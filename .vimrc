@@ -11,22 +11,29 @@ let g:go_list_type = "quickfix"
 let g:go_highlight_types = 1
 let g:go_highlight_fields = 1
 let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
 let g:go_highlight_function_calls = 1
 let g:go_highlight_extra_types = 1
 let g:go_highlight_generate_tags = 1
+let g:go_gocode_propose_source = 1
+autocmd BufWritePost *.go silent! :GoBuild -i
+autocmd FileType go :highlight goErr cterm=bold ctermfg=214
+autocmd FileType go :match goErr /\<err\>/
+exe "set rtp+=".globpath($GOPATH, "src/github.com/nsf/gocode/vim")
+set completeopt=menu,preview
 " sonictemplate
 let g:sonictemplate_vim_template_dir = [ '~/vim/templates' ]
 
 " insert lh
 imap <C-e> <END>
 imap <C-a> <HOME>
-imap <C-j> <Down>
-imap <C-k> <Up>
 imap <C-l> <Right>
 imap <C-h> <Left>
 imap <C-u> <BS>
 imap <C-i> <Del>
-imap <C-o> <ESC>o
+
+imap <C-x> <C-X><C-O>
 
 " fzf.vim
 nnoremap <silent> <leader>f :Files<CR>
@@ -57,6 +64,8 @@ nmap <Leader>w <Plug>(easymotion-overwin-w)
 nmap m <Plug>(operator-replace)
 " tabs
 nmap <C-t> :tabe<CR>:Files<CR>
+nmap <C-c> :vs<CR>:Files<CR>
+nmap <C-y> :tabe<CR>:Ag<CR>
 nmap <C-p> gt<CR>
 nmap <C-n> gT<CR>
 nmap :Vs :vs<CR>:Files<CR>
@@ -172,6 +181,8 @@ set clipboard=unnamed,autoselect
 set backspace=indent,eol,start
 set exrc
 set secure
+set wildmenu
+set wildmode=full
 language en_US
 filetype plugin on
 
@@ -189,24 +200,18 @@ if dein#load_state('/Users/yuma/.cache/dein')
   call dein#add('/Users/yuma/.cache/dein/repos/github.com/Shougo/dein.vim')
 
   " Add or remove your plugins here like this:
-  call dein#add('Shougo/neosnippet.vim')
-  call dein#add("Shougo/neosnippet-snippets")
+  "call dein#add('Shougo/neosnippet.vim')
+  "call dein#add("Shougo/neosnippet-snippets")
   call dein#add('Shougo/deoplete.nvim')
+  " call dein#add('Shougo/deoplete-rct')
   if !has('nvim')
     call dein#add('roxma/nvim-yarp')
     call dein#add('roxma/vim-hug-neovim-rpc')
   endif
   let g:deoplete#enable_at_startup = 1
-  let g:LanguageClient_serverCommands = {
-      \ 'ruby': ['solargraph', 'stdio'],
-  \}
-  call deoplete#custom#var('omni', 'input_patterns', {
-      \ 'ruby': ['[^. *\t]\.\w*', '[a-zA-Z_]\w*::'],
-  \})
-    call dein#add('autozimu/LanguageClient-neovim', {
-      \ 'rev': 'next',
-      \ 'build': 'bash install.sh',
-      \ })
+  " let g:LanguageClient_serverCommands = {
+  "     \ 'ruby': ['solargraph', 'stdio'],
+  " \}
   " editor
   call dein#add('tpope/vim-endwise')
   call dein#add('mattn/vim-maketable')
@@ -225,7 +230,8 @@ if dein#load_state('/Users/yuma/.cache/dein')
   call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
   call dein#add('monochromegane/the_platinum_searcher')
   " ruby
-  call dein#add("Shougo/neocomplcache-rsense")
+  call dein#add('vim-ruby/vim-ruby')
+  call dein#add('marcus/rsense')
   call dein#add('itmammoth/run-rspec.vim')
   call dein#add('ruby-formatter/rufo-vim')
   call dein#add('tpope/vim-rails')
@@ -239,18 +245,35 @@ if dein#load_state('/Users/yuma/.cache/dein')
   " window size
   call dein#add('simeji/winresizer')
   " filer
-  call dein#add("lambdalisue/fern.vim")
+  " call dein#add("lambdalisue/fern.vim")
+  " snipets
+  call dein#add('SirVer/ultisnips')
+  call dein#add('honza/vim-snippets')
   " lsp
-  "call dein#add('prabirshrestha/async.vim')
-  "call dein#add('prabirshrestha/vim-lsp')
-  "call dein#add('mattn/vim-lsp-settings')
-  "call dein#add()
-  "call dein#add()
-  "call dein#add()
-  "call dein#add()
-  "call dein#add()
-  "call dein#add()
+  " call dein#add('prabirshrestha/async.vim')
+  " call dein#add('prabirshrestha/vim-lsp')
+  " call dein#add('prabirshrestha/asyncomplete.vim')
+  " call dein#add('prabirshrestha/asyncomplete-lsp.vim')
+  " call dein#add('yami-beta/asyncomplete-omni.vim')
+  " call dein#add('natebosch/vim-lsc')
+  " let g:lsp_async_completion = 1
+  " let g:asyncomplete_auto_popup = 1
+  " if executable('golsp')
+  "   augroup LspGo
+  "     au!
+  "     autocmd User lsp_setup call lsp#register_server({
+  "         \ 'name': 'go-lang',
+  "         \ 'cmd': {server_info->['golsp', '-mode', 'stdio']},
+  "         \ 'whitelist': ['go'],
+  "         \ })
+  "     autocmd FileType go setlocal omnifunc=lsp#complete
+  "   augroup END
+  " endif
 
+  "call dein#add()
+  "call dein#add()
+  "call dein#add()
+  "call dein#add()
 
   " Required:
   call dein#end()
@@ -268,4 +291,7 @@ endif
 
 let g:ag_working_path_mode="r"
 let g:dein#auto_recache = 1
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 "End dein Scripts-------------------------
