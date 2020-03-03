@@ -77,15 +77,18 @@ alias vv='vim ~/.vimrc'
 alias vmy='vim /etc/mysql/my.conf'
 
 alias mv='mv -i'
-alias vz='vim ~/.zshrc'
+alias vz='vim ~/.zshrc '
+alias ve='vim ~/.zshenv '
 alias sz='source ~/.zshrc'
+alias se='source ~/.zshenv'
 
 alias gs='git status'
-alias gcho='git checkout'
+alias gco='git checkout'
+alias gco-='git checkout -'
 alias gaa='git add .'
 alias gc='git commit'
 alias gcrubo='git commit -m"[fix] rubocop"'
-alias gchob="git checkout -b"
+alias gcob="git checkout -b"
 alias gb='git branch | grep "*" | sed -e "s/^\*\s*//g"'
 alias gush='git push origin $(git branch | grep "*" | sed -e "s/^\*\s*//g")'
 alias gull='git pull --rebase origin $(git branch | grep "*" | sed -e "s/^\*\s*//g")'
@@ -94,8 +97,10 @@ alias stg="git checkout stg"
 alias master="git checkout master"
 alias co='git checkout $(git branch -a | tr -d " " |fzf --height 100% --prompt "CHECKOUT BRANCH>" --preview "git log --color=always {}" | head -n 1 | sed -e "s/^\*\s*//g" | perl -pe "s/remotes\/origin\///g")'
 
+alias ra='rails'
 alias b='bundle'
 alias be='bundle exec'
+alias bspec='RAILS_ENV=test bundle exec rspec'
 alias rubo="bundle exec rubocop"
 alias ruboa="bundle exec rubocop -a"
 alias dk='docker'
@@ -116,13 +121,13 @@ alias cay="cal 2020"
 alias chi="sh ~/code/chrome_history_fzf.sh -d"
 
 alias ku="kubectl"
-alias gosrc="cd ~/go/src"
+alias gos="cd ~/go/src"
 alias gr="go run"
+alias gpr= "hub pull-request"
 
 # ==================================
 ## functions
 # ==================================
-
 
 alias goo='searchByGoogle'
 function searchByGoogle() {
@@ -136,11 +141,6 @@ function f() {
   vim $selected_files
 }
 
-# git make pr
-functions _git_make_pull_request() {
-  open $(hub pull-request)
-}
-alias gpr = "_git_make_pull_request"
 
 # time
 functions _figlet_time() {
@@ -191,3 +191,5 @@ function _vim_git_diff_branch(){
 }
 alias vimd="_vim_git_diff_branch"
 if [ /usr/local/bin/kubectl ]; then source <(kubectl completion zsh); fi
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
