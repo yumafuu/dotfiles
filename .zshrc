@@ -42,6 +42,8 @@ eval "$(goenv init -)"
 ## alias
 # ==================================
 alias todo="todo"
+alias ag="ag -u"
+alias vtodo="vim ~/.todo"
 alias vtodo="vim ~/.todo"
 alias ltodo="todo list"
 alias dezoo="cd ~/ruby/dezo"

@@ -125,8 +125,6 @@ autocmd BufWritePre * :%s/\s\+$//e
 " slack token
 let g:yaasita_slack_token = $IS_SLACK_TOKEN
 
-
-
 " vim rspec
 " https://github.com/itmammoth/run-rspec.vim
 let g:run_rspec_bin = 'bundle exec rspec'
