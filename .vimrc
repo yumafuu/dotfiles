@@ -31,9 +31,8 @@ imap <C-a> <HOME>
 imap <C-l> <Right>
 imap <C-h> <Left>
 imap <C-u> <BS>
-imap <C-i> <Del>
-
-imap <C-x> <C-X><C-O>
+" omnifunc
+imap <C-j> <C-x><C-o>
 
 " fzf.vim
 nnoremap <silent> <leader>f :Files<CR>
@@ -46,6 +45,7 @@ nnoremap <C-[><C-[> :nohlsearch<CR><Esc>
 nnoremap <C-@><C-@> :nohlsearch<CR><Esc>
 
 " ruby
+autocmd BufNewFile,BufRead .pryrc     set filetype=ruby
 au FileType ruby nnoremap <leader>l :RunSpecLine<CR>
 au FileType ruby nnoremap <space>b obinding.pry<ESC>
 " go
@@ -231,6 +231,7 @@ if dein#load_state('/Users/yuma/.cache/dein')
   call dein#add('monochromegane/the_platinum_searcher')
   " ruby
   call dein#add('vim-ruby/vim-ruby')
+  " call dein#add('todesking/ruby_hl_lvar.vim')
   call dein#add('marcus/rsense')
   call dein#add('itmammoth/run-rspec.vim')
   call dein#add('ruby-formatter/rufo-vim')
@@ -271,6 +272,7 @@ if dein#load_state('/Users/yuma/.cache/dein')
   " endif
 
   "call dein#add()
+  call dein#add('terryma/vim-expand-region')
   "call dein#add()
   "call dein#add()
   "call dein#add()
