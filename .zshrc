@@ -122,6 +122,7 @@ alias chi="sh ~/code/chrome_history_fzf.sh -d"
 
 alias ku="kubectl"
 alias gos="cd ~/go/src"
+alias sbb="cd ~/go/src/linebot-smartarch"
 alias gr="go run"
 alias gpr= "hub pull-request"
 
