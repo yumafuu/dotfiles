@@ -102,7 +102,7 @@ alias co='git checkout $(git branch -a | tr -d " " |fzf --height 100% --prompt "
 alias ra='rails'
 alias b='bundle'
 alias be='bundle exec'
-alias bspec='RAILS_ENV=test bundle exec rspec'
+alias brc='bundle exec rails c'
 alias rubo="bundle exec rubocop"
 alias ruboa="bundle exec rubocop -a"
 alias dk='docker'
