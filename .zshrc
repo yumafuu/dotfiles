@@ -99,9 +99,14 @@ alias stg="git checkout stg"
 alias master="git checkout master"
 alias co='git checkout $(git branch -a | tr -d " " |fzf --height 100% --prompt "CHECKOUT BRANCH>" --preview "git log --color=always {}" | head -n 1 | sed -e "s/^\*\s*//g" | perl -pe "s/remotes\/origin\///g")'
 
+alias py='python3'
+
 alias ra='rails'
+alias h='hanami'
 alias b='bundle'
 alias be='bundle exec'
+alias ber='bundle exec rails'
+alias beh='bundle exec hanami'
 alias brc='bundle exec rails c'
 alias rubo="bundle exec rubocop"
 alias ruboa="bundle exec rubocop -a"
