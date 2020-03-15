@@ -58,6 +58,7 @@ alias placy="cd ~/ruby/placy/Placy-api"
 alias mos="cd ~/ruby/mos/"
 alias mosmock="cd ~/ruby/mos/mos-mock-stoplight"
 alias mosapi="cd ~/ruby/mos/mos-api"
+alias chieru="cd ~/ruby/chieru"
 alias chieruapi="cd ~/ruby/chieru/chieru-api"
 
 alias la='ls -A'
