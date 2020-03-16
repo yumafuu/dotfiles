@@ -61,7 +61,7 @@ alias mosapi="cd ~/ruby/mos/mos-api"
 alias chieru="cd ~/ruby/chieru"
 alias chieruapi="cd ~/ruby/chieru/chieru-api"
 
-alias la='ls -A'
+alias ls='exa -g --time-style=long-iso'
 alias l1="ls -1"
 alias k="tree -C"
 alias -g P='| pbcopy'
