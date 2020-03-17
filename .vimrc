@@ -151,7 +151,7 @@ nnoremap <silent> <Space>g :SearchByGoogle<CR>
 syntax on
 colorscheme molokai
 set helplang=ja
-set number
+set relativenumber
 set incsearch
 set smartcase
 set title
