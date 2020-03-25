@@ -37,6 +37,10 @@ export PATH="$GOPATH/bin:$PATH"
 export GOENV_DISABLE_GOPATH=1
 eval "$(goenv init -)"
 
+if [ /usr/local/bin/kubectl ]; then source <(kubectl completion zsh); fi
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 
 # ==================================
 ## alias
@@ -78,6 +82,7 @@ alias vims='vim -p `git diff --name-only`'
 alias vimc='vim -p `git conflicts`'
 alias vv='vim ~/.vimrc'
 alias vmy='vim /etc/mysql/my.conf'
+alias venv='vim .env'
 
 alias mv='mv -i'
 alias vz='vim ~/.zshrc '
@@ -108,6 +113,7 @@ alias b='bundle'
 alias be='bundle exec'
 alias ber='bundle exec rails'
 alias beh='bundle exec hanami'
+alias brs='bundle exec rails s'
 alias brc='bundle exec rails c'
 alias rubo="bundle exec rubocop"
 alias ruboa="bundle exec rubocop -a"
@@ -199,6 +205,9 @@ function _vim_git_diff_branch(){
   vim -p `git diff --name-only $branch`
 }
 alias vimd="_vim_git_diff_branch"
-if [ /usr/local/bin/kubectl ]; then source <(kubectl completion zsh); fi
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+function _search_by_google(){
+  word="$1"
+  open "https://google.com/search?q=$word"
+}
+alias gg="_search_by_google"
