@@ -144,6 +144,12 @@ endfunction
 command! SearchByGoogle call s:search_by_google()
 nnoremap <silent> <Space>g :SearchByGoogle<CR>
 
+" comment out
+" function! s:multi_line_comment_out()
+" endfunction
+" command! MultiLineCommentOut call s:multi_line_comment_out()
+" nnoremap <silent> <Space>m :MultiLineCommentOut<CR>
+
 
 " -------------------------------
 " Basic
