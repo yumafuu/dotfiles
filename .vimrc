@@ -72,12 +72,12 @@ nmap <C-p> gt<CR>
 nmap <C-n> gT<CR>
 nmap :Vs :vs<CR>:Files<CR>
 " {[(
-inoremap { {}<Left>
-inoremap ( ()<left>
-inoremap [ []<Left>
-inoremap " ""<Left>
-inoremap ' ''<Left>
-inoremap ` ``<Left>
+inoremap { {}<C-o>i
+inoremap ( ()<C-o>i
+inoremap [ []<C-o>i
+inoremap " ""<C-o>i
+inoremap ' ''<C-o>i
+inoremap ` ``<C-o>i
 inoremap {{ {
 inoremap [[ [
 inoremap (( (
