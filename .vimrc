@@ -70,14 +70,13 @@ nmap <C-c> :vs<CR>:Files<CR>
 nmap <C-y> :tabe<CR>:Ag<CR>
 nmap <C-p> gt<CR>
 nmap <C-n> gT<CR>
-nmap :Vs :vs<CR>:Files<CR>
 " {[(
-inoremap { {}<C-o>i
-inoremap ( ()<C-o>i
-inoremap [ []<C-o>i
-inoremap " ""<C-o>i
-inoremap ' ''<C-o>i
-inoremap ` ``<C-o>i
+inoremap { {}<Left>
+inoremap ( ()<Left>
+inoremap [ []<Left>
+inoremap " ""<Left>
+inoremap ' ''<Left>
+inoremap ` ``<Left>
 inoremap {{ {
 inoremap [[ [
 inoremap (( (
@@ -219,47 +218,47 @@ if dein#load_state('/Users/yuma/.cache/dein')
   "     \ 'ruby': ['solargraph', 'stdio'],
   " \}
   " editor
-  call dein#add('tpope/vim-endwise')
-  call dein#add('mattn/vim-maketable')
-  call dein#add('easymotion/vim-easymotion')
-  call dein#add('tpope/vim-surround')
-  call dein#add('tpope/vim-repeat')
+  call dein#add("tpope/vim-endwise")
+  call dein#add("mattn/vim-maketable")
+  call dein#add("easymotion/vim-easymotion")
+  call dein#add("tpope/vim-surround")
+  call dein#add("tpope/vim-repeat")
   " textobj
-  call dein#add('kana/vim-textobj-user')
-  call dein#add('rhysd/vim-textobj-ruby')
-  call dein#add('thinca/vim-textobj-between')
+  call dein#add("kana/vim-textobj-user")
+  call dein#add("rhysd/vim-textobj-ruby")
+  call dein#add("thinca/vim-textobj-between")
   " operator
-  call dein#add('kana/vim-operator-user')
-  call dein#add('kana/vim-operator-replace')
+  call dein#add("kana/vim-operator-user")
+  call dein#add("kana/vim-operator-replace")
   " fzf
-  call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 })
-  call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
-  call dein#add('monochromegane/the_platinum_searcher')
+  call dein#add("junegunn/fzf", { "build": "./install --all", "merged": 0 })
+  call dein#add("junegunn/fzf.vim", { "depends": "fzf" })
+  call dein#add("monochromegane/the_platinum_searcher")
   " ruby
-  call dein#add('vim-ruby/vim-ruby')
-  " call dein#add('todesking/ruby_hl_lvar.vim')
-  call dein#add('marcus/rsense')
-  call dein#add('itmammoth/run-rspec.vim')
-  call dein#add('ruby-formatter/rufo-vim')
-  call dein#add('tpope/vim-rails')
+  call dein#add("vim-ruby/vim-ruby")
+  " call dein#add("todesking/ruby_hl_lvar.vim")
+  call dein#add("marcus/rsense")
+  call dein#add("itmammoth/run-rspec.vim")
+  call dein#add("ruby-formatter/rufo-vim")
+  call dein#add("tpope/vim-rails")
   " go
-  call dein#add('fatih/vim-go')
-  call dein#add('SirVer/ultisnips')
+  call dein#add("fatih/vim-go")
+  call dein#add("SirVer/ultisnips")
   " color
-  call dein#add('tomasr/molokai')
+  call dein#add("tomasr/molokai")
   " help
-  call dein#add('vim-jp/vimdoc-ja')
+  call dein#add("vim-jp/vimdoc-ja")
   " window size
-  call dein#add('simeji/winresizer')
+  call dein#add("simeji/winresizer")
   " filer
   " call dein#add("lambdalisue/fern.vim")
   " snipets
-  call dein#add('SirVer/ultisnips')
-  call dein#add('honza/vim-snippets')
+  call dein#add("SirVer/ultisnips")
+  call dein#add("honza/vim-snippets")
   " lsp
-  " call dein#add('prabirshrestha/async.vim')
-  " call dein#add('prabirshrestha/vim-lsp')
-  " call dein#add('prabirshrestha/asyncomplete.vim')
+  " call dein#add("prabirshrestha/async.vim")
+  " call dein#add("prabirshrestha/vim-lsp")
+  " call dein#add("prabirshrestha/asyncomplete.vim")
   " call dein#add('prabirshrestha/asyncomplete-lsp.vim')
   " call dein#add('yami-beta/asyncomplete-omni.vim')
   " call dein#add('natebosch/vim-lsc')
