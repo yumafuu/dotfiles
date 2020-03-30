@@ -20,6 +20,12 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
+# pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+
 # node.js
 export PATH=$HOME/.nodebrew/current/bin:$PATH
 
@@ -105,6 +111,7 @@ alias stg="git checkout stg"
 alias master="git checkout master"
 alias co='git checkout $(git branch -a | tr -d " " |fzf --height 100% --prompt "CHECKOUT BRANCH>" --preview "git log --color=always {}" | head -n 1 | sed -e "s/^\*\s*//g" | perl -pe "s/remotes\/origin\///g")'
 
+alias python='python3'
 alias py='python3'
 
 alias ra='rails'
