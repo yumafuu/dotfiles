@@ -38,6 +38,7 @@ imap <C-j> <C-x><C-o>
 nnoremap <silent> <leader>f :Files<CR>
 nnoremap <silent> <leader>b :Buffers<CR>
 nnoremap <silent> <leader>a :Ag <CR>
+nnoremap <silent> <leader>n :Snippets <CR>
 nnoremap <Leader>v :Fern . -drawer -toggle -reveal=%<CR>
 inoremap <C-@> <ESC>
 nnoremap <space><space> :Fern %:h<CR>
@@ -243,7 +244,6 @@ if dein#load_state('/Users/yuma/.cache/dein')
   call dein#add("tpope/vim-rails")
   " go
   call dein#add("fatih/vim-go")
-  call dein#add("SirVer/ultisnips")
   " color
   call dein#add("tomasr/molokai")
   " help

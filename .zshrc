@@ -12,8 +12,9 @@ export JAVA_HOME=`/usr/libexec/java_home`
 export PATH=${JAVA_HOME}/bin:$PATH
 export PATH="$HOME/.rbenv/versions/2.6.3/bin:$PATH"
 export PATH="/usr/local/opt/swagger-codegen@2/bin:$PATH"
-export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
+export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
 export PATH="/Users/yuma/Library/Python/3.7/bin:$PATH"
+export PATH="/usr/local/sbin:$PATH"
 
 # rbenv
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
@@ -69,7 +70,7 @@ alias mos="cd ~/ruby/mos/"
 alias mosmock="cd ~/ruby/mos/mos-mock-stoplight"
 alias mosapi="cd ~/ruby/mos/mos-api"
 alias chieru="cd ~/ruby/chieru"
-alias chieruapi="cd ~/ruby/chieru/chieru-api"
+alias chierua="cd ~/ruby/chieru/chieru_api"
 
 alias ls='exa -g --time-style=long-iso'
 alias l1="ls -1"
@@ -79,6 +80,8 @@ alias -g G='| grep'
 alias :q='exit'
 alias :w='echo "hahaha"'
 alias :wq='echo "I am not vim!"'
+
+alias Ag='Ag --hidden'
 
 alias bim='vim'
 alias ゔぃm='vim'
@@ -118,8 +121,8 @@ alias ra='rails'
 alias h='hanami'
 alias b='bundle'
 alias be='bundle exec'
-alias ber='bundle exec rails'
-alias beh='bundle exec hanami'
+alias br='bundle exec rails'
+alias bh='bundle exec hanami'
 alias brs='bundle exec rails s'
 alias brc='bundle exec rails c'
 alias rubo="bundle exec rubocop"
@@ -218,3 +221,16 @@ function _search_by_google(){
   open "https://google.com/search?q=$word"
 }
 alias gg="_search_by_google"
+function _search_by_google(){
+  word="$1"
+  open "https://google.com/search?q=$word"
+}
+alias gv="_search_by_vim"
+function _search_by_vim(){
+  tmp_file=$HOME/.tmp_search
+  vim $tmp_file
+  word=$(cat $tmp_file)
+
+  open "https://google.com/search?q=$word"
+  rm -rf $tmp_file
+}
