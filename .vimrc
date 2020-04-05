@@ -237,6 +237,7 @@ if dein#load_state('/Users/yuma/.cache/dein')
   call dein#add("monochromegane/the_platinum_searcher")
   " ruby
   call dein#add("vim-ruby/vim-ruby")
+  call dein#add("vim-scripts/ruby-matchit")
   " call dein#add("todesking/ruby_hl_lvar.vim")
   call dein#add("marcus/rsense")
   call dein#add("itmammoth/run-rspec.vim")
