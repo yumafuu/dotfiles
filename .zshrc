@@ -71,6 +71,7 @@ alias mosmock="cd ~/ruby/mos/mos-mock-stoplight"
 alias mosapi="cd ~/ruby/mos/mos-api"
 alias chieru="cd ~/ruby/chieru"
 alias chierua="cd ~/ruby/chieru/chieru_api"
+alias chierur="cd ~/python/chieru-api-recommend"
 
 alias ls='exa -g --time-style=long-iso'
 alias l1="ls -1"
