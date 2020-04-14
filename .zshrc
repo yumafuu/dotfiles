@@ -35,7 +35,6 @@ export PATH="$HOME/.yarn/bin:$PATH"
 
 
 # go
-export GOROOT=$HOME/go
 export GOPATH=$HOME/go
 export GOENV_ROOT=$HOME/.goenv
 export PATH=$GOENV_ROOT/bin:$PATH
