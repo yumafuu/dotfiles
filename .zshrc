@@ -51,7 +51,7 @@ if [ /usr/local/bin/kubectl ]; then source <(kubectl completion zsh); fi
 # ==================================
 ## alias
 # ==================================
-alias todo="todo"
+alias p="echo; echo AdminPassword1234; echo"
 alias ag="ag -u"
 alias vtodo="vim ~/.todo"
 alias vtodo="vim ~/.todo"
