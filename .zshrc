@@ -20,6 +20,9 @@ export PATH="/usr/local/sbin:$PATH"
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
+if which ruby >/dev/null && which gem >/dev/null; then
+  PATH="$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"
+fi
 
 # pyenv
 export PYENV_ROOT="$HOME/.pyenv"
@@ -36,12 +39,12 @@ export PATH="$HOME/.yarn/bin:$PATH"
 
 # go
 export GOPATH=$HOME/go
-export GOENV_ROOT=$HOME/.goenv
-export PATH=$GOENV_ROOT/bin:$PATH
-export PATH=$HOME/.goenv/bin:$PATH
+# export GOENV_ROOT=$HOME/.goenv
+# export PATH=$GOENV_ROOT/bin:$PATH
+# export PATH=$HOME/.goenv/bin:$PATH
 export PATH="$GOPATH/bin:$PATH"
-export GOENV_DISABLE_GOPATH=1
-eval "$(goenv init -)"
+# export GOENV_DISABLE_GOPATH=1
+# eval "$(goenv init -)"
 
 if [ /usr/local/bin/kubectl ]; then source <(kubectl completion zsh); fi
 

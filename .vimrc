@@ -41,7 +41,6 @@ nnoremap <silent> <leader>a :Ag <CR>
 nnoremap <silent> <leader>n :Snippets <CR>
 nnoremap <Leader>v :Fern . -drawer -toggle -reveal=%<CR>
 inoremap <C-@> <ESC>
-nnoremap <space><space> :Fern %:h<CR>
 nnoremap <C-[><C-[> :nohlsearch<CR><Esc>
 nnoremap <C-@><C-@> :nohlsearch<CR><Esc>
 
@@ -144,11 +143,21 @@ endfunction
 command! SearchByGoogle call s:search_by_google()
 nnoremap <silent> <Space>g :SearchByGoogle<CR>
 
-" comment out
-" function! s:multi_line_comment_out()
+" function! s:ag_by_current_word()
+"     let searchWord = expand("<cword>")
+"     if searchWord  != ''
+"         execute 'Ag ' . searchWord
+"     endif
 " endfunction
-" command! MultiLineCommentOut call s:multi_line_comment_out()
-" nnoremap <silent> <Space>m :MultiLineCommentOut<CR>
+"
+" command! AgByCurrentWord call s:ag_by_current_word()
+" nnoremap <silent> <Space>a :AgByCurrentWord<CR>
+
+"comment out
+function! s:multi_line_comment_out()
+endfunction
+command! MultiLineCommentOut call s:multi_line_comment_out()
+nnoremap <silent> <Space>c :MultiLineCommentOut<CR>
 
 
 " -------------------------------
