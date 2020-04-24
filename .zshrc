@@ -54,6 +54,11 @@ if [ /usr/local/bin/kubectl ]; then source <(kubectl completion zsh); fi
 # ==================================
 ## alias
 # ==================================
+alias wtf="wtfutil"
+alias note="vim ~/.config/wtf/note0.md "
+alias note1="vim ~/.config/wtf/note1.md "
+alias note2="vim ~/.config/wtf/note2.md "
+alias note3="vim ~/.config/wtf/note3.md "
 alias p="echo; echo AdminPassword1234; echo"
 alias ag="ag -u"
 alias vtodo="vim ~/.todo"
@@ -71,7 +76,7 @@ alias placy="cd ~/ruby/placy/Placy-api"
 alias mos="cd ~/ruby/mos/"
 alias mosmock="cd ~/ruby/mos/mos-mock-stoplight"
 alias mosapi="cd ~/ruby/mos/mos-api"
-alias ch="cd ~/ruby/ch"
+alias ch="cd ~/ruby/chieru"
 alias cha="cd ~/ruby/chieru/chieru_api"
 alias chm="cd ~/ruby/chieru/chieru-api-mock"
 alias chr="cd ~/python/chieru-api-recommend"
