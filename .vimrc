@@ -48,6 +48,7 @@ nnoremap <C-@><C-@> :nohlsearch<CR><Esc>
 autocmd BufNewFile,BufRead .pryrc     set filetype=ruby
 au FileType ruby nnoremap <leader>l :RunSpecLine<CR>
 au FileType ruby nnoremap <space>b obinding.pry<ESC>
+
 " go
 au FileType go nmap <leader>g :GoRun<CR>
 au FileType go nmap <leader>e :GoIfErr<CR>
@@ -68,8 +69,8 @@ nmap m <Plug>(operator-replace)
 nmap <C-t> :tabe<CR>:Files<CR>
 nmap <C-c> :vs<CR>:Files<CR>
 nmap <C-y> :tabe<CR>:Ag<CR>
-nmap <C-p> gt<CR>
-nmap <C-n> gT<CR>
+nmap <C-n> gt<CR>
+nmap <C-p> gT<CR>
 " {[(
 inoremap { {}<Left>
 inoremap ( ()<Left>
@@ -86,6 +87,10 @@ inoremap `` `
 inoremap {<Enter> {}<Left><CR><ESC><S-o>
 inoremap (<Enter> ()<Left><CR><ESC><S-o>
 inoremap [<Enter> []<Left><CR><ESC><S-o>
+
+nnoremap <Space><Space> :set paste!<CR>
+autocmd InsertLeave * set nopaste
+
 
 command! PopTerminal call popup_create(term_start([&shell], #{ hidden: 1, term_finish: 'close'}), #{ border: [], minwidth: 130, minheight: &lines/2 })
 "nnoremap <leader>T :below term<Space>++rows=10<CR>
@@ -158,7 +163,6 @@ function! s:multi_line_comment_out()
 endfunction
 command! MultiLineCommentOut call s:multi_line_comment_out()
 nnoremap <silent> <Space>c :MultiLineCommentOut<CR>
-
 
 " -------------------------------
 " Basic
