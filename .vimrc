@@ -92,11 +92,8 @@ nnoremap <Space><Space> :set paste!<CR>
 autocmd InsertLeave * set nopaste
 
 
-command! PopTerminal call popup_create(term_start([&shell], #{ hidden: 1, term_finish: 'close'}), #{ border: [], minwidth: 130, minheight: &lines/2 })
-"nnoremap <leader>T :below term<Space>++rows=10<CR>
 nnoremap <leader>t :bot term<Space>++rows=15<CR>
 nnoremap <leader>T :rightbelow vert term<space>++cols=70<CR>
-"nnoremap <leader>T :PopTerminal<CR>
 
 
 " Anywhere SID.
@@ -232,6 +229,11 @@ if dein#load_state('/Users/yuma/.cache/dein')
   "     \ 'ruby': ['solargraph', 'stdio'],
   " \}
   " editor
+  call dein#add('Shougo/defx.nvim')
+  if !has('nvim')
+    call dein#add('roxma/nvim-yarp')
+    call dein#add('roxma/vim-hug-neovim-rpc')
+  endif
   call dein#add("tpope/vim-endwise")
   call dein#add("mattn/vim-maketable")
   call dein#add("easymotion/vim-easymotion")
