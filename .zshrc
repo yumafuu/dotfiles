@@ -50,6 +50,9 @@ if [ /usr/local/bin/kubectl ]; then source <(kubectl completion zsh); fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+source "/usr/local/opt/kube-ps1/share/kube-ps1.sh"
+#PS1='$(kube_ps1)'$PS1
+
 
 # ==================================
 ## alias
@@ -154,6 +157,7 @@ alias cay="cal 2020"
 alias chi="sh ~/code/chrome_history_fzf.sh -d"
 
 alias ku="kubectl"
+alias kpods="kubectl get pods"
 alias gos="cd ~/go/src"
 alias sbb="cd ~/go/src/linebot-smartarch"
 alias gr="go run"
@@ -243,3 +247,9 @@ function _search_by_vim(){
   open "https://google.com/search?q=$word"
   rm -rf $tmp_file
 }
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/yuma/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/yuma/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/yuma/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/yuma/google-cloud-sdk/completion.zsh.inc'; fi
