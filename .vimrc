@@ -60,9 +60,7 @@ nnoremap <silent><expr> * v:count ? '*'
 
 let g:EasyMotion_do_mapping = 0
 " <Leader>e{char} to move to {char}
-nmap <Leader>w <Plug>(easymotion-overwin-w)
-nmap <Leader>, <Plug>(easymotion-overwin-f)
-nmap <Leader>s <Plug>(easymotion-overwin-f2)
+nmap <Space>s <Plug>(easymotion-overwin-f)
 "replece
 nmap m <Plug>(operator-replace)
 " tabs
