@@ -12,9 +12,12 @@ export JAVA_HOME=`/usr/libexec/java_home`
 export PATH=${JAVA_HOME}/bin:$PATH
 export PATH="$HOME/.rbenv/versions/2.6.3/bin:$PATH"
 export PATH="/usr/local/opt/swagger-codegen@2/bin:$PATH"
-export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
 export PATH="/Users/yuma/Library/Python/3.7/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
+export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
+export LDFLAGS="-L/usr/local/opt/mysql@5.6/lib"
+export CPPFLAGS="-I/usr/local/opt/mysql@5.6/include"
+export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
 
 # rbenv
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
@@ -126,7 +129,7 @@ alias stg="git checkout stg"
 alias master="git checkout master"
 alias co='git checkout $(git branch -a | tr -d " " |fzf --height 100% --prompt "CHECKOUT BRANCH>" --preview "git log --color=always {}" | head -n 1 | sed -e "s/^\*\s*//g" | perl -pe "s/remotes\/origin\///g")'
 
-alias python='python3'
+alias python='python'
 alias py='python3'
 
 alias ra='rails'
@@ -159,6 +162,7 @@ alias chi="sh ~/code/chrome_history_fzf.sh -d"
 alias ku="kubectl"
 alias kpods="kubectl get pods"
 alias ksvc="kubectl get services"
+alias klogs="kubectl logs"
 alias gos="cd ~/go/src"
 alias sbb="cd ~/go/src/linebot-smartarch"
 alias gr="go run"
