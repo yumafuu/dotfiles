@@ -1,8 +1,9 @@
 let mapleader=","
 nnoremap <space>v :source ~/.vimrc<CR>
 
-autocmd BufNewFile,BufRead *.rb  set filetype=ruby
-autocmd BufNewFile,BufRead *.go  set filetype=go
+autocmd BufNewFile,BufRead *.rb set filetype=ruby
+autocmd BufNewFile,BufRead *.go set filetype=go
+autocmd BufNewFile,BufRead *.py set filetype=python
 
 "vim-go
 let g:go_fmt_command = "goimports"
@@ -48,6 +49,7 @@ nnoremap <C-@><C-@> :nohlsearch<CR><Esc>
 autocmd BufNewFile,BufRead .pryrc     set filetype=ruby
 au FileType ruby nnoremap <leader>l :RunSpecLine<CR>
 au FileType ruby nnoremap <space>b obinding.pry<ESC>
+au FileType python nnoremap <space>b oimport ipdb<ESC>oipdb.set_trace()<ESC>
 
 " go
 au FileType go nmap <leader>g :GoRun<CR>
