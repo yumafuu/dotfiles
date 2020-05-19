@@ -89,7 +89,8 @@ inoremap {<Enter> {}<Left><CR><ESC><S-o>
 inoremap (<Enter> ()<Left><CR><ESC><S-o>
 inoremap [<Enter> []<Left><CR><ESC><S-o>
 
-nnoremap <Space><Space> :set paste!<CR>
+nnoremap <Space><Space> :set relativenumber!<CR>
+nnoremap <Space><Tab> :set nu!<CR>
 autocmd InsertLeave * set nopaste
 
 
