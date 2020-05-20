@@ -169,6 +169,7 @@ nnoremap <silent> <Space>c :MultiLineCommentOut<CR>
 syntax on
 colorscheme molokai
 set helplang=ja
+set nu
 set relativenumber
 set incsearch
 set smartcase
