@@ -1,4 +1,5 @@
 # zsh
+bindkey -v
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh" || true
 export ZSH="/Users/yuma/.oh-my-zsh"
 ZSH_THEME="zhann"
@@ -86,6 +87,9 @@ alias ch="cd ~/ruby/chieru"
 alias cha="cd ~/ruby/chieru/chieru_api"
 alias chm="cd ~/ruby/chieru/chieru-api-mock"
 alias chr="cd ~/python/chieru-api-recommend"
+functions chp() {
+  echo $CHIERU_MYSQL_PASSWORD | pbcopy
+}
 
 alias ls='exa -g --time-style=long-iso'
 alias l1="ls -1"
