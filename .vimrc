@@ -66,8 +66,7 @@ nmap <Space>s <Plug>(easymotion-overwin-f)
 "replece
 nmap m <Plug>(operator-replace)
 " tabs
-au FileType go nmap <C-g> :tabe<CR>:Files<CR>
-nmap <C-t> :tabe<CR>:Files<CR>
+nmap <C-g> :tabe<CR>:Files<CR>
 nmap <C-c> :vs<CR>:Files<CR>
 nmap <C-y> :tabe<CR>:Ag<CR>
 nmap <C-n> gt<CR>
