@@ -113,6 +113,8 @@ alias vmy='vim /etc/mysql/my.conf'
 alias venv='vim .env'
 
 alias mv='mv -i'
+alias vr='vim ~/.test.rb '
+alias rr='ruby ~/.test.rb '
 alias vz='vim ~/.zshrc '
 alias ve='vim ~/.zshenv '
 alias sz='source ~/.zshrc'
