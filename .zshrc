@@ -86,7 +86,7 @@ alias mosapi="cd ~/ruby/mos/mos-api"
 alias ch="cd ~/ruby/chieru"
 alias cha="cd ~/ruby/chieru/chieru_api"
 alias chm="cd ~/ruby/chieru/chieru-api-mock"
-alias chr="cd ~/python/chieru-api-recommend"
+alias chr="cd ~/ruby/chieru/chieru-api-recommend"
 functions chp() {
   echo $CHIERU_MYSQL_PASSWORD | pbcopy
 }
