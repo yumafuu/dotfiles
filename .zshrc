@@ -61,6 +61,8 @@ source "/usr/local/opt/kube-ps1/share/kube-ps1.sh"
 # ==================================
 ## alias
 # ==================================
+alias books="cd ~/books"
+alias down="cd ~/Downloads"
 alias wtf="wtfutil"
 alias note="vim ~/.config/wtf/note0.md "
 alias note1="vim ~/.config/wtf/note1.md "
