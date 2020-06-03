@@ -92,6 +92,9 @@ alias chr="cd ~/ruby/chieru/chieru-api-recommend"
 functions chp() {
   echo $CHIERU_MYSQL_PASSWORD | pbcopy
 }
+functions sbbp() {
+  echo $SBB_MYSQL_PASSWORD | pbcopy
+}
 
 alias ls='exa -g --time-style=long-iso'
 alias l1="ls -1"
