@@ -62,7 +62,7 @@ nnoremap <silent><expr> * v:count ? '*'
 
 let g:EasyMotion_do_mapping = 0
 " <Leader>e{char} to move to {char}
-nmap <Space>s <Plug>(easymotion-overwin-f)
+nmap <Space><Space> <Plug>(easymotion-overwin-f)
 "replece
 nmap m <Plug>(operator-replace)
 " tabs
@@ -88,8 +88,8 @@ inoremap {<Enter> {}<Left><CR><ESC><S-o>
 inoremap (<Enter> ()<Left><CR><ESC><S-o>
 inoremap [<Enter> []<Left><CR><ESC><S-o>
 
-nnoremap <Space><Space> :set relativenumber!<CR>
-nnoremap <Space><Tab> :set nu!<CR>
+nnoremap <Space><Tab> :set relativenumber!<CR>
+" nnoremap <Space><Tab> :set nu!<CR>
 autocmd InsertLeave * set nopaste
 
 
@@ -221,6 +221,8 @@ if dein#load_state('/Users/yuma/.cache/dein')
   "call dein#add('Shougo/neosnippet.vim')
   "call dein#add("Shougo/neosnippet-snippets")
   call dein#add('Shougo/deoplete.nvim')
+  call dein#add('roxma/nvim-yarp')
+  call dein#add('roxma/vim-hug-neovim-rpc')
   " call dein#add('Shougo/deoplete-rct')
   if !has('nvim')
     call dein#add('roxma/nvim-yarp')
