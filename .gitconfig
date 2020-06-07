@@ -18,3 +18,5 @@
 	noprefix = true
 [credential "https://source.developers.google.com"]
 	helper = gcloud.sh
+[core]
+	editor = nvim

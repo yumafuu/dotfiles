@@ -1,4 +1,6 @@
 # zsh
+alias vim=nvim
+
 bindkey -v
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh" || true
 export ZSH="/Users/yuma/.oh-my-zsh"
@@ -19,6 +21,8 @@ export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
 export LDFLAGS="-L/usr/local/opt/mysql@5.6/lib"
 export CPPFLAGS="-I/usr/local/opt/mysql@5.6/include"
 export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
+export XDG_BASE_HOME="$HOME/.config"
+export NVIM="$HOME/.config/nvim"
 
 # rbenv
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
@@ -113,7 +117,7 @@ alias びm='vim'
 alias emacs="vim"
 alias vims='vim -p `git diff --name-only`'
 alias vimc='vim -p `git conflicts`'
-alias vv='vim ~/.vimrc'
+alias vv='vim ~/.config/nvim/init.vim'
 alias vmy='vim /etc/mysql/my.conf'
 alias venv='vim .env'
 
