@@ -1,3 +1,4 @@
+Pry.config.editor = "nvim"
 Pry.config.color = true
 if defined?(PryByebug)
   Pry.commands.alias_command 'st', 'step'
