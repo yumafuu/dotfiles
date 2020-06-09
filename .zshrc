@@ -23,6 +23,7 @@ export CPPFLAGS="-I/usr/local/opt/mysql@5.6/include"
 export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
 export XDG_BASE_HOME="$HOME/.config"
 export NVIM="$HOME/.config/nvim"
+source ${HOME}/.cargo/env
 
 # rbenv
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
