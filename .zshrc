@@ -1,5 +1,8 @@
+source ~/.zsh_function
+
 # zsh
 alias vim=nvim
+
 
 bindkey -v
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh" || true
@@ -184,90 +187,6 @@ alias sbb="cd ~/go/src/linebot-smartarch"
 alias gr="go run"
 alias gpr= "hub pull-request"
 
-# ==================================
-## functions
-# ==================================
-
-alias goo='searchByGoogle'
-function searchByGoogle() {
-    [ -z "$1" ] && searchWord=`pbpaste` || searchWord=$1
-    open https://www.google.co.jp/search\?q\=$searchWord
-}
-# fzf
-function f() {
-  files=$(git ls-files) &&
-  selected_files=$(echo "$files" | fzf -m --preview 'head -100 {}') &&
-  vim $selected_files
-}
-
-
-# time
-functions _figlet_time() {
-date=`date +%m/%d`
-time=`date +%H:%M:%S`
-
-figlet $date $time
-}
-alias t='_figlet_time'
-
-# batch
-function _set_badge() {
-    printf "\e]1337;SetBadgeFormat=%s\a" $(/bin/echo -n "$1" | base64)
-}
-alias ba='_set_badge'
-
-# docker exec -it
-function _docker_compose_exec(){
-  image="$1"
-  docker exec -it $image bash
-}
-alias dkeit='_docker_compose_exec'
-
-# mkdir then cd
-function _makedir_then_changedir(){
-  dir=$1
-  mkdir -p $dir
-  cd $dir
- }
-alias mcdir='_makedir_then_changedir'
-
-alias dri="dri"
-function _get_http_status(){
-  url=$1
-  curl -LI $url -o /dev/null -w '%{http_code}\n' -s
-}
-
-alias curls="_get_http_status"
-
-function _vim_git_diff_branch(){
-  if [ "$1" -eq "" ]; then
-    branch=master
-  else
-    branch="$1"
-  fi
-
-  vim -p `git diff --name-only $branch`
-}
-alias vimd="_vim_git_diff_branch"
-
-function _search_by_google(){
-  word="$1"
-  open "https://google.com/search?q=$word"
-}
-alias gg="_search_by_google"
-function _search_by_google(){
-  word="$1"
-  open "https://google.com/search?q=$word"
-}
-alias gv="_search_by_vim"
-function _search_by_vim(){
-  tmp_file=$HOME/.tmp_search
-  vim $tmp_file
-  word=$(cat $tmp_file)
-
-  open "https://google.com/search?q=$word"
-  rm -rf $tmp_file
-}
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/yuma/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/yuma/google-cloud-sdk/path.zsh.inc'; fi
