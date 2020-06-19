@@ -3,7 +3,6 @@ source ~/.zsh_function
 # zsh
 alias vim=nvim
 
-
 bindkey -v
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh" || true
 export ZSH="/Users/yuma/.oh-my-zsh"
