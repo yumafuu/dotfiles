@@ -66,6 +66,7 @@ source "/usr/local/opt/kube-ps1/share/kube-ps1.sh"
 # ==================================
 ## alias
 # ==================================
+alias atcoder="cd ~/atcoder"
 alias books="cd ~/books"
 alias down="cd ~/Downloads"
 alias wtf="wtfutil"
