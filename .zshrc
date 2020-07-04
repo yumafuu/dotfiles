@@ -55,7 +55,7 @@ export PATH="$GOPATH/bin:$PATH"
 # export GOENV_DISABLE_GOPATH=1
 # eval "$(goenv init -)"
 
-if [ /usr/local/bin/kubectl ]; then source <(kubectl completion zsh); fi
+# if [ /usr/local/bin/kubectl ]; then source <(kubectl completion zsh); fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
