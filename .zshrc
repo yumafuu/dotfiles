@@ -171,7 +171,7 @@ alias dkr='docker-compose run web'
 alias dkps="docker ps"
 
 alias tenki="curl wttr.in"
-alias now="cal&&date "+%H:%M:%S""
+alias now="date "+%H:%M:%S"&&cal"
 alias aqua="asciiquarium"
 alias cay="cal 2020"
 
