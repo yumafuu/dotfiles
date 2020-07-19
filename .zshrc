@@ -277,3 +277,10 @@ function _search_by_vim(){
   open "https://google.com/search?q=$word"
   rm -rf $tmp_file
 }
+
+
+function _dairy(){
+  date=`date +%Y%m%d`
+  open "https://scrapbox.io/Yumadairy/$date"
+}
+alias dai="_dairy"
