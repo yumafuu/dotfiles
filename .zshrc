@@ -284,3 +284,13 @@ function _dairy(){
   open "https://scrapbox.io/Yumadairy/$date"
 }
 alias dai="_dairy"
+
+
+function _edit_pbcopy(){
+  file=$HOME/.tmp.txt
+  touch $file
+  vim $file
+  tmp=$(cat $file) ; echo -n $tmp | pbcopy
+  rm $file
+}
+alias e="_edit_pbcopy"
