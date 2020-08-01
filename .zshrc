@@ -62,6 +62,7 @@ export PATH="$GOPATH/bin:$PATH"
 source "/usr/local/opt/kube-ps1/share/kube-ps1.sh"
 #PS1='$(kube_ps1)'$PS1
 
+# export FZF_DEFAULT_OPTS='--preview "bat --style=numbers --color=always --line-range :500 {}"'
 
 # ==================================
 ## alias
@@ -74,7 +75,6 @@ alias note="vim ~/.config/wtf/note0.md "
 alias note1="vim ~/.config/wtf/note1.md "
 alias note2="vim ~/.config/wtf/note2.md "
 alias note3="vim ~/.config/wtf/note3.md "
-alias p="echo; echo AdminPassword1234; echo"
 alias ag="ag -u"
 alias vtodo="vim ~/.todo"
 alias vtodo="vim ~/.todo"
@@ -96,6 +96,10 @@ alias ch="cd ~/ruby/chieru"
 alias cha="cd ~/ruby/chieru/chieru_api"
 alias chm="cd ~/ruby/chieru/chieru-api-mock"
 alias chr="cd ~/ruby/chieru/chieru-api-recommend"
+
+functions mosp(){
+  echo -n AdminPassword1234 | pbcopy
+}
 functions chp() {
   echo $CHIERU_MYSQL_PASSWORD | pbcopy
 }
