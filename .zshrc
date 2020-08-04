@@ -189,6 +189,8 @@ alias gos="cd ~/go/src"
 alias sbb="cd ~/go/src/linebot-smartarch"
 alias gr="go run"
 alias gpr= "hub pull-request"
+alias bo="bookmark-go"
+alias bk="bookmark-go show | fzf | bookmark-go open"
 
 
 # The next line updates PATH for the Google Cloud SDK.
@@ -298,3 +300,4 @@ function _edit_pbcopy(){
   rm $file
 }
 alias e="_edit_pbcopy"
+export PATH="/usr/local/opt/gnu-getopt/bin:$PATH"
