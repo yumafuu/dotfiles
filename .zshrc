@@ -67,6 +67,8 @@ source "/usr/local/opt/kube-ps1/share/kube-ps1.sh"
 # ==================================
 ## alias
 # ==================================
+alias airpods="BluetoothConnector -c ac-90-85-eb-4f-7c"
+alias airpodsd="BluetoothConnector -d ac-90-85-eb-4f-7c"
 alias atcoder="cd ~/atcoder"
 alias books="cd ~/books"
 alias down="cd ~/Downloads"
