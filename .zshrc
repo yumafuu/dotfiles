@@ -193,6 +193,7 @@ alias gr="go run"
 alias gpr= "hub pull-request"
 alias bo="bookmark-go"
 alias bk="bookmark-go show | fzf | bookmark-go open"
+alias f="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}' | xargs nvim"
 
 
 # The next line updates PATH for the Google Cloud SDK.
@@ -210,13 +211,6 @@ function searchByGoogle() {
     [ -z "$1" ] && searchWord=`pbpaste` || searchWord=$1
     open https://www.google.co.jp/search\?q\=$searchWord
 }
-# fzf
-function f() {
-  files=$(git ls-files) &&
-  selected_files=$(echo "$files" | fzf -m --preview 'head -100 {}') &&
-  vim $selected_files
-}
-
 
 # time
 functions _figlet_time() {
