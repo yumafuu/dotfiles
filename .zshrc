@@ -91,6 +91,7 @@ alias ch="cd ~/ruby/chieru"
 alias cha="cd ~/ruby/chieru/chieru_api"
 alias chm="cd ~/ruby/chieru/chieru-api-mock"
 alias chr="cd ~/ruby/chieru/chieru-api-recommend"
+alias bewin="cd ~/ruby/bewin"
 
 functions mosp(){
   echo -n AdminPassword1234 | pbcopy
