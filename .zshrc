@@ -1,4 +1,4 @@
-# zsh
+# zs
 alias vim=nvim
 
 bindkey -v
@@ -11,15 +11,16 @@ source $ZSH/oh-my-zsh.sh
 
 autoload -Uz compinit && compinit
 export PATH="/usr/local/bin:$PATH"
-export JAVA_HOME=`/usr/libexec/java_home`
-export PATH=${JAVA_HOME}/bin:$PATH
+# export JAVA_HOME=`/usr/libexec/java_home`
+# export PATH=${JAVA_HOME}/bin:$PATH
 export PATH="$HOME/.rbenv/versions/2.6.3/bin:$PATH"
-export PATH="/usr/local/opt/swagger-codegen@2/bin:$PATH"
+# export PATH="/usr/local/opt/swagger-codegen@2/bin:$PATH"
 export PATH="/Users/yuma/Library/Python/3.7/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
-export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
-export LDFLAGS="-L/usr/local/opt/mysql@5.6/lib"
-export CPPFLAGS="-I/usr/local/opt/mysql@5.6/include"
+# export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
+# export LDFLAGS="-L/usr/local/opt/mysql@5.6/lib"
+# export CPPFLAGS="-I/usr/local/opt/mysql@5.6/include"
+export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
 export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
 export XDG_BASE_HOME="$HOME/.config"
 export NVIM="$HOME/.config/nvim"
@@ -73,7 +74,8 @@ alias atcoder="cd ~/atcoder"
 alias books="cd ~/books"
 alias down="cd ~/Downloads"
 alias ag="ag -u"
-alias todo="vim ~/.todo.md"
+# alias todo="vim ~/.todo.md"
+alias todo="vim ~/.todo.txt"
 alias rust="cd ~/rust"
 alias dezoo="cd ~/ruby/dezo"
 alias scboo="cd ~/go/src/scbo"
