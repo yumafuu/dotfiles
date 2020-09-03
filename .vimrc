@@ -275,6 +275,7 @@ if dein#load_state('/Users/yuma/.cache/dein')
   " snipets
   call dein#add("SirVer/ultisnips")
   call dein#add("honza/vim-snippets")
+  call dein#add("rbtnn/vim-mario")
   " lsp
   " call dein#add("prabirshrestha/async.vim")
   " call dein#add("prabirshrestha/vim-lsp")

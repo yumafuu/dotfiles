@@ -94,6 +94,7 @@ alias cha="cd ~/ruby/chieru/chieru_api"
 alias chm="cd ~/ruby/chieru/chieru-api-mock"
 alias chr="cd ~/ruby/chieru/chieru-api-recommend"
 alias bewin="cd ~/ruby/bewin"
+alias acs="cd ~/ruby/azucal/acs"
 
 functions mosp(){
   echo -n AdminPassword1234 | pbcopy
@@ -190,6 +191,7 @@ alias gpr= "hub pull-request"
 alias bo="bookmark-go"
 alias bk="bookmark-go show | fzf | bookmark-go open"
 alias f="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}' | xargs nvim"
+alias tf='terraform'
 
 
 # The next line updates PATH for the Google Cloud SDK.
