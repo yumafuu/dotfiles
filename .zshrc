@@ -10,6 +10,7 @@ if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
         print -P "%F{160}▓▒░ The clone has failed.%f%b"
 fi
 
+eval "$(starship init zsh)"
 source "$HOME/.zinit/bin/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
@@ -24,23 +25,30 @@ zinit light-mode for \
 
 zinit light zdharma/fast-syntax-highlighting
 zinit light paulirish/git-open
-# zinit light yous/lime
+zinit light starship/starship
 zinit light rupa/z
-zinit ice depth=1; zinit light romkatv/powerlevel10k
 
 # ==================================
 ## End Zinit
 # ==================================
 
-
+# style
+zstyle ':completion:*' menu select
+autoload colors
 
 # zs
 alias vim=nvim
+bindkey "^A" beginning-of-line
+bindkey "^E" end-of-line
+bindkey "^U" backward-kill-line
+bindkey "^K" backward-kill-line
+
+setopt auto_cd
 
 bindkey -v
 # test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh" || true
 export ZSH="/Users/yuma/.oh-my-zsh"
-ZSH_THEME="zhann"
+# ZSH_THEME="zhann"
 plugins=(git zsh-syntax-highlighting)
 plugins=(git)
 
@@ -60,6 +68,7 @@ source ${HOME}/.cargo/env
 export PATH="/usr/local/opt/gnu-getopt/bin:$PATH"
 
 # rbenv
+eval "$(rbenv init -)"
 export PATH="$HOME/.rbenv/bin:$PATH"
 
 # pyenv
@@ -143,6 +152,7 @@ alias sz='source ~/.zshrc'
 alias se='source ~/.zshenv'
 
 alias gs='git status'
+alias gd='git diff'
 alias gco='git checkout'
 alias gaa='git add .'
 alias gc='git commit'
