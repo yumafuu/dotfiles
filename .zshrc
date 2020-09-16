@@ -116,7 +116,7 @@ alias mos="cd ~/ruby/mos/"
 alias mosapi="cd ~/ruby/mos/mos-api"
 alias cha="cd ~/ruby/chieru/chieru_api"
 alias chr="cd ~/ruby/chieru/chieru-api-recommend"
-alias bewin="cd ~/ruby/bewin"
+alias bewin="cd ~/go/src/bewin"
 alias acs="cd ~/ruby/azucal/acs"
 
 functions mosp(){
@@ -221,5 +221,4 @@ function _search_by_google(){
   open "https://google.com/search?q=$word"
 }
 alias gg="_search_by_google"
-
 
