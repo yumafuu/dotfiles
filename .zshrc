@@ -33,7 +33,25 @@ zinit light rupa/z
 # ==================================
 
 # style
+autoload -U compinit
+compinit
+export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
 zstyle ':completion:*' menu select
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' ignore-parents parent pwd ..
+
+setopt brace_ccl
+setopt extended_glob
+setopt print_eight_bit
+setopt always_last_prompt
+setopt complete_in_word
+setopt magic_equal_subst
+setopt interactive_comments
+setopt auto_param_keys
+setopt auto_menu
+setopt list_types
+setopt auto_param_slash
+setopt mark_dirs
 autoload colors
 
 # zs
@@ -52,7 +70,6 @@ export ZSH="/Users/yuma/.oh-my-zsh"
 plugins=(git zsh-syntax-highlighting)
 plugins=(git)
 
-autoload -Uz compinit && compinit
 export PATH="/usr/local/bin:$PATH"
 export PATH="$HOME/.rbenv/versions/2.6.3/bin:$PATH"
 export PATH="/Users/yuma/Library/Python/3.7/bin:$PATH"
@@ -131,7 +148,8 @@ functions sbbp() {
 
 alias ls='exa -g --time-style=long-iso'
 alias ll=
-alias k="tree -C"
+alias k="tree -C -a -I '.git|node_modules|cache|test_*'"
+alias kill9="kill -9"
 alias -g P='| pbcopy'
 alias -g G='| grep'
 alias :q='exit'
