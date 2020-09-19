@@ -26,7 +26,6 @@ zinit light-mode for \
 zinit light zdharma/fast-syntax-highlighting
 zinit light paulirish/git-open
 zinit light starship/starship
-zinit light rupa/z
 
 # ==================================
 ## End Zinit
@@ -39,7 +38,10 @@ export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46
 zstyle ':completion:*' menu select
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' ignore-parents parent pwd ..
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
 
+setopt share_history
 setopt brace_ccl
 setopt extended_glob
 setopt print_eight_bit
@@ -147,7 +149,7 @@ functions sbbp() {
 }
 
 alias ls='exa -g --time-style=long-iso'
-alias ll=
+alias ll="ls -l"
 alias k="tree -C -a -I '.git|node_modules|cache|test_*'"
 alias kill9="kill -9"
 alias -g P='| pbcopy'
@@ -216,7 +218,6 @@ if [ -f '/Users/yuma/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/yuma/googl
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/yuma/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/yuma/google-cloud-sdk/completion.zsh.inc'; fi
-
 
 # ==================================
 ## functions
