@@ -231,13 +231,11 @@ function _makedir_then_changedir(){
  }
 alias mcdir='_makedir_then_changedir'
 
-function _search_by_google(){
-  word="$1"
-  open "https://google.com/search?q=$word"
+function _search_on_google(){
+  words="$(IFS="+"; echo "${${@:1}[*]}")"
+  if [ "$words" != "" ]; then
+    open "https://google.com/search?q=$words"
+  fi
 }
-function _search_by_google(){
-  word="$1"
-  open "https://google.com/search?q=$word"
-}
-alias gg="_search_by_google"
+alias gg="_search_on_google"
 
