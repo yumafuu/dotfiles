@@ -211,6 +211,7 @@ alias bo="bookmark-go"
 alias bk="bookmark-go show | fzf | bookmark-go open"
 alias f="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}' | xargs nvim"
 alias tf='terraform'
+alias curlt='curl -so /dev/nul -w "http_code: %{http_code}\ntime_namelookup: %{time_namelookup}\ntime_connect: %{time_connect}\ntime_appconnect: %{time_appconnect}\ntime_pretransfer: %{time_pretransfer}\ntime_starttransfer: %{time_starttransfer}\ntime_total: %{time_total}\n"'
 
 
 # The next line updates PATH for the Google Cloud SDK.
