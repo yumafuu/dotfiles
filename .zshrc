@@ -240,3 +240,11 @@ function _search_on_google(){
 }
 alias gg="_search_on_google"
 
+function _search_on_maps(){
+  words="$(IFS="+"; echo "${${@:1}[*]}")"
+  if [ "$words" != "" ]; then
+    open "https://www.google.com/maps/search/$words"
+  fi
+}
+alias map="_search_on_maps"
+
