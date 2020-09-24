@@ -35,6 +35,8 @@ zinit light starship/starship
 autoload -U compinit
 compinit
 export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
 zstyle ':completion:*' menu select
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' ignore-parents parent pwd ..
@@ -56,7 +58,7 @@ setopt auto_param_slash
 setopt mark_dirs
 autoload colors
 
-# zs
+# zsh
 alias vim=nvim
 bindkey "^A" beginning-of-line
 bindkey "^E" end-of-line
@@ -93,7 +95,7 @@ export PATH="$HOME/.rbenv/bin:$PATH"
 # pyenv
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
-# eval "$(pyenv init -)"
+eval "$(pyenv init -)"
 
 
 # node.js
@@ -124,6 +126,7 @@ export PATH="$GOPATH/bin:$PATH"
 # ==================================
 ## alias
 # ==================================
+alias pwd="echo -n `pwd` | pbcopy && pwd"
 alias airpods="BluetoothConnector -c ac-90-85-eb-4f-7c"
 alias atcoder="cd ~/atcoder"
 alias down="cd ~/Downloads"
@@ -134,6 +137,7 @@ alias placy="cd ~/ruby/placy/Placy-api"
 alias mos="cd ~/ruby/mos/"
 alias mosapi="cd ~/ruby/mos/mos-api"
 alias cha="cd ~/ruby/chieru/chieru_api"
+alias chf="cd ~/angular/chieru/chieru-front"
 alias chr="cd ~/ruby/chieru/chieru-api-recommend"
 alias bewin="cd ~/go/src/bewin"
 alias acs="cd ~/ruby/azucal/acs"
@@ -247,4 +251,6 @@ function _search_on_maps(){
   fi
 }
 alias map="_search_on_maps"
+
+export RUBYOPT='-W:no-deprecated -W:no-experimental'
 
