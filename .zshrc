@@ -60,6 +60,7 @@ autoload colors
 
 # zsh
 alias vim=nvim
+alias t=todo.sh
 bindkey "^A" beginning-of-line
 bindkey "^E" end-of-line
 bindkey "^U" backward-kill-line
@@ -126,7 +127,9 @@ export PATH="$GOPATH/bin:$PATH"
 # ==================================
 ## alias
 # ==================================
-alias pwd="echo -n `pwd` | pbcopy && pwd"
+alias pwd='echo -n $(/bin/pwd) | tee >(pbcopy)'
+alias cdp='cd $(pbpaste)'
+alias awk=gawk
 alias airpods="BluetoothConnector -c ac-90-85-eb-4f-7c"
 alias atcoder="cd ~/atcoder"
 alias down="cd ~/Downloads"
