@@ -128,7 +128,9 @@ export PATH="$GOPATH/bin:$PATH"
 ## alias
 # ==================================
 alias pwd='echo -n $(/bin/pwd) | tee >(pbcopy)'
-alias cdp='cd $(pbpaste)'
+alias ...=cd ../..
+alias ....=cd ../../..
+alias p='cd $(pbpaste)'
 alias awk=gawk
 alias airpods="BluetoothConnector -c ac-90-85-eb-4f-7c"
 alias atcoder="cd ~/atcoder"
@@ -256,4 +258,3 @@ function _search_on_maps(){
 alias map="_search_on_maps"
 
 export RUBYOPT='-W:no-deprecated -W:no-experimental'
-
