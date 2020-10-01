@@ -127,9 +127,10 @@ export PATH="$GOPATH/bin:$PATH"
 # ==================================
 ## alias
 # ==================================
+source ~/.zshalias
 alias pwd='echo -n $(/bin/pwd) | tee >(pbcopy)'
-alias ...=cd ../..
-alias ....=cd ../../..
+alias ...=../..
+alias ....=../../..
 alias p='cd $(pbpaste)'
 alias awk=gawk
 alias airpods="BluetoothConnector -c ac-90-85-eb-4f-7c"
@@ -137,25 +138,6 @@ alias atcoder="cd ~/atcoder"
 alias down="cd ~/Downloads"
 alias ag="ag -u"
 alias todo="vim ~/.todo.txt"
-alias rust="cd ~/rust"
-alias placy="cd ~/ruby/placy/Placy-api"
-alias mos="cd ~/ruby/mos/"
-alias mosapi="cd ~/ruby/mos/mos-api"
-alias cha="cd ~/ruby/chieru/chieru_api"
-alias chf="cd ~/angular/chieru/chieru-front"
-alias chr="cd ~/ruby/chieru/chieru-api-recommend"
-alias bewin="cd ~/go/src/bewin"
-alias acs="cd ~/ruby/azucal/acs"
-
-functions mosp(){
-  echo -n AdminPassword1234 | pbcopy
-}
-functions chp() {
-  echo $CHIERU_MYSQL_PASSWORD | pbcopy
-}
-functions sbbp() {
-  echo $SBB_MYSQL_PASSWORD | pbcopy
-}
 
 alias ls='exa -g --time-style=long-iso'
 alias ll="ls -l"
@@ -212,10 +194,6 @@ alias ku="kubectl"
 alias kpods="kubectl get pods"
 alias ksvc="kubectl get services"
 alias klogs="kubectl logs"
-alias gos="cd ~/go/src"
-alias sbb="cd ~/go/src/linebot-smartarch"
-alias gr="go run"
-alias gpr= "hub pull-request"
 alias bo="bookmark-go"
 alias bk="bookmark-go show | fzf | bookmark-go open"
 alias f="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}' | xargs nvim"
