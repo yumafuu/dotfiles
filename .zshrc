@@ -137,7 +137,6 @@ alias airpods="BluetoothConnector -c ac-90-85-eb-4f-7c"
 alias atcoder="cd ~/atcoder"
 alias down="cd ~/Downloads"
 alias ag="ag -u"
-alias todo="vim ~/.todo.txt"
 
 alias ls='exa -g --time-style=long-iso'
 alias ll="ls -l"
