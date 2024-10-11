@@ -1,37 +1,94 @@
-alias ez=exec zsh
+function imgpaste_file(){
+  pngpaste image.png
+  echo image.png is created
+}
 
-# ==================================
-## Zinit
-# ==================================
-### Added by Zinit's installer
-if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
-    print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
-    command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
-    command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && \
-        print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
-        print -P "%F{160}▓▒░ The clone has failed.%f%b"
-fi
+zle -N imgpaste_file
+bindkey "^V" imgpaste_file
+. "$HOME/.rye/env"
 
+
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  # source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# fi
+# source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+alias slamdunk="open ~/Hobby/THE-FIRST-SLAM-DUNK/FULL.mp4"
+
+PATH="$PATH:/opt/homebrew/bin"
+export PATH="${AQUA_ROOT_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/aquaproj-aqua}/bin:$PATH"
+PATH="$PATH:/$HOME/go/bin"
+PATH="$PATH:/Users/yuma/.cargo/bin"
+export PATH="/Users/yuma/.deno/bin:$PATH"
+
+alias vim=nvim
+alias q=exit
+alias vz='vim ~/.zshrc'
+alias vw='vim ~/.config/wezterm/wezterm.lua'
+alias v='vim .'
+alias ez='exec zsh'
+alias vv='vim ~/.config/nvim/init.lua'
+alias ls='exa -a'
+alias tree='exa --tree'
+alias ql='qlmanage -p "$@" >& /dev/null'
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export PATH="/opt/homebrew/opt/sqlite/bin:$PATH"
 eval "$(starship init zsh)"
-source "$HOME/.zinit/bin/zinit.zsh"
-autoload -Uz _zinit
-(( ${+_comps} )) && _comps[zinit]=_zinit
+. "$HOME/.cargo/env"
+. "$HOME/.local/zsh/docker.zsh"
 
-# Load a few important annexes, without Turbo
-# (this is currently required for annexes)
-zinit light-mode for \
-    zinit-zsh/z-a-rust \
-    zinit-zsh/z-a-as-monitor \
-    zinit-zsh/z-a-patch-dl \
-    zinit-zsh/z-a-bin-gem-node
+export WORDCHARS='*?_.[]~-=&;!#$%^(){}<>'
+stty erase '^?'
 
-zinit light zdharma/fast-syntax-highlighting
-zinit light paulirish/git-open
-zinit light starship/starship
+EDITOR=nvim
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_CTRL_T_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
+export FZF_CTRL_T_OPTS='--preview "bat  --color=always --style=header,grid --line-range :100 {}"'
+export FZF_DEFAULT_OPTS='--height 30% --border --select-1'
 
-# ==================================
-## End Zinit
-# ==================================
+# PATH
+export PATH=$HOME/.cargo/bin:$PATH
+export PATH="${PATH}:${HOME}/.krew/bin"
+export PATH="/Users/yuma/.local/bin:$PATH"
+export PATH="/Users/yuma/Library/Python/3.8/bin:$PATH"
+export PATH="/Users/yuma/Library/Python/3.9/bin:$PATH"
+
+alias vz="nvim ~/.zshrc"
+alias vv="nvim ~/.config/nvim/"
+alias ..="cd .."
+alias ...="cd ../../.."
+alias ....="cd ../../../.."
+alias .....="cd ../../../../.."
+alias diff="colordiff -u"
+alias spotify="spt"
+export LESS='-R'
+eval "$(frum init)"
+
+function fps(){
+  if [[ $1 = "" ]]; then
+    ps ax |
+      fzf |
+      awk '{ print $1 }' |
+      tr -d '\n' |
+      tee >(pbcopy)
+  elif [[ $1 = "kill" ]]; then
+    kill -9 $(fps)
+  fi
+}
+
+alias killf="fps kill"
+function vimtmp() {
+  t=$(mktemp)
+  echo $t | tee >(pbcopy)
+  vim $t
+}
+
+alias pswd='ruby -rsecurerandom -e "puts SecureRandom.alphanumeric"|xargs echo -n|pbcopy'
 
 # style
 autoload -U compinit
@@ -39,6 +96,7 @@ compinit
 export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
+# export LANG=ja_JP.UTF-8
 zstyle ':completion:*' menu select
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' ignore-parents parent pwd ..
@@ -58,182 +116,218 @@ setopt auto_menu
 setopt list_types
 setopt auto_param_slash
 setopt mark_dirs
+setopt nonomatch
 autoload colors
 
+export HISTFILE=${HOME}/.zsh_history
+export HISTSIZE=100000000
+export SAVEHIST=100000000
+setopt hist_ignore_dups
+setopt EXTENDED_HISTORY
+
+# function do_nothing(){}
+# zle -N do_nothing
+# bindkey "^D" do_nothing
+setopt IGNORE_EOF
+
 # zsh
-alias vim=nvim
-alias t=todo.sh
 bindkey "^A" beginning-of-line
 bindkey "^E" end-of-line
 bindkey "^U" backward-kill-line
 bindkey "^K" backward-kill-line
+bindkey "^H" backward-word
+bindkey '\e[3~' delete-char
 
 setopt auto_cd
 
-bindkey -v
-# test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh" || true
-export ZSH="/Users/yuma/.oh-my-zsh"
-# ZSH_THEME="zhann"
 plugins=(git zsh-syntax-highlighting)
 plugins=(git)
 
-export PATH="/usr/local/bin:$PATH"
-export PATH="$HOME/.rbenv/versions/2.6.3/bin:$PATH"
-export PATH="/Users/yuma/Library/Python/3.7/bin:$PATH"
-export PATH="/usr/local/sbin:$PATH"
-# export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
-export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
-export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
-export LDFLAGS="-L/usr/local/opt/openssl@1.1/lib"
-export CPPFLAGS="-I/usr/local/opt/openssl@1.1/include"
-export XDG_BASE_HOME="$HOME/.config"
-export NVIM="$HOME/.config/nvim"
-source ${HOME}/.cargo/env
-export PATH="/usr/local/opt/gnu-getopt/bin:$PATH"
-
-# rbenv
-eval "$(rbenv init -)"
-export PATH="$HOME/.rbenv/bin:$PATH"
-
-# pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-
-
-# node.js
-export PATH=$HOME/.nodebrew/current/bin:$PATH
-
-# yarn
-export PATH="$HOME/.yarn/bin:$PATH"
-
-
-# go
-export GOPATH=$HOME/go
-# export GOENV_ROOT=$HOME/.goenv
-# export PATH=$GOENV_ROOT/bin:$PATH
-# export PATH=$HOME/.goenv/bin:$PATH
-export PATH="$GOPATH/bin:$PATH"
-# export GOENV_DISABLE_GOPATH=1
-# eval "$(goenv init -)"
-
-# if [ /usr/local/bin/kubectl ]; then source <(kubectl completion zsh); fi
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# source "/usr/local/opt/kube-ps1/share/kube-ps1.sh"
-#PS1='$(kube_ps1)'$PS1
-
-# export FZF_DEFAULT_OPTS='--preview "bat --style=numbers --color=always --line-range :500 {}"'
+# starship
+source <("/opt/homebrew/bin/starship" init zsh --print-full-init)
 
 # ==================================
 ## alias
 # ==================================
-source ~/.zshalias
-alias pwd='echo -n $(/bin/pwd) | tee >(pbcopy)'
+alias so="source"
 alias ...=../..
 alias ....=../../..
-alias p='cd $(pbpaste)'
-alias awk=gawk
-alias airpods="BluetoothConnector -c ac-90-85-eb-4f-7c"
-alias atcoder="cd ~/atcoder"
-alias down="cd ~/Downloads"
 alias ag="ag -u"
 
-alias ls='exa -g --time-style=long-iso'
-alias ll="ls -l"
-alias k="tree -C -a -I '.git|node_modules|cache|test_*'"
-alias kill9="kill -9"
-alias -g P='| pbcopy'
-alias -g G='| grep'
+alias ls='exa -g --time-style=long-iso -a'
+alias ll="ls -la"
+alias tree="exa -T -a -I .git --git-ignore"
 alias :q='exit'
-alias :w='echo "hahaha"'
-alias :wq='echo "I am not vim!"'
+alias q='exit'
 
 alias Ag='Ag --hidden'
 
-alias vims='vim -p `git diff --name-only`'
-alias vimc='vim -p `git conflicts`'
-alias vv='vim ~/.config/nvim/init.vim'
-alias vmy='vim /etc/mysql/my.conf'
+alias k=kubectl
 
 alias mv='mv -i'
+alias cp='cp -i'
 alias vz='vim ~/.zshrc '
 alias ve='vim ~/.zshenv '
-alias sz='source ~/.zshrc'
+alias ez='exec zsh'
 alias se='source ~/.zshenv'
 
 alias gs='git status'
 alias gd='git diff'
 alias gco='git checkout'
+alias ga='git add .'
 alias gaa='git add .'
+alias gaaa='git add .'
+alias gaaaa='git add .'
+alias gaaaaa='git add .'
+alias gaaaaaa='git add .'
+alias gaaaaaaa='git add .'
+alias gaaaaaaaa='git add .'
 alias gc='git commit'
 alias gcob="git checkout -b"
-alias gush='git push origin $(git branch | grep "*" | sed -e "s/^\*\s*//g")'
-alias gull='git pull --rebase origin $(git branch | grep "*" | sed -e "s/^\*\s*//g")'
-alias dev="git checkout dev"
-alias stg="git checkout stg"
 alias master="git checkout master"
-alias co='git checkout $(git branch -a | tr -d " " |fzf --height 100% --prompt "CHECKOUT BRANCH>" --preview "git log --color=always {}" | head -n 1 | sed -e "s/^\*\s*//g" | perl -pe "s/remotes\/origin\///g")'
+alias main="git checkout main"
 
-alias py='python3'
+alias gush='
+  git push origin \
+  $(
+    git branch | \
+      grep "*" | \
+      sed -e "s/^\*\s*//g" \
+    ) \
+  '
+alias gul='
+  git pull --rebase origin \
+  $(
+    git branch | \
+      grep "*" | \
+      sed -e "s/^\*\s*//g" \
+    ) \
+  '
 
-alias ra='rails'
-alias b='bundle'
-alias be='bundle exec'
-alias bh='bundle exec hanami'
-alias rubo="bundle exec rubocop"
-alias ruboa="bundle exec rubocop -a"
+function g-branch(){
+  git branch -a |
+    sed -e "s/[ ,\*]//g" |
+    sed -e "s/remotes\/origin\///g" |
+    sed -e "s/HEAD->//g" |
+    sort -u |
+    fzf |
+    tr -d '\n'
+}
+alias checkout="g-branch | xargs git checkout"
+alias co=checkout
+
+alias b='bundle -j4'
+alias be="bundle exec"
+
 alias dk='docker'
-alias dkps="docker ps"
+alias dkc="docker compose"
+alias dck="docker compose"
 
-alias tenki="curl wttr.in"
-alias now="date "+%H:%M:%S"&&cal"
-alias aqua="asciiquarium"
-
-alias ku="kubectl"
-alias kpods="kubectl get pods"
-alias ksvc="kubectl get services"
-alias klogs="kubectl logs"
-alias bo="bookmark-go"
-alias bk="bookmark-go show | fzf | bookmark-go open"
-alias f="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}' | xargs nvim"
 alias tf='terraform'
-alias curlt='curl -so /dev/nul -w "http_code: %{http_code}\ntime_namelookup: %{time_namelookup}\ntime_connect: %{time_connect}\ntime_appconnect: %{time_appconnect}\ntime_pretransfer: %{time_pretransfer}\ntime_starttransfer: %{time_starttransfer}\ntime_total: %{time_total}\n"'
+alias oepn="open"
 
+alias ql='qlmanage -p "$@" >& /dev/null'
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/yuma/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/yuma/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/yuma/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/yuma/google-cloud-sdk/completion.zsh.inc'; fi
-
-# ==================================
 ## functions
 # ==================================
 
-# mkdir then cd
-function _makedir_then_changedir(){
-  dir=$1
-  mkdir -p $dir
+zle -N dm
+bindkey "^o" dm
+
+fancy-ctrl-z () {
+  if [[ $#BUFFER -eq 0 ]]; then
+    BUFFER="fg"
+    zle accept-line -w
+  else
+    zle push-input -w
+    zle clear-screen -w
+  fi
+}
+zle -N fancy-ctrl-z
+bindkey '^Z' fancy-ctrl-z
+bindkey -e
+
+function dm(){
+  file=$HOME/.dm.csv
+  touch $file
+
+  if [[ $1 = "a" ]]; then
+    dir=`/bin/pwd`
+    read "name?name: "
+    if [[ $name == "" ]];then
+      name=$dir
+    fi
+    echo $dir,$name | sed "s/\/Users\/yuma/\~/g" | tee -a $file
+    return
+  fi
+
+  if [[ $1 = "e" ]]; then
+    $EDITOR $file
+    return
+  fi
+
+  t=`cat $file | \
+    fzf -d, --with-nth 2 --preview "echo {} | cut -d , -f 1" | \
+    sed "s/\~/\/Users\/yuma/g"`
+  if [[ $t = "" ]]; then
+    return
+  fi
+
+  dir=`echo ${t} | cut -d , -f 1`
   cd $dir
- }
-alias mcdir='_makedir_then_changedir'
-
-function _search_on_google(){
-  words="$(IFS="+"; echo "${${@:1}[*]}")"
-  if [ "$words" != "" ]; then
-    open "https://google.com/search?q=$words"
-  fi
+  echo
 }
-alias gg="_search_on_google"
 
-function _search_on_maps(){
-  words="$(IFS="+"; echo "${${@:1}[*]}")"
-  if [ "$words" != "" ]; then
-    open "https://www.google.com/maps/search/$words"
+function cd_target(){
+  d=$( \
+    fd --type d -H \
+    -E .git \
+    -E node_modules \
+    -E .terragrunt-cache \
+    | fzf --select-1 --preview 'exa -T --git-ignore {}' )
+
+  if [[ $d = "" ]]; then
+    return
   fi
-}
-alias map="_search_on_maps"
 
-export RUBYOPT='-W:no-deprecated -W:no-experimental'
+  cd $d
+}
+
+zle -N cd_target
+bindkey "^k" cd_target
+
+function cdr() {
+  export TMP_CDR_DIR=$(pwd)
+
+  while [[ $TMP_CDR_DIR != "/" ]]
+  do
+    if [ -e "$TMP_CDR_DIR/.git" ];then
+      echo $TMP_CDR_DIR
+      cd $TMP_CDR_DIR
+      break
+    else
+      export TMP_CDR_DIR=$( dirname $TMP_CDR_DIR )
+    fi
+  done
+  unset TMP_CDR_DIR
+}
+
+zle -N cd_parent
+bindkey "^h" cd_parent
+cd_parent () {
+  cd ..
+  zle accept-line
+}
+export PATH="/opt/homebrew/bin:$PATH"
+export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+
+# bun completions
+[ -s "/Users/yuma/.bun/_bun" ] && source "/Users/yuma/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+
+eval "$(rbenv init -)"
+

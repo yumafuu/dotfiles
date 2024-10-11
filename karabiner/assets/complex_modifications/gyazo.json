@@ -1,0 +1,18 @@
+{
+    "title": "Fnキー単独でGyazo起動",
+    "rules": [{
+        "description": "Fnキー単独でGyazo起動",
+        "manipulators": [{
+            "type": "basic",
+            "from": {
+                "key_code": "eject"
+            },
+            "to_if_alone": [{
+                "shell_command": "/usr/bin/osascript ~/.config/WindowCapture/windowcapture.as"
+            }],
+            "to_if_held_down": [{
+                "shell_command": "open /Applications/Gyazo.app;"
+            }]
+      }]
+  }]
+}
