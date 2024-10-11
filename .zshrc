@@ -1,3 +1,8 @@
+export AQUA_GLOBAL_CONFIG=${AQUA_GLOBAL_CONFIG:-}:${XDG_CONFIG_HOME:-$HOME/.config}/aquaproj-aqua/aqua.yaml
+export NPM_CONFIG_PREFIX="${XDG_DATA_HOME:-$HOME/.local/share}/npm-global" # You can change the path freely
+export PATH=$NPM_CONFIG_PREFIX/bin:$PATH
+
+
 function imgpaste_file(){
   pngpaste image.png
   echo image.png is created
@@ -36,7 +41,6 @@ alias ls='exa -a'
 alias tree='exa --tree'
 alias ql='qlmanage -p "$@" >& /dev/null'
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export PATH="/opt/homebrew/opt/sqlite/bin:$PATH"
 eval "$(starship init zsh)"
 . "$HOME/.cargo/env"
