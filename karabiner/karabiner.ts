@@ -3,7 +3,6 @@ import {
   rule,
   ifApp,
   map,
-  mapSimultaneous,
   toKey,
   withCondition,
 } from 'https://deno.land/x/karabinerts@1.30.0/deno.ts'
@@ -24,7 +23,7 @@ writeToProfile('Default', [
       .to({ key_code: 'left_control', lazy: true })
   ]),
 
-  rule('migioptionキーで日本語モードに変更').manipulators([
+  rule('右optionキーで日本語モードに変更').manipulators([
     map('right_option', 'optionalAny')
       .toIfAlone(toKey('japanese_kana'))
       .toIfHeldDown(toKey('right_option'))
