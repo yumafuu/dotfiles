@@ -1,4 +1,3 @@
 # Dotfiles
-My confs
 
-Update automatically by cron
+My Best Dotfiles

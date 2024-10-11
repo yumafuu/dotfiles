@@ -1,0 +1,4 @@
+{
+  "starship.toml": "~/.config/starship.toml",
+  "lemonade.toml": "~/.config/lemonade.toml"
+}
