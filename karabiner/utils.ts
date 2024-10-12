@@ -1,8 +1,27 @@
-export function open(...what: string[]) {
-  return {
-    to: what.map((w) => ({
-      shell_command: `open ${w}`,
-    })),
-    description: `Open ${what.join(" & ")}`,
-  };
-}
+import { parse, stringify } from "jsr:@std/yaml";
+import { to$ } from "karabinerts";
+
+export const KvMap = <T, U>(
+  obj: { [key: string]: T },
+  callback: (key: string, value: T) => U,
+): { [key: string]: U } => {
+  return Object.entries(obj).reduce((acc, [key, value]) => {
+    acc[key] = callback(key, value);
+    return acc;
+  }, {} as { [key: string]: U });
+};
+
+export const ObjectToHint = (obj: { [key: string]: any }): string => {
+  return Object.entries(obj)
+    .map(([key, value]) => `${key}: ${value}`)
+    .join("\n");
+};
+
+export const ReadYaml = async (filename: string) => {
+  const yaml = await Deno.readTextFile(filename);
+  return parse(yaml);
+};
+
+export const toRaycast = (path: string) => {
+  return to$(`open raycast://${path}`);
+};
