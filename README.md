@@ -1,3 +1,3 @@
-# Dotfiles
+# THE BEST dotfiles
 
-My Best Dotfiles
+using [rhysd/dotfiles: dotfiles symbolic links management CLI](https://github.com/rhysd/dotfiles)
