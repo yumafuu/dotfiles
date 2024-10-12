@@ -11,3 +11,4 @@ packages:
   - name: golang/go@go1.23.2
   - name: xxxserxxx/gotop@v4.2.0
   - name: jqlang/jq@jq-1.7.1
+  - name: rhysd/dotfiles@v0.2.3
