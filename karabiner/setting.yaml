@@ -5,14 +5,19 @@ apps:
   a: Wezterm
   r: Reflect
   p: Spotify
+  l: Line
+  e: Deepl
+  m: Spark Desktop
+  c: Rise
 links:
   g: https://github.com
   z: https://zenn.dev
-  x: https://x.comlms.keio.jp
+  x: https://x.com
   y: https://youtube.com
-  c: https://chatpgt.com
-  d: https://deepl.com
+  c: https://chatgpt.com
   l: https://lms.keio.jp
+  m: https://scrapbox.io/yumamemo
+  s: https://scrapbox.io/masuilab
 emojis:
   b: 🙇‍♂️
   g: 👍

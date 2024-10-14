@@ -110,6 +110,74 @@
                     "shell_command": "open -a \"Spotify\".app"
                   }
                 ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "l",
+                  "modifiers": {
+                    "mandatory": [
+                      "control",
+                      "shift"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "shell_command": "open -a \"Line\".app"
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "e",
+                  "modifiers": {
+                    "mandatory": [
+                      "control",
+                      "shift"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "shell_command": "open -a \"Deepl\".app"
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "m",
+                  "modifiers": {
+                    "mandatory": [
+                      "control",
+                      "shift"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "shell_command": "open -a \"Spark Desktop\".app"
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "c",
+                  "modifiers": {
+                    "mandatory": [
+                      "control",
+                      "shift"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "shell_command": "open -a \"Rise\".app"
+                  }
+                ]
               }
             ]
           },
@@ -130,7 +198,9 @@
                       "key_code": "a"
                     }
                   ],
-                  "simultaneous_options": {}
+                  "simultaneous_options": {
+                    "key_down_order": "strict"
+                  }
                 },
                 "parameters": {
                   "basic.simultaneous_threshold_milliseconds": 300
@@ -155,7 +225,9 @@
                       "key_code": "l"
                     }
                   ],
-                  "simultaneous_options": {}
+                  "simultaneous_options": {
+                    "key_down_order": "strict"
+                  }
                 },
                 "parameters": {
                   "basic.simultaneous_threshold_milliseconds": 300
@@ -180,7 +252,9 @@
                       "key_code": "l"
                     }
                   ],
-                  "simultaneous_options": {}
+                  "simultaneous_options": {
+                    "key_down_order": "strict"
+                  }
                 },
                 "parameters": {
                   "basic.simultaneous_threshold_milliseconds": 300
@@ -229,7 +303,7 @@
                   {
                     "set_notification_message": {
                       "id": "duo-layer-duo-layer-left_option-l",
-                      "text": "g: https://github.com\nz: https://zenn.dev\nx: https://x.comlms.keio.jp\ny: https://youtube.com\nc: https://chatpgt.com\nd: https://deepl.com\nl: https://lms.keio.jp"
+                      "text": "g: https://github.com\nz: https://zenn.dev\nx: https://x.com\ny: https://youtube.com\nc: https://chatgpt.com\nl: https://lms.keio.jp\nm: https://scrapbox.io/yumamemo\ns: https://scrapbox.io/masuilab"
                     }
                   }
                 ],
@@ -308,7 +382,7 @@
                 },
                 "to": [
                   {
-                    "shell_command": "open https://x.comlms.keio.jp"
+                    "shell_command": "open https://x.com"
                   },
                   {
                     "set_variable": {
@@ -368,37 +442,7 @@
                 },
                 "to": [
                   {
-                    "shell_command": "open https://chatpgt.com"
-                  },
-                  {
-                    "set_variable": {
-                      "name": "duo-layer-left_option-l",
-                      "value": 0
-                    }
-                  },
-                  {
-                    "set_notification_message": {
-                      "id": "duo-layer-duo-layer-left_option-l",
-                      "text": ""
-                    }
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "variable_if",
-                    "name": "duo-layer-left_option-l",
-                    "value": 1
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "from": {
-                  "key_code": "d"
-                },
-                "to": [
-                  {
-                    "shell_command": "open https://deepl.com"
+                    "shell_command": "open https://chatgpt.com"
                   },
                   {
                     "set_variable": {
@@ -429,6 +473,66 @@
                 "to": [
                   {
                     "shell_command": "open https://lms.keio.jp"
+                  },
+                  {
+                    "set_variable": {
+                      "name": "duo-layer-left_option-l",
+                      "value": 0
+                    }
+                  },
+                  {
+                    "set_notification_message": {
+                      "id": "duo-layer-duo-layer-left_option-l",
+                      "text": ""
+                    }
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "variable_if",
+                    "name": "duo-layer-left_option-l",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "m"
+                },
+                "to": [
+                  {
+                    "shell_command": "open https://scrapbox.io/yumamemo"
+                  },
+                  {
+                    "set_variable": {
+                      "name": "duo-layer-left_option-l",
+                      "value": 0
+                    }
+                  },
+                  {
+                    "set_notification_message": {
+                      "id": "duo-layer-duo-layer-left_option-l",
+                      "text": ""
+                    }
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "variable_if",
+                    "name": "duo-layer-left_option-l",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "s"
+                },
+                "to": [
+                  {
+                    "shell_command": "open https://scrapbox.io/masuilab"
                   },
                   {
                     "set_variable": {
@@ -1351,7 +1455,7 @@
             ]
           },
           {
-            "description": "[Vivaldi][Slack] `left_control` + `j,k`で上下入力",
+            "description": "[Vivaldi][Slack][Reflect] `left_control` + `j,k`で上下入力",
             "manipulators": [
               {
                 "type": "basic",
@@ -1372,7 +1476,7 @@
                   {
                     "type": "frontmost_application_if",
                     "bundle_identifiers": [
-                      "^com\\.vivaldi\\.Vivaldi|com\\.tinyspeck\\.slackmacgap"
+                      "^com.tinyspeck.slackmacgap|app.reflect.ReflectDesktop|com.vivaldi.Vivaldi|com.readdle.SparkDesktop$"
                     ]
                   }
                 ]
@@ -1396,7 +1500,7 @@
                   {
                     "type": "frontmost_application_if",
                     "bundle_identifiers": [
-                      "^com\\.vivaldi\\.Vivaldi|com\\.tinyspeck\\.slackmacgap"
+                      "^com.tinyspeck.slackmacgap|app.reflect.ReflectDesktop|com.vivaldi.Vivaldi|com.readdle.SparkDesktop$"
                     ]
                   }
                 ]

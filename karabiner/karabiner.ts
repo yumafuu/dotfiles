@@ -17,7 +17,19 @@ import {
   writeToProfile,
 } from "karabinerts";
 
-import { KvMap, ObjectToHint, ReadYaml, toRaycast } from "./utils.ts";
+import {
+  KvMap,
+  ObjectToHint,
+  ReadYaml,
+  toRaycast,
+} from "./utils.ts";
+
+import {
+  Slack,
+  Vivaldi,
+  ReflectApp,
+  Spark,
+} from "./app.ts"
 
 const {
   apps,
@@ -26,7 +38,7 @@ const {
   phases,
   snippets,
   raycasts,
-} = await ReadYaml("setting.yaml");
+} = ReadYaml("setting.yaml");
 
 // {
 //   '⌘': 'command',
@@ -45,7 +57,7 @@ writeToProfile("Default", [
 
   rule("Snippets").manipulators(
     Object.entries(snippets).map(([k,v]) => {
-      return mapSimultaneous(`'${k}`.split(""), {}, 300).toPaste(v)
+      return mapSimultaneous(`'${k}`.split(""), { key_down_order: 'strict' }, 300).toPaste(v)
     }),
   ),
 
@@ -108,9 +120,9 @@ writeToProfile("Default", [
     ]),
   ]),
 
-  rule("[Vivaldi][Slack] `left_control` + `j,k`で上下入力").manipulators([
+  rule("[Vivaldi][Slack][Reflect] `left_control` + `j,k`で上下入力").manipulators([
     withCondition(
-      ifApp("^com\\.vivaldi\\.Vivaldi|com\\.tinyspeck\\.slackmacgap"),
+      ifApp(`^${Slack}|${ReflectApp}|${Vivaldi}|${Spark}$`),
     )([
       map("k", "left_control").to("↑"),
       map("j", "left_control").to("↓"),

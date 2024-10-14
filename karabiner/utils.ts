@@ -1,3 +1,4 @@
+import fs from "fs"
 import { parse, stringify } from "jsr:@std/yaml";
 import { to$ } from "karabinerts";
 
@@ -17,8 +18,8 @@ export const ObjectToHint = (obj: { [key: string]: any }): string => {
     .join("\n");
 };
 
-export const ReadYaml = async (filename: string) => {
-  const yaml = await Deno.readTextFile(filename);
+export const ReadYaml = (filename: string) => {
+  const yaml = fs.readFileSync(filename)
   return parse(yaml);
 };
 
