@@ -619,7 +619,7 @@
                 "from": {
                   "simultaneous": [
                     {
-                      "key_code": "left_option"
+                      "key_code": "right_option"
                     },
                     {
                       "key_code": "e"
@@ -640,13 +640,13 @@
                 "to": [
                   {
                     "set_variable": {
-                      "name": "duo-layer-left_option-e",
+                      "name": "duo-layer-right_option-e",
                       "value": 1
                     }
                   },
                   {
                     "set_notification_message": {
-                      "id": "duo-layer-duo-layer-left_option-e",
+                      "id": "duo-layer-duo-layer-right_option-e",
                       "text": "b: 🙇‍♂️\ng: 👍\np: 🙏"
                     }
                   }
@@ -654,7 +654,7 @@
                 "conditions": [
                   {
                     "type": "variable_unless",
-                    "name": "duo-layer-left_option-e",
+                    "name": "duo-layer-right_option-e",
                     "value": 1
                   }
                 ]
@@ -670,13 +670,13 @@
                   },
                   {
                     "set_variable": {
-                      "name": "duo-layer-left_option-e",
+                      "name": "duo-layer-right_option-e",
                       "value": 0
                     }
                   },
                   {
                     "set_notification_message": {
-                      "id": "duo-layer-duo-layer-left_option-e",
+                      "id": "duo-layer-duo-layer-right_option-e",
                       "text": ""
                     }
                   }
@@ -684,7 +684,7 @@
                 "conditions": [
                   {
                     "type": "variable_if",
-                    "name": "duo-layer-left_option-e",
+                    "name": "duo-layer-right_option-e",
                     "value": 1
                   }
                 ]
@@ -700,13 +700,13 @@
                   },
                   {
                     "set_variable": {
-                      "name": "duo-layer-left_option-e",
+                      "name": "duo-layer-right_option-e",
                       "value": 0
                     }
                   },
                   {
                     "set_notification_message": {
-                      "id": "duo-layer-duo-layer-left_option-e",
+                      "id": "duo-layer-duo-layer-right_option-e",
                       "text": ""
                     }
                   }
@@ -714,7 +714,7 @@
                 "conditions": [
                   {
                     "type": "variable_if",
-                    "name": "duo-layer-left_option-e",
+                    "name": "duo-layer-right_option-e",
                     "value": 1
                   }
                 ]
@@ -730,13 +730,13 @@
                   },
                   {
                     "set_variable": {
-                      "name": "duo-layer-left_option-e",
+                      "name": "duo-layer-right_option-e",
                       "value": 0
                     }
                   },
                   {
                     "set_notification_message": {
-                      "id": "duo-layer-duo-layer-left_option-e",
+                      "id": "duo-layer-duo-layer-right_option-e",
                       "text": ""
                     }
                   }
@@ -744,7 +744,7 @@
                 "conditions": [
                   {
                     "type": "variable_if",
-                    "name": "duo-layer-left_option-e",
+                    "name": "duo-layer-right_option-e",
                     "value": 1
                   }
                 ]
@@ -757,20 +757,20 @@
                 "conditions": [
                   {
                     "type": "variable_if",
-                    "name": "duo-layer-left_option-e",
+                    "name": "duo-layer-right_option-e",
                     "value": 1
                   }
                 ],
                 "to": [
                   {
                     "set_variable": {
-                      "name": "duo-layer-left_option-e",
+                      "name": "duo-layer-right_option-e",
                       "value": 0
                     }
                   },
                   {
                     "set_notification_message": {
-                      "id": "duo-layer-duo-layer-left_option-e",
+                      "id": "duo-layer-duo-layer-right_option-e",
                       "text": ""
                     }
                   }
@@ -784,20 +784,20 @@
                 "conditions": [
                   {
                     "type": "variable_if",
-                    "name": "duo-layer-left_option-e",
+                    "name": "duo-layer-right_option-e",
                     "value": 1
                   }
                 ],
                 "to": [
                   {
                     "set_variable": {
-                      "name": "duo-layer-left_option-e",
+                      "name": "duo-layer-right_option-e",
                       "value": 0
                     }
                   },
                   {
                     "set_notification_message": {
-                      "id": "duo-layer-duo-layer-left_option-e",
+                      "id": "duo-layer-duo-layer-right_option-e",
                       "text": ""
                     }
                   }
@@ -1447,7 +1447,7 @@
                   {
                     "type": "frontmost_application_unless",
                     "bundle_identifiers": [
-                      "^com\\.github\\.wez\\.wezterm"
+                      "com.github.wez.wezterm"
                     ]
                   }
                 ]
@@ -1527,7 +1527,7 @@
                   {
                     "type": "frontmost_application_if",
                     "bundle_identifiers": [
-                      "^com\\.hnc\\.Discord"
+                      "^com.hnc.Discord$"
                     ]
                   }
                 ]
@@ -1551,7 +1551,7 @@
                   {
                     "type": "frontmost_application_if",
                     "bundle_identifiers": [
-                      "^com\\.hnc\\.Discord"
+                      "^com.hnc.Discord$"
                     ]
                   }
                 ]
