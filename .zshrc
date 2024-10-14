@@ -73,24 +73,7 @@ alias spotify="spt"
 export LESS='-R'
 eval "$(frum init)"
 
-function fps(){
-  if [[ $1 = "" ]]; then
-    ps ax |
-      fzf |
-      awk '{ print $1 }' |
-      tr -d '\n' |
-      tee >(pbcopy)
-  elif [[ $1 = "kill" ]]; then
-    kill -9 $(fps)
-  fi
-}
 
-alias killf="fps kill"
-function vimtmp() {
-  t=$(mktemp)
-  echo $t | tee >(pbcopy)
-  vim $t
-}
 
 alias pswd='ruby -rsecurerandom -e "puts SecureRandom.alphanumeric"|xargs echo -n|pbcopy'
 

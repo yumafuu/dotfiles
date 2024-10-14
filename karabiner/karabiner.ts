@@ -26,9 +26,11 @@ import {
 
 import {
   Slack,
+  Discord,
   Vivaldi,
   ReflectApp,
   Spark,
+  Wezterm,
 } from "./app.ts"
 
 const {
@@ -67,7 +69,7 @@ writeToProfile("Default", [
     .notification(ObjectToHint(links))
     .manipulators(KvMap(links, (k, v) => to$(`open ${v}`))),
 
-  duoLayer("left_option", "e")
+  duoLayer("right_option", "e")
     .description("Paste Emojis")
     .leaderMode()
     .notification(ObjectToHint(emojis))
@@ -114,7 +116,7 @@ writeToProfile("Default", [
   ]),
 
   rule("[!Wezterm]left_control+ w`でcommand+delete").manipulators([
-    withCondition(ifApp("^com\\.github\\.wez\\.wezterm").unless())([
+    withCondition(ifApp(`${Wezterm}`).unless())([
       map("w", "left_control")
         .to("delete_or_backspace", "command"),
     ]),
@@ -130,7 +132,7 @@ writeToProfile("Default", [
   ]),
 
   rule("[Discord] Shift+Enterで送信").manipulators([
-    withCondition(ifApp("^com\\.hnc\\.Discord"))([
+    withCondition(ifApp(`^${Discord}$`))([
       map("return_or_enter").to("return_or_enter", "left_shift"),
       map("return_or_enter", "⌘").to("return_or_enter"),
     ]),
