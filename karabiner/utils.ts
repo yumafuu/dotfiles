@@ -1,6 +1,6 @@
 import fs from "fs"
-import { parse, stringify } from "jsr:@std/yaml";
-import { to$ } from "karabinerts";
+import { parse } from "jsr:@std/yaml";
+import { to$ } from "karabiner.ts";
 
 export const KvMap = <T, U>(
   obj: { [key: string]: T },

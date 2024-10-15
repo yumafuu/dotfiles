@@ -1,6 +1,6 @@
 {
   "imports": {
-    "karabinerts": "https://deno.land/x/karabinerts@1.30.0/deno.ts",
+    "karabiner.ts": "https://deno.land/x/karabinerts@1.30.0/deno.ts",
     "fs": "node:fs"
   },
   "tasks": {
