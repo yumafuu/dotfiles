@@ -15,7 +15,7 @@ import {
   withModifier,
   // withMapper,
   writeToProfile,
-} from "karabinerts";
+} from "karabiner.ts";
 
 import {
   KvMap,
