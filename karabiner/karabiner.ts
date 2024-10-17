@@ -33,6 +33,8 @@ import {
   Wezterm,
 } from "./app.ts"
 
+const __dirname = new URL(".", import.meta.url).pathname
+
 const {
   apps,
   links,
@@ -40,7 +42,7 @@ const {
   phases,
   snippets,
   raycasts,
-} = ReadYaml("setting.yaml");
+} = ReadYaml(`${__dirname}/setting.yaml`);
 
 // {
 //   '⌘': 'command',

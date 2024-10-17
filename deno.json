@@ -1,0 +1,5 @@
+{
+  "tasks": {
+    "watch": "deno run -A karabiner/karabiner.ts"
+  }
+}
