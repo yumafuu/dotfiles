@@ -12,3 +12,4 @@ packages:
   - name: xxxserxxx/gotop@v4.2.0
   - name: jqlang/jq@jq-1.7.1
   - name: rhysd/dotfiles@v0.2.3
+  - name: neovim/neovim@v0.10.2
