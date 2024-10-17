@@ -37,6 +37,7 @@ const __dirname = new URL(".", import.meta.url).pathname
 
 const {
   apps,
+  maps,
   links,
   emojis,
   phases,
@@ -62,6 +63,17 @@ writeToProfile("Default", [
   rule("Snippets").manipulators(
     Object.entries(snippets).map(([k,v]) => {
       return mapSimultaneous(`'${k}`.split(""), { key_down_order: 'strict' }, 300).toPaste(v)
+    }),
+  ),
+
+  rule("Remap").manipulators(
+    Object.entries(maps).map(([k, v]) => {
+      if ( k.includes("-") ) {
+        const [modifier, key] = k.split("-")
+        return map(key, modifier).toPaste(v)
+      } else {
+        return map(k).toPaste(v)
+      }
     }),
   ),
 

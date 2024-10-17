@@ -1,5 +1,5 @@
 {
   "tasks": {
-    "watch": "deno run -A karabiner/karabiner.ts"
+    "watch": "deno run -A --watch karabiner/karabiner.ts"
   }
 }

@@ -1,4 +1,4 @@
-import fs from "fs"
+import fs from "fs";
 import { parse } from "jsr:@std/yaml";
 import { to$ } from "karabiner.ts";
 
@@ -12,6 +12,12 @@ export const KvMap = <T, U>(
   }, {} as { [key: string]: U });
 };
 
+export const KvWithModifier = (
+  obj: { [key: string]: T },
+  callback: (key: string, value: T) => U,
+) => {
+};
+
 export const ObjectToHint = (obj: { [key: string]: any }): string => {
   return Object.entries(obj)
     .map(([key, value]) => `${key}: ${value}`)
@@ -19,7 +25,7 @@ export const ObjectToHint = (obj: { [key: string]: any }): string => {
 };
 
 export const ReadYaml = (filename: string) => {
-  const yaml = fs.readFileSync(filename)
+  const yaml = fs.readFileSync(filename);
   return parse(yaml);
 };
 
