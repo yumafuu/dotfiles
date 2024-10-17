@@ -1,7 +1,43 @@
 return {
+  {
+    "github/copilot.vim",
+    enabled = false,
+    config = function()
+      vim.g.copilot_no_tab_map = true
+
+      local keymap = vim.keymap.set
+      -- https://github.com/orgs/community/discussions/29817#discussioncomment-4217615
+      keymap(
+        "i",
+        "<C-g>",
+        'copilot#Accept("<CR>")',
+        { silent = true, expr = true, script = true, replace_keycodes = false }
+      )
+      keymap("i", "<C-j>", "<Plug>(copilot-next)")
+      keymap("i", "<C-k>", "<Plug>(copilot-previous)")
+      keymap("i", "<C-o>", "<Plug>(copilot-dismiss)")
+      keymap("i", "<C-s>", "<Plug>(copilot-suggest)")
+    end
+  },
   'nvim-lua/popup.nvim',
   'MunifTanjim/nui.nvim',
   'RRethy/vim-illuminate',
+  'tpope/vim-dispatch',
+  {'akinsho/git-conflict.nvim', version = "*", config = true},
+  {
+    "luckasRanarison/tailwind-tools.nvim",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    opts = {} -- your configuration
+  },
+  {
+    'TobinPalmer/rayso.nvim',
+    cmd = { 'Rayso' },
+    config = function()
+      require('rayso').setup {
+        open_cmd = 'open-via-lemonade',
+      }
+    end
+  },
   {
     'rapan931/lasterisk.nvim',
     config = function()
@@ -84,18 +120,18 @@ return {
       ]])
     end
   },
-  'lambdalisue/kensaku.vim',
-  {
-    'lambdalisue/kensaku-search.vim',
-    config = function()
-      vim.api.nvim_set_keymap(
-        'c',
-        '<CR>',
-        '<Plug>(kensaku-search-replace)<CR>',
-        { noremap = true, silent = true }
-      )
-    end
-  },
+  -- 'lambdalisue/kensaku.vim',
+  -- {
+  --   'lambdalisue/kensaku-search.vim',
+  --   config = function()
+  --     vim.api.nvim_set_keymap(
+  --       'c',
+  --       '<CR>',
+  --       '<Plug>(kensaku-search-replace)<CR>',
+  --       { noremap = true, silent = true }
+  --     )
+  --   end
+  -- },
   -- {
   --   "ibhagwan/fzf-lua",
   --   -- optional for icon support
@@ -105,26 +141,6 @@ return {
   --     require("fzf-lua").setup({})
   --   end
   -- },
-  {
-    "github/copilot.vim",
-    enabled = false,
-    config = function()
-      vim.g.copilot_no_tab_map = true
-
-      local keymap = vim.keymap.set
-      -- https://github.com/orgs/community/discussions/29817#discussioncomment-4217615
-      keymap(
-        "i",
-        "<C-g>",
-        'copilot#Accept("<CR>")',
-        { silent = true, expr = true, script = true, replace_keycodes = false }
-      )
-      keymap("i", "<C-j>", "<Plug>(copilot-next)")
-      keymap("i", "<C-k>", "<Plug>(copilot-previous)")
-      keymap("i", "<C-o>", "<Plug>(copilot-dismiss)")
-      keymap("i", "<C-s>", "<Plug>(copilot-suggest)")
-    end
-  },
   { 'kiran94/s3edit.nvim', config = true, cmd = "S3Edit"},
   {
     '0xAdk/full_visual_line.nvim',
@@ -216,25 +232,6 @@ return {
         lazysql:toggle()
       end
       vim.api.nvim_set_keymap("n", "<space>s", "<cmd>lua _toggleLazysqlTerminal()<CR>", opts)
-
-      -- Gh Dash
-      local ghDash = Terminal:new({
-        cmd = "gh dash",
-        dir = "git_dir",
-        direction = "float",
-        hidden = true,
-        close_on_exit = true,
-        float_opts = float_opts,
-        highlights = highlights,
-        on_open = function(term)
-          vim.cmd("startinsert!")
-          vim.api.nvim_buf_set_keymap(term.bufnr, "t", "<c-g>", "<CMD>close<CR>", opts)
-        end,
-      })
-      function _toggleGhDashTerminal()
-        ghDash:toggle()
-      end
-      vim.api.nvim_set_keymap("n", "<c-g>", "<cmd>lua _toggleGhDashTerminal()<CR>", opts)
     end
   },
   {
@@ -347,8 +344,46 @@ return {
       require("mason").setup()
     end,
   },
+  'mattn/vim-goimports',
+  {
+    "ray-x/go.nvim",
+    dependencies = {  -- optional packages
+      "ray-x/guihua.lua",
+      "neovim/nvim-lspconfig",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    config = function()
+      require("go").setup()
+    end,
+    event = {"CmdlineEnter"},
+    ft = {"go", 'gomod'},
+    build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
+  },
   {
     'neovim/nvim-lspconfig',
+    config = function()
+      local lspconfig = require('lspconfig')
+      lspconfig["denols"].setup({
+        root_dir = lspconfig.util.root_pattern("deno.json"),
+        init_options = {
+          lint = true,
+          unstable = true,
+          suggest = {
+            imports = {
+              hosts = {
+                ["https://deno.land"] = true,
+                ["https://cdn.nest.land"] = true,
+                ["https://crux.land"] = true,
+              },
+            },
+          },
+        },
+
+      })
+      lspconfig["tsserver"].setup({
+        root_dir = lspconfig.util.root_pattern("package.json"),
+      })
+    end
   },
   {
     "williamboman/mason-lspconfig.nvim",
@@ -368,18 +403,107 @@ return {
           nvim_lsp[server_name].setup(opts)
         end,
       })
-      vim.keymap.set('n', 'gf', '<cmd>lua vim.lsp.buf.formatting()<CR>')
+      vim.keymap.set('n', 'MM', '<cmd>lua vim.lsp.buf.format()<CR>')
       vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>')
       vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>')
       vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>')
       vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>')
       vim.keymap.set('n', 'gt', '<cmd>lua vim.lsp.buf.type_definition()<CR>')
       vim.keymap.set('n', 'gn', '<cmd>lua vim.lsp.buf.rename()<CR>')
-      vim.keymap.set('n', 'ga', '<cmd>lua vim.lsp.buf.code_action()<CR>')
-      vim.keymap.set('n', 'ge', '<cmd>lua vim.diagnostic.open_float()<CR>')
-      vim.keymap.set('n', 'g]', '<cmd>lua vim.diagnostic.goto_next()<CR>')
-      vim.keymap.set('n', 'g[', '<cmd>lua vim.diagnostic.goto_prev()<CR>')
+      vim.keymap.set('n', 'K',  '<cmd>lua vim.lsp.buf.hover()<CR>')
+      vim.keymap.set('n', 'ga', '<cmd>lua vim.diagnostic.open_float()<CR>')
+      -- vim.keymap.set('n', 'g]', '<cmd>lua vim.diagnostic.goto_next()<CR>')
+      -- vim.keymap.set('n', 'g[', '<cmd>lua vim.diagnostic.goto_prev()<CR>')
     end
+  },
+  'neovim/nvim-lspconfig',
+  'hrsh7th/cmp-nvim-lsp',
+  'hrsh7th/cmp-buffer',
+  'hrsh7th/cmp-path',
+  'hrsh7th/cmp-cmdline',
+  {
+    'hrsh7th/nvim-cmp',
+    config = function()
+      vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+        vim.lsp.handlers.hover,
+        {
+          border = "rounded", -- "shadow" , "none", "rounded"
+          -- border = border
+          -- width = 100,
+        }
+      )
+      local cmp = require'cmp'
+
+      cmp.setup({
+        snippet = {
+          -- REQUIRED - you must specify a snippet engine
+          expand = function(args)
+            vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+            -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+            -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
+            -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+            -- vim.snippet.expand(args.body) -- For native neovim snippets (Neovim v0.10+)
+          end,
+        },
+        window = {
+          -- completion = cmp.config.window.bordered(),
+          -- documentation = cmp.config.window.bordered(),
+        },
+        mapping = cmp.mapping.preset.insert({
+          ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+          ['<C-f>'] = cmp.mapping.scroll_docs(4),
+          ['<C-Space>'] = cmp.mapping.complete(),
+          ['<C-e>'] = cmp.mapping.abort(),
+          ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+        }),
+        sources = cmp.config.sources({
+          { name = 'nvim_lsp' },
+          { name = 'vsnip' }, -- For vsnip users.
+          -- { name = 'luasnip' }, -- For luasnip users.
+          -- { name = 'ultisnips' }, -- For ultisnips users.
+          -- { name = 'snippy' }, -- For snippy users.
+        }, {
+            { name = 'buffer' },
+          })
+      })
+
+      -- To use git you need to install the plugin petertriho/cmp-git and uncomment lines below
+      -- Set configuration for specific filetype.
+      --[[ cmp.setup.filetype('gitcommit', {
+    sources = cmp.config.sources({
+      { name = 'git' },
+    }, {
+      { name = 'buffer' },
+    })
+ })
+ require("cmp_git").setup() ]]--
+
+      -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+      cmp.setup.cmdline({ '/', '?' }, {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = {
+          { name = 'buffer' }
+        }
+      })
+
+      -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+      cmp.setup.cmdline(':', {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({
+          { name = 'path' }
+        }, {
+            { name = 'cmdline' }
+          }),
+        matching = { disallow_symbol_nonprefix_matching = false }
+      })
+
+      -- Set up lspconfig.
+      -- local capabilities = require('cmp_nvim_lsp').default_capabilities()
+      -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
+      -- require('lspconfig')['gopls'].setup {
+        -- capabilities = capabilities
+      -- }
+    end,
   },
   {
     "shellRaining/hlchunk.nvim",
@@ -496,7 +620,7 @@ return {
   },
   {
     'nanozuki/tabby.nvim',
-    event = 'VimEnter',
+    -- event = 'VimEnter',
     dependencies = 'nvim-tree/nvim-web-devicons',
     config = function()
       vim.o.showtabline = 2
@@ -507,28 +631,29 @@ return {
         current_tab = { fg='#7BAFDA', bg='None' },
         tab = { fg='#595959', bg='None' },
       }
-      require('tabby.tabline').set(function(line)
-        local separator = { '│', hl = { fg = '#3A3A3A', bg = 'None' }, margin = ' ' }
+      local separator = { '│', hl = { fg = '#3A3A3A', bg = 'None' }, margin = ' ' }
 
-        return {
-          line.tabs().foreach(function(tab)
-            local hl = tab.is_current() and theme.current_tab or theme.tab
-
-            return {
-              line.sep(separator, hl, theme.fill),
-              tab.number(),
-              tab.name(),
-              {
-                ' ',
+      require('tabby').setup({
+        line = function(line)
+          return {
+            line.tabs().foreach(function(tab)
+              local hl = tab.is_current() and theme.current_tab or theme.tab
+              return {
+                line.sep(separator, hl, theme.fill),
+                tab.number(),
+                tab.name(),
+                {
+                  ' ',
+                  hl = hl,
+                  margin = ' ',
+                },
                 hl = hl,
                 margin = ' ',
-              },
-              hl = hl,
-              margin = ' ',
-            }
-          end),
-        }
-      end)
+              }
+            end),
+            hl = theme.fill,
+          }
+        end})
     end,
   },
   { 'kevinhwang91/nvim-bqf' },
@@ -568,9 +693,11 @@ return {
             vim.api.nvim_buf_get_name(props.buf),
             ':t'
           )
+
           if filename == '' then
-            filename = '[No Name]'
+            filename = vim.bo[props.buf]
           end
+
           -- local ft_icon, ft_color = devicons.get_icon_color(filename)
           local modified = vim.bo[props.buf].modified
           return {
@@ -721,7 +848,7 @@ return {
     'nvim-telescope/telescope.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' },
     keys = {
-      { "<leader>'", ":Telescope smart_open<CR>", silent = true },
+      { "<leader>'", ":lua require('telescope').extensions.smart_open.smart_open { cwd_only = true, filename_first = false }<CR>", silent = true },
       { "<leader>a", ":Telescope live_grep<CR>", silent = true },
       { "<leader>l", ":Telescope current_buffer_fuzzy_find<CR>", silent = true },
       { "<leader>c", ":Telescope commands<CR>", silent = true },
@@ -741,6 +868,15 @@ return {
               ["<ecs>"] = require('telescope.actions').close,
               ["<c-j>"] = require('telescope.actions').move_selection_next,
               ["<c-k>"] = require('telescope.actions').move_selection_previous,
+              ["<c-w>"] = function()
+                -- local actions = require('telescope.actions')
+                -- local action_state = require('telescope.actions.state')
+                local line = require('telescope.actions.state').get_current_line()
+                local cursor_pos = vim.api.nvim_win_get_cursor(0)
+                local new_line = line:sub(cursor_pos[2] + 2)
+                vim.api.nvim_feedkeys(new_line, 'n', true)
+                vim.api.nvim_win_set_cursor(0, {cursor_pos[1], 0})
+              end,
             },
             n = {
               ["<ecs>"] = require('telescope.actions').close,
