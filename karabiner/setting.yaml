@@ -9,6 +9,10 @@ apps:
   e: Deepl
   m: Spark Desktop
   c: Rise
+maps:
+  # modifier-code_key or code_key
+  left_option-open_bracket: "【"
+  left_option-close_bracket: "】"
 links:
   g: https://github.com
   z: https://zenn.dev
