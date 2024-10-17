@@ -86,7 +86,6 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   command = [[%s/\s\+$//e]],
 })
 
-
 local map = vim.api.nvim_set_keymap
 maps = {
   n = {
@@ -130,7 +129,6 @@ autocmd TermOpen * :startinsert
 autocmd TermOpen * setlocal norelativenumber
 autocmd TermOpen * setlocal nonumber
 
-tnoremap <ESC> <C-\><C-n>
 tnoremap <C-W><C-J>   <cmd>wincmd j<cr>
 tnoremap <C-W>j       <cmd>wincmd j<cr>
 tnoremap <C-W><C-K>   <cmd>wincmd k<cr>
@@ -140,6 +138,7 @@ tnoremap <C-W>h       <cmd>wincmd h<cr>
 tnoremap <C-W><C-L>   <cmd>wincmd l<cr>
 tnoremap <C-W>l       <cmd>wincmd l<cr>
 
+command R Dispatch
 ]])
 
 
