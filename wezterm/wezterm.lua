@@ -32,8 +32,8 @@ return {
   --     attachment = { Parallax = 0.1 },
   --   },
   -- },
-  use_fancy_tab_bar = true,
-  enable_tab_bar = false,
+  use_fancy_tab_bar = false,
+  enable_tab_bar = true,
   tab_bar_at_bottom = false,
   disable_default_key_bindings = true,
 

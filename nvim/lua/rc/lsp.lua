@@ -8,7 +8,7 @@ mason_lspconfig.setup_handlers({
 
     local opts = {}
 
-    if server_name == "tsserver" then
+    if server_name == "ts_ls" then
       if not is_node_repo then
         return
       end

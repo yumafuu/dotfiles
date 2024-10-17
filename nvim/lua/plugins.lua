@@ -380,7 +380,7 @@ return {
         },
 
       })
-      lspconfig["tsserver"].setup({
+      lspconfig["ts_ls"].setup({
         root_dir = lspconfig.util.root_pattern("package.json"),
       })
     end
@@ -899,17 +899,6 @@ return {
       -- Only required if using match_algorithm fzf
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
       { "nvim-telescope/telescope.nvim" },
-    },
-  },
-  {
-    'ahmedkhalf/project.nvim',
-    opt = {
-      patterns = {
-        ".git",
-        "Makefile",
-        "package.json",
-        ".env",
-      },
     },
   },
   "shortcuts/no-neck-pain.nvim",
