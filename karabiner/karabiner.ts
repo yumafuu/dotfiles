@@ -130,6 +130,8 @@ writeToProfile("Default", [
     )([
       map("k", "left_control").to("↑"),
       map("j", "left_control").to("↓"),
+      map("h", "left_control").to("←"),
+      map("l", "left_control").to("→"),
     ]),
   ]),
 
