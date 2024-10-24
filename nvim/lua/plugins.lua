@@ -22,7 +22,6 @@ return {
   'nvim-lua/popup.nvim',
   'MunifTanjim/nui.nvim',
   'RRethy/vim-illuminate',
-  'tpope/vim-dispatch',
   {'akinsho/git-conflict.nvim', version = "*", config = true},
   {
     "luckasRanarison/tailwind-tools.nvim",
@@ -58,27 +57,6 @@ return {
       require('insx.preset.standard').setup()
     end,
   },
-  -- {
-  --   'hrsh7th/nvim-automa',
-  --   config = function()
-  --     require('automa').setup({
-  --       mapping = {
-  --         ['.'] = {
-  --           queries = {
-              -- -- for `diwi***<Esc>`
-              -- automa.query_v1({ 'n', 'no+', 'n', 'i*' }),
-              -- -- for `x`
-              -- automa.query_v1({ 'n#' }),
-              -- -- for `i***<Esc>`
-              -- automa.query_v1({ 'n', 'i*' }),
-              -- -- for `vjjj>`
-              -- automa.query_v1({ 'n', 'v*' }),
-            -- }
-          -- },
-        -- }
-      -- })
-    -- end,
-  -- },
   'kana/vim-operator-user',
   {
     'kana/vim-operator-replace',
@@ -110,37 +88,31 @@ return {
       vim.keymap.set('n', 'M', '<Plug>(leap-from-window)')
     end
   },
+  'lambdalisue/kensaku.vim',
   {
-    'mfussenegger/nvim-treehopper',
-    dependencies = { 'nvim-treesiter/nvim-treesitter' },
+    'lambdalisue/kensaku-search.vim',
     config = function()
-      vim.cmd([[
-        omap     <silent> m :<C-U>lua require('tsht').nodes()<CR>
-        xnoremap <silent> m :lua require('tsht').nodes()<CR>
-      ]])
+      vim.api.nvim_set_keymap(
+        'c',
+        '<CR>',
+        '<Plug>(kensaku-search-replace)<CR>',
+        { noremap = true, silent = true }
+      )
     end
   },
-  -- 'lambdalisue/kensaku.vim',
-  -- {
-  --   'lambdalisue/kensaku-search.vim',
-  --   config = function()
-  --     vim.api.nvim_set_keymap(
-  --       'c',
-  --       '<CR>',
-  --       '<Plug>(kensaku-search-replace)<CR>',
-  --       { noremap = true, silent = true }
-  --     )
-  --   end
-  -- },
-  -- {
-  --   "ibhagwan/fzf-lua",
-  --   -- optional for icon support
-  --   dependencies = { "nvim-tree/nvim-web-devicons" },
-  --   config = function()
-  --     -- calling `setup` is optional for customization
-  --     require("fzf-lua").setup({})
-  --   end
-  -- },
+  {
+    "ibhagwan/fzf-lua",
+    -- optional for icon support
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    config = function()
+      -- calling `setup` is optional for customization
+      require("fzf-lua").setup({})
+    end,
+    keys = {
+      { "<leader>'", ":FzfLua files<cr>", silent = true },
+      { "<leader>a", ":FzfLua live_grep<cr>", silent = true },
+    },
+  },
   { 'kiran94/s3edit.nvim', config = true, cmd = "S3Edit"},
   {
     '0xAdk/full_visual_line.nvim',
@@ -235,19 +207,6 @@ return {
     end
   },
   {
-    "mogulla3/rspec.nvim",
-    config = function()
-      require('rspec').setup {
-        open_quickfix_when_spec_failed = false,
-      }
-      vim.keymap.set("n", "<leader>en", ":RSpecNearest<CR>", { noremap = true, silent = true })
-      vim.keymap.set("n", "<leader>ef", ":RSpecCurrentFile<CR>", { noremap = true, silent = true })
-      vim.keymap.set("n", "<leader>er", ":RSpecRerun<CR>", { noremap = true, silent = true })
-      vim.keymap.set("n", "<leader>eF", ":RSpecOnlyFailures<CR>", { noremap = true, silent = true })
-      vim.keymap.set("n", "<leader>es", ":RSpecShowLastResult<CR>", { noremap = true, silent = true })
-    end
-  },
-  {
     'monaqa/dial.nvim',
     config = function()
       local augend = require("dial.augend")
@@ -308,17 +267,7 @@ return {
       )
     end
   },
-  {
-    'tyru/open-browser.vim',
-    init = function()
-      vim.g.openbrowser_browser_commands = {
-        {
-          name = 'lemonade',
-          args = {'{browser}', 'open', '{uri}'}
-        }
-      }
-    end
-  },
+  { 'tyru/open-browser.vim' },
   {
     'xiyaowong/nvim-transparent',
     lazy = false,
@@ -599,7 +548,12 @@ return {
     )
     end,
   },
-  -- { 'lewis6991/gitsigns.nvim' },
+  {
+    'lewis6991/gitsigns.nvim',
+    init = function()
+      require('gitsigns').setup()
+    end
+  },
   {
     'kevinhwang91/nvim-hlslens',
     init = function()
@@ -649,19 +603,8 @@ return {
         end})
     end,
   },
-  { 'kevinhwang91/nvim-bqf' },
   { 'sindrets/diffview.nvim' },
   { 'lambdalisue/guise.vim' },
-  {
-    'kazhala/close-buffers.nvim',
-    config = function()
-      local map = vim.api.nvim_set_keymap
-      local opts = { noremap = true, silent = true }
-
-      map('n', '<leader>q', "<cmd>BDelete this<CR>", opts)
-      map('n', '<leader>o', "<cmd>BDelete other<CR>", opts)
-    end
-  },
   {
     "linrongbin16/gitlinker.nvim",
     cmd = "GitLink",
@@ -837,69 +780,48 @@ return {
 
     end,
   },
-  {
-    'nvim-telescope/telescope.nvim',
-    dependencies = { 'nvim-lua/plenary.nvim' },
-    keys = {
-      { "<leader>'", ":lua require('telescope').extensions.smart_open.smart_open { cwd_only = true, filename_first = false }<CR>", silent = true },
-      { "<leader>a", ":Telescope live_grep<CR>", silent = true },
-      { "<leader>l", ":Telescope current_buffer_fuzzy_find<CR>", silent = true },
-      { "<leader>c", ":Telescope commands<CR>", silent = true },
-      { "<leader>:", ":Telescope command_history<CR>", silent = true },
-      { "<leader>s", ":Telescope lsp_dynamic_workspace_symbols<CR>", silent = true },
-    },
-    config = function()
-      require('telescope').setup({
-        defaults = {
-          layout_config = {
-            prompt_position = "top",
-          },
-          layout_strategy = "flex",
-          sorting_strategy = "ascending",
-          mappings = {
-            i = {
-              ["<ecs>"] = require('telescope.actions').close,
-              ["<c-j>"] = require('telescope.actions').move_selection_next,
-              ["<c-k>"] = require('telescope.actions').move_selection_previous,
-              ["<c-w>"] = function()
-                -- local actions = require('telescope.actions')
-                -- local action_state = require('telescope.actions.state')
-                local line = require('telescope.actions.state').get_current_line()
-                local cursor_pos = vim.api.nvim_win_get_cursor(0)
-                local new_line = line:sub(cursor_pos[2] + 2)
-                vim.api.nvim_feedkeys(new_line, 'n', true)
-                vim.api.nvim_win_set_cursor(0, {cursor_pos[1], 0})
-              end,
-            },
-            n = {
-              ["<ecs>"] = require('telescope.actions').close,
-              ["<c-j>"] = require('telescope.actions').move_selection_next,
-              ["<c-k>"] = require('telescope.actions').move_selection_previous,
-            },
-          },
-        },
-      })
-    end
-  },
-  {
-    "danielfalk/smart-open.nvim",
-    branch = "0.2.x",
-    config = function()
-      require("telescope").load_extension("smart_open")
-    end,
-    dependencies = {
-      "kkharji/sqlite.lua",
-      -- Only required if using match_algorithm fzf
-      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-      { "nvim-telescope/telescope.nvim" },
-    },
-  },
-  "shortcuts/no-neck-pain.nvim",
-  {
-    'adelarsq/image_preview.nvim',
-    event = 'VeryLazy',
-    config = function()
-      require("image_preview").setup({})
-    end
-  },
+  -- {
+  --   'nvim-telescope/telescope.nvim',
+  --   dependencies = { 'nvim-lua/plenary.nvim' },
+  --   keys = {
+  --     { "<leader>'", ":lua require('telescope').extensions.smart_open.smart_open { cwd_only = true, filename_first = false }<CR>", silent = true },
+  --     { "<leader>a", ":Telescope live_grep<CR>", silent = true },
+  --     { "<leader>l", ":Telescope current_buffer_fuzzy_find<CR>", silent = true },
+  --     { "<leader>c", ":Telescope commands<CR>", silent = true },
+  --     { "<leader>:", ":Telescope command_history<CR>", silent = true },
+  --     { "<leader>s", ":Telescope lsp_dynamic_workspace_symbols<CR>", silent = true },
+  --   },
+  --   config = function()
+  --     require('telescope').setup({
+  --       defaults = {
+  --         layout_config = {
+  --           prompt_position = "top",
+  --         },
+  --         layout_strategy = "flex",
+  --         sorting_strategy = "ascending",
+  --         mappings = {
+  --           i = {
+  --             ["<ecs>"] = require('telescope.actions').close,
+  --             ["<c-j>"] = require('telescope.actions').move_selection_next,
+  --             ["<c-k>"] = require('telescope.actions').move_selection_previous,
+  --             ["<c-w>"] = function()
+  --               -- local actions = require('telescope.actions')
+  --               -- local action_state = require('telescope.actions.state')
+  --               local line = require('telescope.actions.state').get_current_line()
+  --               local cursor_pos = vim.api.nvim_win_get_cursor(0)
+  --               local new_line = line:sub(cursor_pos[2] + 2)
+  --               vim.api.nvim_feedkeys(new_line, 'n', true)
+  --               vim.api.nvim_win_set_cursor(0, {cursor_pos[1], 0})
+  --             end,
+  --           },
+  --           n = {
+  --             ["<ecs>"] = require('telescope.actions').close,
+  --             ["<c-j>"] = require('telescope.actions').move_selection_next,
+  --             ["<c-k>"] = require('telescope.actions').move_selection_previous,
+  --           },
+  --         },
+  --       },
+  --     })
+  --   end
+  -- },
 }

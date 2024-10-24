@@ -17,23 +17,11 @@ import {
   writeToProfile,
 } from "karabiner.ts";
 
-import {
-  KvMap,
-  ObjectToHint,
-  ReadYaml,
-  toRaycast,
-} from "./utils.ts";
+import { KvMap, ObjectToHint, ReadYaml, toRaycast } from "./utils.ts";
 
-import {
-  Slack,
-  Discord,
-  Vivaldi,
-  ReflectApp,
-  Spark,
-  Wezterm,
-} from "./app.ts"
+import { Discord, ReflectApp, Slack, Spark, Vivaldi, Wezterm } from "./app.ts";
 
-const __dirname = new URL(".", import.meta.url).pathname
+const __dirname = new URL(".", import.meta.url).pathname;
 
 const {
   apps,
@@ -61,18 +49,22 @@ writeToProfile("Default", [
   ]),
 
   rule("Snippets").manipulators(
-    Object.entries(snippets).map(([k,v]) => {
-      return mapSimultaneous(`'${k}`.split(""), { key_down_order: 'strict' }, 300).toPaste(v)
+    Object.entries(snippets).map(([k, v]) => {
+      return mapSimultaneous(
+        `'${k}`.split(""),
+        { key_down_order: "strict" },
+        300,
+      ).toPaste(v);
     }),
   ),
 
   rule("Remap").manipulators(
     Object.entries(maps).map(([k, v]) => {
-      if ( k.includes("-") ) {
-        const [modifier, key] = k.split("-")
-        return map(key, modifier).toPaste(v)
+      if (k.includes("-")) {
+        const [modifier, key] = k.split("-");
+        return map(key, modifier).toPaste(v);
       } else {
-        return map(k).toPaste(v)
+        return map(k).toPaste(v);
       }
     }),
   ),
@@ -136,16 +128,17 @@ writeToProfile("Default", [
     ]),
   ]),
 
-  rule("[Vivaldi][Slack][Reflect] `left_control` + `j,k`で上下入力").manipulators([
-    withCondition(
-      ifApp(`^${Slack}|${ReflectApp}|${Vivaldi}|${Spark}$`),
-    )([
-      map("k", "left_control").to("↑"),
-      map("j", "left_control").to("↓"),
-      map("h", "left_control").to("←"),
-      map("l", "left_control").to("→"),
+  rule("[Vivaldi][Slack][Reflect] `left_control` + `j,k`で上下入力")
+    .manipulators([
+      withCondition(
+        ifApp(`^${Slack}|${ReflectApp}|${Vivaldi}|${Spark}$`),
+      )([
+        map("k", "left_control").to("↑"),
+        map("j", "left_control").to("↓"),
+        map("h", "left_control").to("←"),
+        map("l", "left_control").to("→"),
+      ]),
     ]),
-  ]),
 
   rule("[Discord] Shift+Enterで送信").manipulators([
     withCondition(ifApp(`^${Discord}$`))([
