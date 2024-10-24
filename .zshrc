@@ -3,6 +3,7 @@ export NPM_CONFIG_PREFIX="${XDG_DATA_HOME:-$HOME/.local/share}/npm-global"
 export PATH=$NPM_CONFIG_PREFIX/bin:$PATH
 export DOTFILES_REPO_PATH="${HOME}/dotfiles"
 eval "$(sheldon source)"
+alias a=aqua
 
 function imgpaste_file(){
   pngpaste image.png
