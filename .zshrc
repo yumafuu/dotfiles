@@ -19,6 +19,7 @@ alias vv='vim ~/.config/nvim/init.lua'
 alias ls='exa -a'
 alias tree='exa --tree'
 alias ql='qlmanage -p "$@" >& /dev/null'
+alias imgcat='img2sixel'
 
 . "$HOME/.cargo/env"
 
