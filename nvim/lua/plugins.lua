@@ -111,6 +111,7 @@ return {
     keys = {
       { "<leader>'", ":FzfLua files<cr>", silent = true },
       { "<leader>a", ":FzfLua live_grep<cr>", silent = true },
+      { "<leader>b", ":FzfLua blines<cr>", silent = true },
     },
   },
   { 'kiran94/s3edit.nvim', config = true, cmd = "S3Edit"},
@@ -359,6 +360,9 @@ return {
     end
   },
   'neovim/nvim-lspconfig',
+  -------------------
+  -- cmp
+  -------------------
   'hrsh7th/cmp-nvim-lsp',
   'hrsh7th/cmp-buffer',
   'hrsh7th/cmp-path',
@@ -512,6 +516,10 @@ return {
     end,
   },
   {
+    'stevearc/dressing.nvim',
+    opts = {},
+  },
+  {
     'stevearc/overseer.nvim',
     keys = {
       { "<space>ee", "<cmd>OverseerToggle<cr>", desc = "Toggel" },
@@ -523,6 +531,8 @@ return {
     },
     config = function()
       require('overseer').setup({
+        strategy = "toggleterm",
+
         form = {
           border = "rounded",
           win_opts = {
@@ -780,48 +790,40 @@ return {
 
     end,
   },
-  -- {
-  --   'nvim-telescope/telescope.nvim',
-  --   dependencies = { 'nvim-lua/plenary.nvim' },
-  --   keys = {
-  --     { "<leader>'", ":lua require('telescope').extensions.smart_open.smart_open { cwd_only = true, filename_first = false }<CR>", silent = true },
-  --     { "<leader>a", ":Telescope live_grep<CR>", silent = true },
-  --     { "<leader>l", ":Telescope current_buffer_fuzzy_find<CR>", silent = true },
-  --     { "<leader>c", ":Telescope commands<CR>", silent = true },
-  --     { "<leader>:", ":Telescope command_history<CR>", silent = true },
-  --     { "<leader>s", ":Telescope lsp_dynamic_workspace_symbols<CR>", silent = true },
-  --   },
-  --   config = function()
-  --     require('telescope').setup({
-  --       defaults = {
-  --         layout_config = {
-  --           prompt_position = "top",
-  --         },
-  --         layout_strategy = "flex",
-  --         sorting_strategy = "ascending",
-  --         mappings = {
-  --           i = {
-  --             ["<ecs>"] = require('telescope.actions').close,
-  --             ["<c-j>"] = require('telescope.actions').move_selection_next,
-  --             ["<c-k>"] = require('telescope.actions').move_selection_previous,
-  --             ["<c-w>"] = function()
-  --               -- local actions = require('telescope.actions')
-  --               -- local action_state = require('telescope.actions.state')
-  --               local line = require('telescope.actions.state').get_current_line()
-  --               local cursor_pos = vim.api.nvim_win_get_cursor(0)
-  --               local new_line = line:sub(cursor_pos[2] + 2)
-  --               vim.api.nvim_feedkeys(new_line, 'n', true)
-  --               vim.api.nvim_win_set_cursor(0, {cursor_pos[1], 0})
-  --             end,
-  --           },
-  --           n = {
-  --             ["<ecs>"] = require('telescope.actions').close,
-  --             ["<c-j>"] = require('telescope.actions').move_selection_next,
-  --             ["<c-k>"] = require('telescope.actions').move_selection_previous,
-  --           },
-  --         },
-  --       },
-  --     })
-  --   end
-  -- },
+  {
+    'nvim-telescope/telescope.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    config = function()
+      require('telescope').setup({
+        defaults = {
+          layout_config = {
+            prompt_position = "top",
+          },
+          layout_strategy = "flex",
+          sorting_strategy = "ascending",
+          mappings = {
+            i = {
+              ["<ecs>"] = require('telescope.actions').close,
+              ["<c-j>"] = require('telescope.actions').move_selection_next,
+              ["<c-k>"] = require('telescope.actions').move_selection_previous,
+              ["<c-w>"] = function()
+                -- local actions = require('telescope.actions')
+                -- local action_state = require('telescope.actions.state')
+                local line = require('telescope.actions.state').get_current_line()
+                local cursor_pos = vim.api.nvim_win_get_cursor(0)
+                local new_line = line:sub(cursor_pos[2] + 2)
+                vim.api.nvim_feedkeys(new_line, 'n', true)
+                vim.api.nvim_win_set_cursor(0, {cursor_pos[1], 0})
+              end,
+            },
+            n = {
+              ["<ecs>"] = require('telescope.actions').close,
+              ["<c-j>"] = require('telescope.actions').move_selection_next,
+              ["<c-k>"] = require('telescope.actions').move_selection_previous,
+            },
+          },
+        },
+      })
+    end
+  },
 }

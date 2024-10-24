@@ -35,9 +35,11 @@ o.cursorline = false
 o.cursorcolumn = false
 o.smartindent = true
 o.showmatch = true
+o.autoindent = true
+o.smarttab = true
 o.expandtab = true
-o.tabstop = 2
 o.shiftwidth = 2
+o.tabstop = 2
 o.list = true
 o.listchars = {tab='▸-', trail='·', extends='»', precedes='«', nbsp='%'}
 o.fileformats = "unix,dos,mac"
@@ -140,7 +142,6 @@ tnoremap <C-W>l       <cmd>wincmd l<cr>
 
 command R Dispatch
 ]])
-
 
 vim.keymap.set("n", "<C-a>", require("dial.map").inc_normal(), {noremap = true})
 vim.keymap.set("n", "<C-x>", require("dial.map").dec_normal(), {noremap = true})
