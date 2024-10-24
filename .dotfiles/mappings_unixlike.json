@@ -4,5 +4,6 @@
   "wezterm/": "~/.config/wezterm/",
   "lemonade.toml": "~/.config/lemonade.toml",
   "starship.toml": "~/.config/starship.toml",
-  "karabiner/": "~/.config/karabiner/"
+  "karabiner/": "~/.config/karabiner/",
+  "sheldon/": "~/.config/sheldon/"
 }

@@ -1,7 +1,8 @@
 export AQUA_GLOBAL_CONFIG=${AQUA_GLOBAL_CONFIG:-}:${XDG_CONFIG_HOME:-$HOME/.config}/aquaproj-aqua/aqua.yaml
 export NPM_CONFIG_PREFIX="${XDG_DATA_HOME:-$HOME/.local/share}/npm-global"
 export PATH=$NPM_CONFIG_PREFIX/bin:$PATH
-export DOTFILES_REPO_PATH="${HOME}/Develop/dotfiles"
+export DOTFILES_REPO_PATH="${HOME}/dotfiles"
+eval "$(sheldon source)"
 
 function imgpaste_file(){
   pngpaste image.png
