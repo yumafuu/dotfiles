@@ -1,11 +1,6 @@
-export AQUA_GLOBAL_CONFIG=${AQUA_GLOBAL_CONFIG:-}:${XDG_CONFIG_HOME:-$HOME/.config}/aquaproj-aqua/aqua.yaml
-export NPM_CONFIG_PREFIX="${XDG_DATA_HOME:-$HOME/.local/share}/npm-global"
-export PATH=$NPM_CONFIG_PREFIX/bin:$PATH
-export DOTFILES_REPO_PATH="${HOME}/dotfiles"
-
-alias a="aqua"
-export PATH="${AQUA_ROOT_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/aquaproj-aqua}/bin:$PATH"
 export PATH="/opt/homebrew/opt/sqlite/bin:$PATH"
+
+export DOTFILES_REPO_PATH="${HOME}/dotfiles"
 
 . "$HOME/.rye/env"
 
@@ -35,7 +30,7 @@ export EDITOR=nvim
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_CTRL_T_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
 export FZF_CTRL_T_OPTS='--preview "bat  --color=always --style=header,grid --line-range :100 {}"'
-export FZF_DEFAULT_OPTS='--height 30% --border --select-1'
+export FZF_DEFAULT_OPTS="--height 50% --border --color=pointer:blue"
 
 # PATH
 export PATH=$HOME/.cargo/bin:$PATH
@@ -274,4 +269,12 @@ zstyle ':prompt:pure:git:*' color '#8C8C8D'
 zstyle ':prompt:pure:prompt:success' color blue
 
 eval "$(rbenv init -)"
+
+alias a="aqua"
+
+export AQUA_GLOBAL_CONFIG=$HOME/dotfiles/aqua/aqua.yaml
+export NPM_CONFIG_PREFIX="${XDG_DATA_HOME:-$HOME/.local/share}/npm-global"
+export PATH=$NPM_CONFIG_PREFIX/bin:$PATH
+export PATH="$(aqua root-dir)/bin:$PATH"
+
 eval "$(sheldon source)"

@@ -1,5 +1,4 @@
 {
-  "aqua/": "~/.config/aquaproj-aqua/",
   "nvim/": "~/.config/nvim/",
   "wezterm/": "~/.config/wezterm/",
   "tmux/": "~/.config/tmux/",
