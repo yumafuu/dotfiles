@@ -21,7 +21,6 @@ alias tree='exa --tree'
 alias ql='qlmanage -p "$@" >& /dev/null'
 
 . "$HOME/.cargo/env"
-. "$HOME/.local/zsh/docker.zsh"
 
 export WORDCHARS='*?_.[]~-=&;!#$%^(){}<>'
 stty erase '^?'

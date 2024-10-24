@@ -15,3 +15,5 @@ packages:
   - name: neovim/neovim@v0.10.2
   - name: rossmacarthur/sheldon@0.8.0
   - name: sharkdp/hyperfine@v1.18.0
+  - name: denoland/deno@v2.0.2
+  - name: BurntSushi/ripgrep@14.1.1
