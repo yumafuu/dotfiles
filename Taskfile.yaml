@@ -2,6 +2,7 @@ version: '3'
 
 tasks:
   stylua:
+    desc: Format lua
     cmds:
       - stylua -g '*.lua' -- .
     silent: true
