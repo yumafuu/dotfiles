@@ -3,39 +3,22 @@ export NPM_CONFIG_PREFIX="${XDG_DATA_HOME:-$HOME/.local/share}/npm-global"
 export PATH=$NPM_CONFIG_PREFIX/bin:$PATH
 export DOTFILES_REPO_PATH="${HOME}/dotfiles"
 eval "$(sheldon source)"
+
 alias a=aqua
+export PATH="${AQUA_ROOT_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/aquaproj-aqua}/bin:$PATH"
+export PATH="/opt/homebrew/opt/sqlite/bin:$PATH"
 
-function imgpaste_file(){
-  pngpaste image.png
-  echo image.png is created
-}
-
-zle -N imgpaste_file
-bindkey "^V" imgpaste_file
 . "$HOME/.rye/env"
 
-
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  # source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-# fi
-# source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-alias slamdunk="open ~/Hobby/THE-FIRST-SLAM-DUNK/FULL.mp4"
-
 PATH="$PATH:/opt/homebrew/bin"
-export PATH="${AQUA_ROOT_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/aquaproj-aqua}/bin:$PATH"
 PATH="$PATH:/$HOME/go/bin"
 PATH="$PATH:/Users/yuma/.cargo/bin"
+
 export PATH="/Users/yuma/.deno/bin:$PATH"
 
 alias vim=nvim
 alias q=exit
 alias vz='vim ~/.zshrc'
-alias vw='vim ~/.config/wezterm/wezterm.lua'
 alias v='vim .'
 alias ez='exec zsh'
 alias vv='vim ~/.config/nvim/init.lua'
@@ -43,15 +26,13 @@ alias ls='exa -a'
 alias tree='exa --tree'
 alias ql='qlmanage -p "$@" >& /dev/null'
 
-export PATH="/opt/homebrew/opt/sqlite/bin:$PATH"
-eval "$(starship init zsh)"
 . "$HOME/.cargo/env"
 . "$HOME/.local/zsh/docker.zsh"
 
 export WORDCHARS='*?_.[]~-=&;!#$%^(){}<>'
 stty erase '^?'
 
-EDITOR=nvim
+export EDITOR=nvim
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_CTRL_T_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
 export FZF_CTRL_T_OPTS='--preview "bat  --color=always --style=header,grid --line-range :100 {}"'
@@ -129,12 +110,6 @@ bindkey '\e[3~' delete-char
 
 setopt auto_cd
 
-plugins=(git zsh-syntax-highlighting)
-plugins=(git)
-
-# starship
-source <("/opt/homebrew/bin/starship" init zsh --print-full-init)
-
 # ==================================
 ## alias
 # ==================================
@@ -148,10 +123,6 @@ alias ll="ls -la"
 alias tree="exa -T -a -I .git --git-ignore"
 alias :q='exit'
 alias q='exit'
-
-alias Ag='Ag --hidden'
-
-alias k=kubectl
 
 alias mv='mv -i'
 alias cp='cp -i'
@@ -167,10 +138,6 @@ alias ga='git add .'
 alias gaa='git add .'
 alias gaaa='git add .'
 alias gaaaa='git add .'
-alias gaaaaa='git add .'
-alias gaaaaaa='git add .'
-alias gaaaaaaa='git add .'
-alias gaaaaaaaa='git add .'
 alias gc='git commit'
 alias gcob="git checkout -b"
 alias master="git checkout master"
@@ -285,22 +252,6 @@ function cd_target(){
 zle -N cd_target
 bindkey "^k" cd_target
 
-function cdr() {
-  export TMP_CDR_DIR=$(pwd)
-
-  while [[ $TMP_CDR_DIR != "/" ]]
-  do
-    if [ -e "$TMP_CDR_DIR/.git" ];then
-      echo $TMP_CDR_DIR
-      cd $TMP_CDR_DIR
-      break
-    else
-      export TMP_CDR_DIR=$( dirname $TMP_CDR_DIR )
-    fi
-  done
-  unset TMP_CDR_DIR
-}
-
 zle -N cd_parent
 bindkey "^h" cd_parent
 cd_parent () {
@@ -317,6 +268,10 @@ export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-
 eval "$(rbenv init -)"
 
+# pure
+autoload -U promptinit; promptinit
+zstyle ':prompt:pure:path' color white
+zstyle ':prompt:pure:git:*' color blue
+PURE_PROMPT_SYMBOL=">"

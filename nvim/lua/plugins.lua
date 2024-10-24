@@ -324,13 +324,6 @@ return {
     lazy = false,
   },
   {
-    'folke/which-key.nvim',
-    config = function()
-      vim.o.timeout = true
-      vim.o.timeoutlen = 300
-    end,
-  },
-  {
     'rainbowhxch/accelerated-jk.nvim',
     config = function()
       vim.api.nvim_set_keymap('n', 'j', '<Plug>(accelerated_jk_gj)', { silent = true })
