@@ -2,9 +2,8 @@ export AQUA_GLOBAL_CONFIG=${AQUA_GLOBAL_CONFIG:-}:${XDG_CONFIG_HOME:-$HOME/.conf
 export NPM_CONFIG_PREFIX="${XDG_DATA_HOME:-$HOME/.local/share}/npm-global"
 export PATH=$NPM_CONFIG_PREFIX/bin:$PATH
 export DOTFILES_REPO_PATH="${HOME}/dotfiles"
-eval "$(sheldon source)"
 
-alias a=aqua
+alias a="aqua"
 export PATH="${AQUA_ROOT_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/aquaproj-aqua}/bin:$PATH"
 export PATH="/opt/homebrew/opt/sqlite/bin:$PATH"
 
@@ -268,10 +267,11 @@ export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-eval "$(rbenv init -)"
-
 # pure
 autoload -U promptinit; promptinit
 zstyle ':prompt:pure:path' color white
-zstyle ':prompt:pure:git:*' color blue
-PURE_PROMPT_SYMBOL=">"
+zstyle ':prompt:pure:git:*' color '#8C8C8D'
+zstyle ':prompt:pure:prompt:success' color blue
+
+eval "$(rbenv init -)"
+eval "$(sheldon source)"
