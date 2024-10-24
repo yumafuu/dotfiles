@@ -48,8 +48,6 @@ alias .....="cd ../../../../.."
 alias diff="colordiff -u"
 alias spotify="spt"
 export LESS='-R'
-eval "$(frum init)"
-
 
 
 alias pswd='ruby -rsecurerandom -e "puts SecureRandom.alphanumeric"|xargs echo -n|pbcopy'
