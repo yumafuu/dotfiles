@@ -1,0 +1,7 @@
+version: '3'
+
+tasks:
+  stylua:
+    cmds:
+      - stylua -g '*.lua' -- .
+    silent: true
