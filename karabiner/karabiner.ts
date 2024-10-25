@@ -154,4 +154,11 @@ writeToProfile("Default", [
       map("return_or_enter", "⌘").to("return_or_enter"),
     ]),
   ]),
+
+  rule('[Chrome] left_control + [,]でタブ移動').manipulators([
+    withCondition(ifApp(Chrome))([
+      map("open_bracket", "left_control").to("tab", ["left_control", "right_shift"]),
+      map("close_bracket", "left_control").to("tab", ["left_control"]),
+    ])
+  ])
 ]);
