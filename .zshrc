@@ -179,8 +179,6 @@ alias ql='qlmanage -p "$@" >& /dev/null'
 ## functions
 # ==================================
 
-zle -N dm
-bindkey "^o" dm
 
 fancy-ctrl-z () {
   if [[ $#BUFFER -eq 0 ]]; then
@@ -225,6 +223,8 @@ function dm(){
   cd $dir
   echo
 }
+zle -N dm
+bindkey "^o" dm
 
 function cd_target(){
   d=$( \
@@ -262,6 +262,7 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 
 # pure
 autoload -U promptinit; promptinit
+export PURE_CMD_MAX_EXEC_TIME=1
 zstyle ':prompt:pure:path' color white
 zstyle ':prompt:pure:git:*' color '#8C8C8D'
 zstyle ':prompt:pure:prompt:success' color blue
