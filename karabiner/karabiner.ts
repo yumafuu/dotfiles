@@ -19,7 +19,15 @@ import {
 
 import { KvMap, ObjectToHint, ReadYaml, toRaycast } from "./utils.ts";
 
-import { Discord, ReflectApp, Slack, Spark, Vivaldi, Wezterm } from "./app.ts";
+import {
+  Discord,
+  ReflectApp,
+  Slack,
+  Spark,
+  Vivaldi,
+  Wezterm,
+  Chrome,
+} from "./app.ts";
 
 const __dirname = new URL(".", import.meta.url).pathname;
 
@@ -31,7 +39,7 @@ const {
   phases,
   snippets,
   raycasts,
-} = ReadYaml(`${__dirname}/setting.yaml`);
+} = ReadYaml(`${__dirname}/setting.yaml`) as any;
 
 // {
 //   '⌘': 'command',
@@ -128,10 +136,10 @@ writeToProfile("Default", [
     ]),
   ]),
 
-  rule("[Vivaldi][Slack][Reflect] `left_control` + `j,k`で上下入力")
+  rule("[Vivaldi][Chrome][Slack][Reflect] `left_control` + `j,k`で上下入力")
     .manipulators([
       withCondition(
-        ifApp(`^${Slack}|${ReflectApp}|${Vivaldi}|${Spark}$`),
+        ifApp(`^${Slack}|${Chrome}|${ReflectApp}|${Vivaldi}|${Spark}$`),
       )([
         map("k", "left_control").to("↑"),
         map("j", "left_control").to("↓"),
