@@ -9,6 +9,7 @@ apps:
   e: Deepl
   m: Spark Desktop
   c: Rise
+  o: zoom.us
 maps:
   # modifier-code_key or code_key
   left_option-open_bracket: "【"
