@@ -512,12 +512,12 @@ return {
   {
     "stevearc/overseer.nvim",
     keys = {
-      { "<space>ee", "<cmd>OverseerToggle<cr>", desc = "Toggel" },
-      { "<space>ec", "<cmd>OverseerRunCmd<cr>", desc = "Run Command" },
-      { "<space>er", "<cmd>OverseerRun<cr>", desc = "Run Task" },
-      { "<space>eq", "<cmd>OverseerQuickAction<cr>", desc = "Quick Action" },
-      { "<space>ea", "<cmd>OverseerTaskAction<cr>", desc = "Task Action" },
-      { "<space>ei", "<cmd>OverseerInfo<cr>", desc = "Info" },
+      { "<leader>e", "<cmd>OverseerToggle<cr>", desc = "Toggel" },
+      { "<leader>r", "<cmd>OverseerRun<cr>", desc = "Run Task" },
+      -- { "<space>ec", "<cmd>OverseerRunCmd<cr>", desc = "Run Command" },
+      -- { "<space>eq", "<cmd>OverseerQuickAction<cr>", desc = "Quick Action" },
+      -- { "<space>ea", "<cmd>OverseerTaskAction<cr>", desc = "Task Action" },
+      -- { "<space>ei", "<cmd>OverseerInfo<cr>", desc = "Info" },
     },
     config = function()
       overseer = require("overseer")
