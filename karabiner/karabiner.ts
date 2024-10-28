@@ -57,7 +57,6 @@ writeToProfile("Default", [
       withMapper(apps.shared)((k, v) => map(k).toApp(v)),
       ...Object.entries(apps.devices).map(([device, dapps]) => {
         const [product_id, vendor_id] = device.split("-");
-        console.log({ product_id, vendor_id });
         return withMapper(dapps)((k, v) =>
           map(k).toApp(v).condition(ifDeviceExists({
             product_id: Number(product_id),

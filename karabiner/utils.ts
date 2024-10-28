@@ -2,8 +2,15 @@ import fs from "fs";
 import { parse } from "jsr:@std/yaml";
 
 export const ObjectToHint = (obj: { [key: string]: any }): string => {
+  const raycastHint = (str: string) => {
+    if (str.includes("extensions/")) {
+      return str.split("/").at(-1);
+    } else {
+      return str;
+    }
+  };
   return Object.entries(obj)
-    .map(([key, value]) => `${key}: ${value}`)
+    .map(([key, value]) => `${key}: ${raycastHint(value)}`)
     .join("\n");
 };
 

@@ -1206,7 +1206,7 @@
                   {
                     "set_notification_message": {
                       "id": "duo-layer-duo-layer-right_option-r",
-                      "text": "p: extensions/thomas/color-picker/pick-color\nc: extensions/raycast/system/open-camera\ne: extensions/raycast/emoji-symbols/search-emoji-symbols\nspacebar: extensions/raycast/raycast/confetti"
+                      "text": "p: pick-color\nc: open-camera\ne: search-emoji-symbols\nspacebar: confetti"
                     }
                   }
                 ],
