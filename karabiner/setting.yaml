@@ -17,18 +17,15 @@ apps:
     111-2222: # pro
       f: Google Chrome
 maps:
-  # modifier-code_key or code_key
-  left_option-open_bracket: "【"
-  left_option-close_bracket: "】"
+  # {modifier}-{code_key} or {code_key}
+  left_option-open_bracket: "【】"
 links:
   g: https://github.com
   z: https://zenn.dev
   x: https://x.com
   y: https://youtube.com
-  c: https://chatgpt.com
   l: https://lms.keio.jp
-  m: https://scrapbox.io/yumamemo
-  s: https://scrapbox.io/masuilab
+  s: https://scrapbox.io/yumamemo
 emojis:
   b: 🙇‍♂️
   g: 👍
