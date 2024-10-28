@@ -19,7 +19,7 @@ import {
   writeToProfile,
 } from "karabiner.ts";
 
-import { KvMap, ObjectToHint, ReadYaml, toRaycast } from "./utils.ts";
+import { ObjectToHint, ReadYaml, toRaycast } from "./utils.ts";
 
 import {
   Chrome,
@@ -57,7 +57,7 @@ writeToProfile("Default", [
       withMapper(apps.shared)((k, v) => map(k).toApp(v)),
       ...Object.entries(apps.devices).map(([device, dapps]) => {
         const [product_id, vendor_id] = device.split("-");
-        console.log({ product_id, vendor_id })
+        console.log({ product_id, vendor_id });
         return withMapper(dapps)((k, v) =>
           map(k).toApp(v).condition(ifDeviceExists({
             product_id: Number(product_id),
@@ -93,25 +93,29 @@ writeToProfile("Default", [
     .description("Open Link")
     .leaderMode()
     .notification(ObjectToHint(links))
-    .manipulators(KvMap(links, (k, v) => to$(`open ${v}`))),
+    .manipulators(withMapper(links)((k, v) => map(k).to$(`open ${v}`))),
 
   duoLayer("right_option", "e")
     .description("Paste Emojis")
     .leaderMode()
     .notification(ObjectToHint(emojis))
-    .manipulators(KvMap(emojis, (k, v) => toPaste(v))),
+    .manipulators(
+      withMapper(emojis)((k, v) => map(k).toPaste(v)),
+    ),
 
   duoLayer("left_option", "p")
     .description("Paste Phases")
     .leaderMode()
     .notification(ObjectToHint(phases))
-    .manipulators(KvMap(phases, (k, v) => toPaste(v))),
+    .manipulators(withMapper(phases)((k, v) => map(k).toPaste(v))),
 
   duoLayer("right_option", "r")
     .description("Raycast Command")
     .leaderMode()
     .notification(ObjectToHint(raycasts))
-    .manipulators(KvMap(raycasts, (k, v) => toRaycast(v))),
+    .manipulators(
+      withMapper(raycasts)((k, v) => map(k).to$(toRaycast(v))),
+    ),
 
   rule("コロンとセミコロンを入れ替える").manipulators([
     // ; -> :
