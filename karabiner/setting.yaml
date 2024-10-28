@@ -33,17 +33,16 @@ emojis:
   b: 🙇‍♂️
   g: 👍
   p: 🙏
-phases:
-  o: お疲れ様です！
-  a: ありがとうございます！
-  y: よろしくお願いします！
-  k: okです！
-  s: 承知しました🫡
 snippets:
   na: 石川湧馬
-  t: 09041209240
+  tl: 09041209240
   m: yuma.fuu05@gmail.com
   k: yuma.ishikawa@knowledgework.com
+  a: ありがとうございます！
+  o: okです！
+  t: お疲れ様です！
+  y: よろしくお願いします！
+  s: 承知しました🫡
 raycasts:
   p: extensions/thomas/color-picker/pick-color
   c: extensions/raycast/system/open-camera

@@ -31,6 +31,8 @@ import {
   Wezterm,
 } from "./app.ts";
 
+import type { Setting, SettingKV } from "./types.ts";
+
 const __dirname = new URL(".", import.meta.url).pathname;
 
 const {
@@ -38,10 +40,9 @@ const {
   maps,
   links,
   emojis,
-  phases,
   snippets,
   raycasts,
-} = ReadYaml(`${__dirname}/setting.yaml`) as any;
+} = ReadYaml(`${__dirname}/setting.yaml`) as Setting;
 
 // {
 //   '⌘': 'command',
@@ -54,8 +55,8 @@ const {
 writeToProfile("Default", [
   rule("Open App").manipulators([
     withModifier("⌃⇧")([
-      withMapper(apps.shared)((k, v) => map(k).toApp(v)),
-      ...Object.entries(apps.devices).map(([device, dapps]) => {
+      withMapper(apps.shared as SettingKV)((k, v) => map(k).toApp(v)),
+      ...Object.entries(apps.devices as SettingKV).map(([device, dapps]) => {
         const [product_id, vendor_id] = device.split("-");
         return withMapper(dapps)((k, v) =>
           map(k).toApp(v).condition(ifDeviceExists({
@@ -102,11 +103,17 @@ writeToProfile("Default", [
       withMapper(emojis)((k, v) => map(k).toPaste(v)),
     ),
 
-  duoLayer("left_option", "p")
-    .description("Paste Phases")
-    .leaderMode()
-    .notification(ObjectToHint(phases))
-    .manipulators(withMapper(phases)((k, v) => map(k).toPaste(v))),
+  // rule("Phases").manipulators(
+  //   withModifier("left_option")([
+  //     withMapper(phases)((k, v) => map(k).toPaste(v)),
+  //   ]),
+  // ),
+
+  // duoLayer("left_option", "p")
+  //   .description("Paste Phases")
+  //   .leaderMode()
+  //   .notification(ObjectToHint(phases))
+  //   .manipulators(withMapper(phases)((k, v) => map(k).toPaste(v))),
 
   duoLayer("right_option", "r")
     .description("Raycast Command")
