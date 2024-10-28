@@ -2,6 +2,8 @@ import {
   // hyperLayer,
   duoLayer,
   ifApp,
+  ifDevice,
+  ifDeviceExists,
   map,
   mapSimultaneous,
   // layer,
@@ -12,21 +14,21 @@ import {
   toKey,
   toPaste,
   withCondition,
+  withMapper,
   withModifier,
-  // withMapper,
   writeToProfile,
 } from "karabiner.ts";
 
 import { KvMap, ObjectToHint, ReadYaml, toRaycast } from "./utils.ts";
 
 import {
+  Chrome,
   Discord,
   ReflectApp,
   Slack,
   Spark,
   Vivaldi,
   Wezterm,
-  Chrome,
 } from "./app.ts";
 
 const __dirname = new URL(".", import.meta.url).pathname;
@@ -52,7 +54,17 @@ const {
 writeToProfile("Default", [
   rule("Open App").manipulators([
     withModifier("⌃⇧")([
-      KvMap(apps, (k, v) => toApp(v)),
+      withMapper(apps.shared)((k, v) => map(k).toApp(v)),
+      ...Object.entries(apps.devices).map(([device, dapps]) => {
+        const [product_id, vendor_id] = device.split("-");
+        console.log({ product_id, vendor_id })
+        return withMapper(dapps)((k, v) =>
+          map(k).toApp(v).condition(ifDeviceExists({
+            product_id: Number(product_id),
+            vendor_id: Number(vendor_id),
+          }))
+        );
+      }),
     ]),
   ]),
 
@@ -155,10 +167,13 @@ writeToProfile("Default", [
     ]),
   ]),
 
-  rule('[Chrome] left_control + [,]でタブ移動').manipulators([
+  rule("[Chrome] left_control + [,]でタブ移動").manipulators([
     withCondition(ifApp(Chrome))([
-      map("open_bracket", "left_control").to("tab", ["left_control", "right_shift"]),
+      map("open_bracket", "left_control").to("tab", [
+        "left_control",
+        "right_shift",
+      ]),
       map("close_bracket", "left_control").to("tab", ["left_control"]),
-    ])
-  ])
+    ]),
+  ]),
 ]);

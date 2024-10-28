@@ -29,23 +29,6 @@
               {
                 "type": "basic",
                 "from": {
-                  "key_code": "f",
-                  "modifiers": {
-                    "mandatory": [
-                      "control",
-                      "shift"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "open -a \"Vivaldi\".app"
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "from": {
                   "key_code": "s",
                   "modifiers": {
                     "mandatory": [
@@ -178,6 +161,79 @@
                     "shell_command": "open -a \"Rise\".app"
                   }
                 ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "o",
+                  "modifiers": {
+                    "mandatory": [
+                      "control",
+                      "shift"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "shell_command": "open -a \"zoom.us\".app"
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "f",
+                  "modifiers": {
+                    "mandatory": [
+                      "control",
+                      "shift"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "shell_command": "open -a \"Vivaldi\".app"
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "device_exists_if",
+                    "identifiers": [
+                      {
+                        "product_id": 591,
+                        "vendor_id": 1452
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "f",
+                  "modifiers": {
+                    "mandatory": [
+                      "control",
+                      "shift"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "shell_command": "open -a \"Google Chrome\".app"
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "device_exists_if",
+                    "identifiers": [
+                      {
+                        "product_id": 111,
+                        "vendor_id": 2222
+                      }
+                    ]
+                  }
+                ]
               }
             ]
           },
@@ -220,9 +276,6 @@
                     },
                     {
                       "key_code": "t"
-                    },
-                    {
-                      "key_code": "l"
                     }
                   ],
                   "simultaneous_options": {
@@ -247,9 +300,6 @@
                     },
                     {
                       "key_code": "m"
-                    },
-                    {
-                      "key_code": "l"
                     }
                   ],
                   "simultaneous_options": {
@@ -262,6 +312,30 @@
                 "to": [
                   {
                     "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"yuma.fuu05@gmail.com\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "simultaneous": [
+                    {
+                      "key_code": "quote"
+                    },
+                    {
+                      "key_code": "k"
+                    }
+                  ],
+                  "simultaneous_options": {
+                    "key_down_order": "strict"
+                  }
+                },
+                "parameters": {
+                  "basic.simultaneous_threshold_milliseconds": 300
+                },
+                "to": [
+                  {
+                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"yuma.ishikawa@knowledgework.com\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
                   }
                 ]
               }
@@ -1492,7 +1566,7 @@
             ]
           },
           {
-            "description": "[Vivaldi][Slack][Reflect] `left_control` + `j,k`で上下入力",
+            "description": "[Vivaldi][Chrome][Slack][Reflect] `left_control` + `j,k`で上下入力",
             "manipulators": [
               {
                 "type": "basic",
@@ -1513,7 +1587,7 @@
                   {
                     "type": "frontmost_application_if",
                     "bundle_identifiers": [
-                      "^com.tinyspeck.slackmacgap|app.reflect.ReflectDesktop|com.vivaldi.Vivaldi|com.readdle.SparkDesktop$"
+                      "^com.tinyspeck.slackmacgap|com.google.Chrome|app.reflect.ReflectDesktop|com.vivaldi.Vivaldi|com.readdle.SparkDesktop$"
                     ]
                   }
                 ]
@@ -1537,7 +1611,7 @@
                   {
                     "type": "frontmost_application_if",
                     "bundle_identifiers": [
-                      "^com.tinyspeck.slackmacgap|app.reflect.ReflectDesktop|com.vivaldi.Vivaldi|com.readdle.SparkDesktop$"
+                      "^com.tinyspeck.slackmacgap|com.google.Chrome|app.reflect.ReflectDesktop|com.vivaldi.Vivaldi|com.readdle.SparkDesktop$"
                     ]
                   }
                 ]
@@ -1561,7 +1635,7 @@
                   {
                     "type": "frontmost_application_if",
                     "bundle_identifiers": [
-                      "^com.tinyspeck.slackmacgap|app.reflect.ReflectDesktop|com.vivaldi.Vivaldi|com.readdle.SparkDesktop$"
+                      "^com.tinyspeck.slackmacgap|com.google.Chrome|app.reflect.ReflectDesktop|com.vivaldi.Vivaldi|com.readdle.SparkDesktop$"
                     ]
                   }
                 ]
@@ -1585,7 +1659,7 @@
                   {
                     "type": "frontmost_application_if",
                     "bundle_identifiers": [
-                      "^com.tinyspeck.slackmacgap|app.reflect.ReflectDesktop|com.vivaldi.Vivaldi|com.readdle.SparkDesktop$"
+                      "^com.tinyspeck.slackmacgap|com.google.Chrome|app.reflect.ReflectDesktop|com.vivaldi.Vivaldi|com.readdle.SparkDesktop$"
                     ]
                   }
                 ]
@@ -1637,6 +1711,66 @@
                     "type": "frontmost_application_if",
                     "bundle_identifiers": [
                       "^com.hnc.Discord$"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "description": "[Chrome] left_control + [,]でタブ移動",
+            "manipulators": [
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "open_bracket",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_control"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "tab",
+                    "modifiers": [
+                      "left_control",
+                      "right_shift"
+                    ]
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "frontmost_application_if",
+                    "bundle_identifiers": [
+                      "com.google.Chrome"
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "close_bracket",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_control"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "tab",
+                    "modifiers": [
+                      "left_control"
+                    ]
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "frontmost_application_if",
+                    "bundle_identifiers": [
+                      "com.google.Chrome"
                     ]
                   }
                 ]

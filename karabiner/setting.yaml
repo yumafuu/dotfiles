@@ -1,15 +1,20 @@
 apps:
-  d: Discord
-  f: Google Chrome
-  s: Slack
-  a: Wezterm
-  r: Reflect
-  p: Spotify
-  l: Line
-  e: Deepl
-  m: Spark Desktop
-  c: Rise
-  o: zoom.us
+  shared:
+    d: Discord
+    s: Slack
+    a: Wezterm
+    r: Reflect
+    p: Spotify
+    l: Line
+    e: Deepl
+    m: Spark Desktop
+    c: Rise
+    o: zoom.us
+  devices:
+    591-1452: # air
+      f: Vivaldi
+    111-2222: # pro
+      f: Google Chrome
 maps:
   # modifier-code_key or code_key
   left_option-open_bracket: "【"
@@ -35,8 +40,9 @@ phases:
   s: 承知しました🫡
 snippets:
   na: 石川湧馬
-  tl: 09041209240
-  ml: yuma.fuu05@gmail.com
+  t: 09041209240
+  m: yuma.fuu05@gmail.com
+  k: yuma.ishikawa@knowledgework.com
 raycasts:
   p: extensions/thomas/color-picker/pick-color
   c: extensions/raycast/system/open-camera

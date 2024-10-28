@@ -4,6 +4,7 @@
     "fs": "node:fs"
   },
   "tasks": {
+    "fmt": "deno fmt",
     "build": "deno run -A karabiner.ts",
     "watch": "deno run -A --watch karabiner.ts"
   }
