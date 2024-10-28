@@ -103,17 +103,6 @@ writeToProfile("Default", [
       withMapper(emojis)((k, v) => map(k).toPaste(v)),
     ),
 
-  // rule("Phases").manipulators(
-  //   withModifier("left_option")([
-  //     withMapper(phases)((k, v) => map(k).toPaste(v)),
-  //   ]),
-  // ),
-
-  // duoLayer("left_option", "p")
-  //   .description("Paste Phases")
-  //   .leaderMode()
-  //   .notification(ObjectToHint(phases))
-  //   .manipulators(withMapper(phases)((k, v) => map(k).toPaste(v))),
 
   duoLayer("right_option", "r")
     .description("Raycast Command")
