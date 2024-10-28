@@ -11,6 +11,7 @@ apps:
     c: Rise
     o: zoom.us
   devices:
+    # divice-vendor
     591-1452: # air
       f: Vivaldi
     111-2222: # pro
