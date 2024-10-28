@@ -1,22 +1,5 @@
 import fs from "fs";
 import { parse } from "jsr:@std/yaml";
-import { to$ } from "karabiner.ts";
-
-export const KvMap = <T, U>(
-  obj: { [key: string]: T },
-  callback: (key: string, value: T) => U,
-): { [key: string]: U } => {
-  return Object.entries(obj).reduce((acc, [key, value]) => {
-    acc[key] = callback(key, value);
-    return acc;
-  }, {} as { [key: string]: U });
-};
-
-export const KvWithModifier = (
-  obj: { [key: string]: T },
-  callback: (key: string, value: T) => U,
-) => {
-};
 
 export const ObjectToHint = (obj: { [key: string]: any }): string => {
   return Object.entries(obj)
@@ -30,5 +13,5 @@ export const ReadYaml = (filename: string) => {
 };
 
 export const toRaycast = (path: string) => {
-  return to$(`open raycast://${path}`);
+  return `open raycast://${path}`;
 };
