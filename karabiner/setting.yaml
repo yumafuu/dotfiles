@@ -13,7 +13,7 @@ apps:
   devices:
     # divice-vendor
     591-1452: # air
-      f: Vivaldi
+      f: Google Chrome
     111-2222: # pro
       f: Google Chrome
 maps:
@@ -37,7 +37,6 @@ snippets:
   k: yuma.ishikawa@knowledgework.com
   a: ありがとうございます！
   o: okです！
-  t: お疲れ様です！
   y: よろしくお願いします！
   s: 承知しました🫡
 raycasts:

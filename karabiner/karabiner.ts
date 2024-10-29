@@ -9,7 +9,7 @@ import {
   // layer,
   // simlayer,
   rule,
-  // to$,
+  to$,
   // toApp,
   toKey,
   // toPaste,
@@ -102,7 +102,6 @@ writeToProfile("Default", [
     .manipulators(
       withMapper(emojis)((k, v) => map(k).toPaste(v)),
     ),
-
 
   duoLayer("right_option", "r")
     .description("Raycast Command")

@@ -17,3 +17,6 @@ packages:
   - name: sharkdp/hyperfine@v1.18.0
   - name: denoland/deno@v2.0.2
   - name: BurntSushi/ripgrep@14.1.1
+  - name: casey/just@1.36.0
+  - name: sharkdp/bat@v0.24.0
+  - name: junegunn/fzf/fzf-tmux@v0.56.0

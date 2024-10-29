@@ -1,2 +1,4 @@
 taskfile.yuma.yaml
 Taskfile.yuma.yaml
+.vscode
+justfile

@@ -2,7 +2,7 @@ export PATH="/opt/homebrew/opt/sqlite/bin:$PATH"
 
 export DOTFILES_REPO_PATH="${HOME}/dotfiles"
 
-. "$HOME/.rye/env"
+# . "$HOME/.rye/env"
 
 PATH="$PATH:/opt/homebrew/bin"
 PATH="$PATH:/$HOME/go/bin"
@@ -277,3 +277,5 @@ export PATH=$NPM_CONFIG_PREFIX/bin:$PATH
 export PATH="$(aqua root-dir)/bin:$PATH"
 
 eval "$(sheldon source)"
+
+. /opt/homebrew/opt/asdf/libexec/asdf.sh
