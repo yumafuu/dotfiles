@@ -107,6 +107,7 @@ return {
       { "<leader>'", ":FzfLua files<cr>", silent = true },
       { "<leader>a", ":FzfLua live_grep<cr>", silent = true },
       { "<leader>b", ":FzfLua blines<cr>", silent = true },
+      { "<leader>g", ":FzfLua git_status<cr>", silent = true },
     },
   },
   { "kiran94/s3edit.nvim", config = true, cmd = "S3Edit" },
