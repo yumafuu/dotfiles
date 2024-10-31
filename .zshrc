@@ -263,7 +263,7 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # pure
 autoload -U promptinit; promptinit
 export PURE_CMD_MAX_EXEC_TIME=1
-zstyle ':prompt:pure:path' color white
+zstyle ':prompt:pure:path' color '#9C9C9C'
 zstyle ':prompt:pure:git:*' color '#8C8C8D'
 zstyle ':prompt:pure:prompt:success' color blue
 
