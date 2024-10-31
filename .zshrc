@@ -255,6 +255,12 @@ cd_parent () {
   cd ..
   zle accept-line
 }
+zle -N cd_back
+bindkey "^k" cd_back
+cd_back() {
+  cd - > /dev/null
+  zle accept-line
+}
 
 # homebrew
 export PATH="/opt/homebrew/bin:$PATH"
