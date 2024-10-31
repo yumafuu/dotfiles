@@ -20,3 +20,4 @@ packages:
   - name: casey/just@1.36.0
   - name: sharkdp/bat@v0.24.0
   - name: junegunn/fzf/fzf-tmux@v0.56.0
+  - name: rhysd/vim-startuptime@v1.3.2
