@@ -7,13 +7,12 @@ apps:
     p: Spotify
     l: Line
     e: Deepl
-    m: Spark Desktop
     c: Rise
     o: zoom.us
   devices:
     # divice-vendor
     591-1452: # air
-      f: Google Chrome
+      f: Vivaldi
     111-2222: # pro
       f: Google Chrome
 maps:
@@ -26,10 +25,6 @@ links:
   y: https://youtube.com
   l: https://lms.keio.jp
   s: https://scrapbox.io/yumamemo
-emojis:
-  b: 🙇‍♂️
-  g: 👍
-  p: 🙏
 snippets:
   na: 石川湧馬
   tl: 09041209240

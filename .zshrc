@@ -1,14 +1,4 @@
-export PATH="/opt/homebrew/opt/sqlite/bin:$PATH"
-
 export DOTFILES_REPO_PATH="${HOME}/dotfiles"
-
-# . "$HOME/.rye/env"
-
-PATH="$PATH:/opt/homebrew/bin"
-PATH="$PATH:/$HOME/go/bin"
-PATH="$PATH:/Users/yuma/.cargo/bin"
-
-export PATH="/Users/yuma/.deno/bin:$PATH"
 
 alias vim=nvim
 alias q=exit
@@ -21,7 +11,20 @@ alias tree='exa --tree'
 alias ql='qlmanage -p "$@" >& /dev/null'
 alias imgcat='img2sixel'
 
-. "$HOME/.cargo/env"
+# cargo
+if [ -f "$HOME/.cargo.env" ]; then
+  . "$HOME/.cargo.env"
+fi
+
+# rye
+if [ -f "$HOME/.rye/env" ]; then
+  . "$HOME/.rye/env"
+fi
+
+# asdf
+if [ -f /opt/homebrew/opt/asdf/libexec/asdf.sh ]; then
+  . /opt/homebrew/opt/asdf/libexec/asdf.sh
+fi
 
 export WORDCHARS='*?_.[]~-=&;!#$%^(){}<>'
 stty erase '^?'
@@ -33,11 +36,16 @@ export FZF_CTRL_T_OPTS='--preview "bat  --color=always --style=header,grid --lin
 export FZF_DEFAULT_OPTS="--height 50% --border --color=pointer:blue"
 
 # PATH
-export PATH=$HOME/.cargo/bin:$PATH
-export PATH="${PATH}:${HOME}/.krew/bin"
-export PATH="/Users/yuma/.local/bin:$PATH"
-export PATH="/Users/yuma/Library/Python/3.8/bin:$PATH"
-export PATH="/Users/yuma/Library/Python/3.9/bin:$PATH"
+PATH=$HOME/.cargo/bin:$PATH
+PATH="${PATH}:${HOME}/.krew/bin"
+PATH="/Users/yuma/.local/bin:$PATH"
+PATH="/Users/yuma/Library/Python/3.8/bin:$PATH"
+PATH="/Users/yuma/Library/Python/3.9/bin:$PATH"
+PATH="$PATH:/$HOME/go/bin"
+PATH="$PATH:/Users/yuma/.cargo/bin"
+PATH="/Users/yuma/.deno/bin:$PATH"
+
+export PATH
 
 alias vz="nvim ~/.zshrc"
 alias vv="nvim ~/.config/nvim/"
@@ -87,9 +95,9 @@ export SAVEHIST=100000000
 setopt hist_ignore_dups
 setopt EXTENDED_HISTORY
 
-# function do_nothing(){}
-# zle -N do_nothing
-# bindkey "^D" do_nothing
+function do_nothing(){}
+zle -N do_nothing
+bindkey "^D" do_nothing
 setopt IGNORE_EOF
 
 # zsh
@@ -176,10 +184,7 @@ alias oepn="open"
 
 alias ql='qlmanage -p "$@" >& /dev/null'
 
-## functions
-# ==================================
-
-
+# functions
 fancy-ctrl-z () {
   if [[ $#BUFFER -eq 0 ]]; then
     BUFFER="fg"
@@ -250,8 +255,10 @@ cd_parent () {
   cd ..
   zle accept-line
 }
+
+# homebrew
 export PATH="/opt/homebrew/bin:$PATH"
-export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+export PATH="/opt/homebrew/opt/sqlite/bin:$PATH"
 
 # bun completions
 [ -s "/Users/yuma/.bun/_bun" ] && source "/Users/yuma/.bun/_bun"
@@ -267,17 +274,23 @@ zstyle ':prompt:pure:path' color '#9C9C9C'
 zstyle ':prompt:pure:git:*' color '#8C8C8D'
 zstyle ':prompt:pure:prompt:success' color blue
 
+# rbenv
 eval "$(rbenv init -)"
 
+# aqua
 alias a="aqua"
-
 export AQUA_GLOBAL_CONFIG=$HOME/dotfiles/aqua/aqua.yaml
 export NPM_CONFIG_PREFIX="${XDG_DATA_HOME:-$HOME/.local/share}/npm-global"
 export PATH=$NPM_CONFIG_PREFIX/bin:$PATH
 export PATH="$(aqua root-dir)/bin:$PATH"
 
+# sheldon
 eval "$(sheldon source)"
 
-if [ -f /opt/homebrew/opt/asdf/libexec/asdf.sh ]; then
-  . /opt/homebrew/opt/asdf/libexec/asdf.sh
-fi
+# tmux
+export TMUX_PLUGIN_MANAGER_PATH="~/.tmux/plugins"
+tmux-window-name() {
+  ($TMUX_PLUGIN_MANAGER_PATH/tmux-window-name/scripts/rename_session_windows.py &)
+}
+add-zsh-hook chpwd tmux-window-name
+
