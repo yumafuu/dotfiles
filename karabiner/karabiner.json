@@ -131,23 +131,6 @@
               {
                 "type": "basic",
                 "from": {
-                  "key_code": "m",
-                  "modifiers": {
-                    "mandatory": [
-                      "control",
-                      "shift"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "open -a \"Spark Desktop\".app"
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "from": {
                   "key_code": "c",
                   "modifiers": {
                     "mandatory": [
@@ -398,7 +381,7 @@
                       "key_code": "quote"
                     },
                     {
-                      "key_code": "t"
+                      "key_code": "r"
                     }
                   ],
                   "simultaneous_options": {
@@ -410,7 +393,7 @@
                 },
                 "to": [
                   {
-                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"お疲れ様です！\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
+                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"レビューおねがいします🙏\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
                   }
                 ]
               },
@@ -479,23 +462,7 @@
                 },
                 "to": [
                   {
-                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"【\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "from": {
-                  "key_code": "close_bracket",
-                  "modifiers": {
-                    "mandatory": [
-                      "left_option"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"】\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
+                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"【】\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
                   }
                 ]
               }
@@ -537,7 +504,7 @@
                   {
                     "set_notification_message": {
                       "id": "duo-layer-duo-layer-left_option-l",
-                      "text": "g: https://github.com\nz: https://zenn.dev\nx: https://x.com\ny: https://youtube.com\nc: https://chatgpt.com\nl: https://lms.keio.jp\nm: https://scrapbox.io/yumamemo\ns: https://scrapbox.io/masuilab"
+                      "text": "g: https://github.com\nz: https://zenn.dev\nx: https://x.com\ny: https://youtube.com\nl: https://lms.keio.jp\ns: https://scrapbox.io/yumamemo"
                     }
                   }
                 ],
@@ -672,36 +639,6 @@
               {
                 "type": "basic",
                 "from": {
-                  "key_code": "c"
-                },
-                "to": [
-                  {
-                    "shell_command": "open https://chatgpt.com"
-                  },
-                  {
-                    "set_variable": {
-                      "name": "duo-layer-left_option-l",
-                      "value": 0
-                    }
-                  },
-                  {
-                    "set_notification_message": {
-                      "id": "duo-layer-duo-layer-left_option-l",
-                      "text": ""
-                    }
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "variable_if",
-                    "name": "duo-layer-left_option-l",
-                    "value": 1
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "from": {
                   "key_code": "l"
                 },
                 "to": [
@@ -732,41 +669,11 @@
               {
                 "type": "basic",
                 "from": {
-                  "key_code": "m"
-                },
-                "to": [
-                  {
-                    "shell_command": "open https://scrapbox.io/yumamemo"
-                  },
-                  {
-                    "set_variable": {
-                      "name": "duo-layer-left_option-l",
-                      "value": 0
-                    }
-                  },
-                  {
-                    "set_notification_message": {
-                      "id": "duo-layer-duo-layer-left_option-l",
-                      "text": ""
-                    }
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "variable_if",
-                    "name": "duo-layer-left_option-l",
-                    "value": 1
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "from": {
                   "key_code": "s"
                 },
                 "to": [
                   {
-                    "shell_command": "open https://scrapbox.io/masuilab"
+                    "shell_command": "open https://scrapbox.io/yumamemo"
                   },
                   {
                     "set_variable": {
