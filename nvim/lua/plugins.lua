@@ -223,11 +223,17 @@ return {
     end,
   },
   {
-    "rmehri01/onenord.nvim",
+    'shaunsingh/nord.nvim',
     config = function()
-      vim.cmd("colorscheme onenord")
+      vim.cmd("colorscheme nord")
     end,
   },
+  -- {
+  --   "rmehri01/onenord.nvim",
+  --   config = function()
+  --     vim.cmd("colorscheme onenord")
+  --   end,
+  -- },
   {
     "stevearc/oil.nvim",
     config = function()
