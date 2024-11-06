@@ -7,5 +7,6 @@
   "lemonade.toml": "~/.config/lemonade.toml",
   "git/": "~/.config/git/",
   "karabiner/": "~/.config/karabiner/",
-  "sheldon/": "~/.config/sheldon/"
+  "sheldon/": "~/.config/sheldon/",
+  "gh/config.yml": "~/.config/gh/config.yml"
 }
