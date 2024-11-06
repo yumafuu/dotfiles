@@ -12,6 +12,7 @@ alias ls='exa -a'
 alias tree='exa --tree'
 alias ql='qlmanage -p "$@" >& /dev/null'
 alias imgcat='img2sixel'
+alias x='bun x'
 
 # cargo
 if [ -f "$HOME/.cargo.env" ]; then
@@ -48,7 +49,6 @@ PATH="${PATH}:${HOME}/.krew/bin"
 PATH="/Users/yuma/.local/bin:$PATH"
 PATH="/Users/yuma/Library/Python/3.8/bin:$PATH"
 PATH="/Users/yuma/Library/Python/3.9/bin:$PATH"
-stty erase '^?'
 PATH="$PATH:/$HOME/go/bin"
 PATH="$PATH:/Users/yuma/.cargo/bin"
 PATH="/Users/yuma/.deno/bin:$PATH"
@@ -67,7 +67,7 @@ export LESS='-R'
 
 alias pswd='ruby -rsecurerandom -e "puts SecureRandom.alphanumeric"|xargs echo -n|pbcopy'
 
-# style
+# zsh
 autoload -U compinit
 compinit
 stty erase '^?'
@@ -80,6 +80,7 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' ignore-parents parent pwd ..
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
+stty erase '^?'
 
 setopt share_history
 setopt brace_ccl
@@ -108,7 +109,6 @@ zle -N do_nothing
 bindkey "^D" do_nothing
 setopt IGNORE_EOF
 
-# zsh
 bindkey "^A" beginning-of-line
 bindkey "^E" end-of-line
 bindkey "^U" backward-kill-line
@@ -150,6 +150,7 @@ alias gc='git commit'
 alias gcob="git checkout -b"
 alias master="git checkout master"
 alias main="git checkout main"
+alias whcih="which"
 
 alias gush='
   git push origin \
