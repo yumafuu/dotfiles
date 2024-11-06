@@ -12,3 +12,4 @@ registries:
 packages:
 - name: JohnnyMorganz/StyLua@v0.20.0
 - name: go-task/task@v3.39.2
+- name: nodejs/node@v23.1.0

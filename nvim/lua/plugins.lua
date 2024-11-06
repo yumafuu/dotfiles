@@ -1,7 +1,7 @@
 return {
   {
     "github/copilot.vim",
-    enabled = false,
+    enabled = true,
     config = function()
       vim.g.copilot_no_tab_map = true
 
