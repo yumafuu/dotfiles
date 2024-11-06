@@ -1,6 +1,8 @@
 export DOTFILES_REPO_PATH="${HOME}/dotfiles"
 
 alias vim=nvim
+export EDITOR=nvim
+
 alias q=exit
 alias vz='vim ~/.zshrc'
 alias v='vim .'
@@ -26,10 +28,15 @@ if [ -f /opt/homebrew/opt/asdf/libexec/asdf.sh ]; then
   . /opt/homebrew/opt/asdf/libexec/asdf.sh
 fi
 
+# aqua
+alias a="aqua"
+export AQUA_GLOBAL_CONFIG=$HOME/dotfiles/aqua/aqua.yaml
+export NPM_CONFIG_PREFIX="${XDG_DATA_HOME:-$HOME/.local/share}/npm-global"
+export PATH=$NPM_CONFIG_PREFIX/bin:$PATH
+export PATH="$(aqua root-dir)/bin:$PATH"
 export WORDCHARS='*?_.[]~-=&;!#$%^(){}<>'
-stty erase '^?'
 
-export EDITOR=nvim
+# fzf
 source <(fzf --zsh)
 export FZF_CTRL_T_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
 export FZF_CTRL_T_OPTS='--preview "bat  --color=always --style=header,grid --line-range :100 {}"'
@@ -41,10 +48,10 @@ PATH="${PATH}:${HOME}/.krew/bin"
 PATH="/Users/yuma/.local/bin:$PATH"
 PATH="/Users/yuma/Library/Python/3.8/bin:$PATH"
 PATH="/Users/yuma/Library/Python/3.9/bin:$PATH"
+stty erase '^?'
 PATH="$PATH:/$HOME/go/bin"
 PATH="$PATH:/Users/yuma/.cargo/bin"
 PATH="/Users/yuma/.deno/bin:$PATH"
-
 export PATH
 
 alias vz="nvim ~/.zshrc"
@@ -63,6 +70,7 @@ alias pswd='ruby -rsecurerandom -e "puts SecureRandom.alphanumeric"|xargs echo -
 # style
 autoload -U compinit
 compinit
+stty erase '^?'
 export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
@@ -132,7 +140,7 @@ alias ez='exec zsh'
 alias se='source ~/.zshenv'
 
 alias gs='git status'
-alias gd='git diff'
+alias gd='git diff --no-prefix'
 alias gco='git checkout'
 alias ga='git add .'
 alias gaa='git add .'
@@ -283,12 +291,6 @@ zstyle ':prompt:pure:prompt:success' color blue
 # rbenv
 eval "$(rbenv init -)"
 
-# aqua
-alias a="aqua"
-export AQUA_GLOBAL_CONFIG=$HOME/dotfiles/aqua/aqua.yaml
-export NPM_CONFIG_PREFIX="${XDG_DATA_HOME:-$HOME/.local/share}/npm-global"
-export PATH=$NPM_CONFIG_PREFIX/bin:$PATH
-export PATH="$(aqua root-dir)/bin:$PATH"
 
 # sheldon
 eval "$(sheldon source)"

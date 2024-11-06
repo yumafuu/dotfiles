@@ -12,7 +12,8 @@ apps:
   devices:
     # divice-vendor
     591-1452: # air
-      f: Vivaldi
+      # f: Vivaldi
+      f: Google Chrome
     111-2222: # pro
       f: Google Chrome
 maps:
