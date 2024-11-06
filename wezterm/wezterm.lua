@@ -9,7 +9,10 @@ return {
   window_decorations = "INTEGRATED_BUTTONS|RESIZE",
   integrated_title_button_style = "Gnome",
   font_size = 18.0,
-  font = wezterm.font("MesloLGS NF"),
+  font = wezterm.font_with_fallback({
+    "Comic Sans",
+    "MesloLGS NF",
+  }),
   window_padding = {
     left = "1cell",
     right = "1cell",

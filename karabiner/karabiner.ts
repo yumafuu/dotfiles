@@ -73,7 +73,7 @@ writeToProfile("Default", [
       return mapSimultaneous(
         `'${k}`.split(""),
         { key_down_order: "strict" },
-        300,
+        100,
       ).toPaste(v);
     }),
   ),
@@ -94,14 +94,6 @@ writeToProfile("Default", [
     .leaderMode()
     .notification(ObjectToHint(links))
     .manipulators(withMapper(links)((k, v) => map(k).to$(`open ${v}`))),
-
-  duoLayer("right_option", "e")
-    .description("Paste Emojis")
-    .leaderMode()
-    .notification(ObjectToHint(emojis))
-    .manipulators(
-      withMapper(emojis)((k, v) => map(k).toPaste(v)),
-    ),
 
   duoLayer("right_option", "r")
     .description("Raycast Command")
