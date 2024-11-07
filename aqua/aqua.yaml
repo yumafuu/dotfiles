@@ -26,3 +26,4 @@ packages:
   - name: nodejs/node@v23.1.0
   - name: joshmedeski/sesh@v2.6.0
   - name: charmbracelet/gum@v0.14.5
+  - name: x-motemen/ghq@v1.6.3
