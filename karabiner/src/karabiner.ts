@@ -3,7 +3,7 @@ import {
   duoLayer,
   ifApp,
   // ifDevice,
-  ifDeviceExists,
+  // ifDeviceExists,
   map,
   mapSimultaneous,
   // layer,
@@ -18,6 +18,11 @@ import {
   withModifier,
   writeToProfile,
 } from "karabiner.ts";
+
+import type { LayerKeyParam } from "karabiner.ts";
+
+const left_option: LayerKeyParam = "left_option"
+const right_option: LayerKeyParam = "right_option"
 
 import { ObjectToHint, ReadYaml, toRaycast } from "./utils.ts";
 
@@ -80,13 +85,13 @@ const shared = [
     }),
   ),
 
-  duoLayer("left_option", "l")
+  duoLayer(left_option, "l")
     .description("Open Link")
     .leaderMode()
     .notification(ObjectToHint(links))
     .manipulators(withMapper(links)((k, v) => map(k).to$(`open ${v}`))),
 
-  duoLayer("right_option", "r")
+  duoLayer(right_option, "r")
     .description("Raycast Command")
     .leaderMode()
     .notification(ObjectToHint(raycasts))
