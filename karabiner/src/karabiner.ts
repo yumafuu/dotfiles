@@ -55,7 +55,7 @@ const {
 const shared = [
   rule("Open App - shared").manipulators([
     withModifier("⌃⇧")([
-      withMapper(apps.shared as SettingKV)((k, v) => map(k).toApp(v)),
+      withMapper(apps.profiles.shared as SettingKV)((k, v) => map(k).toApp(v)),
     ]),
   ]),
 
