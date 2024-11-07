@@ -3,27 +3,33 @@ export DOTFILES_REPO_PATH="${HOME}/dotfiles"
 alias vim=nvim
 export EDITOR=nvim
 
-# cargo
-if [ -f "$HOME/.cargo.env" ]; then
-  . "$HOME/.cargo.env"
-fi
-
-# rye
-if [ -f "$HOME/.rye/env" ]; then
-  . "$HOME/.rye/env"
-fi
-
-# asdf
-if [ -f /opt/homebrew/opt/asdf/libexec/asdf.sh ]; then
-  . /opt/homebrew/opt/asdf/libexec/asdf.sh
-fi
+# sheldon
+eval "$(sheldon source)"
 
 # aqua
 alias a="aqua"
 export AQUA_GLOBAL_CONFIG=$HOME/dotfiles/aqua/aqua.yaml
 export NPM_CONFIG_PREFIX="${XDG_DATA_HOME:-$HOME/.local/share}/npm-global"
-export PATH=$NPM_CONFIG_PREFIX/bin:$PATH
-export PATH="$(aqua root-dir)/bin:$PATH"
+PATH=$NPM_CONFIG_PREFIX/bin:$PATH
+PATH="$(aqua root-dir)/bin:$PATH"
+
+# homebrew
+PATH="/opt/homebrew/bin:$PATH"
+PATH="/opt/homebrew/opt/sqlite/bin:$PATH"
+
+# cargo
+[ -s "/Users/yuma/.cargo.env" ] && source "/Users/yuma/.cargo.env"
+PATH=$HOME/.cargo/bin:$PATH
+
+# rye
+[ -s "$HOME/.rye/env" ] && source "$HOME/.rye/env"
+
+# asdf
+asdf_sh=/opt/homebrew/opt/asdf/asdf.sh
+[ -s $asdf_sh ] && source $asdf_sh
+
+# deno
+PATH="/Users/yuma/.deno/bin:$PATH"
 
 # fzf
 source <(fzf --zsh)
@@ -31,17 +37,11 @@ export FZF_CTRL_T_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
 export FZF_CTRL_T_OPTS='--preview "bat  --color=always --style=header,grid --line-range :100 {}"'
 export FZF_DEFAULT_OPTS="--height 50% --border --color=pointer:blue"
 
-# PATH
-PATH=$HOME/.cargo/bin:$PATH
-PATH="${PATH}:${HOME}/.krew/bin"
-PATH="/Users/yuma/.local/bin:$PATH"
-PATH="/Users/yuma/Library/Python/3.8/bin:$PATH"
-PATH="/Users/yuma/Library/Python/3.9/bin:$PATH"
+# go
 PATH="$PATH:/$HOME/go/bin"
-PATH="$PATH:/Users/yuma/.cargo/bin"
-PATH="/Users/yuma/.deno/bin:$PATH"
-export PATH
-export LESS='-R'
+
+# bin
+PATH="/Users/yuma/.local/bin:$PATH"
 
 # zsh
 autoload -U compinit
@@ -51,6 +51,7 @@ export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export WORDCHARS='*?_.[]~-=&;!#$%^(){}<>'
+export LESS='-R'
 # export LANG=ja_JP.UTF-8
 zstyle ':completion:*' menu select
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
@@ -87,6 +88,8 @@ bindkey "^U" backward-kill-line
 bindkey "^K" backward-kill-line
 bindkey "^H" backward-word
 bindkey '\e[3~' delete-char
+bindkey "^O" dm
+bindkey "^D" do_nothing
 
 
 # ==================================
@@ -102,62 +105,23 @@ alias tree='exa --tree'
 alias ql='qlmanage -p "$@" >& /dev/null'
 alias imgcat='img2sixel'
 alias x='bun x'
-
-alias so="source"
-alias ...=../..
-alias ....=../../..
 alias ag="ag -u"
-
 alias ls='exa -g --time-style=long-iso -a'
 alias ll="ls -la"
 alias tree="exa -T -a -I .git --git-ignore"
 alias :q='exit'
 alias q='exit'
-
 alias mv='mv -i'
 alias cp='cp -i'
 alias vz='vim ~/.zshrc '
 alias ve='vim ~/.zshenv '
 alias ez='exec zsh'
 alias se='source ~/.zshenv'
-
-alias gs='git status'
-alias gd='git diff --no-prefix'
-alias gco='git checkout'
-alias ga='git add .'
-alias gaa='git add .'
-alias gaaa='git add .'
-alias gaaaa='git add .'
-alias gc='git commit'
-alias gcob="git checkout -b"
-alias master="git checkout master"
-alias main="git checkout main"
-alias whcih="which"
-
-alias gush='git push origin $( git branch | grep "*" | sed -e "s/^\*\s*//g" ) '
-alias gul='git pull --rebase origin  \
-  $( git branch | grep "*" | sed -e "s/^\*\s*//g" )  '
 alias vz="nvim ~/.zshrc"
 alias vv="nvim ~/.config/nvim/"
 alias ..="cd .."
 alias ...="cd ../../.."
-alias ....="cd ../../../.."
-alias .....="cd ../../../../.."
-alias diff="colordiff -u"
 alias spotify="spt"
-alias pswd='ruby -rsecurerandom -e "puts SecureRandom.alphanumeric"|xargs echo -n|pbcopy'
-
-function g-branch(){
-  git branch -a |
-    sed -e "s/[ ,\*]//g" |
-    sed -e "s/remotes\/origin\///g" |
-    sed -e "s/HEAD->//g" |
-    sort -u |
-    fzf |
-    tr -d '\n'
-}
-alias checkout="g-branch | xargs git checkout"
-alias co=checkout
 
 alias b='bundle -j4'
 alias be="bundle exec"
@@ -165,22 +129,16 @@ alias be="bundle exec"
 alias dk='docker'
 alias dkc="docker compose"
 alias dck="docker compose"
-
 alias tf='terraform'
-alias oepn="open"
-
 alias ql='qlmanage -p "$@" >& /dev/null'
 
-# homebrew
-export PATH="/opt/homebrew/bin:$PATH"
-export PATH="/opt/homebrew/opt/sqlite/bin:$PATH"
 
-# bun completions
+# bun
 [ -s "/Users/yuma/.bun/_bun" ] && source "/Users/yuma/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
+PATH="$BUN_INSTALL/bin:$PATH"
 
 # pure
 autoload -U promptinit; promptinit
@@ -192,10 +150,8 @@ zstyle ':prompt:pure:prompt:success' color blue
 # rbenv
 eval "$(rbenv init -)"
 
-# sheldon
-# eval "$(sheldon source)"
-source <(sheldon source)
-
-
 # tmux
 export TMUX_PLUGIN_MANAGER_PATH="~/.tmux/plugins"
+
+# path
+export PATH

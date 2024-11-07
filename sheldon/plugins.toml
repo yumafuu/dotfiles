@@ -15,6 +15,5 @@ github = 'zsh-users/zsh-completions'
 github = 'sindresorhus/pure'
 use = ["async.zsh", "pure.zsh"]
 
-[plugins.yumafuu]
-github = 'yumafuu/dotfiles'
-use = ["zsh/*.zsh"]
+[plugins.local]
+local = '~/dotfiles/zsh'
