@@ -24,6 +24,7 @@ alias vz="nvim ~/.zshrc"
 alias vv="nvim ~/.config/nvim/"
 alias ..="cd .."
 alias ...="cd ../../.."
+
 alias spotify="spt"
 
 alias b='bundle -j4'
@@ -32,8 +33,9 @@ alias be="bundle exec"
 alias dk='docker'
 alias dkc="docker compose"
 alias dck="docker compose"
+
 alias tf='terraform'
 alias ql='qlmanage -p "$@" >& /dev/null'
 
 alias agi="aqua g -i"
-alias ail="aqua i -l -a"
+alias aia="aqua i -a -l"
