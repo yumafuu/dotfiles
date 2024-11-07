@@ -1,19 +1,17 @@
 apps:
-  shared:
-    d: Discord
-    s: Slack
-    a: Wezterm
-    r: Reflect
-    p: Spotify
-    l: Line
-    e: Deepl
-    c: Rise
-    o: zoom.us
   profiles:
+    shared:
+      d: Discord
+      s: Slack
+      a: Wezterm
+      r: Reflect
+      p: Spotify
     yumaAir:
       f: Vivaldi
+      l: Line
     kwPro:
       f: Google Chrome
+      o: zoom.us
 maps:
   # {modifier}-{code_key} or {code_key}
   left_option-open_bracket: "【】"
