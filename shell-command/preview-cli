@@ -1,0 +1,18 @@
+#!/usr/bin/env zsh
+
+if [ -z "$1" ]; then
+  echo "Usage: preview-cli <file>"
+  return 1
+fi
+
+# check file type using file command.
+fy=$(file "$1")
+if [[ $fy == *"text"* ]]; then
+  bat "$1"
+elif [[ $fy == *"image"* ]]; then
+  img2sixel "$1"
+elif [[ $fy == *"PDF"* ]]; then
+  tdf "$1"
+else
+  echo "File type not supported."
+fi
