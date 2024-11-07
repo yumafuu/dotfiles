@@ -39,10 +39,10 @@ const {
   apps,
   maps,
   links,
-  emojis,
   snippets,
   raycasts,
-} = ReadYaml(`${__dirname}/setting.yaml`) as Setting;
+} = ReadYaml(`${__dirname}/../setting.yaml`) as Setting;
+
 
 // {
 //   '⌘': 'command',
@@ -52,28 +52,19 @@ const {
 //   '⇪': 'caps_lock',
 // }
 
-writeToProfile("Default", [
-  rule("Open App").manipulators([
+const shared = [
+  rule("Open App - shared").manipulators([
     withModifier("⌃⇧")([
       withMapper(apps.shared as SettingKV)((k, v) => map(k).toApp(v)),
-      ...Object.entries(apps.devices as SettingKV).map(([device, dapps]) => {
-        const [product_id, vendor_id] = device.split("-");
-        return withMapper(dapps)((k, v) =>
-          map(k).toApp(v).condition(ifDeviceExists({
-            product_id: Number(product_id),
-            vendor_id: Number(vendor_id),
-          }))
-        );
-      }),
     ]),
   ]),
 
   rule("Snippets").manipulators(
     Object.entries(snippets).map(([k, v]) => {
       return mapSimultaneous(
-        `'${k}`.split(""),
+        `[${k}`.split(""),
         { key_down_order: "strict" },
-        100,
+        168,
       ).toPaste(v);
     }),
   ),
@@ -166,4 +157,19 @@ writeToProfile("Default", [
       map("close_bracket", "left_control").to("tab", ["left_control"]),
     ]),
   ]),
-]);
+];
+
+const yumaAir = [
+  rule("Open App - yumaAir").manipulators([
+    withModifier("⌃⇧")(withMapper(apps.profiles.yumaAir)((k, v) => map(k).toApp(v))),
+  ]),
+];
+
+const kwPro = [
+  rule("Open App - kwPro").manipulators([
+    withModifier("⌃⇧")(withMapper(apps.profiles.kwPro)((k, v) => map(k).toApp(v))),
+  ]),
+];
+
+writeToProfile("Yuma-Air", [...shared, ...yumaAir]);
+writeToProfile("KW-Pro", [...shared, ...kwPro]);
