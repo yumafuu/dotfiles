@@ -9,5 +9,6 @@
   ".glzr/": "~/.glzr/",
   "karabiner/": "~/.config/karabiner/",
   "sheldon/": "~/.config/sheldon/",
+  "sesh/": "~/.config/sesh/",
   "gh/config.yml": "~/.config/gh/config.yml"
 }
