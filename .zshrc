@@ -4,23 +4,23 @@ export EDITOR=nvim
 # vim
 alias vim=nvim
 
-# sheldon
-eval "$(sheldon source)"
-
 # aqua
 alias a="aqua"
 export AQUA_GLOBAL_CONFIG=$HOME/dotfiles/aqua/aqua.yaml
 export NPM_CONFIG_PREFIX="${XDG_DATA_HOME:-$HOME/.local/share}/npm-global"
-PATH=$NPM_CONFIG_PREFIX/bin:$PATH
-PATH="$(aqua root-dir)/bin:$PATH"
+export PATH=$NPM_CONFIG_PREFIX/bin:$PATH
+export PATH="$(aqua root-dir)/bin:$PATH"
 
 # homebrew
-PATH="/opt/homebrew/bin:$PATH"
-PATH="/opt/homebrew/opt/sqlite/bin:$PATH"
+export PATH="/opt/homebrew/bin:$PATH"
+export PATH="/opt/homebrew/opt/sqlite/bin:$PATH"
+
+# sheldon
+eval "$(sheldon source)"
 
 # cargo
 [ -s "/Users/yuma/.cargo.env" ] && source "/Users/yuma/.cargo.env"
-PATH=$HOME/.cargo/bin:$PATH
+export PATH=$HOME/.cargo/bin:$PATH
 
 # rye
 [ -s "$HOME/.rye/env" ] && source "$HOME/.rye/env"
@@ -30,7 +30,7 @@ asdf_sh=/opt/homebrew/opt/asdf/asdf.sh
 [ -s $asdf_sh ] && source $asdf_sh
 
 # deno
-PATH="/Users/yuma/.deno/bin:$PATH"
+export PATH="/Users/yuma/.deno/bin:$PATH"
 
 # fzf
 source <(fzf --zsh)
@@ -39,17 +39,17 @@ export FZF_CTRL_T_OPTS='--preview "bat  --color=always --style=header,grid --lin
 export FZF_DEFAULT_OPTS="--height 50% --border --color=pointer:blue"
 
 # go
-PATH="$PATH:/$HOME/go/bin"
+export PATH="$PATH:/$HOME/go/bin"
 
 # bin
-PATH="/Users/yuma/.local/bin:$PATH"
+export PATH="/Users/yuma/.local/bin:$PATH"
 
 # bun
 [ -s "/Users/yuma/.bun/_bun" ] && source "/Users/yuma/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
-PATH="$BUN_INSTALL/bin:$PATH"
+export PATH="$BUN_INSTALL/bin:$PATH"
 
 # pure
 autoload -U promptinit; promptinit
@@ -65,18 +65,14 @@ bindkey "^U" backward-kill-line
 bindkey "^K" backward-kill-line
 bindkey "^H" backward-word
 bindkey '\e[3~' delete-char
-bindkey "^O" dm
 bindkey "^D" do_nothing
 bindkey "^k" cd_target
 bindkey "^h" cd_parent
 bindkey "^k" cd_back
-bindkey "^g" _fzf_cd_ghq
+bindkey "^o" _fzf_cd_ghq
 
 # rbenv
 eval "$(rbenv init -)"
 
 # tmux
 export TMUX_PLUGIN_MANAGER_PATH="~/.tmux/plugins"
-
-# path
-export PATH
