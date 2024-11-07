@@ -104,9 +104,6 @@ export SAVEHIST=100000000
 setopt hist_ignore_dups
 setopt EXTENDED_HISTORY
 
-function do_nothing(){}
-zle -N do_nothing
-bindkey "^D" do_nothing
 setopt IGNORE_EOF
 
 bindkey "^A" beginning-of-line
@@ -192,84 +189,6 @@ alias tf='terraform'
 alias oepn="open"
 
 alias ql='qlmanage -p "$@" >& /dev/null'
-
-# functions
-fancy-ctrl-z () {
-  if [[ $#BUFFER -eq 0 ]]; then
-    BUFFER="fg"
-    zle accept-line -w
-  else
-    zle push-input -w
-    zle clear-screen -w
-  fi
-}
-zle -N fancy-ctrl-z
-bindkey '^Z' fancy-ctrl-z
-bindkey -e
-
-function dm(){
-  file=$HOME/.dm.csv
-  touch $file
-
-  if [[ $1 = "a" ]]; then
-    dir=`/bin/pwd`
-    read "name?name: "
-    if [[ $name == "" ]];then
-      name=$dir
-    fi
-    echo $dir,$name | sed "s/\/Users\/yuma/\~/g" | tee -a $file
-    return
-  fi
-
-  if [[ $1 = "e" ]]; then
-    $EDITOR $file
-    return
-  fi
-
-  t=`cat $file | \
-    fzf -d, --with-nth 2 --preview "echo {} | cut -d , -f 1" | \
-    sed "s/\~/\/Users\/yuma/g"`
-  if [[ $t = "" ]]; then
-    return
-  fi
-
-  dir=`echo ${t} | cut -d , -f 1`
-  cd $dir
-  echo
-}
-zle -N dm
-bindkey "^o" dm
-
-function cd_target(){
-  d=$( \
-    fd --type d -H \
-    -E .git \
-    -E node_modules \
-    -E .terragrunt-cache \
-    | fzf --select-1 --preview 'exa -T --git-ignore {}' )
-
-  if [[ $d = "" ]]; then
-    return
-  fi
-
-  cd $d
-}
-
-zle -N cd_target
-bindkey "^k" cd_target
-
-zle -N cd_parent
-bindkey "^h" cd_parent
-cd_parent () {
-  cd ..
-  zle accept-line
-}
-zle -N cd_back
-bindkey "^k" cd_back
-cd_back() {
-  cd - > /dev/null
-  zle accept-line
-}
 
 # homebrew
 export PATH="/opt/homebrew/bin:$PATH"
