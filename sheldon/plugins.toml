@@ -15,5 +15,9 @@ github = 'zsh-users/zsh-completions'
 github = 'sindresorhus/pure'
 use = ["async.zsh", "pure.zsh"]
 
-[plugins.local]
+[plugins.localzsh]
 local = '~/dotfiles/zsh'
+
+[plugins.preview-cli]
+local = '~/dotfiles/shell-command'
+apply = ["PATH"]
