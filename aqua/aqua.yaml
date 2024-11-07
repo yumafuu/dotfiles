@@ -24,3 +24,5 @@ packages:
   - name: oven-sh/bun@bun-v1.1.34
   - name: protocolbuffers/protobuf/protoc@v28.3
   - name: nodejs/node@v23.1.0
+  - name: joshmedeski/sesh@v2.6.0
+  - name: charmbracelet/gum@v0.14.5
