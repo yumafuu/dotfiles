@@ -11,7 +11,7 @@ return {
   font_size = 18.0,
   font = wezterm.font_with_fallback({
     { family="Comic Code Ligatures", weight="Regular" },
-    "MesloLGS NF",
+    -- "MesloLGS NF",
   }),
   window_padding = {
     left = "1cell",
