@@ -35,3 +35,5 @@ alias dck="docker compose"
 alias tf='terraform'
 alias ql='qlmanage -p "$@" >& /dev/null'
 
+alias agi="aqua g -i"
+alias ail="aqua i -l -a"

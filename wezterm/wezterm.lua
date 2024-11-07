@@ -1,8 +1,6 @@
 local wezterm = require("wezterm")
 local act = wezterm.action
 
-local dimmer = { brightness = 0.1 }
-
 return {
   color_scheme = "Teerb",
 
@@ -25,16 +23,6 @@ return {
   use_ime = true,
   window_background_opacity = 0.9,
   macos_window_background_blur = 100,
-  -- background = {
-  --   {
-  --     source = {
-  --       File = "/Users/yuma/Pictures/Wallpapers/pexels-shanekell.jpg",
-  --     },
-  --     repeat_x = 'Mirror',
-  --     hsb = dimmer,
-  --     attachment = { Parallax = 0.1 },
-  --   },
-  -- },
   use_fancy_tab_bar = false,
   enable_tab_bar = true,
   tab_bar_at_bottom = false,
