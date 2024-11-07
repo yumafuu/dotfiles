@@ -9,12 +9,10 @@ apps:
     e: Deepl
     c: Rise
     o: zoom.us
-  devices:
-    # divice-vendor
-    591-1452: # air
-      # f: Vivaldi
-      f: Google Chrome
-    111-2222: # pro
+  profiles:
+    yumaAir:
+      f: Vivaldi
+    kwPro:
       f: Google Chrome
 maps:
   # {modifier}-{code_key} or {code_key}
