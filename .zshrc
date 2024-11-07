@@ -58,6 +58,19 @@ zstyle ':prompt:pure:path' color '#9C9C9C'
 zstyle ':prompt:pure:git:*' color '#8C8C8D'
 zstyle ':prompt:pure:prompt:success' color blue
 
+# bindkey
+bindkey "^A" beginning-of-line
+bindkey "^E" end-of-line
+bindkey "^U" backward-kill-line
+bindkey "^K" backward-kill-line
+bindkey "^H" backward-word
+bindkey '\e[3~' delete-char
+bindkey "^O" dm
+bindkey "^D" do_nothing
+bindkey "^k" cd_target
+bindkey "^h" cd_parent
+bindkey "^k" cd_back
+
 # rbenv
 eval "$(rbenv init -)"
 

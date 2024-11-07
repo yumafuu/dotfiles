@@ -37,13 +37,3 @@ setopt hist_ignore_dups
 setopt EXTENDED_HISTORY
 setopt IGNORE_EOF
 setopt auto_cd
-
-# bindkey
-bindkey "^A" beginning-of-line
-bindkey "^E" end-of-line
-bindkey "^U" backward-kill-line
-bindkey "^K" backward-kill-line
-bindkey "^H" backward-word
-bindkey '\e[3~' delete-char
-bindkey "^O" dm
-bindkey "^D" do_nothing
