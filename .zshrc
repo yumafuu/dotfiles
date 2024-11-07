@@ -3,17 +3,6 @@ export DOTFILES_REPO_PATH="${HOME}/dotfiles"
 alias vim=nvim
 export EDITOR=nvim
 
-alias q=exit
-alias vz='vim ~/.zshrc'
-alias v='vim .'
-alias ez='exec zsh'
-alias vv='vim ~/.config/nvim/init.lua'
-alias ls='exa -a'
-alias tree='exa --tree'
-alias ql='qlmanage -p "$@" >& /dev/null'
-alias imgcat='img2sixel'
-alias x='bun x'
-
 # cargo
 if [ -f "$HOME/.cargo.env" ]; then
   . "$HOME/.cargo.env"
@@ -35,7 +24,6 @@ export AQUA_GLOBAL_CONFIG=$HOME/dotfiles/aqua/aqua.yaml
 export NPM_CONFIG_PREFIX="${XDG_DATA_HOME:-$HOME/.local/share}/npm-global"
 export PATH=$NPM_CONFIG_PREFIX/bin:$PATH
 export PATH="$(aqua root-dir)/bin:$PATH"
-export WORDCHARS='*?_.[]~-=&;!#$%^(){}<>'
 
 # fzf
 source <(fzf --zsh)
@@ -53,19 +41,7 @@ PATH="$PATH:/$HOME/go/bin"
 PATH="$PATH:/Users/yuma/.cargo/bin"
 PATH="/Users/yuma/.deno/bin:$PATH"
 export PATH
-
-alias vz="nvim ~/.zshrc"
-alias vv="nvim ~/.config/nvim/"
-alias ..="cd .."
-alias ...="cd ../../.."
-alias ....="cd ../../../.."
-alias .....="cd ../../../../.."
-alias diff="colordiff -u"
-alias spotify="spt"
 export LESS='-R'
-
-
-alias pswd='ruby -rsecurerandom -e "puts SecureRandom.alphanumeric"|xargs echo -n|pbcopy'
 
 # zsh
 autoload -U compinit
@@ -74,6 +50,7 @@ stty erase '^?'
 export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
+export WORDCHARS='*?_.[]~-=&;!#$%^(){}<>'
 # export LANG=ja_JP.UTF-8
 zstyle ':completion:*' menu select
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
@@ -81,7 +58,6 @@ zstyle ':completion:*' ignore-parents parent pwd ..
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
 stty erase '^?'
-
 setopt share_history
 setopt brace_ccl
 setopt extended_glob
@@ -97,14 +73,13 @@ setopt auto_param_slash
 setopt mark_dirs
 setopt nonomatch
 autoload colors
-
 export HISTFILE=${HOME}/.zsh_history
 export HISTSIZE=100000000
 export SAVEHIST=100000000
 setopt hist_ignore_dups
 setopt EXTENDED_HISTORY
-
 setopt IGNORE_EOF
+setopt auto_cd
 
 bindkey "^A" beginning-of-line
 bindkey "^E" end-of-line
@@ -113,11 +88,21 @@ bindkey "^K" backward-kill-line
 bindkey "^H" backward-word
 bindkey '\e[3~' delete-char
 
-setopt auto_cd
 
 # ==================================
 ## alias
 # ==================================
+alias q=exit
+alias vz='vim ~/.zshrc'
+alias v='vim .'
+alias ez='exec zsh'
+alias vv='vim ~/.config/nvim/init.lua'
+alias ls='exa -a'
+alias tree='exa --tree'
+alias ql='qlmanage -p "$@" >& /dev/null'
+alias imgcat='img2sixel'
+alias x='bun x'
+
 alias so="source"
 alias ...=../..
 alias ....=../../..
@@ -149,22 +134,18 @@ alias master="git checkout master"
 alias main="git checkout main"
 alias whcih="which"
 
-alias gush='
-  git push origin \
-  $(
-    git branch | \
-      grep "*" | \
-      sed -e "s/^\*\s*//g" \
-    ) \
-  '
-alias gul='
-  git pull --rebase origin \
-  $(
-    git branch | \
-      grep "*" | \
-      sed -e "s/^\*\s*//g" \
-    ) \
-  '
+alias gush='git push origin $( git branch | grep "*" | sed -e "s/^\*\s*//g" ) '
+alias gul='git pull --rebase origin  \
+  $( git branch | grep "*" | sed -e "s/^\*\s*//g" )  '
+alias vz="nvim ~/.zshrc"
+alias vv="nvim ~/.config/nvim/"
+alias ..="cd .."
+alias ...="cd ../../.."
+alias ....="cd ../../../.."
+alias .....="cd ../../../../.."
+alias diff="colordiff -u"
+alias spotify="spt"
+alias pswd='ruby -rsecurerandom -e "puts SecureRandom.alphanumeric"|xargs echo -n|pbcopy'
 
 function g-branch(){
   git branch -a |
@@ -211,9 +192,10 @@ zstyle ':prompt:pure:prompt:success' color blue
 # rbenv
 eval "$(rbenv init -)"
 
-
 # sheldon
-eval "$(sheldon source)"
+# eval "$(sheldon source)"
+source <(sheldon source)
+
 
 # tmux
 export TMUX_PLUGIN_MANAGER_PATH="~/.tmux/plugins"

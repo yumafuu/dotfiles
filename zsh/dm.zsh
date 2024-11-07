@@ -29,4 +29,4 @@ function dm(){
   echo
 }
 zle -N dm
-bindkey "^o" dm
+bindkey -M vicmd "^O" dm
