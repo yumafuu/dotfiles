@@ -6,6 +6,7 @@
   "tmux/.tmux.conf": "~/.tmux.conf",
   "lemonade.toml": "~/.config/lemonade.toml",
   "git/": "~/.config/git/",
+  ".glzr/": "~/.glzr/",
   "karabiner/": "~/.config/karabiner/",
   "sheldon/": "~/.config/sheldon/",
   "gh/config.yml": "~/.config/gh/config.yml"
