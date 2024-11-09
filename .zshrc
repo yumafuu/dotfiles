@@ -4,16 +4,20 @@ export EDITOR=nvim
 # vim
 alias vim=nvim
 
-# aqua
+# homebrew
+export PATH="/opt/homebrew/bin:$PATH"
+export PATH="/opt/homebrew/opt/sqlite/bin:$PATH"
+
+# asdf
+asdf_sh=/opt/homebrew/opt/asdf/libexec/asdf.sh
+[ -s $asdf_sh ] && source $asdf_sh
+
+# aqua (make sure load after asdf)
 alias a="aqua"
 export AQUA_GLOBAL_CONFIG=$HOME/dotfiles/aqua/aqua.yaml
 export NPM_CONFIG_PREFIX="${XDG_DATA_HOME:-$HOME/.local/share}/npm-global"
 export PATH=$NPM_CONFIG_PREFIX/bin:$PATH
 export PATH="$(aqua root-dir)/bin:$PATH"
-
-# homebrew
-export PATH="/opt/homebrew/bin:$PATH"
-export PATH="/opt/homebrew/opt/sqlite/bin:$PATH"
 
 # sheldon
 eval "$(sheldon source)"
@@ -24,10 +28,6 @@ export PATH=$HOME/.cargo/bin:$PATH
 
 # rye
 [ -s "$HOME/.rye/env" ] && source "$HOME/.rye/env"
-
-# asdf
-asdf_sh=/opt/homebrew/opt/asdf/asdf.sh
-[ -s $asdf_sh ] && source $asdf_sh
 
 # deno
 export PATH="/Users/yuma/.deno/bin:$PATH"
@@ -52,7 +52,6 @@ export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
 # pure
-autoload -U promptinit; promptinit
 export PURE_CMD_MAX_EXEC_TIME=1
 zstyle ':prompt:pure:path' color '#9C9C9C'
 zstyle ':prompt:pure:git:*' color '#8C8C8D'

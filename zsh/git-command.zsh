@@ -1,4 +1,4 @@
-function g-branch(){
+function g-branch() {
   git branch -a |
     sed -e "s/[ ,\*]//g" |
     sed -e "s/remotes\/origin\///g" |
