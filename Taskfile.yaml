@@ -9,10 +9,6 @@ tasks:
   shellcheck:
     desc: Lint shell scripts
     cmds:
-      - shellcheck -f diff zsh/*.zsh zshrc
-    silent: true
-  shfmt:
-    desc: Format shell scripts
-    cmds:
-      - shfmt -w -i 2 .zshrc zsh/*.zsh
+      - shellcheck -f diff zsh/*.zsh zshrc > /tmp/shellcheck.diff
+      - patch -p1 < /tmp/shellcheck.diff
     silent: true
