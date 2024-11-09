@@ -8,7 +8,7 @@ return {
   integrated_title_button_style = "Gnome",
   font_size = 18.0,
   font = wezterm.font_with_fallback({
-    { family="Comic Code Ligatures", weight="Regular" },
+    { family = "Comic Code Ligatures", weight = "Regular" },
     -- "MesloLGS NF",
   }),
   window_padding = {

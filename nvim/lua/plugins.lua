@@ -22,6 +22,7 @@ return {
   "nvim-lua/popup.nvim",
   "MunifTanjim/nui.nvim",
   "RRethy/vim-illuminate",
+  "norcalli/nvim-colorizer.lua",
   { "akinsho/git-conflict.nvim", version = "*", config = true },
   {
     "luckasRanarison/tailwind-tools.nvim",
@@ -223,7 +224,7 @@ return {
     end,
   },
   {
-    'shaunsingh/nord.nvim',
+    "shaunsingh/nord.nvim",
     config = function()
       vim.cmd("colorscheme nord")
     end,

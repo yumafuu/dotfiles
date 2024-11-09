@@ -38,4 +38,5 @@ alias tf='terraform'
 alias ql='qlmanage -p "$@" >& /dev/null'
 
 alias agi="aqua g -i"
+alias ai="aqua i -l"
 alias aia="aqua i -a -l"

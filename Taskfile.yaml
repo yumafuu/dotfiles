@@ -6,3 +6,13 @@ tasks:
     cmds:
       - stylua -g '*.lua' -- .
     silent: true
+  shellcheck:
+    desc: Lint shell scripts
+    cmds:
+      - shellcheck -f diff zsh/*.zsh zshrc
+    silent: true
+  shfmt:
+    desc: Format shell scripts
+    cmds:
+      - shfmt -w -i 2 .zshrc zsh/*.zsh
+    silent: true

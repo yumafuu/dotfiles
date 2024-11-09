@@ -1,4 +1,4 @@
-fancy-ctrl-z () {
+fancy-ctrl-z() {
   if [[ $#BUFFER -eq 0 ]]; then
     BUFFER="fg"
     zle accept-line -w
