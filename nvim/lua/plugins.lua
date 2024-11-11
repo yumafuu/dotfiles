@@ -25,6 +25,10 @@ return {
   "norcalli/nvim-colorizer.lua",
   { "akinsho/git-conflict.nvim", version = "*", config = true },
   {
+    "kjuq/sixelview.nvim",
+    opts = {},
+  },
+  {
     "luckasRanarison/tailwind-tools.nvim",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     opts = {}, -- your configuration

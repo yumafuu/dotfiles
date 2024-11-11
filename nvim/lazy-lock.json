@@ -51,6 +51,7 @@
   "rainbow-delimiters.nvim": { "branch": "master", "commit": "d227e6c9879bb50af35cd733461198666981d482" },
   "rayso.nvim": { "branch": "main", "commit": "4a94c6fa2410e3800cf47a03b8f5e5315595ba99" },
   "s3edit.nvim": { "branch": "main", "commit": "89d602431b750ab800b5aa2c7b46b948d7a539a1" },
+  "sixelview.nvim": { "branch": "master", "commit": "ebfdcb42adbe69ae08dde4d25b56651103e065ab" },
   "tabby.nvim": { "branch": "main", "commit": "c58d9803f9526b0c8c8b7bfd43822764e33b30ba" },
   "tailwind-tools.nvim": { "branch": "master", "commit": "89e560705ecd49607c63c277935c5264bb770d57" },
   "telescope.nvim": { "branch": "master", "commit": "df534c3042572fb958586facd02841e10186707c" },
