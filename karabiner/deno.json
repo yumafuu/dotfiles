@@ -5,7 +5,7 @@
   },
   "tasks": {
     "fmt": "deno fmt",
-    "build": "deno run -A src/karabiner.ts",
-    "watch": "deno run -A --watch src/karabiner.ts"
+    "build": "deno run -A generate.ts",
+    "watch": "deno run -A --watch generate.ts"
   }
 }

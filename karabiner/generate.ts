@@ -24,7 +24,7 @@ import type { LayerKeyParam } from "karabiner.ts";
 const left_option: LayerKeyParam = "left_option";
 const right_option: LayerKeyParam = "right_option";
 
-import { ObjectToHint, ReadYaml, toRaycast } from "./utils.ts";
+import { ObjectToHint, ReadYaml, toRaycast } from "./src/utils.ts";
 
 import {
   Chrome,
@@ -34,9 +34,9 @@ import {
   Spark,
   Vivaldi,
   Wezterm,
-} from "./app.ts";
+} from "./src/app.ts";
 
-import type { Setting, SettingKV } from "./types.ts";
+import type { Setting, SettingKV } from "./src/types.ts";
 
 const __dirname = new URL(".", import.meta.url).pathname;
 
@@ -46,7 +46,7 @@ const {
   links,
   snippets,
   raycasts,
-} = ReadYaml(`${__dirname}/../setting.yaml`) as Setting;
+} = ReadYaml(`${__dirname}/setting.yaml`) as Setting;
 
 //  '⌘': 'command'
 //  '⌥': 'option'
@@ -174,6 +174,8 @@ const shared = [
       map("k", ["left_command", "left_control"]).toMouseKey({
         vertical_wheel: -40,
       }),
+      map("l", ["left_command"]).toMouseKey({ x: 10000 }),
+      map("h", ["left_command"]).toMouseKey({ x: -10000 }),
       map("k", "left_control").to("↑"),
       map("j", "left_control").to("↓"),
       map("h", "left_control").to("←"),
