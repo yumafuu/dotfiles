@@ -134,7 +134,7 @@ const shared = [
   rule("[Vivaldi][Chrome][Slack][Reflect] `left_control` + `j,k`で上下入力")
     .manipulators([
       withCondition(
-        ifApp(`^${Slack}|${Chrome}|${ReflectApp}|${Vivaldi}|${Spark}$`),
+        ifApp(`^${Chrome}|${ReflectApp}|${Vivaldi}|${Spark}$`),
       )([
         map("k", "left_control").to("↑"),
         map("j", "left_control").to("↓"),
@@ -161,24 +161,31 @@ const shared = [
 
   rule("[Slack] 爆速既読セット").manipulators([
     withCondition(ifApp(Slack))([
-      map("h", ["left_option", "left_shift"]).to("open_bracket", [
+      map("h", ["left_command", "left_control"]).to("open_bracket", [
         "left_command",
       ]),
-      map("l", ["left_option", "left_shift"]).to("up_arrow", [
+      map("l", ["left_command", "left_control"]).to("up_arrow", [
         "left_option",
         "left_shift",
       ]),
-      map("j", ["left_option", "left_shift"]).toMouseKey({
+      map("j", ["left_command", "left_control"]).toMouseKey({
         vertical_wheel: 40,
       }),
-      map("k", ["left_option", "left_shift"]).toMouseKey({
+      map("k", ["left_command", "left_control"]).toMouseKey({
         vertical_wheel: -40,
       }),
+      map("k", "left_control").to("↑"),
+      map("j", "left_control").to("↓"),
+      map("h", "left_control").to("←"),
+      map("l", "left_control").to("→"),
     ]),
   ]),
 
-  rule("[Slack] left_option + left_shift + open_bracket -> ecs").manipulators([
-    map("open_bracket", ["left_option", "left_shift"]).to("escape"),
+  rule("[Slack] ecs").manipulators([
+    withCondition(ifApp(Slack))([
+      map("open_bracket", ["left_option", "left_shift"]).to("escape"),
+      map("open_bracket", "left_option").to("escape"),
+    ]),
   ]),
 ];
 
