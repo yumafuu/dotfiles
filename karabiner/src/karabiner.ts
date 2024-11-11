@@ -8,7 +8,6 @@ import {
   mapSimultaneous,
   // layer,
   // simlayer,
-  mouseMotionToScroll,
   rule,
   // to$,
   // toApp,
@@ -49,13 +48,11 @@ const {
   raycasts,
 } = ReadYaml(`${__dirname}/../setting.yaml`) as Setting;
 
-// {
-//   '⌘': 'command',
-//   '⌥': 'option',
-//   '⌃': 'control',
-//   '⇧': 'shift',
-//   '⇪': 'caps_lock',
-// }
+//  '⌘': 'command'
+//  '⌥': 'option'
+//  '⌃': 'control',
+//  '⇧': 'shift',
+//  '⇪': 'caps_lock',
 
 const shared = [
   rule("Open App - shared").manipulators([
@@ -164,12 +161,24 @@ const shared = [
 
   rule("[Slack] 爆速既読セット").manipulators([
     withCondition(ifApp(Slack))([
-      map("h", ["left_option", "left_shift"]).to("open_bracket", [ "left_command" ]),
-      map("l", ["left_option", "left_shift"]).to("up_arrow", [ "left_option", "left_shift", ]),
-      map("j", ["left_option", "left_shift"]).toMouseKey({ vertical_wheel: 40, }),
-      map("k", ["left_option", "left_shift"]).toMouseKey({ vertical_wheel: -40, }),
-      map("open_bracket", ["left_option", "left_shift"]).to("escape"),
+      map("h", ["left_option", "left_shift"]).to("open_bracket", [
+        "left_command",
+      ]),
+      map("l", ["left_option", "left_shift"]).to("up_arrow", [
+        "left_option",
+        "left_shift",
+      ]),
+      map("j", ["left_option", "left_shift"]).toMouseKey({
+        vertical_wheel: 40,
+      }),
+      map("k", ["left_option", "left_shift"]).toMouseKey({
+        vertical_wheel: -40,
+      }),
     ]),
+  ]),
+
+  rule("[Slack] left_option + left_shift + open_bracket -> ecs").manipulators([
+    map("open_bracket", ["left_option", "left_shift"]).to("escape"),
   ]),
 ];
 
