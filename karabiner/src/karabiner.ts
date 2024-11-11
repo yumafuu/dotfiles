@@ -187,6 +187,12 @@ const shared = [
       map("open_bracket", "left_option").to("escape"),
     ]),
   ]),
+
+  rule("[Slack] 検索remap").manipulators([
+    withCondition(ifApp(Slack))([
+      map("k", "left_command").to("g", ["left_command"]),
+    ]),
+  ]),
 ];
 
 const yumaAir = [
