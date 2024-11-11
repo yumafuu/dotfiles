@@ -21,9 +21,6 @@ import {
 
 import type { LayerKeyParam } from "karabiner.ts";
 
-const left_option: LayerKeyParam = "left_option";
-const right_option: LayerKeyParam = "right_option";
-
 import { ObjectToHint, ReadYaml, toRaycast } from "./src/utils.ts";
 
 import {
@@ -82,13 +79,13 @@ const shared = [
     }),
   ),
 
-  duoLayer(left_option, "l")
+  duoLayer("left_option", "l")
     .description("Open Link")
     .leaderMode()
     .notification(ObjectToHint(links))
     .manipulators(withMapper(links)((k, v) => map(k).to$(`open ${v}`))),
 
-  duoLayer(right_option, "r")
+  duoLayer("right_option", "r")
     .description("Raycast Command")
     .leaderMode()
     .notification(ObjectToHint(raycasts))
@@ -164,7 +161,7 @@ const shared = [
       map("h", ["left_command", "left_control"]).to("open_bracket", [
         "left_command",
       ]),
-      map("l", ["left_command", "left_control"]).to("up_arrow", [
+      map("l", ["left_command", "left_control"]).to("down_arrow", [
         "left_option",
         "left_shift",
       ]),
