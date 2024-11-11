@@ -1042,7 +1042,7 @@
                   {
                     "type": "frontmost_application_if",
                     "bundle_identifiers": [
-                      "^com.tinyspeck.slackmacgap|com.google.Chrome|app.reflect.ReflectDesktop|com.vivaldi.Vivaldi|com.readdle.SparkDesktop$"
+                      "^com.google.Chrome|app.reflect.ReflectDesktop|com.vivaldi.Vivaldi|com.readdle.SparkDesktop$"
                     ]
                   }
                 ]
@@ -1066,7 +1066,7 @@
                   {
                     "type": "frontmost_application_if",
                     "bundle_identifiers": [
-                      "^com.tinyspeck.slackmacgap|com.google.Chrome|app.reflect.ReflectDesktop|com.vivaldi.Vivaldi|com.readdle.SparkDesktop$"
+                      "^com.google.Chrome|app.reflect.ReflectDesktop|com.vivaldi.Vivaldi|com.readdle.SparkDesktop$"
                     ]
                   }
                 ]
@@ -1090,7 +1090,7 @@
                   {
                     "type": "frontmost_application_if",
                     "bundle_identifiers": [
-                      "^com.tinyspeck.slackmacgap|com.google.Chrome|app.reflect.ReflectDesktop|com.vivaldi.Vivaldi|com.readdle.SparkDesktop$"
+                      "^com.google.Chrome|app.reflect.ReflectDesktop|com.vivaldi.Vivaldi|com.readdle.SparkDesktop$"
                     ]
                   }
                 ]
@@ -1114,7 +1114,7 @@
                   {
                     "type": "frontmost_application_if",
                     "bundle_identifiers": [
-                      "^com.tinyspeck.slackmacgap|com.google.Chrome|app.reflect.ReflectDesktop|com.vivaldi.Vivaldi|com.readdle.SparkDesktop$"
+                      "^com.google.Chrome|app.reflect.ReflectDesktop|com.vivaldi.Vivaldi|com.readdle.SparkDesktop$"
                     ]
                   }
                 ]
@@ -1241,8 +1241,8 @@
                   "key_code": "h",
                   "modifiers": {
                     "mandatory": [
-                      "left_option",
-                      "left_shift"
+                      "left_command",
+                      "left_control"
                     ]
                   }
                 },
@@ -1269,8 +1269,8 @@
                   "key_code": "l",
                   "modifiers": {
                     "mandatory": [
-                      "left_option",
-                      "left_shift"
+                      "left_command",
+                      "left_control"
                     ]
                   }
                 },
@@ -1298,8 +1298,8 @@
                   "key_code": "j",
                   "modifiers": {
                     "mandatory": [
-                      "left_option",
-                      "left_shift"
+                      "left_command",
+                      "left_control"
                     ]
                   }
                 },
@@ -1325,8 +1325,8 @@
                   "key_code": "k",
                   "modifiers": {
                     "mandatory": [
-                      "left_option",
-                      "left_shift"
+                      "left_command",
+                      "left_control"
                     ]
                   }
                 },
@@ -1349,11 +1349,136 @@
               {
                 "type": "basic",
                 "from": {
+                  "key_code": "k",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_control"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "up_arrow"
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "frontmost_application_if",
+                    "bundle_identifiers": [
+                      "com.tinyspeck.slackmacgap"
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "j",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_control"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "down_arrow"
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "frontmost_application_if",
+                    "bundle_identifiers": [
+                      "com.tinyspeck.slackmacgap"
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "h",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_control"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "left_arrow"
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "frontmost_application_if",
+                    "bundle_identifiers": [
+                      "com.tinyspeck.slackmacgap"
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "l",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_control"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "right_arrow"
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "frontmost_application_if",
+                    "bundle_identifiers": [
+                      "com.tinyspeck.slackmacgap"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "description": "[Slack] ecs",
+            "manipulators": [
+              {
+                "type": "basic",
+                "from": {
                   "key_code": "open_bracket",
                   "modifiers": {
                     "mandatory": [
                       "left_option",
                       "left_shift"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "escape"
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "frontmost_application_if",
+                    "bundle_identifiers": [
+                      "com.tinyspeck.slackmacgap"
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "open_bracket",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_option"
                     ]
                   }
                 },
@@ -2475,7 +2600,7 @@
                   {
                     "type": "frontmost_application_if",
                     "bundle_identifiers": [
-                      "^com.tinyspeck.slackmacgap|com.google.Chrome|app.reflect.ReflectDesktop|com.vivaldi.Vivaldi|com.readdle.SparkDesktop$"
+                      "^com.google.Chrome|app.reflect.ReflectDesktop|com.vivaldi.Vivaldi|com.readdle.SparkDesktop$"
                     ]
                   }
                 ]
@@ -2499,7 +2624,7 @@
                   {
                     "type": "frontmost_application_if",
                     "bundle_identifiers": [
-                      "^com.tinyspeck.slackmacgap|com.google.Chrome|app.reflect.ReflectDesktop|com.vivaldi.Vivaldi|com.readdle.SparkDesktop$"
+                      "^com.google.Chrome|app.reflect.ReflectDesktop|com.vivaldi.Vivaldi|com.readdle.SparkDesktop$"
                     ]
                   }
                 ]
@@ -2523,7 +2648,7 @@
                   {
                     "type": "frontmost_application_if",
                     "bundle_identifiers": [
-                      "^com.tinyspeck.slackmacgap|com.google.Chrome|app.reflect.ReflectDesktop|com.vivaldi.Vivaldi|com.readdle.SparkDesktop$"
+                      "^com.google.Chrome|app.reflect.ReflectDesktop|com.vivaldi.Vivaldi|com.readdle.SparkDesktop$"
                     ]
                   }
                 ]
@@ -2547,7 +2672,7 @@
                   {
                     "type": "frontmost_application_if",
                     "bundle_identifiers": [
-                      "^com.tinyspeck.slackmacgap|com.google.Chrome|app.reflect.ReflectDesktop|com.vivaldi.Vivaldi|com.readdle.SparkDesktop$"
+                      "^com.google.Chrome|app.reflect.ReflectDesktop|com.vivaldi.Vivaldi|com.readdle.SparkDesktop$"
                     ]
                   }
                 ]
@@ -2674,8 +2799,8 @@
                   "key_code": "h",
                   "modifiers": {
                     "mandatory": [
-                      "left_option",
-                      "left_shift"
+                      "left_command",
+                      "left_control"
                     ]
                   }
                 },
@@ -2702,8 +2827,8 @@
                   "key_code": "l",
                   "modifiers": {
                     "mandatory": [
-                      "left_option",
-                      "left_shift"
+                      "left_command",
+                      "left_control"
                     ]
                   }
                 },
@@ -2731,8 +2856,8 @@
                   "key_code": "j",
                   "modifiers": {
                     "mandatory": [
-                      "left_option",
-                      "left_shift"
+                      "left_command",
+                      "left_control"
                     ]
                   }
                 },
@@ -2758,8 +2883,8 @@
                   "key_code": "k",
                   "modifiers": {
                     "mandatory": [
-                      "left_option",
-                      "left_shift"
+                      "left_command",
+                      "left_control"
                     ]
                   }
                 },
@@ -2782,11 +2907,136 @@
               {
                 "type": "basic",
                 "from": {
+                  "key_code": "k",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_control"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "up_arrow"
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "frontmost_application_if",
+                    "bundle_identifiers": [
+                      "com.tinyspeck.slackmacgap"
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "j",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_control"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "down_arrow"
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "frontmost_application_if",
+                    "bundle_identifiers": [
+                      "com.tinyspeck.slackmacgap"
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "h",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_control"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "left_arrow"
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "frontmost_application_if",
+                    "bundle_identifiers": [
+                      "com.tinyspeck.slackmacgap"
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "l",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_control"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "right_arrow"
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "frontmost_application_if",
+                    "bundle_identifiers": [
+                      "com.tinyspeck.slackmacgap"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "description": "[Slack] ecs",
+            "manipulators": [
+              {
+                "type": "basic",
+                "from": {
                   "key_code": "open_bracket",
                   "modifiers": {
                     "mandatory": [
                       "left_option",
                       "left_shift"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "escape"
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "frontmost_application_if",
+                    "bundle_identifiers": [
+                      "com.tinyspeck.slackmacgap"
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "open_bracket",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_option"
                     ]
                   }
                 },
