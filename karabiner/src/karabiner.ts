@@ -8,6 +8,7 @@ import {
   mapSimultaneous,
   // layer,
   // simlayer,
+  mouseMotionToScroll,
   rule,
   // to$,
   // toApp,
@@ -21,8 +22,8 @@ import {
 
 import type { LayerKeyParam } from "karabiner.ts";
 
-const left_option: LayerKeyParam = "left_option"
-const right_option: LayerKeyParam = "right_option"
+const left_option: LayerKeyParam = "left_option";
+const right_option: LayerKeyParam = "right_option";
 
 import { ObjectToHint, ReadYaml, toRaycast } from "./utils.ts";
 
@@ -47,7 +48,6 @@ const {
   snippets,
   raycasts,
 } = ReadYaml(`${__dirname}/../setting.yaml`) as Setting;
-
 
 // {
 //   '⌘': 'command',
@@ -145,7 +145,6 @@ const shared = [
         map("l", "left_control").to("→"),
       ]),
     ]),
-
   rule("[Discord] Shift+Enterで送信").manipulators([
     withCondition(ifApp(`^${Discord}$`))([
       map("return_or_enter").to("return_or_enter", "left_shift"),
@@ -162,17 +161,31 @@ const shared = [
       map("close_bracket", "left_control").to("tab", ["left_control"]),
     ]),
   ]),
+
+  rule("[Slack] 爆速既読セット").manipulators([
+    withCondition(ifApp(Slack))([
+      map("h", ["left_option", "left_shift"]).to("open_bracket", [ "left_command" ]),
+      map("l", ["left_option", "left_shift"]).to("up_arrow", [ "left_option", "left_shift", ]),
+      map("j", ["left_option", "left_shift"]).toMouseKey({ vertical_wheel: 40, }),
+      map("k", ["left_option", "left_shift"]).toMouseKey({ vertical_wheel: -40, }),
+      map("open_bracket", ["left_option", "left_shift"]).to("escape"),
+    ]),
+  ]),
 ];
 
 const yumaAir = [
   rule("Open App - yumaAir").manipulators([
-    withModifier("⌃⇧")(withMapper(apps.profiles.yumaAir)((k, v) => map(k).toApp(v))),
+    withModifier("⌃⇧")(
+      withMapper(apps.profiles.yumaAir)((k, v) => map(k).toApp(v)),
+    ),
   ]),
 ];
 
 const kwPro = [
   rule("Open App - kwPro").manipulators([
-    withModifier("⌃⇧")(withMapper(apps.profiles.kwPro)((k, v) => map(k).toApp(v))),
+    withModifier("⌃⇧")(
+      withMapper(apps.profiles.kwPro)((k, v) => map(k).toApp(v)),
+    ),
   ]),
 ];
 
