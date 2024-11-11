@@ -178,6 +178,7 @@ const shared = [
       map("j", "left_control").to("↓"),
       map("h", "left_control").to("←"),
       map("l", "left_control").to("→"),
+      map("spacebar", "left_control").to("1", "left_control"),
     ]),
   ]),
 
