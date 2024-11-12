@@ -163,6 +163,10 @@ const shared = [
         "left_option",
         "left_shift",
       ]),
+      map("i", ["left_command", "left_control"]).to("t", [
+        "left_command",
+        "left_shift",
+      ]),
       map("j", ["left_command", "left_control"]).toMouseKey({
         vertical_wheel: 40,
       }),

@@ -7,6 +7,8 @@ alias vim=nvim
 # homebrew
 export PATH="/opt/homebrew/bin:$PATH"
 export PATH="/opt/homebrew/opt/sqlite/bin:$PATH"
+export LIBRARY_PATH="/opt/homebrew/lib:$LD_LIBRARY_PATH"
+export LD_LIBRARY_PATH="/opt/homebrew/lib:$LD_LIBRARY_PATH"
 
 # asdf
 asdf_sh=/opt/homebrew/opt/asdf/libexec/asdf.sh
