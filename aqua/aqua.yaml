@@ -27,3 +27,4 @@ packages:
   - name: joshmedeski/sesh@v2.6.0
   - name: charmbracelet/gum@v0.14.5
   - name: x-motemen/ghq@v1.6.3
+  - name: svenstaro/genact@v1.4.2

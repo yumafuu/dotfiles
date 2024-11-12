@@ -23,6 +23,10 @@ return {
   "MunifTanjim/nui.nvim",
   "RRethy/vim-illuminate",
   "norcalli/nvim-colorizer.lua",
+  {
+    "shortcuts/no-neck-pain.nvim",
+    version = "*",
+  },
   { "akinsho/git-conflict.nvim", version = "*", config = true },
   {
     "kjuq/sixelview.nvim",

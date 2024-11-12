@@ -19,8 +19,6 @@ import {
   writeToProfile,
 } from "karabiner.ts";
 
-import type { LayerKeyParam } from "karabiner.ts";
-
 import { ObjectToHint, ReadYaml, toRaycast } from "./src/utils.ts";
 
 import {
