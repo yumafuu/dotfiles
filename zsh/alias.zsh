@@ -25,6 +25,7 @@ alias vv="nvim ~/.config/nvim/"
 alias ..="cd .."
 alias ...="cd ../../.."
 
+alias spt="spotify_player"
 alias spotify="spt"
 
 alias b='bundle -j4'
@@ -40,3 +41,7 @@ alias ql='qlmanage -p "$@" >& /dev/null'
 alias agi="aqua g -i"
 alias ai="aqua i -l"
 alias aia="aqua i -a -l"
+
+alias gogen="go generate"
+alias gorun="go run"
+alias gotest="go test"

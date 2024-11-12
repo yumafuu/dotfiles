@@ -24,6 +24,18 @@ return {
   "RRethy/vim-illuminate",
   "norcalli/nvim-colorizer.lua",
   {
+    "diegoulloao/nvim-file-location",
+    config = function()
+      require("nvim-file-location").setup({
+        keymap = "<leader>cf",
+        mode = "workdir", -- options: workdir | absolute
+        add_line = false,
+        add_column = false,
+        default_register = "*",
+      })
+     end
+  },
+  {
     "shortcuts/no-neck-pain.nvim",
     version = "*",
   },
@@ -115,7 +127,7 @@ return {
     keys = {
       { "<leader>'", ":FzfLua files<cr>", silent = true },
       { "<leader>a", ":FzfLua live_grep<cr>", silent = true },
-      { "<leader>b", ":FzfLua blines<cr>", silent = true },
+      { "<leader>b", ":FzfLua buffers<cr>", silent = true },
       { "<leader>g", ":FzfLua git_status<cr>", silent = true },
     },
   },
