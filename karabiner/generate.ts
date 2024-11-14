@@ -5,6 +5,7 @@ import {
   // ifDevice,
   // ifDeviceExists,
   map,
+  mapDoubleTap,
   mapSimultaneous,
   // layer,
   // simlayer,
@@ -163,18 +164,16 @@ const shared = [
         "left_option",
         "left_shift",
       ]),
-      map("i", ["left_command", "left_control"]).to("t", [
-        "left_command",
-        "left_shift",
-      ]),
       map("j", ["left_command", "left_control"]).toMouseKey({
         vertical_wheel: 40,
       }),
       map("k", ["left_command", "left_control"]).toMouseKey({
         vertical_wheel: -40,
       }),
-      map("l", ["left_command"]).toMouseKey({ x: 10000 }),
-      map("h", ["left_command"]).toMouseKey({ x: -10000 }),
+      map("i", ["left_command", "left_control"]).to("t", [
+        "left_command",
+        "left_shift",
+      ]),
       map("k", "left_control").to("↑"),
       map("j", "left_control").to("↓"),
       map("h", "left_control").to("←"),
@@ -194,6 +193,10 @@ const shared = [
     withCondition(ifApp(Slack))([
       map("k", "left_command").to("g", ["left_command"]),
     ]),
+  ]),
+
+  rule("[Gyazo] left_option２回押しでスクリーンショット").manipulators([
+    mapDoubleTap("left_option").toApp("Gyazo"),
   ]),
 ];
 
