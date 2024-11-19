@@ -196,7 +196,7 @@ const shared = [
   ]),
 
   rule("[Gyazo] left_option２回押しでスクリーンショット").manipulators([
-    mapDoubleTap("left_option").toApp("Gyazo"),
+    mapDoubleTap("g", "right_option").toApp("Gyazo"),
   ]),
 ];
 

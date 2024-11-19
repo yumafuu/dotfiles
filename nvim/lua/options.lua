@@ -148,10 +148,3 @@ vim.keymap.set("n", "<C-a>", require("dial.map").inc_normal(), { noremap = true 
 vim.keymap.set("n", "<C-x>", require("dial.map").dec_normal(), { noremap = true })
 vim.keymap.set("v", "<C-a>", require("dial.map").inc_visual(), { noremap = true })
 vim.keymap.set("v", "<C-x>", require("dial.map").dec_visual(), { noremap = true })
-
-vim.api.nvim_create_autocmd("QuitPre", {
-  pattern = "*",
-  callback = function()
-    vim.cmd("confirm quit")
-  end,
-})

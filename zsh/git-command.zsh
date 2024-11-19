@@ -10,6 +10,7 @@ function g-branch() {
 alias checkout="g-branch | xargs git checkout"
 alias co=checkout
 alias gush='git push origin $( git branch | grep "*" | sed -e "s/^\*\s*//g" ) '
+alias gushf='gush -f'
 alias gul='git pull --rebase origin  \
   $( git branch | grep "*" | sed -e "s/^\*\s*//g" )  '
 alias gs='git status'
