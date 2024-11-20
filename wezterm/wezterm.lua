@@ -78,13 +78,13 @@ return {
   },
 
   quick_select_patterns = {
-    "[0-9a-zA-Z_-]{3,40}",
+    "[0-9a-zA-Z_-]{3,40}",                        -- Words
     "https?://[\\w.-]+\\.[a-z]{2,}[\\w/?.=&%-]*", -- URLs
-    "/[\\w.-/]+",                                -- File paths
-    "[\\w._%+-]+@[\\w.-]+\\.[a-z]{2,}",          -- Emails
-    "\\b(?:\\d{1,3}\\.){3}\\d{1,3}\\b",          -- IP addresses
-    "\\b0x[0-9a-fA-F]+\\b",                      -- Hex numbers
-    "\\b[0-9a-fA-F]{7,40}\\b",                   -- Git hashes
+    "/[\\w.-/]+",                                 -- File paths
+    "[\\w._%+-]+@[\\w.-]+\\.[a-z]{2,}",           -- Emails
+    "\\b(?:\\d{1,3}\\.){3}\\d{1,3}\\b",           -- IP addresses
+    "\\b0x[0-9a-fA-F]+\\b",                       -- Hex numbers
+    "\\b[0-9a-fA-F]{7,40}\\b",                    -- Git hashes
     "\\b[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\\b" -- UUIDs
   },
 }
