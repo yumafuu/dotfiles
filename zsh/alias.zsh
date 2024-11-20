@@ -24,6 +24,7 @@ alias vz="nvim ~/.zshrc"
 alias vv="nvim ~/.config/nvim/"
 alias ..="cd .."
 alias ...="cd ../../.."
+alias $=""
 
 alias spt="spotify_player"
 alias spotify="spt"
@@ -46,3 +47,5 @@ alias gogen="go generate"
 alias gorun="go run"
 alias gotest="go test"
 alias gotestv="go test -v"
+
+alias ll="ls -la"
