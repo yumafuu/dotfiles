@@ -198,6 +198,20 @@ const shared = [
   rule("[Gyazo] left_option２回押しでスクリーンショット").manipulators([
     mapDoubleTap("g", "right_option").toApp("Gyazo"),
   ]),
+
+  rule("left_option + [uiojklm,.]で[123456789]").manipulators([
+    map("u", ["left_option"]).to("1"),
+    map("i", ["left_option"]).to("2"),
+    map("o", ["left_option"]).to("3"),
+    map("j", ["left_option"]).to("4"),
+    map("k", ["left_option"]).to("5"),
+    map("l", ["left_option"]).to("6"),
+    map("m", ["left_option"]).to("7"),
+    map("comma", ["left_option"]).to("8"),
+    map("period", ["left_option"]).to("9"),
+    map("/", ["left_option"]).to("0"),
+  ]),
+
 ];
 
 const yumaAir = [
