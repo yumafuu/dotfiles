@@ -263,6 +263,7 @@ return {
         keymaps = {
           ["?"] = "actions.show_help",
           ["-"] = "actions.parent",
+          ["_"] = "actions.open_cwd",
           ["<C-l>"] = "actions.refresh",
           ["<CR>"] = "actions.select",
           ["<C-t>"] = "actions.select_tab",

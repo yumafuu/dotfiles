@@ -8,7 +8,7 @@ vim.cmd([[
   endfunction
 
   fun! s:DetectDeno()
-    if getline(1) == '#!/usr/bin/env -S deno run --allow-all'
+    if getline(1) == '#!/usr/bin/env -S deno run -A'
         set ft=javascript
     endif
   endfun

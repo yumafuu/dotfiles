@@ -78,7 +78,7 @@ return {
   },
 
   quick_select_patterns = {
-    "[0-9a-zA-Z_-]{3,40}",                        -- Words
+    "[0-9a-zA-Z_-]{3,90}",                        -- Words
     "https?://[\\w.-]+\\.[a-z]{2,}[\\w/?.=&%-]*", -- URLs
     "/[\\w.-/]+",                                 -- File paths
     "[\\w._%+-]+@[\\w.-]+\\.[a-z]{2,}",           -- Emails
