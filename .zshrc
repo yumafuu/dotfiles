@@ -13,6 +13,7 @@ export LD_LIBRARY_PATH="/opt/homebrew/lib:$LD_LIBRARY_PATH"
 # asdf
 asdf_sh=/opt/homebrew/opt/asdf/libexec/asdf.sh
 [ -s $asdf_sh ] && source $asdf_sh
+export ASDF_GOLANG_MOD_VERSION_ENABLED=true
 
 # aqua (make sure load after asdf)
 alias a="aqua"
@@ -44,7 +45,7 @@ export FZF_DEFAULT_OPTS="--height 50% --border --color=pointer:blue"
 export PATH="$PATH:/$HOME/go/bin"
 
 # bin
-export PATH="/Users/yuma/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 
 # bun
 [ -s "/Users/yuma/.bun/_bun" ] && source "/Users/yuma/.bun/_bun"
@@ -77,3 +78,6 @@ eval "$(rbenv init -)"
 
 # tmux
 export TMUX_PLUGIN_MANAGER_PATH="~/.tmux/plugins"
+
+# psql
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
