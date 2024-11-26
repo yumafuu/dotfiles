@@ -5,7 +5,7 @@
   },
   "tasks": {
     "fmt": "deno fmt",
-    "build": "deno run -A generate.ts",
-    "watch": "deno run -A --watch generate.ts"
+    "build": "deno run -A --env generate.ts",
+    "watch": "deno run -A --watch --env generate.ts"
   }
 }
