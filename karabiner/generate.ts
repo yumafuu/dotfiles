@@ -7,7 +7,7 @@ import {
   map,
   mapDoubleTap,
   mapSimultaneous,
-  // layer,
+  layer,
   // simlayer,
   rule,
   // to$,
@@ -31,6 +31,11 @@ import {
   Vivaldi,
   Wezterm,
 } from "./src/app.ts";
+
+import {
+  TeamID,
+  HelloChannel,
+} from "./src/slack.ts";
 
 import type { Setting, SettingKV } from "./src/types.ts";
 
@@ -165,10 +170,10 @@ const shared = [
         "left_shift",
       ]),
       map("j", ["left_command", "left_control"]).toMouseKey({
-        vertical_wheel: 40,
+        vertical_wheel: 1000,
       }),
       map("k", ["left_command", "left_control"]).toMouseKey({
-        vertical_wheel: -40,
+        vertical_wheel: -1000,
       }),
       map("i", ["left_command", "left_control"]).to("t", [
         "left_command",
@@ -199,19 +204,12 @@ const shared = [
     mapDoubleTap("g", "right_option").toApp("Gyazo"),
   ]),
 
-  rule("left_option + [uiojklm,.]で[123456789]").manipulators([
-    map("u", ["left_option"]).to("1"),
-    map("i", ["left_option"]).to("2"),
-    map("o", ["left_option"]).to("3"),
-    map("j", ["left_option"]).to("4"),
-    map("k", ["left_option"]).to("5"),
-    map("l", ["left_option"]).to("6"),
-    map("m", ["left_option"]).to("7"),
-    map("comma", ["left_option"]).to("8"),
-    map("period", ["left_option"]).to("9"),
-    map("/", ["left_option"]).to("0"),
+  rule("right_option + s + keyでslackのチャンネルを開く").manipulators([
+    withCondition(ifApp(Slack))([
+      mapDoubleTap("h", "left_shift").to$(`open "slack://channel?team=T0115RHBKBN&id=C0119U6TYHW"`),
+      mapDoubleTap("y", "left_shift").to$(`open "slack://channel?team=T0115RHBKBN&id=C07SDSKJY73"`),
+    ]),
   ]),
-
 ];
 
 const yumaAir = [

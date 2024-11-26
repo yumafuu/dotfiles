@@ -14,6 +14,7 @@ export LD_LIBRARY_PATH="/opt/homebrew/lib:$LD_LIBRARY_PATH"
 asdf_sh=/opt/homebrew/opt/asdf/libexec/asdf.sh
 [ -s $asdf_sh ] && source $asdf_sh
 export ASDF_GOLANG_MOD_VERSION_ENABLED=true
+export PATH="$(go env GOPATH)/bin:$PATH"
 
 # aqua (make sure load after asdf)
 alias a="aqua"
@@ -42,7 +43,7 @@ export FZF_CTRL_T_OPTS='--preview "bat  --color=always --style=header,grid --lin
 export FZF_DEFAULT_OPTS="--height 50% --border --color=pointer:blue"
 
 # go
-export PATH="$PATH:/$HOME/go/bin"
+export PATH="$PATH:$HOME/go/bin"
 
 # bin
 export PATH="$HOME/.local/bin:$PATH"
