@@ -189,9 +189,9 @@ vim.cmd([[
   xnoremap <silent><C-j> :move'>+1<CR>gv=gv
 
   " Dup line
-  nnoremap g<C-k> <Cmd>copy.<CR>
-  nnoremap g<C-j> <Cmd>copy-1<CR>
-  xnoremap g<C-k> :copy'<-1<CR>gv
-  xnoremap g<C-j> :copy'>+0<CR>gv
+  nnoremap <space>k <Cmd>copy-1<CR>
+  nnoremap <space>j <Cmd>copy.<CR>
+  xnoremap <space>k :copy'<-1<CR>gv
+  xnoremap <space>j :copy'>+0<CR>gv
 ]])
 
