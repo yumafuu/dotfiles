@@ -371,7 +371,7 @@ return {
           nvim_lsp[server_name].setup(opts)
         end,
       })
-      vim.keymap.set("n", "MM", "<cmd>lua vim.lsp.buf.format()<CR>")
+      vim.keymap.set("n", "gf", "<cmd>lua vim.lsp.buf.format()<CR>")
       vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>")
       vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>")
       vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>")

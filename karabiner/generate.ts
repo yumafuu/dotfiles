@@ -201,8 +201,8 @@ const shared = [
 
   rule("right_option + s + keyでslackのチャンネルを開く").manipulators([
     withCondition(ifApp(Slack))([
-      mapDoubleTap("h", "left_control").to$(`open "slack://channel?team=T0115RHBKBN&id=C0119U6TYHW"`),
-      mapDoubleTap("y", "left_control").to$(`open "slack://channel?team=T0115RHBKBN&id=C07SDSKJY73"`),
+      mapDoubleTap("h", "left_shift").to$(`open "slack://channel?team=T0115RHBKBN&id=C0119U6TYHW"`),
+      mapDoubleTap("y", "left_shift").to$(`open "slack://channel?team=T0115RHBKBN&id=C07SDSKJY73"`),
     ]),
   ]),
 ];
