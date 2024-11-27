@@ -179,6 +179,9 @@ const shared = [
       map("h", "left_control").to("←"),
       map("l", "left_control").to("→"),
       map("spacebar", "left_control").to("1", "left_control"),
+
+      map("o", ["left_command", "left_control"]).to$(`open "slack://channel?team=T0115RHBKBN&id=C0119U6TYHW"`),
+      map("y", ["left_command", "left_control"]).to$(`open "slack://channel?team=T0115RHBKBN&id=C07SDSKJY73"`),
     ]),
   ]),
 
@@ -197,13 +200,6 @@ const shared = [
 
   rule("[Gyazo] left_option２回押しでスクリーンショット").manipulators([
     mapDoubleTap("g", "right_option").toApp("Gyazo"),
-  ]),
-
-  rule("right_option + s + keyでslackのチャンネルを開く").manipulators([
-    withCondition(ifApp(Slack))([
-      mapDoubleTap("h", "left_shift").to$(`open "slack://channel?team=T0115RHBKBN&id=C0119U6TYHW"`),
-      mapDoubleTap("y", "left_shift").to$(`open "slack://channel?team=T0115RHBKBN&id=C07SDSKJY73"`),
-    ]),
   ]),
 ];
 
