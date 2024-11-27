@@ -105,8 +105,8 @@ return {
   {
     "ggandor/leap.nvim",
     config = function()
-      vim.keymap.set("n", "m", "<Plug>(leap)")
-      vim.keymap.set("n", "M", "<Plug>(leap-from-window)")
+      vim.keymap.set("n", "<C-b>", "<Plug>(leap)")
+      vim.keymap.set("n", "<C-S-b>", "<Plug>(leap-from-window)")
     end,
   },
   "lambdalisue/kensaku.vim",
@@ -345,6 +345,11 @@ return {
       })
       lspconfig["ts_ls"].setup({
         root_dir = lspconfig.util.root_pattern("package.json"),
+      })
+      lspconfig.typos_lsp.setup({
+        init_options = {
+          config = '~/dotfiles/typos/typos.toml',
+        }
       })
     end,
   },
