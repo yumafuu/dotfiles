@@ -1,5 +1,19 @@
 return {
   {
+    "kana/vim-submode",
+    config = function()
+      vim.cmd([[
+        function! s:my_x()
+          undojoin
+          normal! "_x
+        endfunction
+        nnoremap <silent> <Plug>(my-x) :<C-u>call <SID>my_x()<CR>
+        call submode#enter_with('my_x', 'n', '', 'x', '"_x')
+        call submode#map('my_x', 'n', 'r', 'x', '<Plug>(my-x)')
+      ]])
+    end
+  },
+  {
     "github/copilot.vim",
     enabled = true,
     config = function()
