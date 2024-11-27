@@ -24,7 +24,7 @@ export PATH=$NPM_CONFIG_PREFIX/bin:$PATH
 export PATH="$(aqua root-dir)/bin:$PATH"
 
 # sheldon
-eval "$(sheldon source)"
+command -v sheldon >/dev/null && eval "$(sheldon source)"
 
 # cargo
 [ -s "/Users/yuma/.cargo.env" ] && source "/Users/yuma/.cargo.env"
@@ -75,7 +75,7 @@ bindkey "^k" cd_back
 bindkey "^o" _fzf_cd_ghq
 
 # rbenv
-eval "$(rbenv init -)"
+command -v rbenv >/dev/null && eval "$(rbenv init -)"
 
 # tmux
 export TMUX_PLUGIN_MANAGER_PATH="~/.tmux/plugins"
