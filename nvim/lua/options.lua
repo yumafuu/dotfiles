@@ -148,3 +148,50 @@ vim.keymap.set("n", "<C-a>", require("dial.map").inc_normal(), { noremap = true 
 vim.keymap.set("n", "<C-x>", require("dial.map").dec_normal(), { noremap = true })
 vim.keymap.set("v", "<C-a>", require("dial.map").inc_visual(), { noremap = true })
 vim.keymap.set("v", "<C-x>", require("dial.map").dec_visual(), { noremap = true })
+
+vim.cmd([[
+  " ref: https://zenn.dev/vim_jp/articles/43d021f461f3a4
+
+  " i<space>でWORD選択
+  onoremap i<space> iW
+  xnoremap i<space> iW
+
+  " カーソル以下を置換
+  nnoremap S :%s/\V\<<C-r><C-w>\>//g<Left><Left>
+  xnoremap S "zy:%s/\V<C-r><C-r>=escape(@z,'/\')<CR>//gce<Left><Left><Left><Left>
+
+  " ペースト時にインデントを保持
+  nnoremap p ]p`]
+  nnoremap P ]P`]
+
+  " f, F で next paragraph
+  nnoremap F<cr> {
+  nnoremap f<cr> }
+
+  " git diff
+  command! GitDiff new
+      \ | setlocal buftype=nofile bufhidden=delete noswapfile
+      \ | setfiletype gitcommit
+      \ | execute 'read !git diff #'
+      \ | setlocal readonly nobuflisted
+      \ | normal! gg
+  nnoremap ds <cmd>GitDiff<cr>
+
+  " Mで括弧ジャンプ
+  packadd! matchit
+  noremap M %
+  map <expr> M expand('<cword>') =~# 'end' ? '%' : 'g%'
+
+  " 行を移動
+  nnoremap <expr> <C-k> $'<Cmd>move-1-{v:count1}<CR>=l'
+  nnoremap <expr> <C-j> $'<Cmd>move+{v:count1}<CR>=l'
+  xnoremap <silent><C-k> :move'<-2<CR>gv=gv
+  xnoremap <silent><C-j> :move'>+1<CR>gv=gv
+
+  " Dup line
+  nnoremap g<C-k> <Cmd>copy.<CR>
+  nnoremap g<C-j> <Cmd>copy-1<CR>
+  xnoremap g<C-k> :copy'<-1<CR>gv
+  xnoremap g<C-j> :copy'>+0<CR>gv
+]])
+
