@@ -92,9 +92,7 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 local map = vim.api.nvim_set_keymap
 maps = {
   n = {
-    -- [';']          = ':',
-    -- ['te']         = ':execute ":e" expand("%:h")<CR>',
-    ["te"] = '<cmd>execute ":tabe" expand("%:h")<CR>',
+    ["te"] = '<cmd>execute ":tabedit" expand("%:h")<CR>',
     ["<C-[><C-[>"] = "<cmd>noh<CR><Esc>",
     ["C-l"] = "<cmd>noh<CR>",
     ["<C-[><C-[>"] = "<cmd>noh<CR>",
