@@ -148,6 +148,11 @@ vim.keymap.set("v", "<C-a>", require("dial.map").inc_visual(), { noremap = true 
 vim.keymap.set("v", "<C-x>", require("dial.map").dec_visual(), { noremap = true })
 
 vim.cmd([[
+  " mark jump
+  nnoremap ] `
+]])
+
+vim.cmd([[
   " ref: https://zenn.dev/vim_jp/articles/43d021f461f3a4
 
   " i<space>でWORD選択
@@ -181,15 +186,15 @@ vim.cmd([[
   map <expr> M expand('<cword>') =~# 'end' ? '%' : 'g%'
 
   " 行を移動
+  xnoremap <silent><C-k> :move'<-2<CR>gv=gv
   nnoremap <expr> <C-k> $'<Cmd>move-1-{v:count1}<CR>=l'
   nnoremap <expr> <C-j> $'<Cmd>move+{v:count1}<CR>=l'
-  xnoremap <silent><C-k> :move'<-2<CR>gv=gv
   xnoremap <silent><C-j> :move'>+1<CR>gv=gv
 
   " Dup line
-  nnoremap <space>k <Cmd>copy-1<CR>
+  " nnoremap <space>k <Cmd>copy-1<CR>
   nnoremap <space>j <Cmd>copy.<CR>
-  xnoremap <space>k :copy'<-1<CR>gv
+  " xnoremap <space>k :copy'<-1<CR>gv
   xnoremap <space>j :copy'>+0<CR>gv
 ]])
 

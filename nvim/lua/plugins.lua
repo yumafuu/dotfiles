@@ -14,6 +14,11 @@ return {
     end
   },
   {
+    "chentoast/marks.nvim",
+    event = "VeryLazy",
+    opts = {},
+  },
+  {
     "github/copilot.vim",
     enabled = true,
     config = function()
@@ -283,7 +288,6 @@ return {
           ["<C-t>"] = "actions.select_tab",
           ["<C-i>"] = "actions.preview",
           ["g."] = "actions.toggle_hidden",
-          ["`"] = "actions.cd",
           ["~"] = "actions.tcd",
         },
         use_default_keymaps = false,
