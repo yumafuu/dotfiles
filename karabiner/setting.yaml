@@ -5,6 +5,7 @@ apps:
       a: Wezterm
       r: Reflect
       p: Spotify
+      n: Notion
     yumaAir:
       d: Discord
       f: Vivaldi
