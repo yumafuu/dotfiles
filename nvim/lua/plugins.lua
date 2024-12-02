@@ -120,7 +120,12 @@ return {
   "dhruvasagar/vim-table-mode",
   "nvim-treesitter/nvim-treesitter",
   "vim-denops/denops.vim",
-  "rhysd/clever-f.vim",
+  {
+    "rhysd/clever-f.vim",
+    config = function()
+      vim.g.clever_f_smart_case = 1
+    end
+  },
   {
     "ggandor/leap.nvim",
     config = function()
