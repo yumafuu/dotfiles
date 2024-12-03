@@ -7,7 +7,7 @@ import {
   map,
   mapDoubleTap,
   mapSimultaneous,
-  layer,
+  // layer,
   // simlayer,
   rule,
   // to$,
@@ -182,6 +182,7 @@ const shared = [
 
       map("o", ["left_command", "left_control"]).to$(`open "slack://channel?team=T0115RHBKBN&id=C0119U6TYHW"`),
       map("y", ["left_command", "left_control"]).to$(`open "slack://channel?team=T0115RHBKBN&id=C07SDSKJY73"`),
+      map("g", ["left_command", "left_control"]).to$(`open "slack://channel?team=T0115RHBKBN&id=C07BTBXKE0H"`),
     ]),
   ]),
 

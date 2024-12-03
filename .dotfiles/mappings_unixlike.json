@@ -10,5 +10,6 @@
   "karabiner/": "~/.config/karabiner/",
   "sheldon/": "~/.config/sheldon/",
   "sesh/": "~/.config/sesh/",
+  "typos/typos.toml": "~/.config/.typos.toml",
   "gh/config.yml": "~/.config/gh/config.yml"
 }
