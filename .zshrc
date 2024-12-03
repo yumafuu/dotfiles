@@ -1,8 +1,8 @@
 export DOTFILES_REPO_PATH="${HOME}/dotfiles"
-export EDITOR=nvim
 
 # vim
 alias vim=nvim
+export EDITOR=nvim
 
 # homebrew
 export PATH="/opt/homebrew/bin:$PATH"
@@ -82,3 +82,7 @@ export TMUX_PLUGIN_MANAGER_PATH="~/.tmux/plugins"
 
 # psql
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+
+# gh
+## copilot
+eval "$(gh copilot alias -- zsh)"
