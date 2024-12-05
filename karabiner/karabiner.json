@@ -1571,6 +1571,31 @@
                     ]
                   }
                 ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "g",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_command",
+                      "left_control"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "shell_command": "open \"slack://channel?team=T0115RHBKBN&id=C07BTBXKE0H\""
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "frontmost_application_if",
+                    "bundle_identifiers": [
+                      "com.tinyspeck.slackmacgap"
+                    ]
+                  }
+                ]
               }
             ]
           },
@@ -1738,6 +1763,28 @@
                 "parameters": {
                   "basic.to_delayed_action_delay_milliseconds": 200
                 }
+              }
+            ]
+          },
+          {
+            "description": "left_control + right_shift + gでクリップボードの中を検索",
+            "manipulators": [
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "g",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_control",
+                      "right_shift"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "shell_command": "open \"https://google.com/search?q=$( pbpaste )\""
+                  }
+                ]
               }
             ]
           },
@@ -3406,6 +3453,31 @@
                     ]
                   }
                 ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "g",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_command",
+                      "left_control"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "shell_command": "open \"slack://channel?team=T0115RHBKBN&id=C07BTBXKE0H\""
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "frontmost_application_if",
+                    "bundle_identifiers": [
+                      "com.tinyspeck.slackmacgap"
+                    ]
+                  }
+                ]
               }
             ]
           },
@@ -3573,6 +3645,28 @@
                 "parameters": {
                   "basic.to_delayed_action_delay_milliseconds": 200
                 }
+              }
+            ]
+          },
+          {
+            "description": "left_control + right_shift + gでクリップボードの中を検索",
+            "manipulators": [
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "g",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_control",
+                      "right_shift"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "shell_command": "open \"https://google.com/search?q=$( pbpaste )\""
+                  }
+                ]
               }
             ]
           },
