@@ -204,7 +204,7 @@ const shared = [
   ]),
 
   rule("left_control + right_shift + gでクリップボードの中を検索").manipulators([
-    map("g", ["left_control", "right_shift"]).to$(`open "https://google.com/search?q=$(pbpaste)"`),
+    mapDoubleTap("g", "right_command").to$(`open "https://google.com/search?q=$(pbpaste)"`),
   ]),
 ];
 
