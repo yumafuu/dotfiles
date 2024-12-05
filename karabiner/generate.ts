@@ -202,6 +202,10 @@ const shared = [
   rule("[Gyazo] left_option２回押しでスクリーンショット").manipulators([
     mapDoubleTap("g", "right_option").toApp("Gyazo"),
   ]),
+
+  rule("left_control + right_shift + gでクリップボードの中を検索").manipulators([
+    map("g", ["left_control", "right_shift"]).to$(`open "https://google.com/search?q=$( pbpaste )"`),
+  ]),
 ];
 
 const yumaAir = [
