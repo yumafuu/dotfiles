@@ -1775,16 +1775,75 @@
                   "key_code": "g",
                   "modifiers": {
                     "mandatory": [
-                      "left_control",
-                      "right_shift"
+                      "right_command"
                     ]
                   }
                 },
                 "to": [
                   {
-                    "shell_command": "open \"https://google.com/search?q=$( pbpaste )\""
+                    "shell_command": "open \"https://google.com/search?q=$(pbpaste)\""
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "variable_if",
+                    "name": "double-tap-g-right_command",
+                    "value": 1
                   }
                 ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "g",
+                  "modifiers": {
+                    "mandatory": [
+                      "right_command"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "set_variable": {
+                      "name": "double-tap-g-right_command",
+                      "value": 1
+                    }
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "variable_unless",
+                    "name": "double-tap-g-right_command",
+                    "value": 1
+                  }
+                ],
+                "to_delayed_action": {
+                  "to_if_invoked": [
+                    {
+                      "key_code": "g",
+                      "modifiers": [
+                        "right_command"
+                      ]
+                    },
+                    {
+                      "set_variable": {
+                        "name": "double-tap-g-right_command",
+                        "value": 0
+                      }
+                    }
+                  ],
+                  "to_if_canceled": [
+                    {
+                      "set_variable": {
+                        "name": "double-tap-g-right_command",
+                        "value": 0
+                      }
+                    }
+                  ]
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 200
+                }
               }
             ]
           },
@@ -3657,16 +3716,75 @@
                   "key_code": "g",
                   "modifiers": {
                     "mandatory": [
-                      "left_control",
-                      "right_shift"
+                      "right_command"
                     ]
                   }
                 },
                 "to": [
                   {
-                    "shell_command": "open \"https://google.com/search?q=$( pbpaste )\""
+                    "shell_command": "open \"https://google.com/search?q=$(pbpaste)\""
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "variable_if",
+                    "name": "double-tap-g-right_command",
+                    "value": 1
                   }
                 ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "g",
+                  "modifiers": {
+                    "mandatory": [
+                      "right_command"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "set_variable": {
+                      "name": "double-tap-g-right_command",
+                      "value": 1
+                    }
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "variable_unless",
+                    "name": "double-tap-g-right_command",
+                    "value": 1
+                  }
+                ],
+                "to_delayed_action": {
+                  "to_if_invoked": [
+                    {
+                      "key_code": "g",
+                      "modifiers": [
+                        "right_command"
+                      ]
+                    },
+                    {
+                      "set_variable": {
+                        "name": "double-tap-g-right_command",
+                        "value": 0
+                      }
+                    }
+                  ],
+                  "to_if_canceled": [
+                    {
+                      "set_variable": {
+                        "name": "double-tap-g-right_command",
+                        "value": 0
+                      }
+                    }
+                  ]
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 200
+                }
               }
             ]
           },
