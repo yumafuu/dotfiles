@@ -93,6 +93,7 @@ local map = vim.api.nvim_set_keymap
 maps = {
   n = {
     ["te"] = '<cmd>execute ":tabedit" expand("%:h")<CR>',
+    ["ts"] = '<cmd>execute ":tab split"<CR>',
     ["<C-[><C-[>"] = "<cmd>noh<CR><Esc>",
     ["C-l"] = "<cmd>noh<CR>",
     ["<C-[><C-[>"] = "<cmd>noh<CR>",
@@ -106,7 +107,6 @@ maps = {
     ["<C-p>"] = "<cmd>tabprevious<CR>",
     ["tt"] = "<cmd>terminal<CR>",
     ["tv"] = "<cmd>vsplit | terminal<CR>",
-    ["ts"] = "<cmd>split | terminal<CR>",
   },
   i = {
     ["<C-h>"] = "<Left>",
@@ -197,4 +197,3 @@ vim.cmd([[
   " xnoremap <space>k :copy'<-1<CR>gv
   xnoremap <space>j :copy'>+0<CR>gv
 ]])
-

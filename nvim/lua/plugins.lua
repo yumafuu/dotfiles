@@ -153,6 +153,7 @@ return {
       { "<leader>a", ":FzfLua live_grep<cr>", silent = true },
       { "<leader>b", ":FzfLua buffers<cr>", silent = true },
       { "<leader>g", ":FzfLua git_status<cr>", silent = true },
+      { "<leader>m", ":FzfLua marks<cr>", silent = true },
     },
   },
   { "kiran94/s3edit.nvim", config = true, cmd = "S3Edit" },
@@ -398,7 +399,7 @@ return {
       vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>")
       vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>")
       vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>")
-      vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>")
+      vim.keymap.set("n", "gi", "<cmd>lua im.lsp.buf.implementation()<CR>")
       vim.keymap.set("n", "gt", "<cmd>lua vim.lsp.buf.type_definition()<CR>")
       vim.keymap.set("n", "gn", "<cmd>lua vim.lsp.buf.rename()<CR>")
       vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>")
