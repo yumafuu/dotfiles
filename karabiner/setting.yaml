@@ -10,6 +10,7 @@ apps:
       d: Discord
       f: Vivaldi
       l: Line
+      i: Rhino 8
     kwPro:
       f: Google Chrome
       o: zoom.us
