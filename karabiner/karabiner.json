@@ -12,23 +12,6 @@
               {
                 "type": "basic",
                 "from": {
-                  "key_code": "d",
-                  "modifiers": {
-                    "mandatory": [
-                      "control",
-                      "shift"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "open -a \"Discord\".app"
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "from": {
                   "key_code": "s",
                   "modifiers": {
                     "mandatory": [
@@ -91,6 +74,23 @@
                 "to": [
                   {
                     "shell_command": "open -a \"Spotify\".app"
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "n",
+                  "modifiers": {
+                    "mandatory": [
+                      "control",
+                      "shift"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "shell_command": "open -a \"Notion\".app"
                   }
                 ]
               }
@@ -315,6 +315,30 @@
                 "to": [
                   {
                     "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"承知しました🫡\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "simultaneous": [
+                    {
+                      "key_code": "open_bracket"
+                    },
+                    {
+                      "key_code": "g"
+                    }
+                  ],
+                  "simultaneous_options": {
+                    "key_down_order": "strict"
+                  }
+                },
+                "parameters": {
+                  "basic.simultaneous_threshold_milliseconds": 168
+                },
+                "to": [
+                  {
+                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"ご確認お願いします🙇‍♂️\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
                   }
                 ]
               }
@@ -1276,7 +1300,7 @@
                 },
                 "to": [
                   {
-                    "key_code": "up_arrow",
+                    "key_code": "down_arrow",
                     "modifiers": [
                       "left_option",
                       "left_shift"
@@ -1306,7 +1330,7 @@
                 "to": [
                   {
                     "mouse_key": {
-                      "vertical_wheel": 40
+                      "vertical_wheel": 1000
                     }
                   }
                 ],
@@ -1333,7 +1357,7 @@
                 "to": [
                   {
                     "mouse_key": {
-                      "vertical_wheel": -40
+                      "vertical_wheel": -1000
                     }
                   }
                 ],
@@ -1349,44 +1373,21 @@
               {
                 "type": "basic",
                 "from": {
-                  "key_code": "l",
+                  "key_code": "i",
                   "modifiers": {
                     "mandatory": [
-                      "left_command"
+                      "left_command",
+                      "left_control"
                     ]
                   }
                 },
                 "to": [
                   {
-                    "mouse_key": {
-                      "x": 10000
-                    }
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "frontmost_application_if",
-                    "bundle_identifiers": [
-                      "com.tinyspeck.slackmacgap"
+                    "key_code": "t",
+                    "modifiers": [
+                      "left_command",
+                      "left_shift"
                     ]
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "from": {
-                  "key_code": "h",
-                  "modifiers": {
-                    "mandatory": [
-                      "left_command"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "mouse_key": {
-                      "x": -10000
-                    }
                   }
                 ],
                 "conditions": [
@@ -1520,6 +1521,56 @@
                     ]
                   }
                 ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "o",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_command",
+                      "left_control"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "shell_command": "open \"slack://channel?team=T0115RHBKBN&id=C0119U6TYHW\""
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "frontmost_application_if",
+                    "bundle_identifiers": [
+                      "com.tinyspeck.slackmacgap"
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "y",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_command",
+                      "left_control"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "shell_command": "open \"slack://channel?team=T0115RHBKBN&id=C07SDSKJY73\""
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "frontmost_application_if",
+                    "bundle_identifiers": [
+                      "com.tinyspeck.slackmacgap"
+                    ]
+                  }
+                ]
               }
             ]
           },
@@ -1606,6 +1657,87 @@
                     ]
                   }
                 ]
+              }
+            ]
+          },
+          {
+            "description": "[Gyazo] left_option２回押しでスクリーンショット",
+            "manipulators": [
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "g",
+                  "modifiers": {
+                    "mandatory": [
+                      "right_option"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "shell_command": "open -a \"Gyazo\".app"
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "variable_if",
+                    "name": "double-tap-g-right_option",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "g",
+                  "modifiers": {
+                    "mandatory": [
+                      "right_option"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "set_variable": {
+                      "name": "double-tap-g-right_option",
+                      "value": 1
+                    }
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "variable_unless",
+                    "name": "double-tap-g-right_option",
+                    "value": 1
+                  }
+                ],
+                "to_delayed_action": {
+                  "to_if_invoked": [
+                    {
+                      "key_code": "g",
+                      "modifiers": [
+                        "right_option"
+                      ]
+                    },
+                    {
+                      "set_variable": {
+                        "name": "double-tap-g-right_option",
+                        "value": 0
+                      }
+                    }
+                  ],
+                  "to_if_canceled": [
+                    {
+                      "set_variable": {
+                        "name": "double-tap-g-right_option",
+                        "value": 0
+                      }
+                    }
+                  ]
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 200
+                }
               }
             ]
           },
@@ -1645,6 +1777,40 @@
                     "shell_command": "open -a \"zoom.us\".app"
                   }
                 ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "t",
+                  "modifiers": {
+                    "mandatory": [
+                      "control",
+                      "shift"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "shell_command": "open -a \"Toggl\".app"
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "g",
+                  "modifiers": {
+                    "mandatory": [
+                      "control",
+                      "shift"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "shell_command": "open -a \"GoogleCalendar\".app"
+                  }
+                ]
               }
             ]
           }
@@ -1678,23 +1844,6 @@
           {
             "description": "Open App - shared",
             "manipulators": [
-              {
-                "type": "basic",
-                "from": {
-                  "key_code": "d",
-                  "modifiers": {
-                    "mandatory": [
-                      "control",
-                      "shift"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "open -a \"Discord\".app"
-                  }
-                ]
-              },
               {
                 "type": "basic",
                 "from": {
@@ -1760,6 +1909,23 @@
                 "to": [
                   {
                     "shell_command": "open -a \"Spotify\".app"
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "n",
+                  "modifiers": {
+                    "mandatory": [
+                      "control",
+                      "shift"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "shell_command": "open -a \"Notion\".app"
                   }
                 ]
               }
@@ -1984,6 +2150,30 @@
                 "to": [
                   {
                     "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"承知しました🫡\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "simultaneous": [
+                    {
+                      "key_code": "open_bracket"
+                    },
+                    {
+                      "key_code": "g"
+                    }
+                  ],
+                  "simultaneous_options": {
+                    "key_down_order": "strict"
+                  }
+                },
+                "parameters": {
+                  "basic.simultaneous_threshold_milliseconds": 168
+                },
+                "to": [
+                  {
+                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"ご確認お願いします🙇‍♂️\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
                   }
                 ]
               }
@@ -2945,7 +3135,7 @@
                 },
                 "to": [
                   {
-                    "key_code": "up_arrow",
+                    "key_code": "down_arrow",
                     "modifiers": [
                       "left_option",
                       "left_shift"
@@ -2975,7 +3165,7 @@
                 "to": [
                   {
                     "mouse_key": {
-                      "vertical_wheel": 40
+                      "vertical_wheel": 1000
                     }
                   }
                 ],
@@ -3002,7 +3192,7 @@
                 "to": [
                   {
                     "mouse_key": {
-                      "vertical_wheel": -40
+                      "vertical_wheel": -1000
                     }
                   }
                 ],
@@ -3018,44 +3208,21 @@
               {
                 "type": "basic",
                 "from": {
-                  "key_code": "l",
+                  "key_code": "i",
                   "modifiers": {
                     "mandatory": [
-                      "left_command"
+                      "left_command",
+                      "left_control"
                     ]
                   }
                 },
                 "to": [
                   {
-                    "mouse_key": {
-                      "x": 10000
-                    }
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "frontmost_application_if",
-                    "bundle_identifiers": [
-                      "com.tinyspeck.slackmacgap"
+                    "key_code": "t",
+                    "modifiers": [
+                      "left_command",
+                      "left_shift"
                     ]
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "from": {
-                  "key_code": "h",
-                  "modifiers": {
-                    "mandatory": [
-                      "left_command"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "mouse_key": {
-                      "x": -10000
-                    }
                   }
                 ],
                 "conditions": [
@@ -3189,6 +3356,56 @@
                     ]
                   }
                 ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "o",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_command",
+                      "left_control"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "shell_command": "open \"slack://channel?team=T0115RHBKBN&id=C0119U6TYHW\""
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "frontmost_application_if",
+                    "bundle_identifiers": [
+                      "com.tinyspeck.slackmacgap"
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "y",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_command",
+                      "left_control"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "shell_command": "open \"slack://channel?team=T0115RHBKBN&id=C07SDSKJY73\""
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "frontmost_application_if",
+                    "bundle_identifiers": [
+                      "com.tinyspeck.slackmacgap"
+                    ]
+                  }
+                ]
               }
             ]
           },
@@ -3279,8 +3496,106 @@
             ]
           },
           {
+            "description": "[Gyazo] left_option２回押しでスクリーンショット",
+            "manipulators": [
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "g",
+                  "modifiers": {
+                    "mandatory": [
+                      "right_option"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "shell_command": "open -a \"Gyazo\".app"
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "variable_if",
+                    "name": "double-tap-g-right_option",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "g",
+                  "modifiers": {
+                    "mandatory": [
+                      "right_option"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "set_variable": {
+                      "name": "double-tap-g-right_option",
+                      "value": 1
+                    }
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "variable_unless",
+                    "name": "double-tap-g-right_option",
+                    "value": 1
+                  }
+                ],
+                "to_delayed_action": {
+                  "to_if_invoked": [
+                    {
+                      "key_code": "g",
+                      "modifiers": [
+                        "right_option"
+                      ]
+                    },
+                    {
+                      "set_variable": {
+                        "name": "double-tap-g-right_option",
+                        "value": 0
+                      }
+                    }
+                  ],
+                  "to_if_canceled": [
+                    {
+                      "set_variable": {
+                        "name": "double-tap-g-right_option",
+                        "value": 0
+                      }
+                    }
+                  ]
+                },
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 200
+                }
+              }
+            ]
+          },
+          {
             "description": "Open App - yumaAir",
             "manipulators": [
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "d",
+                  "modifiers": {
+                    "mandatory": [
+                      "control",
+                      "shift"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "shell_command": "open -a \"Discord\".app"
+                  }
+                ]
+              },
               {
                 "type": "basic",
                 "from": {
@@ -3312,6 +3627,23 @@
                 "to": [
                   {
                     "shell_command": "open -a \"Line\".app"
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "i",
+                  "modifiers": {
+                    "mandatory": [
+                      "control",
+                      "shift"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "shell_command": "open -a \"Rhino 8\".app"
                   }
                 ]
               }

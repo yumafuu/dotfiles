@@ -1,6 +1,0 @@
-{
-  "tasks": {
-    "build": "deno run -A karabiner/src/karabiner.ts",
-    "watch": "deno run -A --watch karabiner/src/karabiner.ts",
-  }
-}

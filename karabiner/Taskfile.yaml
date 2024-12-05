@@ -1,0 +1,14 @@
+version: '3'
+
+tasks:
+  fmt:
+    desc: Lint shell scripts (Fix)
+    cmds:
+      - deno fmt
+    silent: true
+
+  build:
+    desc: Build karabiner.json
+    cmds:
+      - deno run -A generate.ts
+    silent: true

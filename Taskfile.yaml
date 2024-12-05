@@ -17,3 +17,6 @@ tasks:
       - shellcheck -f diff zsh/*.zsh .zshrc > /tmp/shellcheck.diff
       - patch -p1 < /tmp/shellcheck.diff
     silent: true
+
+include:
+  - karabiner/Taskfile.yaml
