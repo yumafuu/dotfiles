@@ -6,15 +6,15 @@ apps:
       r: Reflect
       p: Spotify
       n: Notion
+      o: zoom.us
     yumaAir:
       d: Discord
       f: Vivaldi
       l: Line
       i: Rhino 8
     kwPro:
-      f: Google Chrome
-      o: zoom.us
       t: Toggl
+      f: Google Chrome
       g: GoogleCalendar
 maps:
   # {modifier}-{code_key} or {code_key}
