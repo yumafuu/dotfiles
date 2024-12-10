@@ -93,7 +93,7 @@ local map = vim.api.nvim_set_keymap
 maps = {
   n = {
     ["te"] = '<cmd>execute ":tabedit" expand("%:h")<CR>',
-    ["ts"] = '<cmd>execute ":tab split"<CR>',
+    ["tt"] = '<cmd>execute ":tab split"<CR>',
     ["<C-[><C-[>"] = "<cmd>noh<CR><Esc>",
     ["C-l"] = "<cmd>noh<CR>",
     ["<C-[><C-[>"] = "<cmd>noh<CR>",
@@ -105,7 +105,6 @@ maps = {
     ["<Leader>c"] = "<plug>(operator-camelize-toggle)",
     ["<C-n>"] = "<cmd>tabnext<CR>",
     ["<C-p>"] = "<cmd>tabprevious<CR>",
-    ["tt"] = "<cmd>terminal<CR>",
     ["tv"] = "<cmd>vsplit | terminal<CR>",
   },
   i = {
@@ -185,15 +184,13 @@ vim.cmd([[
   noremap M %
   map <expr> M expand('<cword>') =~# 'end' ? '%' : 'g%'
 
-  " 行を移動
-  xnoremap <silent><C-k> :move'<-2<CR>gv=gv
-  nnoremap <expr> <C-k> $'<Cmd>move-1-{v:count1}<CR>=l'
-  nnoremap <expr> <C-j> $'<Cmd>move+{v:count1}<CR>=l'
-  xnoremap <silent><C-j> :move'>+1<CR>gv=gv
-
   " Dup line
   " nnoremap <space>k <Cmd>copy-1<CR>
   nnoremap <space>j <Cmd>copy.<CR>
   " xnoremap <space>k :copy'<-1<CR>gv
   xnoremap <space>j :copy'>+0<CR>gv
+
+  " :memoで :e {gitroot}/.yuma/{branch}/memo.md を開く
+  command! -nargs=0 Memo execute 'silent! call mkdir((isdirectory(system("git rev-parse --show-toplevel 2>/dev/null | tr -d \"\\n\"")) ? substitute(system("git rev-parse --show-toplevel"), "\n", "", "") . "/.yuma/" . substitute(system("git rev-parse --abbrev-ref HEAD"), "\n", "", "") : "memo"), "p")' | execute 'e ' . (isdirectory(system('git rev-parse --show-toplevel 2>/dev/null | tr -d "\\n"')) ? substitute(system('git rev-parse --show-toplevel'), '\n', '', '') . '/.yuma/' . substitute(system('git rev-parse --abbrev-ref HEAD'), '\n', '', '') . '/memo.md' : 'memo/memo.md')
+
 ]])

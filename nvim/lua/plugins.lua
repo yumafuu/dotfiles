@@ -1,5 +1,32 @@
 return {
   {
+    "nvim-neotest/neotest",
+    dependencies = {
+      "nvim-neotest/nvim-nio",
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      { "fredrikaverpil/neotest-golang", version = "*" },
+      { "nvim-neotest/neotest-plenary", version = "*" },
+    },
+    config = function()
+       require("neotest").setup({
+        adapters = {
+          require("neotest-golang"), -- Registration
+          require("neotest-plenary"),
+        },
+      })
+    end,
+    keys = {
+       {
+        "<leader>td",
+        function()
+          require("neotest").run.run({ suite = true })
+        end,
+        desc = "Debug nearest test",
+      },
+    },
+  },
+  {
     "kana/vim-submode",
     config = function()
       vim.cmd([[
@@ -93,6 +120,7 @@ return {
   },
   {
     "hrsh7th/nvim-insx",
+    tag = "v1.1.0",
     config = function()
       require("insx.preset.standard").setup()
     end,
@@ -534,8 +562,7 @@ return {
     keys = { "<space>m", "<space>j", "<space>s" },
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     config = function()
-      require("treesj").setup({--[[ your config ]]
-      })
+      require("treesj").setup()
     end,
   },
   {
@@ -577,7 +604,7 @@ return {
   {
     "stevearc/overseer.nvim",
     keys = {
-      { "<leader>e", "<cmd>OverseerToggle<cr>", desc = "Toggel" },
+      { "<leader>e", "<cmd>OverseerToggle<cr>", desc = "Toggle" },
       { "<leader>r", "<cmd>OverseerRun<cr>", desc = "Run Task" },
       -- { "<space>ec", "<cmd>OverseerRunCmd<cr>", desc = "Run Command" },
       -- { "<space>eq", "<cmd>OverseerQuickAction<cr>", desc = "Quick Action" },
