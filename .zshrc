@@ -73,7 +73,7 @@ bindkey "^D" do_nothing
 bindkey "^k" cd_target
 bindkey "^h" cd_parent
 bindkey "^k" cd_back
-bindkey "^o" _fzf_cd_ghq
+bindkey "^o" ghq-fzf
 
 # rbenv
 command -v rbenv >/dev/null && eval "$(rbenv init -)"
