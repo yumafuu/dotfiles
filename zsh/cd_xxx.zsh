@@ -23,9 +23,8 @@ cd_parent() {
   cd ..
   zle accept-line
 }
-zle -N cd_back
-bindkey "^k" cd_back
+
 cd_back() {
-  cd - >/dev/null || exit
+  cd -
   zle accept-line
 }

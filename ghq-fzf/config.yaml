@@ -1,0 +1,7 @@
+fzf:
+  preview: "bat $(ghq-fzf root {})/README.md"
+dirs:
+  - "~/dotfiles"
+  - "~/dotfiles/nvim"
+  - "~/dotfiles/karabiner"
+  - "~/Downloads"
