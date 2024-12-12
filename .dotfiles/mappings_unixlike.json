@@ -1,4 +1,5 @@
 {
+  "ghq-fzf/": "~/.config/ghq-fzf/",
   "nvim/": "~/.config/nvim/",
   "wezterm/": "~/.config/wezterm/",
   "tmux/": "~/.config/tmux/",

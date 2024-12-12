@@ -50,6 +50,7 @@ export PATH="$HOME/.local/bin:$PATH"
 
 # bun
 [ -s "/Users/yuma/.bun/_bun" ] && source "/Users/yuma/.bun/_bun"
+[ -s "/Users/yuma.ishikawa/.bun/_bun" ] && source "/Users/yuma.ishikawa/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
