@@ -1,5 +1,5 @@
 fzf:
-  preview: "bat $(ghq-fzf root {})/README.md"
+  preview: "exa --tree -L 2 $(_ghq-fzf fullpath {})"
 dirs:
   - "~/dotfiles"
   - "~/dotfiles/nvim"
