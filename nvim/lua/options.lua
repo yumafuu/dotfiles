@@ -154,14 +154,6 @@ vim.cmd([[
 vim.cmd([[
   " ref: https://zenn.dev/vim_jp/articles/43d021f461f3a4
 
-  " i<space>でWORD選択
-  onoremap i<space> iW
-  xnoremap i<space> iW
-
-  " カーソル以下を置換
-  nnoremap S :%s/\V\<<C-r><C-w>\>//g<Left><Left>
-  xnoremap S "zy:%s/\V<C-r><C-r>=escape(@z,'/\')<CR>//gce<Left><Left><Left><Left>
-
   " ペースト時にインデントを保持
   nnoremap p ]p`]
   nnoremap P ]P`]
@@ -185,9 +177,7 @@ vim.cmd([[
   map <expr> M expand('<cword>') =~# 'end' ? '%' : 'g%'
 
   " Dup line
-  " nnoremap <space>k <Cmd>copy-1<CR>
   nnoremap <space>j <Cmd>copy.<CR>
-  " xnoremap <space>k :copy'<-1<CR>gv
   xnoremap <space>j :copy'>+0<CR>gv
 
   " :memoで :e {gitroot}/.yuma/{branch}/memo.md を開く
