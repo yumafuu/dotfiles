@@ -1,6 +1,10 @@
 fzf:
   preview: "exa --tree -L 2 $(_ghq-fzf fullpath {})"
-dirs:
+nested:
+  - root: github.com/yumafuu/myme
+    dirs:
+      - myme-core
+external:
   - "~/dotfiles"
   - "~/dotfiles/nvim"
   - "~/dotfiles/karabiner"
