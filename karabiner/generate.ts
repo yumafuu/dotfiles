@@ -206,6 +206,13 @@ const shared = [
   rule("left_control + right_shift + gでクリップボードの中を検索").manipulators([
     mapDoubleTap("g", "right_command").to$(`open "https://google.com/search?q=$(pbpaste)"`),
   ]),
+
+  rule("[Notion] left_control + [,]でタブ移動").manipulators([
+    withCondition(ifApp("Notion"))([
+      map("open_bracket", "left_control").to("tab", [ "left_control", "right_shift", ]),
+      map("close_bracket", "left_control").to("tab", ["left_control"]),
+    ]),
+  ]),
 ];
 
 const yumaAir = [
