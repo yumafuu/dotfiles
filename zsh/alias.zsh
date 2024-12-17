@@ -12,10 +12,10 @@ alias ..="cd .."
 alias ...="cd ../../.."
 
 # exa
-alias ls='exa -g --time-style=long-iso -a'
-alias ez='exec zsh'
-alias ll="exa -la"
+alias ls='eza -g --time-style=long-iso -a'
+alias ll="eza -la --icons --time-style=long-iso"
 alias tree="exa -T -a -I .git --git-ignore"
+alias ez='exec zsh'
 
 # vim
 alias v='nvim .'
