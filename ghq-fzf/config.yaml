@@ -1,17 +1,9 @@
 fzf:
   preview: "exa --tree -L 2 $(_ghq-fzf fullpath {})"
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
 nested:
   - root: github.com/yumafuu/myme
     dirs:
       - myme-core
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
 external:
   - "~/dotfiles"
   - "~/dotfiles/nvim"
