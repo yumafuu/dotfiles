@@ -1,9 +1,11 @@
 fzf:
-  preview: "exa --tree -L 2 $(_ghq-fzf fullpath {})"
-nested:
-  - root: github.com/yumafuu/myme
-    dirs:
-      - myme-core
+  preview: "eza --tree --icons -L 2 $(_ghq-fzf fullpath {})"
+ghq:
+  showFullpath: false
+  nested:
+    - root: github.com/yumafuu/bite-poc-cli
+      dirs:
+        - core
 external:
   - "~/dotfiles"
   - "~/dotfiles/nvim"
