@@ -10,6 +10,11 @@ return {
     }
   },
   {
+    "pmizio/typescript-tools.nvim",
+    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+    opts = {},
+  },
+  {
     "nvim-neotest/neotest",
     dependencies = {
       "nvim-neotest/nvim-nio",
@@ -413,6 +418,7 @@ return {
           config = '~/dotfiles/typos/typos.toml',
         }
       })
+      lspconfig.protols.setup({})
     end,
   },
   {
@@ -436,7 +442,7 @@ return {
       vim.keymap.set("n", "gf", "<cmd>lua vim.lsp.buf.format()<CR>")
       vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>")
       vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>")
-      vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>")
+      vim.keymap.set("n", "gc", "<cmd>lua vim.lsp.buf.code_action()<CR>")
       vim.keymap.set("n", "gi", "<cmd>lua im.lsp.buf.implementation()<CR>")
       vim.keymap.set("n", "gt", "<cmd>lua vim.lsp.buf.type_definition()<CR>")
       vim.keymap.set("n", "gn", "<cmd>lua vim.lsp.buf.rename()<CR>")
