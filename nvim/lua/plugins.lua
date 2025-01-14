@@ -1,4 +1,20 @@
 return {
+ {
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      tc = require("todo-comments")
+      tc.setup({
+        search = {
+          command = "rg",
+          pattern = "MEMO\\(yuma\\)|TODO\\(yuma\\)",
+        }
+      })
+
+      vim.keymap.set("n", "]t", function() tc.jump_next() end)
+      vim.keymap.set("n", "[t", function() tc.jump_prev() end)
+    end
+  },
   {
     "OXY2DEV/markview.nvim",
     lazy = false,      -- Recommended
@@ -197,6 +213,7 @@ return {
       { "<leader>b", ":FzfLua buffers<cr>", silent = true },
       { "<leader>g", ":FzfLua git_status<cr>", silent = true },
       { "<leader>m", ":FzfLua marks<cr>", silent = true },
+      { "<leader>t", ":TodoFzfLua <cr>", silent = true },
     },
   },
   { "kiran94/s3edit.nvim", config = true, cmd = "S3Edit" },

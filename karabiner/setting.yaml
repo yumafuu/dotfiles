@@ -16,29 +16,3 @@ apps:
       o: zoom.us
       t: Toggl
       g: GoogleCalendar
-maps:
-  # {modifier}-{code_key} or {code_key}
-  left_option-open_bracket: "【】"
-links:
-  g: https://github.com
-  z: https://zenn.dev
-  x: https://x.com
-  y: https://youtube.com
-  l: https://lms.keio.jp
-  s: https://scrapbox.io/yumamemo
-snippets:
-  na: 石川湧馬
-  t: 09041209240
-  m: yuma.fuu05@gmail.com
-  k: yuma.ishikawa@knowledgework.com
-  a: ありがとうございます！
-  o: okです！
-  r: レビューおねがいします🙏
-  y: よろしくお願いします！
-  s: 承知しました🫡
-  g: ご確認お願いします🙇‍♂️
-raycasts:
-  p: extensions/thomas/color-picker/pick-color
-  c: extensions/raycast/system/open-camera
-  e: extensions/raycast/emoji-symbols/search-emoji-symbols
-  spacebar: extensions/raycast/raycast/confetti
