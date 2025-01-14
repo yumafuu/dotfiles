@@ -1,26 +1,27 @@
 import {
-  // hyperLayer,
   duoLayer,
   ifApp,
-  // ifDevice,
-  // ifDeviceExists,
   map,
   mapDoubleTap,
   mapSimultaneous,
-  // layer,
-  // simlayer,
+  layer,
+  simlayer,
   rule,
   // to$,
   // toApp,
   toKey,
-  // toPaste,
+  toPaste,
   withCondition,
   withMapper,
   withModifier,
   writeToProfile,
 } from "karabiner.ts";
 
-import { ObjectToHint, ReadYaml, toRaycast } from "./src/utils.ts";
+import {
+  ReadYaml,
+  toRaycast,
+  toSuperPaste,
+} from "./src/utils.ts";
 
 import {
   Chrome,
@@ -32,65 +33,49 @@ import {
   Wezterm,
 } from "./src/app.ts";
 
-import type { Setting, SettingKV } from "./src/types.ts";
+import type { Setting } from "./src/types.ts";
 
 const __dirname = new URL(".", import.meta.url).pathname;
 
-const {
-  apps,
-  maps,
-  links,
-  snippets,
-  raycasts,
-} = ReadYaml(`${__dirname}/setting.yaml`) as Setting;
+const { apps } = await ReadYaml(`${__dirname}/setting.yaml`) as Setting;
 
 //  '⌘': 'command'
 //  '⌥': 'option'
 //  '⌃': 'control',
 //  '⇧': 'shift',
 //  '⇪': 'caps_lock',
-
 const shared = [
   rule("Open App - shared").manipulators([
     withModifier("⌃⇧")([
-      withMapper(apps.profiles.shared as SettingKV)((k, v) => map(k).toApp(v)),
+      withMapper(apps.profiles.shared)((k, v) => map(k).toApp(v)),
     ]),
   ]),
 
-  rule("Snippets").manipulators(
-    Object.entries(snippets).map(([k, v]) => {
-      return mapSimultaneous(
-        `[${k}`.split(""),
-        { key_down_order: "strict" },
-        168,
-      ).toPaste(v);
-    }),
-  ),
-
-  rule("Remap").manipulators(
-    Object.entries(maps).map(([k, v]) => {
-      if (k.includes("-")) {
-        const [modifier, key] = k.split("-");
-        return map(key, modifier).toPaste(v);
-      } else {
-        return map(k).toPaste(v);
-      }
-    }),
-  ),
-
-  duoLayer("left_option", "l")
-    .description("Open Link")
-    .leaderMode()
-    .notification(ObjectToHint(links))
-    .manipulators(withMapper(links)((k, v) => map(k).to$(`open ${v}`))),
-
-  duoLayer("right_option", "r")
-    .description("Raycast Command")
-    .leaderMode()
-    .notification(ObjectToHint(raycasts))
-    .manipulators(
-      withMapper(raycasts)((k, v) => map(k).to$(toRaycast(v))),
-    ),
+  layer('.').manipulators({
+    n: toPaste("石川湧馬"),
+    t: toPaste("09041209240"),
+    m: toPaste("yuma.fuu05@gmail.com"),
+    k: toPaste("yuma.ishikawa@knowledgework.com"),
+  }),
+  layer('[').manipulators({
+    a: toPaste("ありがとうございます！"),
+    s: toPaste("承知しました！"),
+    o: toPaste("okです！"),
+    r: toPaste("レビューおねがいします！"),
+    y: toPaste("よろしくお願いします！"),
+    g: toPaste("ご確認お願いします！"),
+  }),
+  layer('\\').manipulators({
+    s: toPaste("すごい"),
+    v: toSuperPaste(),
+    c: toRaycast("raycast/system/open-camera"),
+    e: toRaycast("raycast/emoji-symbols/search-emoji-symbols"),
+  }),
+  layer(']').manipulators({
+    r: toPaste("🙏"),
+    g: toPaste("👍"),
+    b: toPaste("🙇‍♂️"),
+  }),
 
   rule("コロンとセミコロンを入れ替える").manipulators([
     // ; -> :
