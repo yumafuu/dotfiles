@@ -29,7 +29,7 @@ text=$(pbpaste)
 # if text match https://knowledgework.atlassian.net/browse/KWS-{any} then make markdown link
 # [KWS-{any}](https://knowledgework.atlassian.net/browse/KWS-{any})
 if [[ $text =~ KWS-[0-9]+ ]]; then
-  text="[$\{BASH_REMATCH[0]\}](https://knowledgework.atlassian.net/browse/KWS-$\{BASH_REMATCH[0]\})"
+  text="[$\{BASH_REMATCH[0]\}](https://knowledgework.atlassian.net/browse/$\{BASH_REMATCH[0]\})"
 fi
 
 osascript -e '
