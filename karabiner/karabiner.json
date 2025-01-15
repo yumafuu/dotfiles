@@ -97,318 +97,73 @@
             ]
           },
           {
-            "description": "Snippets",
+            "description": "Layer - layer-period",
             "manipulators": [
               {
                 "type": "basic",
                 "from": {
-                  "simultaneous": [
-                    {
-                      "key_code": "open_bracket"
-                    },
-                    {
-                      "key_code": "n"
-                    },
-                    {
-                      "key_code": "a"
-                    }
-                  ],
-                  "simultaneous_options": {
-                    "key_down_order": "strict"
-                  }
-                },
-                "parameters": {
-                  "basic.simultaneous_threshold_milliseconds": 168
-                },
-                "to": [
-                  {
-                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"石川湧馬\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "from": {
-                  "simultaneous": [
-                    {
-                      "key_code": "open_bracket"
-                    },
-                    {
-                      "key_code": "t"
-                    }
-                  ],
-                  "simultaneous_options": {
-                    "key_down_order": "strict"
-                  }
-                },
-                "parameters": {
-                  "basic.simultaneous_threshold_milliseconds": 168
-                },
-                "to": [
-                  {
-                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"09041209240\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "from": {
-                  "simultaneous": [
-                    {
-                      "key_code": "open_bracket"
-                    },
-                    {
-                      "key_code": "m"
-                    }
-                  ],
-                  "simultaneous_options": {
-                    "key_down_order": "strict"
-                  }
-                },
-                "parameters": {
-                  "basic.simultaneous_threshold_milliseconds": 168
-                },
-                "to": [
-                  {
-                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"yuma.fuu05@gmail.com\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "from": {
-                  "simultaneous": [
-                    {
-                      "key_code": "open_bracket"
-                    },
-                    {
-                      "key_code": "k"
-                    }
-                  ],
-                  "simultaneous_options": {
-                    "key_down_order": "strict"
-                  }
-                },
-                "parameters": {
-                  "basic.simultaneous_threshold_milliseconds": 168
-                },
-                "to": [
-                  {
-                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"yuma.ishikawa@knowledgework.com\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "from": {
-                  "simultaneous": [
-                    {
-                      "key_code": "open_bracket"
-                    },
-                    {
-                      "key_code": "a"
-                    }
-                  ],
-                  "simultaneous_options": {
-                    "key_down_order": "strict"
-                  }
-                },
-                "parameters": {
-                  "basic.simultaneous_threshold_milliseconds": 168
-                },
-                "to": [
-                  {
-                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"ありがとうございます！\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "from": {
-                  "simultaneous": [
-                    {
-                      "key_code": "open_bracket"
-                    },
-                    {
-                      "key_code": "o"
-                    }
-                  ],
-                  "simultaneous_options": {
-                    "key_down_order": "strict"
-                  }
-                },
-                "parameters": {
-                  "basic.simultaneous_threshold_milliseconds": 168
-                },
-                "to": [
-                  {
-                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"okです！\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "from": {
-                  "simultaneous": [
-                    {
-                      "key_code": "open_bracket"
-                    },
-                    {
-                      "key_code": "r"
-                    }
-                  ],
-                  "simultaneous_options": {
-                    "key_down_order": "strict"
-                  }
-                },
-                "parameters": {
-                  "basic.simultaneous_threshold_milliseconds": 168
-                },
-                "to": [
-                  {
-                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"レビューおねがいします🙏\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "from": {
-                  "simultaneous": [
-                    {
-                      "key_code": "open_bracket"
-                    },
-                    {
-                      "key_code": "y"
-                    }
-                  ],
-                  "simultaneous_options": {
-                    "key_down_order": "strict"
-                  }
-                },
-                "parameters": {
-                  "basic.simultaneous_threshold_milliseconds": 168
-                },
-                "to": [
-                  {
-                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"よろしくお願いします！\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "from": {
-                  "simultaneous": [
-                    {
-                      "key_code": "open_bracket"
-                    },
-                    {
-                      "key_code": "s"
-                    }
-                  ],
-                  "simultaneous_options": {
-                    "key_down_order": "strict"
-                  }
-                },
-                "parameters": {
-                  "basic.simultaneous_threshold_milliseconds": 168
-                },
-                "to": [
-                  {
-                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"承知しました🫡\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "from": {
-                  "simultaneous": [
-                    {
-                      "key_code": "open_bracket"
-                    },
-                    {
-                      "key_code": "g"
-                    }
-                  ],
-                  "simultaneous_options": {
-                    "key_down_order": "strict"
-                  }
-                },
-                "parameters": {
-                  "basic.simultaneous_threshold_milliseconds": 168
-                },
-                "to": [
-                  {
-                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"ご確認お願いします🙇‍♂️\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "description": "Remap",
-            "manipulators": [
-              {
-                "type": "basic",
-                "from": {
-                  "key_code": "open_bracket",
-                  "modifiers": {
-                    "mandatory": [
-                      "left_option"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"【】\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "description": "Open Link",
-            "manipulators": [
-              {
-                "type": "basic",
-                "from": {
-                  "simultaneous": [
-                    {
-                      "key_code": "left_option"
-                    },
-                    {
-                      "key_code": "l"
-                    }
-                  ],
-                  "simultaneous_options": {
-                    "to_after_key_up": []
-                  },
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "parameters": {
-                  "basic.simultaneous_threshold_milliseconds": 200
+                  "key_code": "period"
                 },
                 "to": [
                   {
                     "set_variable": {
-                      "name": "duo-layer-left_option-l",
+                      "name": "layer-period",
                       "value": 1
                     }
                   },
                   {
-                    "set_notification_message": {
-                      "id": "duo-layer-duo-layer-left_option-l",
-                      "text": "g: https://github.com\nz: https://zenn.dev\nx: https://x.com\ny: https://youtube.com\nl: https://lms.keio.jp\ns: https://scrapbox.io/yumamemo"
+                    "set_variable": {
+                      "name": "__layer",
+                      "value": 1
                     }
                   }
                 ],
                 "conditions": [
                   {
                     "type": "variable_unless",
-                    "name": "duo-layer-left_option-l",
+                    "name": "layer-period",
+                    "value": 1
+                  },
+                  {
+                    "type": "variable_unless",
+                    "name": "__layer",
+                    "value": 1
+                  }
+                ],
+                "to_if_alone": [
+                  {
+                    "key_code": "period"
+                  }
+                ],
+                "to_after_key_up": [
+                  {
+                    "set_variable": {
+                      "name": "layer-period",
+                      "value": 0
+                    }
+                  },
+                  {
+                    "set_variable": {
+                      "name": "__layer",
+                      "value": 0
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "n"
+                },
+                "to": [
+                  {
+                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"石川湧馬\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "variable_if",
+                    "name": "layer-period",
                     "value": 1
                   }
                 ]
@@ -416,29 +171,17 @@
               {
                 "type": "basic",
                 "from": {
-                  "key_code": "g"
+                  "key_code": "t"
                 },
                 "to": [
                   {
-                    "shell_command": "open https://github.com"
-                  },
-                  {
-                    "set_variable": {
-                      "name": "duo-layer-left_option-l",
-                      "value": 0
-                    }
-                  },
-                  {
-                    "set_notification_message": {
-                      "id": "duo-layer-duo-layer-left_option-l",
-                      "text": ""
-                    }
+                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"09041209240\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
                   }
                 ],
                 "conditions": [
                   {
                     "type": "variable_if",
-                    "name": "duo-layer-left_option-l",
+                    "name": "layer-period",
                     "value": 1
                   }
                 ]
@@ -446,29 +189,17 @@
               {
                 "type": "basic",
                 "from": {
-                  "key_code": "z"
+                  "key_code": "m"
                 },
                 "to": [
                   {
-                    "shell_command": "open https://zenn.dev"
-                  },
-                  {
-                    "set_variable": {
-                      "name": "duo-layer-left_option-l",
-                      "value": 0
-                    }
-                  },
-                  {
-                    "set_notification_message": {
-                      "id": "duo-layer-duo-layer-left_option-l",
-                      "text": ""
-                    }
+                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"yuma.fuu05@gmail.com\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
                   }
                 ],
                 "conditions": [
                   {
                     "type": "variable_if",
-                    "name": "duo-layer-left_option-l",
+                    "name": "layer-period",
                     "value": 1
                   }
                 ]
@@ -476,89 +207,91 @@
               {
                 "type": "basic",
                 "from": {
-                  "key_code": "x"
+                  "key_code": "k"
                 },
                 "to": [
                   {
-                    "shell_command": "open https://x.com"
-                  },
-                  {
-                    "set_variable": {
-                      "name": "duo-layer-left_option-l",
-                      "value": 0
-                    }
-                  },
-                  {
-                    "set_notification_message": {
-                      "id": "duo-layer-duo-layer-left_option-l",
-                      "text": ""
-                    }
+                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"yuma.ishikawa@knowledgework.com\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
                   }
                 ],
                 "conditions": [
                   {
                     "type": "variable_if",
-                    "name": "duo-layer-left_option-l",
+                    "name": "layer-period",
                     "value": 1
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "description": "Layer - layer-open_bracket",
+            "manipulators": [
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "open_bracket"
+                },
+                "to": [
+                  {
+                    "set_variable": {
+                      "name": "layer-open_bracket",
+                      "value": 1
+                    }
+                  },
+                  {
+                    "set_variable": {
+                      "name": "__layer",
+                      "value": 1
+                    }
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "variable_unless",
+                    "name": "layer-open_bracket",
+                    "value": 1
+                  },
+                  {
+                    "type": "variable_unless",
+                    "name": "__layer",
+                    "value": 1
+                  }
+                ],
+                "to_if_alone": [
+                  {
+                    "key_code": "open_bracket"
+                  }
+                ],
+                "to_after_key_up": [
+                  {
+                    "set_variable": {
+                      "name": "layer-open_bracket",
+                      "value": 0
+                    }
+                  },
+                  {
+                    "set_variable": {
+                      "name": "__layer",
+                      "value": 0
+                    }
                   }
                 ]
               },
               {
                 "type": "basic",
                 "from": {
-                  "key_code": "y"
+                  "key_code": "a"
                 },
                 "to": [
                   {
-                    "shell_command": "open https://youtube.com"
-                  },
-                  {
-                    "set_variable": {
-                      "name": "duo-layer-left_option-l",
-                      "value": 0
-                    }
-                  },
-                  {
-                    "set_notification_message": {
-                      "id": "duo-layer-duo-layer-left_option-l",
-                      "text": ""
-                    }
+                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"ありがとうございます！\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
                   }
                 ],
                 "conditions": [
                   {
                     "type": "variable_if",
-                    "name": "duo-layer-left_option-l",
-                    "value": 1
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "from": {
-                  "key_code": "l"
-                },
-                "to": [
-                  {
-                    "shell_command": "open https://lms.keio.jp"
-                  },
-                  {
-                    "set_variable": {
-                      "name": "duo-layer-left_option-l",
-                      "value": 0
-                    }
-                  },
-                  {
-                    "set_notification_message": {
-                      "id": "duo-layer-duo-layer-left_option-l",
-                      "text": ""
-                    }
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "variable_if",
-                    "name": "duo-layer-left_option-l",
+                    "name": "layer-open_bracket",
                     "value": 1
                   }
                 ]
@@ -570,25 +303,13 @@
                 },
                 "to": [
                   {
-                    "shell_command": "open https://scrapbox.io/yumamemo"
-                  },
-                  {
-                    "set_variable": {
-                      "name": "duo-layer-left_option-l",
-                      "value": 0
-                    }
-                  },
-                  {
-                    "set_notification_message": {
-                      "id": "duo-layer-duo-layer-left_option-l",
-                      "text": ""
-                    }
+                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"承知しました！\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
                   }
                 ],
                 "conditions": [
                   {
                     "type": "variable_if",
-                    "name": "duo-layer-left_option-l",
+                    "name": "layer-open_bracket",
                     "value": 1
                   }
                 ]
@@ -596,103 +317,145 @@
               {
                 "type": "basic",
                 "from": {
-                  "key_code": "escape"
+                  "key_code": "o"
                 },
+                "to": [
+                  {
+                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"okです！\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
+                  }
+                ],
                 "conditions": [
                   {
                     "type": "variable_if",
-                    "name": "duo-layer-left_option-l",
+                    "name": "layer-open_bracket",
                     "value": 1
-                  }
-                ],
-                "to": [
-                  {
-                    "set_variable": {
-                      "name": "duo-layer-left_option-l",
-                      "value": 0
-                    }
-                  },
-                  {
-                    "set_notification_message": {
-                      "id": "duo-layer-duo-layer-left_option-l",
-                      "text": ""
-                    }
                   }
                 ]
               },
               {
                 "type": "basic",
                 "from": {
-                  "key_code": "caps_lock"
+                  "key_code": "r"
                 },
+                "to": [
+                  {
+                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"レビューおねがいします！\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
+                  }
+                ],
                 "conditions": [
                   {
                     "type": "variable_if",
-                    "name": "duo-layer-left_option-l",
+                    "name": "layer-open_bracket",
                     "value": 1
                   }
-                ],
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "y"
+                },
                 "to": [
                   {
-                    "set_variable": {
-                      "name": "duo-layer-left_option-l",
-                      "value": 0
-                    }
-                  },
+                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"よろしくお願いします！\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
+                  }
+                ],
+                "conditions": [
                   {
-                    "set_notification_message": {
-                      "id": "duo-layer-duo-layer-left_option-l",
-                      "text": ""
-                    }
+                    "type": "variable_if",
+                    "name": "layer-open_bracket",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "g"
+                },
+                "to": [
+                  {
+                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"ご確認お願いします！\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "variable_if",
+                    "name": "layer-open_bracket",
+                    "value": 1
                   }
                 ]
               }
             ]
           },
           {
-            "description": "Raycast Command",
+            "description": "Layer - layer-backslash",
             "manipulators": [
               {
                 "type": "basic",
                 "from": {
-                  "simultaneous": [
-                    {
-                      "key_code": "right_option"
-                    },
-                    {
-                      "key_code": "r"
-                    }
-                  ],
-                  "simultaneous_options": {
-                    "to_after_key_up": []
-                  },
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "parameters": {
-                  "basic.simultaneous_threshold_milliseconds": 200
+                  "key_code": "backslash"
                 },
                 "to": [
                   {
                     "set_variable": {
-                      "name": "duo-layer-right_option-r",
+                      "name": "layer-backslash",
                       "value": 1
                     }
                   },
                   {
-                    "set_notification_message": {
-                      "id": "duo-layer-duo-layer-right_option-r",
-                      "text": "p: pick-color\nc: open-camera\ne: search-emoji-symbols\nspacebar: confetti"
+                    "set_variable": {
+                      "name": "__layer",
+                      "value": 1
                     }
                   }
                 ],
                 "conditions": [
                   {
                     "type": "variable_unless",
-                    "name": "duo-layer-right_option-r",
+                    "name": "layer-backslash",
+                    "value": 1
+                  },
+                  {
+                    "type": "variable_unless",
+                    "name": "__layer",
+                    "value": 1
+                  }
+                ],
+                "to_if_alone": [
+                  {
+                    "key_code": "backslash"
+                  }
+                ],
+                "to_after_key_up": [
+                  {
+                    "set_variable": {
+                      "name": "layer-backslash",
+                      "value": 0
+                    }
+                  },
+                  {
+                    "set_variable": {
+                      "name": "__layer",
+                      "value": 0
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "s"
+                },
+                "to": [
+                  {
+                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"すごい\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "variable_if",
+                    "name": "layer-backslash",
                     "value": 1
                   }
                 ]
@@ -700,29 +463,17 @@
               {
                 "type": "basic",
                 "from": {
-                  "key_code": "p"
+                  "key_code": "v"
                 },
                 "to": [
                   {
-                    "shell_command": "open raycast://extensions/thomas/color-picker/pick-color"
-                  },
-                  {
-                    "set_variable": {
-                      "name": "duo-layer-right_option-r",
-                      "value": 0
-                    }
-                  },
-                  {
-                    "set_notification_message": {
-                      "id": "duo-layer-duo-layer-right_option-r",
-                      "text": ""
-                    }
+                    "shell_command": "\ntext=$(pbpaste)\n# if text match https://knowledgework.atlassian.net/browse/KWS-{any} then make markdown link\n# [KWS-{any}](https://knowledgework.atlassian.net/browse/KWS-{any})\nif [[ $text =~ KWS-[0-9]+ ]]; then\n  text=\"[${BASH_REMATCH[0]}](https://knowledgework.atlassian.net/browse/${BASH_REMATCH[0]})\"\nfi\n\nosascript -e '\ntell application \"System Events\"\n  keystroke  \"'\"$text\"'\"\nend tell '\n\n"
                   }
                 ],
                 "conditions": [
                   {
                     "type": "variable_if",
-                    "name": "duo-layer-right_option-r",
+                    "name": "layer-backslash",
                     "value": 1
                   }
                 ]
@@ -735,24 +486,12 @@
                 "to": [
                   {
                     "shell_command": "open raycast://extensions/raycast/system/open-camera"
-                  },
-                  {
-                    "set_variable": {
-                      "name": "duo-layer-right_option-r",
-                      "value": 0
-                    }
-                  },
-                  {
-                    "set_notification_message": {
-                      "id": "duo-layer-duo-layer-right_option-r",
-                      "text": ""
-                    }
                   }
                 ],
                 "conditions": [
                   {
                     "type": "variable_if",
-                    "name": "duo-layer-right_option-r",
+                    "name": "layer-backslash",
                     "value": 1
                   }
                 ]
@@ -765,81 +504,68 @@
                 "to": [
                   {
                     "shell_command": "open raycast://extensions/raycast/emoji-symbols/search-emoji-symbols"
-                  },
-                  {
-                    "set_variable": {
-                      "name": "duo-layer-right_option-r",
-                      "value": 0
-                    }
-                  },
-                  {
-                    "set_notification_message": {
-                      "id": "duo-layer-duo-layer-right_option-r",
-                      "text": ""
-                    }
                   }
                 ],
                 "conditions": [
                   {
                     "type": "variable_if",
-                    "name": "duo-layer-right_option-r",
+                    "name": "layer-backslash",
                     "value": 1
                   }
                 ]
-              },
+              }
+            ]
+          },
+          {
+            "description": "Layer - layer-close_bracket",
+            "manipulators": [
               {
                 "type": "basic",
                 "from": {
-                  "key_code": "spacebar"
+                  "key_code": "close_bracket"
                 },
                 "to": [
                   {
-                    "shell_command": "open raycast://extensions/raycast/raycast/confetti"
-                  },
-                  {
                     "set_variable": {
-                      "name": "duo-layer-right_option-r",
-                      "value": 0
+                      "name": "layer-close_bracket",
+                      "value": 1
                     }
                   },
                   {
-                    "set_notification_message": {
-                      "id": "duo-layer-duo-layer-right_option-r",
-                      "text": ""
+                    "set_variable": {
+                      "name": "__layer",
+                      "value": 1
                     }
                   }
                 ],
                 "conditions": [
                   {
-                    "type": "variable_if",
-                    "name": "duo-layer-right_option-r",
+                    "type": "variable_unless",
+                    "name": "layer-close_bracket",
                     "value": 1
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "from": {
-                  "key_code": "escape"
-                },
-                "conditions": [
+                  },
                   {
-                    "type": "variable_if",
-                    "name": "duo-layer-right_option-r",
+                    "type": "variable_unless",
+                    "name": "__layer",
                     "value": 1
                   }
                 ],
-                "to": [
+                "to_if_alone": [
+                  {
+                    "key_code": "close_bracket"
+                  }
+                ],
+                "to_after_key_up": [
                   {
                     "set_variable": {
-                      "name": "duo-layer-right_option-r",
+                      "name": "layer-close_bracket",
                       "value": 0
                     }
                   },
                   {
-                    "set_notification_message": {
-                      "id": "duo-layer-duo-layer-right_option-r",
-                      "text": ""
+                    "set_variable": {
+                      "name": "__layer",
+                      "value": 0
                     }
                   }
                 ]
@@ -847,27 +573,54 @@
               {
                 "type": "basic",
                 "from": {
-                  "key_code": "caps_lock"
+                  "key_code": "r"
                 },
+                "to": [
+                  {
+                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"🙏\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
+                  }
+                ],
                 "conditions": [
                   {
                     "type": "variable_if",
-                    "name": "duo-layer-right_option-r",
+                    "name": "layer-close_bracket",
                     "value": 1
                   }
-                ],
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "g"
+                },
                 "to": [
                   {
-                    "set_variable": {
-                      "name": "duo-layer-right_option-r",
-                      "value": 0
-                    }
-                  },
+                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"👍\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
+                  }
+                ],
+                "conditions": [
                   {
-                    "set_notification_message": {
-                      "id": "duo-layer-duo-layer-right_option-r",
-                      "text": ""
-                    }
+                    "type": "variable_if",
+                    "name": "layer-close_bracket",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "b"
+                },
+                "to": [
+                  {
+                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"🙇‍♂️\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "variable_if",
+                    "name": "layer-close_bracket",
+                    "value": 1
                   }
                 ]
               }
@@ -1709,7 +1462,8 @@
                     "name": "double-tap-g-right_option",
                     "value": 1
                   }
-                ]
+                ],
+                "description": "__support__manipulator"
               },
               {
                 "type": "basic",
@@ -1790,7 +1544,8 @@
                     "name": "double-tap-g-right_command",
                     "value": 1
                   }
-                ]
+                ],
+                "description": "__support__manipulator"
               },
               {
                 "type": "basic",
@@ -1844,6 +1599,66 @@
                 "parameters": {
                   "basic.to_delayed_action_delay_milliseconds": 200
                 }
+              }
+            ]
+          },
+          {
+            "description": "[Notion] left_control + [,]でタブ移動",
+            "manipulators": [
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "open_bracket",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_control"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "tab",
+                    "modifiers": [
+                      "left_control",
+                      "right_shift"
+                    ]
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "frontmost_application_if",
+                    "bundle_identifiers": [
+                      "Notion"
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "close_bracket",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_control"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "tab",
+                    "modifiers": [
+                      "left_control"
+                    ]
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "frontmost_application_if",
+                    "bundle_identifiers": [
+                      "Notion"
+                    ]
+                  }
+                ]
               }
             ]
           },
@@ -2038,318 +1853,73 @@
             ]
           },
           {
-            "description": "Snippets",
+            "description": "Layer - layer-period",
             "manipulators": [
               {
                 "type": "basic",
                 "from": {
-                  "simultaneous": [
-                    {
-                      "key_code": "open_bracket"
-                    },
-                    {
-                      "key_code": "n"
-                    },
-                    {
-                      "key_code": "a"
-                    }
-                  ],
-                  "simultaneous_options": {
-                    "key_down_order": "strict"
-                  }
-                },
-                "parameters": {
-                  "basic.simultaneous_threshold_milliseconds": 168
-                },
-                "to": [
-                  {
-                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"石川湧馬\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "from": {
-                  "simultaneous": [
-                    {
-                      "key_code": "open_bracket"
-                    },
-                    {
-                      "key_code": "t"
-                    }
-                  ],
-                  "simultaneous_options": {
-                    "key_down_order": "strict"
-                  }
-                },
-                "parameters": {
-                  "basic.simultaneous_threshold_milliseconds": 168
-                },
-                "to": [
-                  {
-                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"09041209240\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "from": {
-                  "simultaneous": [
-                    {
-                      "key_code": "open_bracket"
-                    },
-                    {
-                      "key_code": "m"
-                    }
-                  ],
-                  "simultaneous_options": {
-                    "key_down_order": "strict"
-                  }
-                },
-                "parameters": {
-                  "basic.simultaneous_threshold_milliseconds": 168
-                },
-                "to": [
-                  {
-                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"yuma.fuu05@gmail.com\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "from": {
-                  "simultaneous": [
-                    {
-                      "key_code": "open_bracket"
-                    },
-                    {
-                      "key_code": "k"
-                    }
-                  ],
-                  "simultaneous_options": {
-                    "key_down_order": "strict"
-                  }
-                },
-                "parameters": {
-                  "basic.simultaneous_threshold_milliseconds": 168
-                },
-                "to": [
-                  {
-                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"yuma.ishikawa@knowledgework.com\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "from": {
-                  "simultaneous": [
-                    {
-                      "key_code": "open_bracket"
-                    },
-                    {
-                      "key_code": "a"
-                    }
-                  ],
-                  "simultaneous_options": {
-                    "key_down_order": "strict"
-                  }
-                },
-                "parameters": {
-                  "basic.simultaneous_threshold_milliseconds": 168
-                },
-                "to": [
-                  {
-                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"ありがとうございます！\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "from": {
-                  "simultaneous": [
-                    {
-                      "key_code": "open_bracket"
-                    },
-                    {
-                      "key_code": "o"
-                    }
-                  ],
-                  "simultaneous_options": {
-                    "key_down_order": "strict"
-                  }
-                },
-                "parameters": {
-                  "basic.simultaneous_threshold_milliseconds": 168
-                },
-                "to": [
-                  {
-                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"okです！\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "from": {
-                  "simultaneous": [
-                    {
-                      "key_code": "open_bracket"
-                    },
-                    {
-                      "key_code": "r"
-                    }
-                  ],
-                  "simultaneous_options": {
-                    "key_down_order": "strict"
-                  }
-                },
-                "parameters": {
-                  "basic.simultaneous_threshold_milliseconds": 168
-                },
-                "to": [
-                  {
-                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"レビューおねがいします🙏\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "from": {
-                  "simultaneous": [
-                    {
-                      "key_code": "open_bracket"
-                    },
-                    {
-                      "key_code": "y"
-                    }
-                  ],
-                  "simultaneous_options": {
-                    "key_down_order": "strict"
-                  }
-                },
-                "parameters": {
-                  "basic.simultaneous_threshold_milliseconds": 168
-                },
-                "to": [
-                  {
-                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"よろしくお願いします！\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "from": {
-                  "simultaneous": [
-                    {
-                      "key_code": "open_bracket"
-                    },
-                    {
-                      "key_code": "s"
-                    }
-                  ],
-                  "simultaneous_options": {
-                    "key_down_order": "strict"
-                  }
-                },
-                "parameters": {
-                  "basic.simultaneous_threshold_milliseconds": 168
-                },
-                "to": [
-                  {
-                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"承知しました🫡\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "from": {
-                  "simultaneous": [
-                    {
-                      "key_code": "open_bracket"
-                    },
-                    {
-                      "key_code": "g"
-                    }
-                  ],
-                  "simultaneous_options": {
-                    "key_down_order": "strict"
-                  }
-                },
-                "parameters": {
-                  "basic.simultaneous_threshold_milliseconds": 168
-                },
-                "to": [
-                  {
-                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"ご確認お願いします🙇‍♂️\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "description": "Remap",
-            "manipulators": [
-              {
-                "type": "basic",
-                "from": {
-                  "key_code": "open_bracket",
-                  "modifiers": {
-                    "mandatory": [
-                      "left_option"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"【】\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "description": "Open Link",
-            "manipulators": [
-              {
-                "type": "basic",
-                "from": {
-                  "simultaneous": [
-                    {
-                      "key_code": "left_option"
-                    },
-                    {
-                      "key_code": "l"
-                    }
-                  ],
-                  "simultaneous_options": {
-                    "to_after_key_up": []
-                  },
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "parameters": {
-                  "basic.simultaneous_threshold_milliseconds": 200
+                  "key_code": "period"
                 },
                 "to": [
                   {
                     "set_variable": {
-                      "name": "duo-layer-left_option-l",
+                      "name": "layer-period",
                       "value": 1
                     }
                   },
                   {
-                    "set_notification_message": {
-                      "id": "duo-layer-duo-layer-left_option-l",
-                      "text": "g: https://github.com\nz: https://zenn.dev\nx: https://x.com\ny: https://youtube.com\nl: https://lms.keio.jp\ns: https://scrapbox.io/yumamemo"
+                    "set_variable": {
+                      "name": "__layer",
+                      "value": 1
                     }
                   }
                 ],
                 "conditions": [
                   {
                     "type": "variable_unless",
-                    "name": "duo-layer-left_option-l",
+                    "name": "layer-period",
+                    "value": 1
+                  },
+                  {
+                    "type": "variable_unless",
+                    "name": "__layer",
+                    "value": 1
+                  }
+                ],
+                "to_if_alone": [
+                  {
+                    "key_code": "period"
+                  }
+                ],
+                "to_after_key_up": [
+                  {
+                    "set_variable": {
+                      "name": "layer-period",
+                      "value": 0
+                    }
+                  },
+                  {
+                    "set_variable": {
+                      "name": "__layer",
+                      "value": 0
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "n"
+                },
+                "to": [
+                  {
+                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"石川湧馬\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "variable_if",
+                    "name": "layer-period",
                     "value": 1
                   }
                 ]
@@ -2357,29 +1927,17 @@
               {
                 "type": "basic",
                 "from": {
-                  "key_code": "g"
+                  "key_code": "t"
                 },
                 "to": [
                   {
-                    "shell_command": "open https://github.com"
-                  },
-                  {
-                    "set_variable": {
-                      "name": "duo-layer-left_option-l",
-                      "value": 0
-                    }
-                  },
-                  {
-                    "set_notification_message": {
-                      "id": "duo-layer-duo-layer-left_option-l",
-                      "text": ""
-                    }
+                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"09041209240\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
                   }
                 ],
                 "conditions": [
                   {
                     "type": "variable_if",
-                    "name": "duo-layer-left_option-l",
+                    "name": "layer-period",
                     "value": 1
                   }
                 ]
@@ -2387,29 +1945,17 @@
               {
                 "type": "basic",
                 "from": {
-                  "key_code": "z"
+                  "key_code": "m"
                 },
                 "to": [
                   {
-                    "shell_command": "open https://zenn.dev"
-                  },
-                  {
-                    "set_variable": {
-                      "name": "duo-layer-left_option-l",
-                      "value": 0
-                    }
-                  },
-                  {
-                    "set_notification_message": {
-                      "id": "duo-layer-duo-layer-left_option-l",
-                      "text": ""
-                    }
+                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"yuma.fuu05@gmail.com\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
                   }
                 ],
                 "conditions": [
                   {
                     "type": "variable_if",
-                    "name": "duo-layer-left_option-l",
+                    "name": "layer-period",
                     "value": 1
                   }
                 ]
@@ -2417,89 +1963,91 @@
               {
                 "type": "basic",
                 "from": {
-                  "key_code": "x"
+                  "key_code": "k"
                 },
                 "to": [
                   {
-                    "shell_command": "open https://x.com"
-                  },
-                  {
-                    "set_variable": {
-                      "name": "duo-layer-left_option-l",
-                      "value": 0
-                    }
-                  },
-                  {
-                    "set_notification_message": {
-                      "id": "duo-layer-duo-layer-left_option-l",
-                      "text": ""
-                    }
+                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"yuma.ishikawa@knowledgework.com\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
                   }
                 ],
                 "conditions": [
                   {
                     "type": "variable_if",
-                    "name": "duo-layer-left_option-l",
+                    "name": "layer-period",
                     "value": 1
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "description": "Layer - layer-open_bracket",
+            "manipulators": [
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "open_bracket"
+                },
+                "to": [
+                  {
+                    "set_variable": {
+                      "name": "layer-open_bracket",
+                      "value": 1
+                    }
+                  },
+                  {
+                    "set_variable": {
+                      "name": "__layer",
+                      "value": 1
+                    }
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "variable_unless",
+                    "name": "layer-open_bracket",
+                    "value": 1
+                  },
+                  {
+                    "type": "variable_unless",
+                    "name": "__layer",
+                    "value": 1
+                  }
+                ],
+                "to_if_alone": [
+                  {
+                    "key_code": "open_bracket"
+                  }
+                ],
+                "to_after_key_up": [
+                  {
+                    "set_variable": {
+                      "name": "layer-open_bracket",
+                      "value": 0
+                    }
+                  },
+                  {
+                    "set_variable": {
+                      "name": "__layer",
+                      "value": 0
+                    }
                   }
                 ]
               },
               {
                 "type": "basic",
                 "from": {
-                  "key_code": "y"
+                  "key_code": "a"
                 },
                 "to": [
                   {
-                    "shell_command": "open https://youtube.com"
-                  },
-                  {
-                    "set_variable": {
-                      "name": "duo-layer-left_option-l",
-                      "value": 0
-                    }
-                  },
-                  {
-                    "set_notification_message": {
-                      "id": "duo-layer-duo-layer-left_option-l",
-                      "text": ""
-                    }
+                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"ありがとうございます！\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
                   }
                 ],
                 "conditions": [
                   {
                     "type": "variable_if",
-                    "name": "duo-layer-left_option-l",
-                    "value": 1
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "from": {
-                  "key_code": "l"
-                },
-                "to": [
-                  {
-                    "shell_command": "open https://lms.keio.jp"
-                  },
-                  {
-                    "set_variable": {
-                      "name": "duo-layer-left_option-l",
-                      "value": 0
-                    }
-                  },
-                  {
-                    "set_notification_message": {
-                      "id": "duo-layer-duo-layer-left_option-l",
-                      "text": ""
-                    }
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "variable_if",
-                    "name": "duo-layer-left_option-l",
+                    "name": "layer-open_bracket",
                     "value": 1
                   }
                 ]
@@ -2511,25 +2059,13 @@
                 },
                 "to": [
                   {
-                    "shell_command": "open https://scrapbox.io/yumamemo"
-                  },
-                  {
-                    "set_variable": {
-                      "name": "duo-layer-left_option-l",
-                      "value": 0
-                    }
-                  },
-                  {
-                    "set_notification_message": {
-                      "id": "duo-layer-duo-layer-left_option-l",
-                      "text": ""
-                    }
+                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"承知しました！\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
                   }
                 ],
                 "conditions": [
                   {
                     "type": "variable_if",
-                    "name": "duo-layer-left_option-l",
+                    "name": "layer-open_bracket",
                     "value": 1
                   }
                 ]
@@ -2537,103 +2073,145 @@
               {
                 "type": "basic",
                 "from": {
-                  "key_code": "escape"
+                  "key_code": "o"
                 },
+                "to": [
+                  {
+                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"okです！\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
+                  }
+                ],
                 "conditions": [
                   {
                     "type": "variable_if",
-                    "name": "duo-layer-left_option-l",
+                    "name": "layer-open_bracket",
                     "value": 1
-                  }
-                ],
-                "to": [
-                  {
-                    "set_variable": {
-                      "name": "duo-layer-left_option-l",
-                      "value": 0
-                    }
-                  },
-                  {
-                    "set_notification_message": {
-                      "id": "duo-layer-duo-layer-left_option-l",
-                      "text": ""
-                    }
                   }
                 ]
               },
               {
                 "type": "basic",
                 "from": {
-                  "key_code": "caps_lock"
+                  "key_code": "r"
                 },
+                "to": [
+                  {
+                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"レビューおねがいします！\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
+                  }
+                ],
                 "conditions": [
                   {
                     "type": "variable_if",
-                    "name": "duo-layer-left_option-l",
+                    "name": "layer-open_bracket",
                     "value": 1
                   }
-                ],
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "y"
+                },
                 "to": [
                   {
-                    "set_variable": {
-                      "name": "duo-layer-left_option-l",
-                      "value": 0
-                    }
-                  },
+                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"よろしくお願いします！\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
+                  }
+                ],
+                "conditions": [
                   {
-                    "set_notification_message": {
-                      "id": "duo-layer-duo-layer-left_option-l",
-                      "text": ""
-                    }
+                    "type": "variable_if",
+                    "name": "layer-open_bracket",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "g"
+                },
+                "to": [
+                  {
+                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"ご確認お願いします！\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "variable_if",
+                    "name": "layer-open_bracket",
+                    "value": 1
                   }
                 ]
               }
             ]
           },
           {
-            "description": "Raycast Command",
+            "description": "Layer - layer-backslash",
             "manipulators": [
               {
                 "type": "basic",
                 "from": {
-                  "simultaneous": [
-                    {
-                      "key_code": "right_option"
-                    },
-                    {
-                      "key_code": "r"
-                    }
-                  ],
-                  "simultaneous_options": {
-                    "to_after_key_up": []
-                  },
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "parameters": {
-                  "basic.simultaneous_threshold_milliseconds": 200
+                  "key_code": "backslash"
                 },
                 "to": [
                   {
                     "set_variable": {
-                      "name": "duo-layer-right_option-r",
+                      "name": "layer-backslash",
                       "value": 1
                     }
                   },
                   {
-                    "set_notification_message": {
-                      "id": "duo-layer-duo-layer-right_option-r",
-                      "text": "p: pick-color\nc: open-camera\ne: search-emoji-symbols\nspacebar: confetti"
+                    "set_variable": {
+                      "name": "__layer",
+                      "value": 1
                     }
                   }
                 ],
                 "conditions": [
                   {
                     "type": "variable_unless",
-                    "name": "duo-layer-right_option-r",
+                    "name": "layer-backslash",
+                    "value": 1
+                  },
+                  {
+                    "type": "variable_unless",
+                    "name": "__layer",
+                    "value": 1
+                  }
+                ],
+                "to_if_alone": [
+                  {
+                    "key_code": "backslash"
+                  }
+                ],
+                "to_after_key_up": [
+                  {
+                    "set_variable": {
+                      "name": "layer-backslash",
+                      "value": 0
+                    }
+                  },
+                  {
+                    "set_variable": {
+                      "name": "__layer",
+                      "value": 0
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "s"
+                },
+                "to": [
+                  {
+                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"すごい\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "variable_if",
+                    "name": "layer-backslash",
                     "value": 1
                   }
                 ]
@@ -2641,29 +2219,17 @@
               {
                 "type": "basic",
                 "from": {
-                  "key_code": "p"
+                  "key_code": "v"
                 },
                 "to": [
                   {
-                    "shell_command": "open raycast://extensions/thomas/color-picker/pick-color"
-                  },
-                  {
-                    "set_variable": {
-                      "name": "duo-layer-right_option-r",
-                      "value": 0
-                    }
-                  },
-                  {
-                    "set_notification_message": {
-                      "id": "duo-layer-duo-layer-right_option-r",
-                      "text": ""
-                    }
+                    "shell_command": "\ntext=$(pbpaste)\n# if text match https://knowledgework.atlassian.net/browse/KWS-{any} then make markdown link\n# [KWS-{any}](https://knowledgework.atlassian.net/browse/KWS-{any})\nif [[ $text =~ KWS-[0-9]+ ]]; then\n  text=\"[${BASH_REMATCH[0]}](https://knowledgework.atlassian.net/browse/${BASH_REMATCH[0]})\"\nfi\n\nosascript -e '\ntell application \"System Events\"\n  keystroke  \"'\"$text\"'\"\nend tell '\n\n"
                   }
                 ],
                 "conditions": [
                   {
                     "type": "variable_if",
-                    "name": "duo-layer-right_option-r",
+                    "name": "layer-backslash",
                     "value": 1
                   }
                 ]
@@ -2676,24 +2242,12 @@
                 "to": [
                   {
                     "shell_command": "open raycast://extensions/raycast/system/open-camera"
-                  },
-                  {
-                    "set_variable": {
-                      "name": "duo-layer-right_option-r",
-                      "value": 0
-                    }
-                  },
-                  {
-                    "set_notification_message": {
-                      "id": "duo-layer-duo-layer-right_option-r",
-                      "text": ""
-                    }
                   }
                 ],
                 "conditions": [
                   {
                     "type": "variable_if",
-                    "name": "duo-layer-right_option-r",
+                    "name": "layer-backslash",
                     "value": 1
                   }
                 ]
@@ -2706,81 +2260,68 @@
                 "to": [
                   {
                     "shell_command": "open raycast://extensions/raycast/emoji-symbols/search-emoji-symbols"
-                  },
-                  {
-                    "set_variable": {
-                      "name": "duo-layer-right_option-r",
-                      "value": 0
-                    }
-                  },
-                  {
-                    "set_notification_message": {
-                      "id": "duo-layer-duo-layer-right_option-r",
-                      "text": ""
-                    }
                   }
                 ],
                 "conditions": [
                   {
                     "type": "variable_if",
-                    "name": "duo-layer-right_option-r",
+                    "name": "layer-backslash",
                     "value": 1
                   }
                 ]
-              },
+              }
+            ]
+          },
+          {
+            "description": "Layer - layer-close_bracket",
+            "manipulators": [
               {
                 "type": "basic",
                 "from": {
-                  "key_code": "spacebar"
+                  "key_code": "close_bracket"
                 },
                 "to": [
                   {
-                    "shell_command": "open raycast://extensions/raycast/raycast/confetti"
-                  },
-                  {
                     "set_variable": {
-                      "name": "duo-layer-right_option-r",
-                      "value": 0
+                      "name": "layer-close_bracket",
+                      "value": 1
                     }
                   },
                   {
-                    "set_notification_message": {
-                      "id": "duo-layer-duo-layer-right_option-r",
-                      "text": ""
+                    "set_variable": {
+                      "name": "__layer",
+                      "value": 1
                     }
                   }
                 ],
                 "conditions": [
                   {
-                    "type": "variable_if",
-                    "name": "duo-layer-right_option-r",
+                    "type": "variable_unless",
+                    "name": "layer-close_bracket",
                     "value": 1
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "from": {
-                  "key_code": "escape"
-                },
-                "conditions": [
+                  },
                   {
-                    "type": "variable_if",
-                    "name": "duo-layer-right_option-r",
+                    "type": "variable_unless",
+                    "name": "__layer",
                     "value": 1
                   }
                 ],
-                "to": [
+                "to_if_alone": [
+                  {
+                    "key_code": "close_bracket"
+                  }
+                ],
+                "to_after_key_up": [
                   {
                     "set_variable": {
-                      "name": "duo-layer-right_option-r",
+                      "name": "layer-close_bracket",
                       "value": 0
                     }
                   },
                   {
-                    "set_notification_message": {
-                      "id": "duo-layer-duo-layer-right_option-r",
-                      "text": ""
+                    "set_variable": {
+                      "name": "__layer",
+                      "value": 0
                     }
                   }
                 ]
@@ -2788,27 +2329,54 @@
               {
                 "type": "basic",
                 "from": {
-                  "key_code": "caps_lock"
+                  "key_code": "r"
                 },
+                "to": [
+                  {
+                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"🙏\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
+                  }
+                ],
                 "conditions": [
                   {
                     "type": "variable_if",
-                    "name": "duo-layer-right_option-r",
+                    "name": "layer-close_bracket",
                     "value": 1
                   }
-                ],
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "g"
+                },
                 "to": [
                   {
-                    "set_variable": {
-                      "name": "duo-layer-right_option-r",
-                      "value": 0
-                    }
-                  },
+                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"👍\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
+                  }
+                ],
+                "conditions": [
                   {
-                    "set_notification_message": {
-                      "id": "duo-layer-duo-layer-right_option-r",
-                      "text": ""
-                    }
+                    "type": "variable_if",
+                    "name": "layer-close_bracket",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "b"
+                },
+                "to": [
+                  {
+                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"🙇‍♂️\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "variable_if",
+                    "name": "layer-close_bracket",
+                    "value": 1
                   }
                 ]
               }
@@ -3650,7 +3218,8 @@
                     "name": "double-tap-g-right_option",
                     "value": 1
                   }
-                ]
+                ],
+                "description": "__support__manipulator"
               },
               {
                 "type": "basic",
@@ -3731,7 +3300,8 @@
                     "name": "double-tap-g-right_command",
                     "value": 1
                   }
-                ]
+                ],
+                "description": "__support__manipulator"
               },
               {
                 "type": "basic",
@@ -3785,6 +3355,66 @@
                 "parameters": {
                   "basic.to_delayed_action_delay_milliseconds": 200
                 }
+              }
+            ]
+          },
+          {
+            "description": "[Notion] left_control + [,]でタブ移動",
+            "manipulators": [
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "open_bracket",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_control"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "tab",
+                    "modifiers": [
+                      "left_control",
+                      "right_shift"
+                    ]
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "frontmost_application_if",
+                    "bundle_identifiers": [
+                      "Notion"
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "close_bracket",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_control"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "tab",
+                    "modifiers": [
+                      "left_control"
+                    ]
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "frontmost_application_if",
+                    "bundle_identifiers": [
+                      "Notion"
+                    ]
+                  }
+                ]
               }
             ]
           },
