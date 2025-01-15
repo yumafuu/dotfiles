@@ -1,0 +1,19 @@
+{
+  "name": "karabiner",
+  "module": "generate.ts",
+  "type": "module",
+  "scripts": {
+    "gen": "bun generate.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.1.16",
+    "@types/js-yaml": "^4.0.9"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "js-yaml": "^4.1.0",
+    "karabiner.ts": "^1.30.3"
+  }
+}
