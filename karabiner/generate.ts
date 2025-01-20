@@ -51,13 +51,13 @@ const shared = [
     ]),
   ]),
 
-  layer('.').manipulators({
+  layer('[').manipulators({
     n: toPaste("石川湧馬"),
     t: toPaste("09041209240"),
     m: toPaste("yuma.fuu05@gmail.com"),
     k: toPaste("yuma.ishikawa@knowledgework.com"),
   }),
-  layer('[').manipulators({
+  layer('.').manipulators({
     a: toPaste("ありがとうございます！"),
     s: toPaste("承知しました！"),
     o: toPaste("okです！"),
