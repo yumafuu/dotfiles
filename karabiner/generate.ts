@@ -66,7 +66,6 @@ const shared = [
     g: toPaste("ご確認お願いします！"),
   }),
   layer('\\').manipulators({
-    s: toPaste("すごい"),
     v: toSuperPaste(),
     c: toRaycast("raycast/system/open-camera"),
     e: toRaycast("raycast/emoji-symbols/search-emoji-symbols"),
