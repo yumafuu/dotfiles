@@ -58,20 +58,6 @@ return {
     },
   },
   {
-    "kana/vim-submode",
-    config = function()
-      vim.cmd([[
-        function! s:my_x()
-          undojoin
-          normal! "_x
-        endfunction
-        nnoremap <silent> <Plug>(my-x) :<C-u>call <SID>my_x()<CR>
-        call submode#enter_with('my_x', 'n', '', 'x', '"_x')
-        call submode#map('my_x', 'n', 'r', 'x', '<Plug>(my-x)')
-      ]])
-    end
-  },
-  {
     "chentoast/marks.nvim",
     event = "VeryLazy",
     opts = {},
@@ -171,7 +157,7 @@ return {
     dependencies = { "kana/vim-textobj-user" },
   },
   "simeji/winresizer",
-  "tpope/vim-surround",
+  -- "tpope/vim-surround",
   "tpope/vim-repeat",
   "tpope/vim-commentary",
   "folke/neodev.nvim",
@@ -188,8 +174,15 @@ return {
   {
     "ggandor/leap.nvim",
     config = function()
-      vim.keymap.set("n", "<C-b>", "<Plug>(leap)")
-      vim.keymap.set("n", "<C-S-b>", "<Plug>(leap-from-window)")
+      vim.keymap.set("n", "gl", "<Plug>(leap)")
+    end,
+  },
+  {
+    "atusy/leap-search.nvim",
+    config = function()
+      vim.keymap.set("n", "g/", function()
+        require("leap-search").leap(vim.fn.getreg("/"))
+      end)
     end,
   },
   "lambdalisue/kensaku.vim",
