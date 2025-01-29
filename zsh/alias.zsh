@@ -54,4 +54,5 @@ alias gogen="go generate"
 alias gorun="go run"
 alias gotest="go test"
 alias gotestv="go test -v"
+alias gtv="go test -v"
 
