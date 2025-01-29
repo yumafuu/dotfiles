@@ -30,12 +30,19 @@ text=$(pbpaste)
 # [KWS-{any}](https://knowledgework.atlassian.net/browse/KWS-{any})
 if [[ $text =~ KWS-[0-9]+ ]]; then
   text="[$\{BASH_REMATCH[0]\}](https://knowledgework.atlassian.net/browse/$\{BASH_REMATCH[0]\})"
+else
+  text="[]($text)"
 fi
 
+
 osascript -e '
-tell application \"System Events\"
-  keystroke  "'"$text"'"
-end tell '
+set prev to the clipboard
+set the clipboard to "'"$text"'"
+tell application "System Events"
+  keystroke "v" using command down
+  delay 0.1
+end tell
+set the clipboard to prev'
 
 `);
 }
