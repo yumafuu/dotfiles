@@ -26,10 +26,20 @@ export const toRaycast = (path: string) => {
 export const toSuperPaste = () => {
   return to$(`
 text=$(pbpaste)
-# if text match https://knowledgework.atlassian.net/browse/KWS-{any} then make markdown link
-# [KWS-{any}](https://knowledgework.atlassian.net/browse/KWS-{any})
 if [[ $text =~ KWS-[0-9]+ ]]; then
-  text="[$\{BASH_REMATCH[0]\}](https://knowledgework.atlassian.net/browse/$\{BASH_REMATCH[0]\})"
+  # if text match https://knowledgework.atlassian.net/browse/KWS-{any} then
+  # [KWS-{any}](https://knowledgework.atlassian.net/browse/KWS-{any})
+
+  title=$\{BASH_REMATCH[0]\}
+  url="https://knowledgework.atlassian.net/browse/$title"
+  text=":jira: [$title]($url)"
+elif [[ $text =~ https://github.com/knowledge-work/knowledgework/pull/[0-9]+ ]]; then
+  # if text match https://github.com/knowledge-work/knowledgework/pull/{any}
+  # then get the title of the PR and make it as [title](url)
+
+  title=$(/opt/homebrew/bin/gh pr view $text --json title --jq .title | cut -d']' -f2)
+  url=$text
+  text=":github: [$title]($url)"
 else
   text="[]($text)"
 fi
