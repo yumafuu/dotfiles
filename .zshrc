@@ -87,3 +87,6 @@ export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 # gh
 ## copilot
 eval "$(gh copilot alias -- zsh)"
+
+# kw
+export PATH="/Users/yuma/ghq/knowledgework/knowledge-work/local/bin:$PATH"
