@@ -1,4 +1,74 @@
 return {
+  {
+    "CopilotC-Nvim/CopilotChat.nvim",
+    dependencies = {
+      { "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log and async functions
+    },
+    build = "make tiktoken", -- Only on MacOS or Linux
+    opts = {
+      -- See Configuration section for options
+    },
+    -- See Commands section for default commands if you want to lazy load on them
+  },
+  {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    event = "InsertEnter",
+    config = function()
+      require("copilot").setup({
+        panel = {
+          enabled = true,
+          auto_refresh = false,
+          keymap = {
+            jump_prev = "[[",
+            jump_next = "]]",
+            accept = "<CR>",
+            refresh = "gr",
+            open = "<M-CR>"
+          },
+          layout = {
+            position = "right", -- | top | left | right | horizontal | vertical
+            ratio = 0.3
+          },
+        },
+        suggestion = {
+          enabled = true,
+          auto_trigger = true,
+          hide_during_completion = false,
+          debounce = 75,
+          keymap = {
+            accept = "<C-g>",
+            accept_word = false,
+            accept_line = false,
+            next = "<M-]>",
+            prev = "<M-[>",
+            dismiss = "<C-.>",
+          },
+        },
+      })
+    end,
+  },
+
+-- {
+--   "github/copilot.vim",
+--   enabled = true,
+--   config = function()
+--     vim.g.copilot_no_tab_map = true
+
+--     local keymap = vim.keymap.set
+--     -- https://github.com/orgs/community/discussions/29817#discussioncomment-4217615
+--     keymap(
+--       "i",
+--       "<C-g>",
+--       'copilot#Accept("<CR>")',
+--       { silent = true, expr = true, script = true, replace_keycodes = false }
+--     )
+--     keymap("i", "<C-j>", "<Plug>(copilot-next)")
+--     keymap("i", "<C-k>", "<Plug>(copilot-previous)")
+--     keymap("i", "<C-o>", "<Plug>(copilot-dismiss)")
+--     keymap("i", "<C-s>", "<Plug>(copilot-suggest)")
+--   end,
+-- },
  {
     "folke/todo-comments.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
@@ -61,26 +131,6 @@ return {
     "chentoast/marks.nvim",
     event = "VeryLazy",
     opts = {},
-  },
-  {
-    "github/copilot.vim",
-    enabled = true,
-    config = function()
-      vim.g.copilot_no_tab_map = true
-
-      local keymap = vim.keymap.set
-      -- https://github.com/orgs/community/discussions/29817#discussioncomment-4217615
-      keymap(
-        "i",
-        "<C-g>",
-        'copilot#Accept("<CR>")',
-        { silent = true, expr = true, script = true, replace_keycodes = false }
-      )
-      keymap("i", "<C-j>", "<Plug>(copilot-next)")
-      keymap("i", "<C-k>", "<Plug>(copilot-previous)")
-      keymap("i", "<C-o>", "<Plug>(copilot-dismiss)")
-      keymap("i", "<C-s>", "<Plug>(copilot-suggest)")
-    end,
   },
   "nvim-lua/popup.nvim",
   "MunifTanjim/nui.nvim",
@@ -446,10 +496,10 @@ return {
       vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>")
       vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>")
       vim.keymap.set("n", "gc", "<cmd>lua vim.lsp.buf.code_action()<CR>")
-      vim.keymap.set("n", "gi", "<cmd>lua im.lsp.buf.implementation()<CR>")
+      vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>")
       vim.keymap.set("n", "gt", "<cmd>lua vim.lsp.buf.type_definition()<CR>")
       vim.keymap.set("n", "gn", "<cmd>lua vim.lsp.buf.rename()<CR>")
-      vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>")
+      vim.keymap.set("n", "K",  "<cmd>lua vim.lsp.buf.hover()<CR>")
       vim.keymap.set("n", "ga", "<cmd>lua vim.diagnostic.open_float()<CR>")
       vim.keymap.set("n", "g]", "<cmd>lua vim.diagnostic.goto_next()<CR>")
       vim.keymap.set("n", "g[", "<cmd>lua vim.diagnostic.goto_prev()<CR>")
