@@ -64,6 +64,8 @@ const shared = [
     r: toPaste("レビューおねがいします！"),
     y: toPaste("よろしくお願いします！"),
     g: toPaste("ご確認お願いします！"),
+    c: toPaste("この回答を60点として100点にしてください"),
+    m: toPaste("100点の回答をするために足りない情報があればなんでも質問してください"),
   }),
   layer('\\').manipulators({
     v: toSuperPaste(),
