@@ -21,8 +21,8 @@ return {
   harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
 
   use_ime = true,
-  window_background_opacity = 0.9,
-  macos_window_background_blur = 100,
+  window_background_opacity = 10 * 0.1,
+  macos_window_background_blur = 7 * 10,
   use_fancy_tab_bar = false,
   enable_tab_bar = true,
   tab_bar_at_bottom = false,
