@@ -51,21 +51,22 @@ const shared = [
     ]),
   ]),
 
-  layer('[').manipulators({
+  layer('.').manipulators({
+    a: toPaste("ありがとうございます！"),
+    b: toPaste("@hiro @masaya @tatsuki @shu"),
+    c: toPaste("この回答を60点として100点にしてください"),
+    g: toPaste("ご確認お願いします！"),
+    m: toPaste("100点の回答をするために足りない情報があればなんでも質問してください"),
+    o: toPaste("okです！"),
+    r: toPaste("レビューおねがいします！🙏"),
+    s: toPaste("承知しました！"),
+    y: toPaste("よろしくお願いします！"),
+  }),
+  layer(',').manipulators({
     n: toPaste("石川湧馬"),
     t: toPaste("09041209240"),
     m: toPaste("yuma.fuu05@gmail.com"),
     k: toPaste("yuma.ishikawa@knowledgework.com"),
-  }),
-  layer('.').manipulators({
-    a: toPaste("ありがとうございます！"),
-    s: toPaste("承知しました！"),
-    o: toPaste("okです！"),
-    r: toPaste("レビューおねがいします！"),
-    y: toPaste("よろしくお願いします！"),
-    g: toPaste("ご確認お願いします！"),
-    c: toPaste("この回答を60点として100点にしてください"),
-    m: toPaste("100点の回答をするために足りない情報があればなんでも質問してください"),
   }),
   layer('\\').manipulators({
     v: toSuperPaste(),
@@ -141,7 +142,7 @@ const shared = [
     ]),
   ]),
 
-  rule("[Slack] 爆速既読セット").manipulators([
+  rule("[Slack] 既読セット").manipulators([
     withCondition(ifApp(Slack))([
       map("h", ["left_command", "left_control"]).to("open_bracket", [
         "left_command",
