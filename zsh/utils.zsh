@@ -8,4 +8,4 @@ function _openJiraFromCurrentBranch() {
 
   open "https://knowledgework.atlassian.net/browse/$ticket"
 }
-alias jira=_openJiraFromCurrentBranch
+alias oj=_openJiraFromCurrentBranch
