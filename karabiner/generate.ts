@@ -63,10 +63,10 @@ const shared = [
     y: toPaste("よろしくお願いします！"),
   }),
   layer(',').manipulators({
-    n: toPaste("石川湧馬"),
+    a: toPaste("石川湧馬"),
     t: toPaste("09041209240"),
-    m: toPaste("yuma.fuu05@gmail.com"),
-    k: toPaste("yuma.ishikawa@knowledgework.com"),
+    s: toPaste("yuma.fuu05@gmail.com"),
+    d: toPaste("yuma.ishikawa@knowledgework.com"),
   }),
   layer('\\').manipulators({
     v: toSuperPaste(),
