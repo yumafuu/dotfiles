@@ -1,6 +1,7 @@
 apps:
   profiles:
     shared:
+
       s: Slack
       a: Wezterm
       r: Reflect
@@ -16,4 +17,5 @@ apps:
       o: zoom.us
       t: Toggl
       g: GoogleCalendar
+      j: Jira
       m: Gmail

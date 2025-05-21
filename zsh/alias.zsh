@@ -10,27 +10,27 @@ alias ez='exec zsh'
 alias se='source ~/.zshenv'
 alias ..="cd .."
 alias ...="cd ../../.."
+alias cdr='cd "$(git rev-parse --show-toplevel)"'
 
-# exa
+# exz
 alias ls='eza -g --time-style=long-iso -a'
 alias ll="eza -la --icons --time-style=long-iso"
-alias tree="exa -T -a -I .git --git-ignore"
+alias tree="eza -T -a -I .git --git-ignore"
+
+# ez
 alias ez='exec zsh'
 
 # vim
-alias v='nvim .'
-alias vv="nvim ~/.config/nvim/"
-alias vz='nvim ~/.zshrc '
+# alias v="fzf|xargs -r nvim"
+alias v="nvim ."
+alias vz='nvim ~/dotfiles/.zshrc '
 alias ve='nvim ~/.zshenv '
-alias vv='vim ~/.config/nvim/init.lua'
+alias vv='vim ~/.config/nvim/lua/plugins.lua'
+alias vd='vim -p $(git diff --name-only)'
 
 # spotify_player
 alias spotify="spt"
 alias spt="spotify_player"
-
-# bundle
-alias b='bundle -j4'
-alias be="bundle exec"
 
 # docker
 alias dk='docker'
@@ -55,4 +55,3 @@ alias gorun="go run"
 alias gotest="go test"
 alias gotestv="go test -v"
 alias gtv="go test -v"
-

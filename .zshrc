@@ -1,4 +1,18 @@
+# config
 export DOTFILES_REPO_PATH="${HOME}/dotfiles"
+export XDG_CONFIG_HOME="${HOME}/.config"
+
+# sheldon ---
+cache_dir=${XDG_CACHE_HOME:-$HOME/.cache}
+sheldon_cache="$cache_dir/sheldon.zsh"
+sheldon_toml="$HOME/.config/sheldon/plugins.toml"
+# キャッシュがない、またはキャッシュが古い場合にキャッシュを作成
+if [[ ! -r "$sheldon_cache" || "$sheldon_toml" -nt "$sheldon_cache" ]]; then
+  mkdir -p $cache_dir
+  sheldon source > $sheldon_cache
+fi
+source "$sheldon_cache"
+unset cache_dir sheldon_cache sheldon_toml
 
 # vim
 alias vim=nvim
@@ -9,29 +23,18 @@ export PATH="/opt/homebrew/bin:$PATH"
 export PATH="/opt/homebrew/opt/sqlite/bin:$PATH"
 export LIBRARY_PATH="/opt/homebrew/lib:$LD_LIBRARY_PATH"
 export LD_LIBRARY_PATH="/opt/homebrew/lib:$LD_LIBRARY_PATH"
+export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
 
-# asdf
-asdf_sh=/opt/homebrew/opt/asdf/libexec/asdf.sh
-[ -s $asdf_sh ] && source $asdf_sh
-export ASDF_GOLANG_MOD_VERSION_ENABLED=true
-export PATH="$(go env GOPATH)/bin:$PATH"
-
-# aqua (make sure load after asdf)
+# aqua
 alias a="aqua"
 export AQUA_GLOBAL_CONFIG=$HOME/dotfiles/aqua/aqua.yaml
-export NPM_CONFIG_PREFIX="${XDG_DATA_HOME:-$HOME/.local/share}/npm-global"
-export PATH=$NPM_CONFIG_PREFIX/bin:$PATH
 export PATH="$(aqua root-dir)/bin:$PATH"
 
-# sheldon
-command -v sheldon >/dev/null && eval "$(sheldon source)"
+# go
+export PATH="$(go env GOPATH)/bin:$PATH"
 
 # cargo
-[ -s "/Users/yuma/.cargo.env" ] && source "/Users/yuma/.cargo.env"
 export PATH=$HOME/.cargo/bin:$PATH
-
-# rye
-[ -s "$HOME/.rye/env" ] && source "$HOME/.rye/env"
 
 # deno
 export PATH="/Users/yuma/.deno/bin:$PATH"
@@ -49,17 +52,18 @@ export PATH="$PATH:$HOME/go/bin"
 export PATH="$HOME/.local/bin:$PATH"
 
 # bun
-[ -s "/Users/yuma/.bun/_bun" ] && source "/Users/yuma/.bun/_bun"
-[ -s "/Users/yuma.ishikawa/.bun/_bun" ] && source "/Users/yuma.ishikawa/.bun/_bun"
+source "/Users/yuma.ishikawa/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
 # pure
-export PURE_CMD_MAX_EXEC_TIME=1
+autoload -U promptinit; promptinit
+export PURE_CMD_MAX_EXEC_TIME=0.1
+export PURE_PROMPT_SYMBOL=">"
 zstyle ':prompt:pure:path' color '#9C9C9C'
-zstyle ':prompt:pure:git:*' color '#8C8C8D'
+zstyle ':prompt:pure:git:*' color '#d3d3d3'
 zstyle ':prompt:pure:prompt:success' color blue
 
 # bindkey
@@ -76,7 +80,7 @@ bindkey "^k" cd_back
 bindkey "^o" ghq-fzf
 
 # rbenv
-command -v rbenv >/dev/null && eval "$(rbenv init -)"
+# command -v rbenv >/dev/null && eval "$(rbenv init -)"
 
 # tmux
 export TMUX_PLUGIN_MANAGER_PATH="~/.tmux/plugins"
@@ -84,9 +88,13 @@ export TMUX_PLUGIN_MANAGER_PATH="~/.tmux/plugins"
 # psql
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 
-# gh
-## copilot
-eval "$(gh copilot alias -- zsh)"
-
 # kw
-export PATH="/Users/yuma/ghq/knowledgework/knowledge-work/local/bin:$PATH"
+export PATH="$HOME/ghq/github.com/knowledge-work/knowledgework/local/bin:$PATH"
+export PATH="$HOME/ghq/github.com/knowledge-work/knowledgework/.yuma/bin:$PATH"
+
+# Windsurf
+export PATH="/Users/yuma.ishikawa/.codeium/windsurf/bin:$PATH"
+
+# if type zprof > /dev/null 2>&1; then
+#   zprof | cat
+# fi

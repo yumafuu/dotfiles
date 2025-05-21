@@ -1,12 +1,15 @@
 local wezterm = require("wezterm")
 local act = wezterm.action
+local font_size = 19.0
+local window_background_opacity = 9 * 0.1
+local macos_window_background_blur = 7 * 10
 
 return {
   color_scheme = "Teerb",
 
   window_decorations = "INTEGRATED_BUTTONS|RESIZE",
   integrated_title_button_style = "Gnome",
-  font_size = 18.0,
+  font_size = font_size,
   font = wezterm.font_with_fallback({
     { family = "Comic Code Ligatures", weight = "Regular" },
     -- "MesloLGS NF",
@@ -21,14 +24,26 @@ return {
   harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
 
   use_ime = true,
-  window_background_opacity = 10 * 0.1,
-  macos_window_background_blur = 7 * 10,
+  window_background_opacity = window_background_opacity,
+  macos_window_background_blur = macos_window_background_blur,
   use_fancy_tab_bar = false,
-  enable_tab_bar = true,
+  enable_tab_bar = false,
   tab_bar_at_bottom = false,
   disable_default_key_bindings = true,
 
   leader = { key = "s", mods = "CTRL", timeout_milliseconds = 500 },
+  colors = {
+    brights = {
+      "#969896",
+      "#cc6666",
+      "#b5bd68",
+      "#f0c674",
+      "#57a2be",
+      "#b294bb",
+      "#8abeb7",
+      "#ffffff",
+    },
+  },
   keys = {
     -----------------------
     --  BASIC
@@ -66,6 +81,11 @@ return {
     --  MODE
     -----------------------
     { key = "[", mods = "LEADER", action = act.ActivateCopyMode },
+
+    -----------------------
+    --  QuickSelect
+    -----------------------
+    { key = "p", mods = "LEADER", action = wezterm.action.QuickSelectArgs({ patterns = { "https?://\\S+" } }) },
   },
 
   key_tables = {},
@@ -78,13 +98,11 @@ return {
   },
 
   quick_select_patterns = {
-    "[0-9a-zA-Z_-]{3,90}",                        -- Words
-    "https?://[\\w.-]+\\.[a-z]{2,}[\\w/?.=&%-]*", -- URLs
-    "/[\\w.-/]+",                                 -- File paths
-    "[\\w._%+-]+@[\\w.-]+\\.[a-z]{2,}",           -- Emails
-    "\\b(?:\\d{1,3}\\.){3}\\d{1,3}\\b",           -- IP addresses
-    "\\b0x[0-9a-fA-F]+\\b",                       -- Hex numbers
-    "\\b[0-9a-fA-F]{7,40}\\b",                    -- Git hashes
-    "\\b[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\\b" -- UUIDs
+    [[\b(?:/|~/|\.\.?/)?(?:[^/\s]+/)*[^/\s]+\b]],
+    "[a-zA-Z][a-zA-Z0-9+.-]*://[^\\s\\x{00}-\\x{1F}<>\"'()\\[\\]]+",
+    "[A-Za-z0-9._%%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}",
+    "\\b[0-9a-fA-F]{7,40}\\b",
+    "\\b[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\\b",
+    "[0-9a-zA-Z_-]{3,90}",
   },
 }

@@ -15,6 +15,9 @@ import {
   withMapper,
   withModifier,
   writeToProfile,
+  toRemoveNotificationMessage,
+  toUnsetVar,
+  ifVar,
 } from "karabiner.ts";
 
 import {
@@ -44,29 +47,71 @@ const { apps } = await ReadYaml(`${__dirname}/setting.yaml`) as Setting;
 //  '⌃': 'control',
 //  '⇧': 'shift',
 //  '⇪': 'caps_lock',
+let raycastEmoji = 'raycast/emoji-symbols/search-emoji-symbols'
+let escape = [toUnsetVar('leader'), toRemoveNotificationMessage('leader')]
+
 const shared = [
+  // ========================================================================
+  rule('Hyper').manipulators([
+    map('right⌘').toHyper().toIfAlone('right⌘')
+  ]),
+  // -------
+  // nested
+  // -------
+   rule('Leader Key').manipulators([
+    withCondition(ifVar('leader', 0))([
+      map('l', 'Hyper')
+        .toVar('leader', 1)
+        .toNotificationMessage('leader', 'Leader Key: Open, Raycast, ...'),
+    ]),
+
+    withCondition(ifVar('leader', 0).unless())([
+      map('escape').to(escape),
+    ]),
+
+    withCondition(ifVar('leader', 1))([
+      withMapper(['o', 'r', 't'])((x) =>
+        map(x)
+          .toVar('leader', x)
+          .toNotificationMessage('leader', `leader ${x}`),
+      ),
+    ]),
+
+    withCondition(ifVar('leader', 't'))(
+      [
+        map('a').toPaste('ありがとうございます！'),
+        map('s').toPaste('承知です！'),
+        map('y').toPaste('よろしくお願いします！'),
+        map('n').toPaste('【社内】'),
+        map('k').toPaste('【個人】'),
+      ].map((x) => x.to(escape)),
+    ),
+
+    withCondition(ifVar('leader', 'o'))(
+      [
+        map('f').toApp('Finder'),
+      ].map((x) => x.to(escape)),
+    ),
+
+    withCondition(ifVar('leader', 'r'))(
+      [
+        map('e').to$(`open raycast://extensions/${raycastEmoji}`),
+      ].map((x) => x.to(escape)),
+    ),
+  ]),
+  // ========================================================================
+
   rule("Open App - shared").manipulators([
     withModifier("⌃⇧")([
       withMapper(apps.profiles.shared)((k, v) => map(k).toApp(v)),
     ]),
   ]),
 
-  layer('.').manipulators({
-    a: toPaste("ありがとうございます！"),
-    b: toPaste("@hiro @masaya @tatsuki @shu"),
-    c: toPaste("この回答を60点として100点にしてください"),
-    g: toPaste("ご確認お願いします！"),
-    m: toPaste("100点の回答をするために足りない情報があればなんでも質問してください"),
-    o: toPaste("okです！"),
-    r: toPaste("レビューおねがいします！🙏"),
-    s: toPaste("承知しました！"),
-    y: toPaste("よろしくお願いします！"),
-  }),
-  layer(',').manipulators({
-    a: toPaste("石川湧馬"),
+  layer('/').manipulators({
+    n: toPaste("石川湧馬"),
     t: toPaste("09041209240"),
-    s: toPaste("yuma.fuu05@gmail.com"),
-    d: toPaste("yuma.ishikawa@knowledgework.com"),
+    m: toPaste("yuma.fuu05@gmail.com"),
+    k: toPaste("yuma.ishikawa@knowledgework.com"),
   }),
   layer('\\').manipulators({
     v: toSuperPaste(),
@@ -111,6 +156,16 @@ const shared = [
     withCondition(ifApp(`${Wezterm}`).unless())([
       map("w", "left_control")
         .to("delete_or_backspace", "command"),
+    ]),
+  ]),
+
+  rule("[Wezterm] escで英数字モード").manipulators([
+    withCondition(ifApp(`${Wezterm}`))([
+      map("escape", "optionalAny")
+        .toIfAlone(toKey("japanese_eisuu"))
+        .toIfHeldDown(toKey("left_control"))
+        .to({ key_code: "left_control", lazy: true }),
+
     ]),
   ]),
 
