@@ -1,15 +1,24 @@
 shell = "zsh"
 
+[templates]
+defer = "{{ hooks | get: \"pre\" | nl }}{% for file in files %}zsh-defer source \"{{ file }}\"\n{% endfor %}{{ hooks | get: \"post\" | nl }}"
+
 [plugins]
 
-[plugins.zsh-syntax-highlighting]
-github = "zsh-users/zsh-syntax-highlighting"
+[plugins.zsh-defer]
+github = "romkatv/zsh-defer"
 
-[plugins.zsh-abbr]
-github = "olets/zsh-abbr"
+# [plugins.zsh-syntax-highlighting]
+# github = "zsh-users/zsh-syntax-highlighting"
+# apply = ["defer"]
 
-[plugins.zsh-completions]
-github = 'zsh-users/zsh-completions'
+# [plugins.zsh-abbr]
+# github = "olets/zsh-abbr"
+# apply = ["defer"]
+
+# [plugins.zsh-completions]
+# github = 'zsh-users/zsh-completions'
+# apply = ["defer"]
 
 [plugins.pure]
 github = 'sindresorhus/pure'
@@ -17,7 +26,8 @@ use = ["async.zsh", "pure.zsh"]
 
 [plugins.localzsh]
 local = '~/dotfiles/zsh'
+apply = ["defer"]
 
-[plugins.preview-cli]
+[plugins.command]
 local = '~/dotfiles/shell-command'
 apply = ["PATH"]

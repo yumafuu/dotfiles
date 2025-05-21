@@ -11,6 +11,7 @@ function g-branch-fzf() {
 alias _gitCheckoutFuzzy="g-branch-fzf | xargs git checkout"
 alias co=_gitCheckoutFuzzy
 alias gco='git checkout'
+alias ghco='gh pr checkout'
 alias gcob="git checkout -b"
 
 # push

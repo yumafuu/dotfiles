@@ -11,12 +11,31 @@ export LANG=en_US.UTF-8
 export WORDCHARS='*?_.[]~-=&;!#$%^(){}<>'
 export LESS='-R'
 export HISTFILE=${HOME}/.zsh_history
-export HISTSIZE=100000000
-export SAVEHIST=100000000
+export HISTSIZE=1000000
+export SAVEHIST=1000000
+export WORDCHARS='*?_.[]~-&;!#$%^(){}<>'
 
 # autoload
 autoload colors
-autoload -zU compinit && compinit
+# autoload -zU compinit && compinit
+_compinit() {
+  local re_initialize=0
+  for match in ${ZDOTDIR}/.zcompdump*(.Nmh+24); do
+    re_initialize=1
+    break
+  done
+
+  autoload -Uz compinit
+  if [ "$re_initialize" -eq "1" ]; then
+    compinit
+    # update the timestamp on compdump file
+    compdump
+  else
+    # omit the check for new functions since we updated today
+    compinit -C
+  fi
+}
+_compinit
 
 # stty
 stty erase '^?'

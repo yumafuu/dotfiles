@@ -3,11 +3,16 @@ fzf:
 ghq:
   showFullpath: false
   nested:
-    - root: github.com/yumafuu/bite-poc-cli
+    - root: github.com/knowledge-work/knowledgework
       dirs:
-        - core
+        - z-playground/yuma
+        - z-playground/yuma/sharepoint-api
+  exclude:
+    - github.com/knowledge-work/og-generator
+    - github.com/knowledge-work/experimental
 external:
   - "~/dotfiles"
   - "~/dotfiles/nvim"
   - "~/dotfiles/karabiner"
   - "~/Downloads"
+  - "~/junk"

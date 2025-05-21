@@ -13,6 +13,25 @@ hl(0, "HlSearchLens", { bg = None, fg = "#7CB0FF" })
 hl(0, "HlSearchLensNear", { bg = "None", fg = "#7BAFDA" })
 
 vim.cmd("set winhighlight=Normal:MyNormal,NormalNC:MyNormalNC")
+vim.cmd("colorscheme nord")
+vim.g.did_install_default_menus = 1
+vim.g.did_install_syntax_menu = 1
+vim.g.did_indent_on = 1
+vim.g.did_load_filetypes = 1
+vim.g.did_load_ftplugin = 1
+vim.g.loaded_2html_plugin = 1
+vim.g.loaded_gzip = 1
+vim.g.loaded_man = 1
+vim.g.loaded_matchit = 1
+vim.g.loaded_matchparen = 1
+vim.g.loaded_netrwPlugin = 1
+vim.g.loaded_remote_plugins = 1
+vim.g.loaded_shada_plugin = 1
+vim.g.loaded_spellfile_plugin = 1
+vim.g.loaded_tarPlugin = 1
+vim.g.loaded_tutor_mode_plugin = 1
+vim.g.loaded_zipPlugin = 1
+vim.g.skip_loading_mswin = 1
 
 local o = vim.opt
 
@@ -106,6 +125,8 @@ maps = {
     ["<C-n>"] = "<cmd>tabnext<CR>",
     ["<C-p>"] = "<cmd>tabprevious<CR>",
     ["tv"] = "<cmd>vsplit | terminal<CR>",
+    ["<C-d>"] = "<C-d>zz",
+    ["<C-u>"] = "<C-u>zz",
   },
   i = {
     ["<C-h>"] = "<Left>",
@@ -113,6 +134,8 @@ maps = {
   },
   v = {
     ["go"] = "<Plug>(openbrowser-smart-search)",
+    ["<C-d>"] = "<C-d>zz",
+    ["<C-u>"] = "<C-u>zz",
   },
 }
 
@@ -145,6 +168,9 @@ vim.keymap.set("n", "<C-a>", require("dial.map").inc_normal(), { noremap = true 
 vim.keymap.set("n", "<C-x>", require("dial.map").dec_normal(), { noremap = true })
 vim.keymap.set("v", "<C-a>", require("dial.map").inc_visual(), { noremap = true })
 vim.keymap.set("v", "<C-x>", require("dial.map").dec_visual(), { noremap = true })
+vim.api.nvim_set_keymap("n", "<leader>av", ":AvanteToggle<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("v", "<leader>av", ":AvanteToggle<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("i", "<C-a>", "<C-o>:AvanteToggle<CR>", { noremap = false, silent = true })
 
 vim.cmd([[
   " mark jump
@@ -158,10 +184,6 @@ vim.cmd([[
   nnoremap p ]p`]
   nnoremap P ]P`]
 
-  " f, F で next paragraph
-  nnoremap F<cr> {
-  nnoremap f<cr> }
-
   " git diff
   command! GitDiff new
       \ | setlocal buftype=nofile bufhidden=delete noswapfile
@@ -171,14 +193,6 @@ vim.cmd([[
       \ | normal! gg
   nnoremap ds <cmd>GitDiff<cr>
 
-  " Mで括弧ジャンプ
-  packadd! matchit
-  noremap M %
-  map <expr> M expand('<cword>') =~# 'end' ? '%' : 'g%'
-
-  " Dup line
-  nnoremap <space>j <Cmd>copy.<CR>
-  xnoremap <space>j :copy'>+0<CR>gv
 
   " :memoで :e {gitroot}/.yuma/{branch}/memo.md を開く
   command! -nargs=0 Memo execute 'silent! call mkdir((isdirectory(system("git rev-parse --show-toplevel 2>/dev/null | tr -d \"\\n\"")) ? substitute(system("git rev-parse --show-toplevel"), "\n", "", "") . "/.yuma/" . substitute(system("git rev-parse --abbrev-ref HEAD"), "\n", "", "") : "memo"), "p")' | execute 'e ' . (isdirectory(system('git rev-parse --show-toplevel 2>/dev/null | tr -d "\\n"')) ? substitute(system('git rev-parse --show-toplevel'), '\n', '', '') . '/.yuma/' . substitute(system('git rev-parse --abbrev-ref HEAD'), '\n', '', '') . '/memo.md' : 'memo/memo.md')
