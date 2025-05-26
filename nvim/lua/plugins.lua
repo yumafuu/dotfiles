@@ -423,28 +423,9 @@ return {
         },
       }
 
-      -- LazyDocker
-      local lazydocker = Terminal:new({
-        cmd = "lazydocker",
-        -- dir = "git_dir",
-        direction = "float",
-        hidden = true,
-        close_on_exit = true,
-        float_opts = float_opts,
-        highlights = highlights,
-        on_open = function(term)
-          vim.cmd("startinsert!")
-          vim.api.nvim_buf_set_keymap(term.bufnr, "t", "<Space>d", "<CMD>close<CR>", opts)
-        end,
-      })
-      function _toggleLazydockerTerminal()
-        lazydocker:toggle()
-      end
-      vim.api.nvim_set_keymap("n", "<Space>d", "<cmd>lua _toggleLazydockerTerminal()<CR>", opts)
-
-      -- LazyGit
-      local lazygit = Terminal:new({
-        cmd = "lazygit",
+      -- git
+      local git_ui = Terminal:new({
+        cmd = "tig",
         dir = "git_dir",
         direction = "float",
         hidden = true,
@@ -456,10 +437,10 @@ return {
           vim.api.nvim_buf_set_keymap(term.bufnr, "t", "<c-\\>", "<CMD>close<CR>", opts)
         end,
       })
-      function _toggleLazygitTerminal()
-        lazygit:toggle()
+      function _toggle_git_ui()
+        git_ui:toggle()
       end
-      vim.api.nvim_set_keymap("n", "<c-\\>", "<cmd>lua _toggleLazygitTerminal()<CR>", opts)
+      vim.api.nvim_set_keymap("n", "<c-\\>", "<cmd>lua _toggle_git_ui()<CR>", opts)
     end,
   },
   {

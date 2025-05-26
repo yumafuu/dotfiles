@@ -32,3 +32,8 @@ startup_command = "nvim aqua.yaml"
 name = "📁sesh"
 path = "~/dotfiles/sesh"
 startup_command = "nvim sesh.toml"
+
+[[session]]
+name = "💬dotfiles"
+path = "~/dotfiles"
+startup_command = "dotfiles link && nvim ."
