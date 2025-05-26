@@ -3,5 +3,6 @@ bind refs    M !git branch -m %(branch) "%(prompt Enter branch name: )"
 bind reflog  M !git branch -m %(branch) "%(prompt Enter branch name: )"
 set diff-highlight = true
 
+bind status C >git commit -v
 bind status R >gh pr create
-bind status O >gh pr view
+bind status V >gh pr view
