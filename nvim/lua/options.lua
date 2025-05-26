@@ -1,19 +1,19 @@
 local hl = vim.api.nvim_set_hl
 
-hl(0, "NormalFloat", { bg = None })
-hl(0, "FloatBorder", { bg = None, fg = "#444444" })
-hl(0, "ActiveWindow", { bg = None })
-hl(0, "InactiveWindow", { bg = None })
+vim.cmd("colorscheme nord")
+vim.cmd("set winhighlight=Normal:MyNormal,NormalNC:MyNormalNC")
+hl(0, "NormalFloat", { bg = "None" })
+hl(0, "FloatBorder", { fg = "#444444" })
+hl(0, "ActiveWindow", { bg = "None" })
+hl(0, "InactiveWindow", { bg = "None" })
 hl(0, "LineNr", { fg = "#C0C0C0" })
 hl(0, "CursorLineNr", { fg = "#66C1FF" })
-hl(0, "NotifyBackground", { bg = None })
-hl(0, "TelescopeNormal", { bg = None })
+hl(0, "NotifyBackground", { bg = "None" })
+hl(0, "TelescopeNormal", { bg = "None" })
 hl(1, "HlSearchNear", { bg = "#444444", fg = "#7CB0FF" })
 hl(0, "HlSearchLens", { bg = None, fg = "#7CB0FF" })
 hl(0, "HlSearchLensNear", { bg = "None", fg = "#7BAFDA" })
 
-vim.cmd("set winhighlight=Normal:MyNormal,NormalNC:MyNormalNC")
-vim.cmd("colorscheme nord")
 vim.g.did_install_default_menus = 1
 vim.g.did_install_syntax_menu = 1
 vim.g.did_indent_on = 1
@@ -32,6 +32,21 @@ vim.g.loaded_tarPlugin = 1
 vim.g.loaded_tutor_mode_plugin = 1
 vim.g.loaded_zipPlugin = 1
 vim.g.skip_loading_mswin = 1
+
+vim.diagnostic.config({
+  float = { border = "rounded" },
+})
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+  vim.lsp.handlers.hover, {
+    border = "rounded",
+  }
+)
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
+  vim.lsp.handlers.signature_help, {
+    border = "rounded",
+  }
+)
+
 
 local o = vim.opt
 

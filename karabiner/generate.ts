@@ -120,8 +120,8 @@ const shared = [
   }),
   layer(']').manipulators({
     r: toPaste("🙏"),
-    g: toPaste("👍"),
-    b: toPaste("🙇‍♂️"),
+    b: toPaste("👍"),
+    t: toPaste("🎉"),
   }),
 
   rule("コロンとセミコロンを入れ替える").manipulators([

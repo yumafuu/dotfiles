@@ -34,33 +34,38 @@ return {
     },
   },
   {
-    "yetone/avante.nvim",
-    opts = {
-      provider = "claude",
-      claude = {
-        endpoint = "https://api.anthropic.com",
-        model = "claude-3-7-sonnet-20250219",
-      },
-      vertex = {
-        model = "gemini-2.5-pro-preview-05-06",
-        endpoint = "https://us-central1-aiplatform.googleapis.com/v1/projects/kwit-gemini-api/locations/us-central1/publishers/google/models",
-      },
-    },
-    event = "VeryLazy",
-    version = false, -- Never set this value to "*"! Never!
-    -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
-    build = "make",
-    system_prompt = function()
-      local hub = require("mcphub").get_hub_instance()
-      return hub:get_active_servers_prompt()
-    end,
-    -- Using function prevents requiring mcphub before it's loaded
-    custom_tools = function()
-      return {
-        require("mcphub.extensions.avante").mcp_tool(),
-      }
+    "olimorris/codecompanion.nvim",
+    config = function()
     end,
   },
+  -- {
+  --   "yetone/avante.nvim",
+  --   opts = {
+  --     provider = "claude",
+  --     claude = {
+  --       endpoint = "https://api.anthropic.com",
+  --       model = "claude-3-7-sonnet-20250219",
+  --     },
+  --     vertex = {
+  --       model = "gemini-2.5-pro-preview-05-06",
+  --       endpoint = "https://us-central1-aiplatform.googleapis.com/v1/projects/kwit-gemini-api/locations/us-central1/publishers/google/models",
+  --     },
+  --   },
+  --   event = "VeryLazy",
+  --   version = false, -- Never set this value to "*"! Never!
+  --   -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
+  --   build = "make",
+  --   system_prompt = function()
+  --     local hub = require("mcphub").get_hub_instance()
+  --     return hub:get_active_servers_prompt()
+  --   end,
+  --   -- Using function prevents requiring mcphub before it's loaded
+  --   custom_tools = function()
+  --     return {
+  --       require("mcphub.extensions.avante").mcp_tool(),
+  --     }
+  --   end,
+  -- },
   {
     -- Make sure to set this up properly if you have lazy=true
     "MeanderingProgrammer/render-markdown.nvim",
@@ -139,7 +144,7 @@ return {
   {
     "kylechui/nvim-surround",
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
-    event = "VeryLazy",
+    event = "VimEnter",
     config = function()
       require("nvim-surround").setup({
         -- Configuration here, or leave empty to use defaults
@@ -279,7 +284,7 @@ return {
     event = "VeryLazy",
     config = function()
       require("nvim-file-location").setup({
-        keymap = "<leader>cf",
+        keymap = "<leader>l",
         mode = "workdir", -- options: workdir | absolute
         add_line = false,
         add_column = false,
@@ -339,19 +344,25 @@ return {
       require("insx.preset.standard").setup()
     end,
   },
-  { "kana/vim-operator-user", lazy = true },
-  { "kana/vim-operator-replace", lazy = true },
+  {
+    "kana/vim-operator-user",
+    lazy = false,
+  },
+  {
+    "kana/vim-operator-replace",
+    lazy = false,
+    dependencies = { "kana/vim-operator-user" },
+  },
   { "tyru/operator-camelize.vim", lazy = true },
   { "kana/vim-textobj-user", lazy = true },
-  { "simeji/winresizer", lazy = true },
-  -- "tpope/vim-surround",
-  { "tpope/vim-repeat", lazy = true },
+  { "simeji/winresizer", event = "VeryLazy" },
+  { "tpope/vim-repeat", lazy = false },
   { "tpope/vim-commentary", lazy = true },
-  { "machakann/vim-highlightedyank", lazy = true },
+  { "machakann/vim-highlightedyank", event = "VeryLazy" },
   { "dhruvasagar/vim-table-mode", lazy = true },
   { "nvim-treesitter/nvim-treesitter", lazy = true },
-  { "vim-denops/denops.vim", lazy = false },
-  { "lambdalisue/kensaku.vim", lazy = true },
+  { "vim-denops/denops.vim", lazy = true },
+  { "lambdalisue/kensaku.vim", event = "CmdlineEnter" },
   {
     "lambdalisue/kensaku-search.vim",
     lazy = true,
@@ -474,6 +485,7 @@ return {
   { "shaunsingh/nord.nvim", lazy = false },
   {
     "stevearc/oil.nvim",
+    lazy = false,
     config = function()
       require("oil").setup({
         default_file_explorer = true,
@@ -522,7 +534,7 @@ return {
       end, { noremap = true, silent = true })
     end,
   },
-  { "tyru/open-browser.vim", lazy = true },
+  { "tyru/open-browser.vim", event = "VeryLazy" },
   {
     "xiyaowong/nvim-transparent",
     lazy = false, -- needed
@@ -548,19 +560,25 @@ return {
     "ray-x/go.nvim",
     config = function()
       require("go").setup()
+      local format_sync_grp = vim.api.nvim_create_augroup("GoFormat", {})
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        pattern = "*.go",
+        callback = function()
+         require('go.format').goimports()
+        end,
+        group = format_sync_grp,
+      })
+
     end,
-    event = { "CmdlineEnter" },
+    event = "VeryLazy",
     ft = { "go", "gomod" },
     build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
   },
   { "ray-x/guihua.lua", lazy = true },
   {
     "neovim/nvim-lspconfig",
-    lazy = true,
+    -- lazy = true,
     config = function()
-      vim.diagnostic.config({
-        float = { border = "rounded" },
-      })
       local lspconfig = require("lspconfig")
       lspconfig["denols"].setup({
         root_dir = lspconfig.util.root_pattern("deno.json"),
@@ -586,7 +604,10 @@ return {
           config = "~/dotfiles/typos/typos.toml",
         },
       })
-      lspconfig.protols.setup({})
+      -- lspconfig.protols.setup({})
+      lspconfig.buf_ls.setup({})
+      -- lspconfig.terraform.setup({})
+      lspconfig.terraformls.setup({})
       lspconfig.gopls.setup({
         capabilities = capabilities,
         settings = {
@@ -713,7 +734,7 @@ return {
       vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>")
       vim.keymap.set("n", "gt", "<cmd>lua vim.lsp.buf.type_definition()<CR>")
       vim.keymap.set("n", "gn", "<cmd>lua vim.lsp.buf.rename()<CR>")
-      vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>")
+      -- vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>")
       vim.keymap.set("n", "ga", "<cmd>lua vim.diagnostic.open_float()<CR>")
       vim.keymap.set("n", "g]", "<cmd>lua vim.diagnostic.goto_next()<CR>")
       vim.keymap.set("n", "g[", "<cmd>lua vim.diagnostic.goto_prev()<CR>")
@@ -722,7 +743,7 @@ return {
   },
   {
     "j-hui/fidget.nvim",
-    lazy = true,
+    -- event = "VeryLazy",
     config = function()
       require("fidget").setup({
         notification = {
@@ -734,35 +755,74 @@ return {
       })
     end,
   },
+  {
+    "lewis6991/hover.nvim",
+    config = function()
+      require("hover").setup({
+        init = function()
+          -- Require providers
+          require("hover.providers.lsp")
+          require('hover.providers.diagnostic')
+          require('hover.providers.gh')
+          require('hover.providers.gh_user')
+          require('hover.providers.jira')
+          -- require('hover.providers.dap')
+          require('hover.providers.fold_preview')
+          -- require('hover.providers.man')
+          require('hover.providers.dictionary')
+          -- require('hover.providers.highlight')
+        end,
+        preview_opts = {
+          border = "rounded",
+        },
+        -- Whether the contents of a currently open hover window should be moved
+        -- to a :h preview-window when pressing the hover keymap.
+        preview_window = true,
+        title = true,
+        mouse_providers = {
+          "LSP",
+        },
+        mouse_delay = 1000,
+      })
+
+      -- Setup keymaps
+      vim.keymap.set("n", "K", require("hover").hover, { desc = "hover.nvim" })
+      vim.keymap.set("n", "gK", require("hover").hover_select, { desc = "hover.nvim (select)" })
+      vim.keymap.set("n", "<S-h>", function() require("hover").hover_switch("previous") end, { desc = "hover.nvim (previous source)" })
+      vim.keymap.set("n", "<S-l>", function() require("hover").hover_switch("next") end, { desc = "hover.nvim (next source)" })
+
+      vim.o.mousemoveevent = true
+    end,
+  },
+  {
+    "greggh/claude-code.nvim",
+    config = function()
+      require("claude-code").setup()
+    end
+  },
   -------------------
   -- cmp
   -------------------
-  { "hrsh7th/cmp-nvim-lsp", lazy = true },
-  { "hrsh7th/cmp-buffer", lazy = true },
-  { "hrsh7th/cmp-path", lazy = true },
-  { "hrsh7th/cmp-cmdline", lazy = true },
+  { "hrsh7th/cmp-nvim-lsp", event = "VeryLazy" },
+  { "hrsh7th/cmp-buffer", event = "VeryLazy" },
+  { "hrsh7th/cmp-path", event = "VeryLazy" },
+  { "hrsh7th/cmp-cmdline", event = "VeryLazy" },
+  { "hrsh7th/cmp-omni", event = "VeryLazy" },
+  { "hrsh7th/cmp-nvim-lsp-signature-help", event = "VeryLazy" },
+  { "hrsh7th/cmp-calc", event = "VeryLazy" },
+  { "lukas-reineke/cmp-rg", event = "VeryLazy" },
   {
     "hrsh7th/nvim-cmp",
-    lazy = true,
+    event = "VeryLazy",
     config = function()
       vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
         border = "rounded", -- "shadow" , "none", "rounded"
-        -- border = border
+        border = border,
         -- width = 100,
       })
       local cmp = require("cmp")
 
       cmp.setup({
-        -- snippet = {
-        --   -- REQUIRED - you must specify a snippet engine
-        --   expand = function(args)
-        --     -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-        --     -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-        --     -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
-        --     -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
-        --     -- vim.snippet.expand(args.body) -- For native neovim snippets (Neovim v0.10+)
-        --   end,
-        -- },
         window = {
           completion = cmp.config.window.bordered({
             border = "rounded",
@@ -784,12 +844,18 @@ return {
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
           { name = "codeium" },
-          -- { name = "vsnip" }, -- For vsnip users.
-          -- { name = 'luasnip' }, -- For luasnip users.
-          -- { name = 'ultisnips' }, -- For ultisnips users.
-          -- { name = 'snippy' }, -- For snippy users.
-        }, {
-          { name = "buffer" },
+          { name = "buffer", max_item_count = 10, keyword_length = 2 },
+          { name = "path" },
+          { name = "calc" },
+          { name = "omni", option = { disable_omnifuncs = { "v:lua.vim.lsp.omnifunc" } } },
+          {
+            name = "rg",
+            keyword_length = 5,
+            max_item_count = 5,
+            option = { additional_arguments = "--smart-case --hidden" },
+            priority = 80,
+            group_index = 3,
+          },
         }),
       })
 
@@ -995,9 +1061,10 @@ return {
       })
     end,
   },
-  { "lambdalisue/guise.vim" },
+  { "lambdalisue/guise.vim", lazy = true },
   {
     "linrongbin16/gitlinker.nvim",
+    lazy = true,
     cmd = "GitLink",
     opts = {},
     keys = {

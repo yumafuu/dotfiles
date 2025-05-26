@@ -1,19 +1,34 @@
 [[session]]
-name = "Downloads 📥"
+name = "🐤kw"
 path = "~/Downloads"
 startup_command = "ls"
 
 [[session]]
-name = "tmux config"
+name = "📥Downloads"
+path = "~/Downloads"
+startup_command = "ls"
+
+[[session]]
+name = "📄tmux"
 path = "~/dotfiles/tmux"
 startup_command = "nvim .tmux.conf"
 
 [[session]]
-name = "nvim config"
+name = "😈nvim"
 path = "~/dotfiles/nvim"
+startup_command = "nvim lua/plugins.lua"
+
+[[session]]
+name = "💻karabiner"
+path = "~/dotfiles/karabiner"
 startup_command = "nvim ."
 
 [[session]]
-name = "karabiner"
-path = "~/dotfiles/karabiner"
-startup_command = "nvim ."
+name = "💧aqua"
+path = "~/dotfiles/aqua"
+startup_command = "nvim aqua.yaml"
+
+[[session]]
+name = "📁sesh"
+path = "~/dotfiles/sesh"
+startup_command = "nvim sesh.toml"
