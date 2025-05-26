@@ -5,3 +5,8 @@ Taskfile.yuma.yaml
 .vscode
 justfile
 .pre-commit-config.yaml
+CLAUDE.md
+
+**/.claude/settings.local.json
+
+**/CLAUDE.local.md

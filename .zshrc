@@ -28,7 +28,13 @@ export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
 # aqua
 alias a="aqua"
 export AQUA_GLOBAL_CONFIG=$HOME/dotfiles/aqua/aqua.yaml
+export NPM_CONFIG_PREFIX=${XDG_DATA_HOME:-$HOME/.local/share}/npm-global
+export PATH=$NPM_CONFIG_PREFIX/bin:$PATH
 export PATH="$(aqua root-dir)/bin:$PATH"
+
+# mise
+zsh-defer eval "$(mise activate zsh)"
+zsh-defer eval "$(mise hook-env)"
 
 # go
 export PATH="$(go env GOPATH)/bin:$PATH"
