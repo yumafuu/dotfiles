@@ -183,9 +183,6 @@ vim.keymap.set("n", "<C-a>", require("dial.map").inc_normal(), { noremap = true 
 vim.keymap.set("n", "<C-x>", require("dial.map").dec_normal(), { noremap = true })
 vim.keymap.set("v", "<C-a>", require("dial.map").inc_visual(), { noremap = true })
 vim.keymap.set("v", "<C-x>", require("dial.map").dec_visual(), { noremap = true })
-vim.api.nvim_set_keymap("n", "<leader>av", ":AvanteToggle<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("v", "<leader>av", ":AvanteToggle<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("i", "<C-a>", "<C-o>:AvanteToggle<CR>", { noremap = false, silent = true })
 
 vim.cmd([[
   " mark jump
@@ -213,3 +210,28 @@ vim.cmd([[
   command! -nargs=0 Memo execute 'silent! call mkdir((isdirectory(system("git rev-parse --show-toplevel 2>/dev/null | tr -d \"\\n\"")) ? substitute(system("git rev-parse --show-toplevel"), "\n", "", "") . "/.yuma/" . substitute(system("git rev-parse --abbrev-ref HEAD"), "\n", "", "") : "memo"), "p")' | execute 'e ' . (isdirectory(system('git rev-parse --show-toplevel 2>/dev/null | tr -d "\\n"')) ? substitute(system('git rev-parse --show-toplevel'), '\n', '', '') . '/.yuma/' . substitute(system('git rev-parse --abbrev-ref HEAD'), '\n', '', '') . '/memo.md' : 'memo/memo.md')
 
 ]])
+
+local function copy_current_path()
+  local bufname = vim.api.nvim_buf_get_name(0)
+  local prefix = "oil://"
+  local fullpath = bufname
+  if fullpath:sub(1, #prefix) == prefix then
+    fullpath = fullpath:sub(#prefix + 1)
+  end
+  local cwd = vim.fn.getcwd()
+  local relpath = vim.fn.fnamemodify(fullpath, ':.')
+  vim.fn.setreg('+', relpath)
+  vim.notify("Copied path: " .. relpath, vim.log.levels.INFO)
+end
+
+vim.keymap.set({'n','v'}, '<leader>l', copy_current_path, { noremap = true, silent = true })
+
+local function select_ABC()
+  vim.fn.jobstart({ "/opt/homebrew/bin/im-select", "com.apple.keylayout.ABC" }, { detach = true })
+end
+-- Create the autocmd
+vim.api.nvim_create_autocmd("InsertLeave", {
+  pattern = "*",
+  callback = select_ABC,
+  desc = "Restore ABC input source after leaving insert mode",
+})

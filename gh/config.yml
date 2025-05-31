@@ -15,3 +15,4 @@ version: "1"
 aliases:
     co: pr checkout
     watches: api /users/yumafuu/subscriptions --paginate --jq .[].full_name
+    cap: '!git add . && git commit -m "$1" && git push && gh pr view'

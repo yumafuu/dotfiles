@@ -1,39 +1,52 @@
 [[session]]
-name = "🐤kw"
-path = "~/Downloads"
-startup_command = "ls"
+name = "🐤 kw"
+path = "~/ghq/github.com/knowledge-work/knowledgework"
 
 [[session]]
-name = "📥Downloads"
+name = "📥 Downloads"
 path = "~/Downloads"
 startup_command = "ls"
+preview_command = "ls -l"
 
 [[session]]
-name = "📄tmux"
+name = "📄 tmux"
 path = "~/dotfiles/tmux"
 startup_command = "nvim .tmux.conf"
 
 [[session]]
-name = "😈nvim"
+name = "😈 nvim"
 path = "~/dotfiles/nvim"
 startup_command = "nvim lua/plugins.lua"
 
 [[session]]
-name = "💻karabiner"
+name = "💻 karabiner"
 path = "~/dotfiles/karabiner"
 startup_command = "nvim ."
 
 [[session]]
-name = "💧aqua"
+name = "💧 aqua"
 path = "~/dotfiles/aqua"
 startup_command = "nvim aqua.yaml"
 
 [[session]]
-name = "📁sesh"
+name = "📁 sesh"
 path = "~/dotfiles/sesh"
 startup_command = "nvim sesh.toml"
 
 [[session]]
-name = "💬dotfiles"
+name = "💬 dotfiles"
 path = "~/dotfiles"
 startup_command = "dotfiles link && nvim ."
+
+[[session]]
+name = "🧢 zsh"
+path = "~/dotfiles"
+startup_command = "vim -p .zshrc zsh/alias.zsh"
+
+[[session]]
+name = "🎮 wezterm"
+path = "~/dotfiles/wezterm"
+startup_command = "vim wezterm.lua"
+
+[[session]]
+name = "☁️ floax"

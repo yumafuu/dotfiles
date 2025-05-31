@@ -1,4 +1,3 @@
 {
-  "karabiner/": "~/.config/karabiner/",
-  "amethyst/amethyst.yaml": "~/.config/amethyst/amethyst.yml"
+  "karabiner/": "~/.config/karabiner/"
 }
