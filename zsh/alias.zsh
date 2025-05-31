@@ -21,10 +21,16 @@ alias tree="eza -T -a -I .git --git-ignore"
 alias ez='exec zsh'
 
 # vim
-# alias v="fzf|xargs -r nvim"
-alias v="nvim ."
-alias vz='nvim ~/dotfiles/.zshrc '
-alias ve='nvim ~/.zshenv '
+nvim() {
+  # pwdkey is $(pwd) replace / to .
+  local pwdkey=$(pwd | tr '/' '.')
+  local sock="/tmp/nvim-$pwdkey.sock"
+  command nvim --listen "$sock" "$@"
+}
+alias vim='nvim'
+alias v="vim ."
+alias vz='vim ~/dotfiles/.zshrc '
+alias ve='vim ~/.zshenv '
 alias vv='vim ~/.config/nvim/lua/plugins.lua'
 alias vd='vim -p $(git diff --name-only)'
 

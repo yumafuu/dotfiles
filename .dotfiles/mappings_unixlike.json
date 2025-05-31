@@ -13,6 +13,5 @@
   "sesh/": "~/.config/sesh/",
   "typos/typos.toml": "~/.config/.typos.toml",
   "gh/config.yml": "~/.config/gh/config.yml",
-  "tig/tigrc": "~/.tigrc",
   "lf/": "~/.config/lf/"
 }

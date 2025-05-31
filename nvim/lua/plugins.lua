@@ -14,7 +14,7 @@ return {
           map_keys = true,
           accept_fallback = nil,
           key_bindings = {
-            accept = "<C-g>",
+            accept = "<C-]>",
             accept_word = false,
             accept_line = false,
             clear = false,
@@ -174,6 +174,7 @@ return {
   {
     "pmizio/typescript-tools.nvim",
     opts = {},
+    enabled = false,
   },
   {
     "quolpr/quicktest.nvim",
@@ -193,7 +194,7 @@ return {
           require("quicktest.adapters.rspec"),
         },
         -- split or popup mode, when argument not specified
-        default_win_mode = "split",
+        default_win_mode = "popup",
         use_builtin_colorizer = true,
       })
     end,
@@ -277,19 +278,6 @@ return {
     "brenoprata10/nvim-highlight-colors",
     config = function()
       require("nvim-highlight-colors").setup()
-    end,
-  },
-  {
-    "diegoulloao/nvim-file-location",
-    event = "VeryLazy",
-    config = function()
-      require("nvim-file-location").setup({
-        keymap = "<leader>l",
-        mode = "workdir", -- options: workdir | absolute
-        add_line = false,
-        add_column = false,
-        default_register = "*",
-      })
     end,
   },
   {
@@ -423,24 +411,24 @@ return {
         },
       }
 
-      -- git
-      local git_ui = Terminal:new({
-        cmd = "tig",
-        dir = "git_dir",
-        direction = "float",
-        hidden = true,
-        close_on_exit = true,
-        highlights = highlights,
-        float_opts = float_opts,
-        on_open = function(term)
-          vim.cmd("startinsert!")
-          vim.api.nvim_buf_set_keymap(term.bufnr, "t", "<c-\\>", "<CMD>close<CR>", opts)
-        end,
-      })
-      function _toggle_git_ui()
-        git_ui:toggle()
-      end
-      vim.api.nvim_set_keymap("n", "<c-\\>", "<cmd>lua _toggle_git_ui()<CR>", opts)
+      -- -- git
+      -- local git_ui = Terminal:new({
+      --   cmd = "lazygit",
+      --   dir = "git_dir",
+      --   direction = "float",
+      --   hidden = true,
+      --   close_on_exit = true,
+      --   highlights = highlights,
+      --   float_opts = float_opts,
+      --   on_open = function(term)
+      --     vim.cmd("startinsert!")
+      --     vim.api.nvim_buf_set_keymap(term.bufnr, "t", "<c-\\>", "<CMD>close<CR>", opts)
+      --   end,
+      -- })
+      -- function _toggle_git_ui()
+      --   git_ui:toggle()
+      -- end
+      -- vim.api.nvim_set_keymap("n", "<c-\\>", "<cmd>lua _toggle_git_ui()<CR>", opts)
     end,
   },
   {
@@ -561,8 +549,11 @@ return {
     -- lazy = true,
     config = function()
       local lspconfig = require("lspconfig")
-      lspconfig["denols"].setup({
-        root_dir = lspconfig.util.root_pattern("deno.json"),
+      local util = require("lspconfig.util")
+
+      lspconfig.denols.setup({
+        root_dir = util.root_pattern("deno.json"),
+        workspace_required = true,
         init_options = {
           lint = true,
           unstable = true,
@@ -577,9 +568,9 @@ return {
           },
         },
       })
-      lspconfig["ts_ls"].setup({
-        root_dir = lspconfig.util.root_pattern("package.json"),
-      })
+      -- lspconfig["ts_ls"].setup({
+      --   root_dir = lspconfig.util.root_pattern("package.json"),
+      -- })
       lspconfig.typos_lsp.setup({
         init_options = {
           config = "~/dotfiles/typos/typos.toml",
@@ -711,7 +702,7 @@ return {
       vim.keymap.set("n", "gf", "<cmd>lua vim.lsp.buf.format()<CR>")
       vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>")
       vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>")
-      vim.keymap.set("n", "lca", "<cmd>lua vim.lsp.buf.code_action()<CR>")
+      vim.keymap.set("n", "ca", "<cmd>lua vim.lsp.buf.code_action()<CR>")
       vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>")
       vim.keymap.set("n", "gt", "<cmd>lua vim.lsp.buf.type_definition()<CR>")
       vim.keymap.set("n", "gn", "<cmd>lua vim.lsp.buf.rename()<CR>")

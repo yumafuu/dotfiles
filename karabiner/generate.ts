@@ -82,8 +82,6 @@ const shared = [
         map('a').toPaste('ありがとうございます！'),
         map('s').toPaste('承知です！'),
         map('y').toPaste('よろしくお願いします！'),
-        map('n').toPaste('【社内】'),
-        map('k').toPaste('【個人】'),
       ].map((x) => x.to(escape)),
     ),
 
@@ -122,6 +120,8 @@ const shared = [
     r: toPaste("🙏"),
     b: toPaste("👍"),
     t: toPaste("🎉"),
+    n: toPaste('【社内】'),
+    k: toPaste('【個人】'),
   }),
 
   rule("コロンとセミコロンを入れ替える").manipulators([
@@ -241,20 +241,18 @@ const shared = [
     ]),
   ]),
 
-  rule("[Gyazo] left_option２回押しでスクリーンショット").manipulators([
-    mapDoubleTap("g", "right_option").toApp("Gyazo"),
-  ]),
-
-  rule("left_control + right_shift + gでクリップボードの中を検索").manipulators([
-    mapDoubleTap("g", "right_command").to$(`open "https://google.com/search?q=$(pbpaste)"`),
-  ]),
-
   rule("[Notion] left_control + [,]でタブ移動").manipulators([
     withCondition(ifApp("Notion"))([
       map("open_bracket", "left_control").to("tab", [ "left_control", "right_shift", ]),
       map("close_bracket", "left_control").to("tab", ["left_control"]),
     ]),
   ]),
+
+  // rule("push to talk").manipulators([
+  //   map("v", "left_control")
+  //     .toIfHeldDown(toKey("fn"))
+  //     .to("v", "left_control"),
+  // ]),
 ];
 
 const yumaAir = [

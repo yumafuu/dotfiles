@@ -43,7 +43,10 @@ export PATH="$(go env GOPATH)/bin:$PATH"
 export PATH=$HOME/.cargo/bin:$PATH
 
 # deno
-export PATH="/Users/yuma/.deno/bin:$PATH"
+export PATH="$HOME/.deno/bin:$PATH"
+
+# local
+export PATH="$HOME/.local/bin:$PATH"
 
 # fzf
 source <(fzf --zsh)

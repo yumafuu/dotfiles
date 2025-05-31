@@ -17,7 +17,8 @@ export WORDCHARS='*?_.[]~-&;!#$%^(){}<>'
 
 # autoload
 autoload colors
-# autoload -zU compinit && compinit
+
+# compinit
 _compinit() {
   local re_initialize=0
   for match in ${ZDOTDIR}/.zcompdump*(.Nmh+24); do
@@ -41,6 +42,7 @@ _compinit
 stty erase '^?'
 
 # setopt
+bindkey '^A' beginning-of-line
 setopt share_history
 setopt brace_ccl
 setopt extended_glob
