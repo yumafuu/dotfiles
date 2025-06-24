@@ -248,11 +248,9 @@ const shared = [
     ]),
   ]),
 
-  // rule("push to talk").manipulators([
-  //   map("v", "left_control")
-  //     .toIfHeldDown(toKey("fn"))
-  //     .to("v", "left_control"),
-  // ]),
+  rule("left_control + left_command + g でクリップボードの中を検索").manipulators([
+    map("g", ["left_control", "left_command"]).to$(`open "https://google.com/search?q=$(pbpaste)"`),
+  ]),
 ];
 
 const yumaAir = [

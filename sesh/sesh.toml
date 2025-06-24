@@ -49,4 +49,8 @@ path = "~/dotfiles/wezterm"
 startup_command = "vim wezterm.lua"
 
 [[session]]
+name = "👨‍🔧 me"
+path = "~/junk"
+
+[[session]]
 name = "☁️ floax"
