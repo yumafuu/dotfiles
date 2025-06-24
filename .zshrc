@@ -6,7 +6,7 @@ export XDG_CONFIG_HOME="${HOME}/.config"
 cache_dir=${XDG_CACHE_HOME:-$HOME/.cache}
 sheldon_cache="$cache_dir/sheldon.zsh"
 sheldon_toml="$HOME/.config/sheldon/plugins.toml"
-# キャッシュがない、またはキャッシュが古い場合にキャッシュを作成
+## cache
 if [[ ! -r "$sheldon_cache" || "$sheldon_toml" -nt "$sheldon_cache" ]]; then
   mkdir -p $cache_dir
   sheldon source > $sheldon_cache
@@ -34,7 +34,7 @@ export PATH="$(aqua root-dir)/bin:$PATH"
 
 # mise
 zsh-defer eval "$(mise activate zsh)"
-zsh-defer eval "$(mise hook-env)"
+eval "$(mise hook-env)"
 
 # go
 export PATH="$(go env GOPATH)/bin:$PATH"
@@ -58,7 +58,7 @@ export FZF_DEFAULT_OPTS="--height 50% --border --color=pointer:blue"
 export PATH="$PATH:$HOME/go/bin"
 
 # bin
-export PATH="$HOME/.local/bin:$PATH"
+export PATH="$PATH:$HOME/.local/bin"
 
 # bun
 source "/Users/yuma.ishikawa/.bun/_bun"

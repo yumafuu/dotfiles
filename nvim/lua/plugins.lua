@@ -26,6 +26,18 @@ return {
     end,
   },
   {
+    "HakonHarnes/img-clip.nvim",
+    event = "VeryLazy",
+    opts = {
+      -- add options here
+      -- or leave it empty to use the default settings
+    },
+    keys = {
+      -- suggested keymap
+      { "<leader>p", "<cmd>PasteImage<cr>", desc = "Paste image from system clipboard" },
+    },
+  },
+  {
     "CopilotC-Nvim/CopilotChat.nvim",
     build = "make tiktoken", -- Only on MacOS or Linux
     event = "VeryLazy",
@@ -575,6 +587,13 @@ return {
         init_options = {
           config = "~/dotfiles/typos/typos.toml",
         },
+        on_attach = function(client, bufnr)
+          local name = vim.api.nvim_buf_get_name(bufnr)
+          if name:match("^oil://") then
+            client.stop()
+            return
+          end
+        end,
       })
       -- lspconfig.protols.setup({})
       lspconfig.buf_ls.setup({})
@@ -741,7 +760,7 @@ return {
           -- require('hover.providers.dap')
           require('hover.providers.fold_preview')
           -- require('hover.providers.man')
-          require('hover.providers.dictionary')
+          -- require('hover.providers.dictionary')
           -- require('hover.providers.highlight')
         end,
         preview_opts = {
@@ -749,7 +768,7 @@ return {
         },
         -- Whether the contents of a currently open hover window should be moved
         -- to a :h preview-window when pressing the hover keymap.
-        preview_window = true,
+        preview_window = false,
         title = true,
         mouse_providers = {
           "LSP",
@@ -757,11 +776,13 @@ return {
         mouse_delay = 1000,
       })
 
+
       -- Setup keymaps
       vim.keymap.set("n", "K", require("hover").hover, { desc = "hover.nvim" })
       vim.keymap.set("n", "gK", require("hover").hover_select, { desc = "hover.nvim (select)" })
       vim.keymap.set("n", "<S-h>", function() require("hover").hover_switch("previous") end, { desc = "hover.nvim (previous source)" })
       vim.keymap.set("n", "<S-l>", function() require("hover").hover_switch("next") end, { desc = "hover.nvim (next source)" })
+      vim.keymap.set('n', '<MouseMove>', require('hover').hover_mouse, { desc = "hover.nvim (mouse)" })
 
       vim.o.mousemoveevent = true
     end,
@@ -803,6 +824,7 @@ return {
           documentation = cmp.config.window.bordered({
             documentation = {
               border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+              bo
             },
           }),
         },
@@ -819,7 +841,6 @@ return {
           { name = "buffer", max_item_count = 10, keyword_length = 2 },
           { name = "path" },
           { name = "calc" },
-          { name = "omni", option = { disable_omnifuncs = { "v:lua.vim.lsp.omnifunc" } } },
           {
             name = "rg",
             keyword_length = 5,
@@ -830,18 +851,6 @@ return {
           },
         }),
       })
-
-      -- To use git you need to install the plugin petertriho/cmp-git and uncomment lines below
-      -- Set configuration for specific filetype.
-      --[[ cmp.setup.filetype('gitcommit', {
-    sources = cmp.config.sources({
-      { name = 'git' },
-    }, {
-      { name = 'buffer' },
-    })
- })
- require("cmp_git").setup() ]]
-      --
 
       -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
       cmp.setup.cmdline({ "/", "?" }, {

@@ -1,7 +1,6 @@
 apps:
   profiles:
     shared:
-      w: WindSurf
       s: Slack
       a: Wezterm
       r: Reflect

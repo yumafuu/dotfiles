@@ -21,18 +21,22 @@ alias tree="eza -T -a -I .git --git-ignore"
 alias ez='exec zsh'
 
 # vim
-nvim() {
-  # pwdkey is $(pwd) replace / to .
-  local pwdkey=$(pwd | tr '/' '.')
-  local sock="/tmp/nvim-$pwdkey.sock"
-  command nvim --listen "$sock" "$@"
-}
+# nvim() {
+#   # pwdkey is $(pwd) replace / to .
+#   local pwdkey=$(pwd | tr '/' '.')
+#   local sock="/tmp/nvim-$pwdkey.sock"
+#   command nvim --listen "$sock" "$@"
+# }
 alias vim='nvim'
 alias v="vim ."
 alias vz='vim ~/dotfiles/.zshrc '
 alias ve='vim ~/.zshenv '
 alias vv='vim ~/.config/nvim/lua/plugins.lua'
 alias vd='vim -p $(git diff --name-only)'
+
+# ai
+alias c="claude"
+alias gw="gwq"
 
 # spotify_player
 alias spotify="spt"
@@ -61,3 +65,58 @@ alias gorun="go run"
 alias gotest="go test"
 alias gotestv="go test -v"
 alias gtv="go test -v"
+
+# git
+## checkout
+function g-branch-fzf() {
+  git branch -a |
+    sed -e "s/[ ,\*]//g" |
+    sed -e "s/remotes\/origin\///g" |
+    sed -e "s/HEAD->//g" |
+    sort -u |
+    fzf |
+    tr -d '\n'
+}
+
+# FZF でブランチ選択 or 引数でブランチ作成／チェックアウト
+co() {
+  if [ $# -eq 0 ]; then
+    # 引数なし：g-branch-fzf の結果を checkout
+    g-branch-fzf | xargs git checkout
+  else
+    branch=$1
+    # refs/heads に存在すれば checkout、なければ -b
+    if git show-ref --verify --quiet "refs/heads/${branch}"; then
+      git checkout "${branch}"
+    else
+      git checkout -b "${branch}"
+    fi
+  fi
+}
+
+alias g="git"
+alias gcdf='git clean -df'
+alias ghco='gh pr checkout'
+
+## push
+alias gush='git push origin $( git branch | grep "*" | sed -e "s/^\*\s*//g" )'
+alias gushf='gush -f'
+
+## pull
+alias gul='git pull --autostash --rebase origin $( git branch | grep "*" | sed -e "s/^\*\s*//g" )'
+
+## status
+alias gs='git status'
+alias gd='git diff --no-prefix'
+
+## add
+alias ga='git add .'
+alias gaa='git add .'
+alias gaaa='git add .'
+
+## commit
+alias gc='git commit'
+
+## branch to command
+alias master="git checkout master"
+alias main="git checkout main"
