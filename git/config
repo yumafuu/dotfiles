@@ -1,0 +1,5 @@
+[alias]
+    s = status
+    c = commit
+    d = diff
+    cl = clean

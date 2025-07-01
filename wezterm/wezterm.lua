@@ -1,6 +1,6 @@
 local wezterm = require("wezterm")
 local act = wezterm.action
-local font_size = 16.0
+local font_size = 14.0
 local window_background_opacity = 9 * 0.1
 local macos_window_background_blur = 7 * 10
 
