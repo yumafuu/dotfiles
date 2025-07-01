@@ -5,14 +5,13 @@ apps:
       a: Wezterm
       r: Reflect
       p: Spotify
+      f: Google Chrome
       n: Notion
     yumaAir:
       d: Discord
-      f: Vivaldi
       l: Line
       i: Rhino 8
     kwPro:
-      f: Google Chrome
       o: zoom.us
       t: Toggl
       g: GoogleCalendar

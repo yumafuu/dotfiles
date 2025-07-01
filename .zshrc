@@ -61,7 +61,7 @@ export PATH="$PATH:$HOME/go/bin"
 export PATH="$PATH:$HOME/.local/bin"
 
 # bun
-source "/Users/yuma.ishikawa/.bun/_bun"
+source "$HOME/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
