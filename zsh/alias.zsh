@@ -95,6 +95,7 @@ co() {
 }
 
 alias g="git"
+alias gco="git checkout"
 alias gcdf='git clean -df'
 alias ghco='gh pr checkout'
 
