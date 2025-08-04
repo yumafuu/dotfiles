@@ -33,7 +33,7 @@ export PATH=$NPM_CONFIG_PREFIX/bin:$PATH
 export PATH="$(aqua root-dir)/bin:$PATH"
 
 # mise
-zsh-defer eval "$(mise activate zsh)"
+eval "$(mise activate zsh)"
 eval "$(mise hook-env)"
 
 # go

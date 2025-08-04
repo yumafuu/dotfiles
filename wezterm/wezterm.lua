@@ -50,7 +50,14 @@ return {
     -----------------------
     { key = "c", mods = "CMD", action = act.CopyTo("ClipboardAndPrimarySelection") },
     { key = "v", mods = "CMD", action = act.PasteFrom("Clipboard") },
-    { key = "/", mods = "CTRL", action = act.QuickSelect },
+    { key = "/", mods = "CTRL", action = act.QuickSelectArgs({
+      action = wezterm.action_callback(function(window, pane)
+        local url = window:get_selection_text_for_pane(pane)
+        if url and url:match("^https?://") then
+          wezterm.open_with(url)
+        end
+      end),
+    }) },
 
     -----------------------
     --  PANE
