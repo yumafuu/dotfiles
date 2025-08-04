@@ -54,3 +54,7 @@ path = "~/junk"
 
 [[session]]
 name = "☁️ floax"
+
+[[session]]
+name = "🤚 kos"
+path = "~/ghq/github.com/KOS-LLC/ai-dev-ops"

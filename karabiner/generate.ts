@@ -251,6 +251,15 @@ const shared = [
   rule("left_control + left_command + g でクリップボードの中を検索").manipulators([
     map("g", ["left_control", "left_command"]).to$(`open "https://google.com/search?q=$(pbpaste)"`),
   ]),
+
+  rule("[tmux] Cmd + HJKL to tmux-safe keys").manipulators([
+    withCondition(ifApp("Wezterm"))([
+      map("h", "left_command").to("page_down"),
+      map("j", "left_command").to("end"),
+      map("k", "left_command").to("home"),
+      map("l", "left_command").to("page_up"),
+    ]),
+  ]),
 ];
 
 const yumaAir = [

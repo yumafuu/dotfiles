@@ -116,7 +116,7 @@ return {
   },
   {
     "zbirenbaum/copilot.lua",
-    enabled = false,
+    enabled = true,
     cmd = "Copilot",
     event = "InsertEnter",
     config = function()
@@ -142,7 +142,7 @@ return {
           hide_during_completion = false,
           debounce = 75,
           keymap = {
-            accept = "<C-g>",
+            accept = "<C-]>",
             accept_word = false,
             accept_line = false,
             next = "<M-]>",
@@ -186,7 +186,7 @@ return {
   {
     "pmizio/typescript-tools.nvim",
     opts = {},
-    enabled = false,
+    enabled = true,
   },
   {
     "quolpr/quicktest.nvim",
@@ -556,6 +556,39 @@ return {
     build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
   },
   { "ray-x/guihua.lua", lazy = true },
+  { "b0o/schemastore.nvim", lazy = true },
+  {
+    "jose-elias-alvarez/typescript.nvim",
+    lazy = true,
+    config = function()
+      require("typescript").setup({
+        server = {
+          on_attach = function(client, bufnr)
+            -- client.server_capabilities.document_formatting = false
+            -- client.server_capabilities.document_range_formatting = false
+            -- fmt_on_save()
+          end,
+        },
+      })
+    end,
+  },
+  {
+    "jose-elias-alvarez/null-ls.nvim",
+    lazy = true,
+    config = function()
+      require("null-ls").setup({
+        sources = {
+          require("null-ls").builtins.formatting.prettierd,
+          require("null-ls").builtins.formatting.stylua,
+          require("null-ls").builtins.diagnostics.eslint_d,
+          require("null-ls").builtins.diagnostics.flake8,
+          require("null-ls").builtins.diagnostics.shellcheck,
+          require("null-ls").builtins.code_actions.gitsigns,
+        },
+      })
+    end,
+  },
+
   {
     "neovim/nvim-lspconfig",
     -- lazy = true,
@@ -563,6 +596,14 @@ return {
       local lspconfig = require("lspconfig")
       local util = require("lspconfig.util")
 
+      lspconfig.jsonls.setup({
+        settings = {
+          json = {
+            schemas = require("schemastore").json.schemas(),
+            validate = { enable = true },
+          },
+        },
+      })
       lspconfig.denols.setup({
         root_dir = util.root_pattern("deno.json"),
         workspace_required = true,
