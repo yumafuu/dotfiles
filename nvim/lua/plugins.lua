@@ -26,58 +26,45 @@ return {
     end,
   },
   {
-    "HakonHarnes/img-clip.nvim",
-    event = "VeryLazy",
-    opts = {
-      -- add options here
-      -- or leave it empty to use the default settings
+    'pwntester/octo.nvim',
+    requires = {
+      'nvim-lua/plenary.nvim',
+      'nvim-tree/nvim-web-devicons',
     },
-    keys = {
-      -- suggested keymap
-      { "<leader>p", "<cmd>PasteImage<cr>", desc = "Paste image from system clipboard" },
-    },
-  },
-  {
-    "CopilotC-Nvim/CopilotChat.nvim",
-    build = "make tiktoken", -- Only on MacOS or Linux
-    event = "VeryLazy",
-    opts = {
-      -- See Configuration section for options
-    },
-  },
-  {
-    "olimorris/codecompanion.nvim",
     config = function()
-    end,
+      require('octo').setup({
+        use_local_fs = false,
+        enable_builtin = false,
+        default_remote = { "upstream", "origin" },
+        default_merge_method = "rebase",
+        default_delete_branch = false,
+        ssh_aliases = {},
+        picker = "fzf-lua",
+        picker_config = {
+          use_emojis = false,
+          mappings = {
+            open_in_browser = {lhs = "<C-b>", desc = "open issue in browser"},
+            copy_url        = {lhs = "<C-y>", desc = "copy url to system clipboard"},
+            copy_sha        = {lhs = "<C-e>", desc = "copy commit SHA to system clipboard"},
+            checkout_pr    = {lhs = "<C-o>", desc = "checkout pull request"},
+            merge_pr       = {lhs = "<C-r>", desc = "merge pull request"},
+          },
+        },
+        file_panel = { size = 10, use_icons = true },
+        colors = {
+          white    = "#ffffff",
+          grey     = "#2A354C",
+          black    = "#000000",
+          red      = "#fdb8c0",
+          dark_red = "#e03e4d",
+        },
+        snippet_context_lines = 4,
+        gh_cmd = "gh",
+        timeout = 5000,
+        default_to_projects_v2 = false,
+      })
+    end
   },
-  -- {
-  --   "yetone/avante.nvim",
-  --   opts = {
-  --     provider = "claude",
-  --     claude = {
-  --       endpoint = "https://api.anthropic.com",
-  --       model = "claude-3-7-sonnet-20250219",
-  --     },
-  --     vertex = {
-  --       model = "gemini-2.5-pro-preview-05-06",
-  --       endpoint = "https://us-central1-aiplatform.googleapis.com/v1/projects/kwit-gemini-api/locations/us-central1/publishers/google/models",
-  --     },
-  --   },
-  --   event = "VeryLazy",
-  --   version = false, -- Never set this value to "*"! Never!
-  --   -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
-  --   build = "make",
-  --   system_prompt = function()
-  --     local hub = require("mcphub").get_hub_instance()
-  --     return hub:get_active_servers_prompt()
-  --   end,
-  --   -- Using function prevents requiring mcphub before it's loaded
-  --   custom_tools = function()
-  --     return {
-  --       require("mcphub.extensions.avante").mcp_tool(),
-  --     }
-  --   end,
-  -- },
   {
     -- Make sure to set this up properly if you have lazy=true
     "MeanderingProgrammer/render-markdown.nvim",
@@ -103,6 +90,7 @@ return {
     -- stylua: ignore
     keys = {
       { "?", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+      { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
     },
   },
   {
@@ -593,10 +581,25 @@ return {
     "neovim/nvim-lspconfig",
     -- lazy = true,
     config = function()
+      vim.lsp.config('*', {
+        capabilities = require('cmp_nvim_lsp').default_capabilities(),
+      })
+      vim.lsp.enable(require('mason-lspconfig').get_installed_servers())
+
       local lspconfig = require("lspconfig")
       local util = require("lspconfig.util")
+      local mason_lsp    = require("mason-lspconfig")
+
+      lspconfig.terraformls.setup({
+        capabilities = require("cmp_nvim_lsp").default_capabilities(),
+        filetypes = {
+          "terraform",
+          "tf",
+        },
+      })
 
       lspconfig.jsonls.setup({
+        capabilities = capabilities,
         settings = {
           json = {
             schemas = require("schemastore").json.schemas(),
@@ -638,110 +641,17 @@ return {
       })
       -- lspconfig.protols.setup({})
       lspconfig.buf_ls.setup({})
-      -- lspconfig.terraform.setup({})
-      lspconfig.terraformls.setup({})
       lspconfig.gopls.setup({
         capabilities = capabilities,
         settings = {
-          gopls = {
-            ---- Build ----
-            directoryFilters = { --{{{
-              -- common
-              "-**/.git",
-              "-**/vendor",
-              "-**/.symlinks",
-              -- for Node.JS
-              "-**/.next",
-              "-**/.swc",
-              "-**/node_modules",
-              "-**/storybook-static",
-              "-**/.pnpm-store",
-              -- for Python
-              "-**/.mypy_cache",
-              "-**/__pycache__",
-              "-**/.pytest_cache",
-              "-**/.venv",
-              "-**/venv",
-              "-**/.neptune",
-              -- for Terraform
-              "-**/.terraform",
-              -- for Dart and Flutter
-              "-**/.dart_tool",
-              -- for iOS
-              "-**/Pods",
-              "-**/.fvm",
-              -- for MyProjects
-              "-**/.cache",
-              "-**/data",
-              "-**/results",
-              "-**/results_plots",
-              "-**/output",
-              "-**/.docker-compose-data",
-              "-**/coverage",
-            }, --}}}
-            templateExtensions = {
-              ".go.tmpl",
-              ".go.tpl",
-              ".gotmpl",
-              ".gotpl",
-            },
-            ---- Formatting ----
-            ["local"] = os.getenv("GO_IMPORTS_LOCAL"),
-            ---- UI ----
-            codelenses = {
-              gc_details = false,
-              generate = true,
-              regenerate_cgo = true,
-              test = false,
-              tidy = true,
-              upgrade_dependency = true,
-              vendor = false,
-            },
-            ---- UI Completion ----
-            usePlaceholders = true,
-            ---- UI Diagnostic ----
-            analyses = {
-              unusedparams = false,
-            },
-            ---- UI Documentation ----
-            ---- UI Inlayhint ----
-            ---- UI Navigation ----
-          },
+          gopls = { },
         },
         filetypes = {
           "go",
           "gomod",
           "gowork",
         },
-        -- on_attach = function()
-        --   fmt_on_save()
-        -- end,
       })
-      -- lspconfig.golangci_lint_ls.setup({
-      --   capabilities = capabilities,
-      --   init_options = (function()
-      --     local handle = io.popen(
-      --       "golangci-lint --version 2>/dev/null | grep -o 'version [0-9]\\+\\.[0-9]\\+\\.[0-9]\\+' | cut -d' ' -f2")
-      --     local version = handle and handle:read("*a"):gsub("%s+$", "") or ""
-      --     if handle then handle:close() end
-
-      --     local major_version = tonumber(version:match("^(%d+)%."))
-
-      --     if major_version and major_version < 2 then
-      --       return {
-      --         command = {
-      --           "golangci-lint",
-      --           "run",
-      --           "--out-format",
-      --           "json",
-      --           "--issues-exit-code=1",
-      --         }
-      --       }
-      --     end
-
-      --     return {}
-      --   end)(),
-      -- })
     end,
   },
   {
@@ -1087,8 +997,10 @@ return {
   {
     "linrongbin16/gitlinker.nvim",
     lazy = true,
-    cmd = "GitLink",
-    opts = {},
+    cmd = "GitLink remote=upstream",
+    opts = {
+      remote = "git@github.com:knowledge-work/knowledgework.git",
+    },
     keys = {
       { "gy", "<cmd>GitLink<cr>", mode = { "n", "v" }, desc = "Yank git link" },
       { "gY", "<cmd>GitLink!<cr>", mode = { "n", "v" }, desc = "Open git link" },

@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+if [[ "$1" == "-o" ]]; then
+  url=$(gh pr view --json url -q .url)
+  open "$url"
+else
+  gh pr view "$@"
+fi

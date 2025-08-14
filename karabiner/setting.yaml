@@ -7,6 +7,7 @@ apps:
       p: Spotify
       f: Google Chrome
       n: Notion
+      m: My Recorder
     yumaAir:
       d: Discord
       l: Line
@@ -16,4 +17,3 @@ apps:
       t: Toggl
       g: GoogleCalendar
       j: Jira
-      m: Gmail

@@ -58,3 +58,7 @@ name = "☁️ floax"
 [[session]]
 name = "🤚 kos"
 path = "~/ghq/github.com/KOS-LLC/ai-dev-ops"
+
+[[window]]
+name = "git"
+startup_script = "git pull"

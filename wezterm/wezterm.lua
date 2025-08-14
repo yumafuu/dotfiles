@@ -4,6 +4,10 @@ local font_size = 14.0
 local window_background_opacity = 9 * 0.1
 local macos_window_background_blur = 7 * 10
 
+wezterm.on("window-focus-changed", function(window, pane)
+  os.execute("/opt/homebrew/bin/im-select com.apple.keylayout.ABC")
+end)
+
 return {
   color_scheme = "Teerb",
 
@@ -55,6 +59,9 @@ return {
         local url = window:get_selection_text_for_pane(pane)
         if url and url:match("^https?://") then
           wezterm.open_with(url)
+        else
+          -- CopyTo clipboard if not a URL
+          window:perform_action(act.CopyTo("Clipboard"), pane)
         end
       end),
     }) },
@@ -120,8 +127,8 @@ return {
     -- UUID
     [[\b[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\b]],
 
-    -- 汎用トークン（ASCII のみ、3〜90文字）
-    [[[A-Za-z0-9_-]{3,90}]],
+    -- 汎用トークン（ASCII のみ、5〜90文字）
+    [[[A-Za-z0-9_-]{5,90}]],
   }
 
 }

@@ -44,6 +44,7 @@ stty erase '^?'
 
 # setopt
 bindkey '^A' beginning-of-line
+bindkey '^[p' copy-prev-word
 setopt share_history
 setopt brace_ccl
 setopt extended_glob
