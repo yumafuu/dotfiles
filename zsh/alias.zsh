@@ -35,8 +35,11 @@ alias vv='vim ~/.config/nvim/lua/plugins.lua'
 alias vd='vim -p $(git diff --name-only)'
 
 # ai
+## claude
 alias c="claude"
-alias gw="gwq"
+
+## gwq
+alias gq="gwq"
 
 # spotify_player
 alias spotify="spt"
@@ -121,3 +124,6 @@ alias gc='git commit'
 ## branch to command
 alias master="git checkout master"
 alias main="git checkout main"
+
+# fast
+alias fast="bun x fast-cli --single-line --upload"

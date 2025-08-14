@@ -53,7 +53,7 @@ let escape = [toUnsetVar('leader'), toRemoveNotificationMessage('leader')]
 const shared = [
   // ========================================================================
   rule('Hyper').manipulators([
-    map('right⌘').toHyper().toIfAlone('right⌘')
+    map('spacebar', 'left_control').toHyper()
   ]),
   // -------
   // nested
@@ -159,16 +159,6 @@ const shared = [
     ]),
   ]),
 
-  rule("[Wezterm] escで英数字モード").manipulators([
-    withCondition(ifApp(`${Wezterm}`))([
-      map("escape", "optionalAny")
-        .toIfAlone(toKey("japanese_eisuu"))
-        .toIfHeldDown(toKey("left_control"))
-        .to({ key_code: "left_control", lazy: true }),
-
-    ]),
-  ]),
-
   rule("[Vivaldi][Chrome][Slack][Reflect] `left_control` + `j,k`で上下入力")
     .manipulators([
       withCondition(
@@ -224,7 +214,7 @@ const shared = [
 
       map("o", ["left_command", "left_control"]).to$(`open "slack://channel?team=T0115RHBKBN&id=C0119U6TYHW"`),
       map("y", ["left_command", "left_control"]).to$(`open "slack://channel?team=T0115RHBKBN&id=C07SDSKJY73"`),
-      map("g", ["left_command", "left_control"]).to$(`open "slack://channel?team=T0115RHBKBN&id=C07BTBXKE0H"`),
+      map("g", ["left_command", "left_control"]).to$(`open "slack://channel?team=T0115RHBKBN&id=C051H2P00SY"`),
     ]),
   ]),
 
@@ -250,15 +240,6 @@ const shared = [
 
   rule("left_control + left_command + g でクリップボードの中を検索").manipulators([
     map("g", ["left_control", "left_command"]).to$(`open "https://google.com/search?q=$(pbpaste)"`),
-  ]),
-
-  rule("[tmux] Cmd + HJKL to tmux-safe keys").manipulators([
-    withCondition(ifApp("Wezterm"))([
-      map("h", "left_command").to("page_down"),
-      map("j", "left_command").to("end"),
-      map("k", "left_command").to("home"),
-      map("l", "left_command").to("page_up"),
-    ]),
   ]),
 ];
 

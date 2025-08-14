@@ -1,10 +1,51 @@
 #!/usr/bin/env bash
+# gp: add/commit/push & open PR (create if missing)
+
+set -euo pipefail
+
 if [ $# -eq 0 ]; then
   echo "Usage: gp <commit-message>"
   exit 1
 fi
 
-git add . &&
-git commit -m "$*" &&
-git push origin $( git branch | grep "*" | sed -e "s/^\*\s*//g" ) &&
-gh pr view --web
+if ! command -v gh >/dev/null 2>&1; then
+  echo "ERROR: GitHub CLI (gh) is not installed or not in PATH."
+  exit 1
+fi
+
+COMMIT_MSG="$*"
+BASE_BRANCH="${BASE_BRANCH:-main}"   # 環境変数で上書き可: export BASE_BRANCH=develop
+
+# 現在のブランチ名取得（detached HEAD 対策込み）
+branch="$(git rev-parse --abbrev-ref HEAD 2>/dev/null || true)"
+if [ -z "$branch" ] || [ "$branch" = "HEAD" ]; then
+  echo "ERROR: Not on a branch (detached HEAD)."
+  exit 1
+fi
+
+# 変更が無い時に commit で落ちないようにする
+git add -A
+if ! git diff --cached --quiet; then
+  git commit -m "$COMMIT_MSG"
+else
+  echo "No staged changes; skipping commit."
+fi
+
+# upstream が無くても大丈夫なように -u 付き
+git push -u origin "$branch"
+
+# PR があるか確認して、あれば開く／なければ作る
+if gh pr view --head "$branch" >/dev/null 2>&1; then
+  # 既存 PR をブラウザで開く
+  gh pr view --web --head "$branch"
+else
+  # タイトルは「branch: commit message」。PR_BODY/PR_TITLE で上書き可
+  PR_TITLE="${PR_TITLE:-${branch}: ${COMMIT_MSG}}"
+  if [ -n "${PR_BODY:-}" ]; then
+    gh pr create --base "$BASE_BRANCH" --head "$branch" --title "$PR_TITLE" --body "$PR_BODY" --web
+  else
+    # --fill でコミットメッセージを本文に流用
+    gh pr create --base "$BASE_BRANCH" --head "$branch" --title "$PR_TITLE" --fill --web
+  fi
+fi
+

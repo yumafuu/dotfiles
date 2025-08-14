@@ -15,3 +15,4 @@ packages:
 - name: koalaman/shellcheck@v0.10.0
 - name: crate-ci/typos@v1.28.1
 - name: ziglang/zig@0.13.0
+- name: ajeetdsouza/zoxide@v0.9.8
