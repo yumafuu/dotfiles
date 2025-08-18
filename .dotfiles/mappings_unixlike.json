@@ -13,5 +13,6 @@
   "sesh/": "~/.config/sesh/",
   "typos/typos.toml": "~/.config/.typos.toml",
   "gh/config.yml": "~/.config/gh/config.yml",
+  "gitmux/.gitmux.conf": "~/.config/gitmux/.gitmux.conf",
   "lf/": "~/.config/lf/"
 }

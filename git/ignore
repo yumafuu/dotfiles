@@ -12,3 +12,9 @@ CLAUDE.md
 **/CLAUDE.local.md
 
 **/z-playground/yumaware/.junk/tmp.js
+.crush/
+CRUSH.md
+
+# lsmcp cache
+.lsmcp/cache
+.lsmcp
