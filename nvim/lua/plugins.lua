@@ -26,46 +26,6 @@ return {
     end,
   },
   {
-    'pwntester/octo.nvim',
-    requires = {
-      'nvim-lua/plenary.nvim',
-      'nvim-tree/nvim-web-devicons',
-    },
-    config = function()
-      require('octo').setup({
-        use_local_fs = false,
-        enable_builtin = false,
-        default_remote = { "upstream", "origin" },
-        default_merge_method = "rebase",
-        default_delete_branch = false,
-        ssh_aliases = {},
-        picker = "fzf-lua",
-        picker_config = {
-          use_emojis = false,
-          mappings = {
-            open_in_browser = {lhs = "<C-b>", desc = "open issue in browser"},
-            copy_url        = {lhs = "<C-y>", desc = "copy url to system clipboard"},
-            copy_sha        = {lhs = "<C-e>", desc = "copy commit SHA to system clipboard"},
-            checkout_pr    = {lhs = "<C-o>", desc = "checkout pull request"},
-            merge_pr       = {lhs = "<C-r>", desc = "merge pull request"},
-          },
-        },
-        file_panel = { size = 10, use_icons = true },
-        colors = {
-          white    = "#ffffff",
-          grey     = "#2A354C",
-          black    = "#000000",
-          red      = "#fdb8c0",
-          dark_red = "#e03e4d",
-        },
-        snippet_context_lines = 4,
-        gh_cmd = "gh",
-        timeout = 5000,
-        default_to_projects_v2 = false,
-      })
-    end
-  },
-  {
     -- Make sure to set this up properly if you have lazy=true
     "MeanderingProgrammer/render-markdown.nvim",
     opts = {
@@ -672,7 +632,7 @@ return {
       vim.keymap.set("n", "gf", "<cmd>lua vim.lsp.buf.format()<CR>")
       vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>")
       vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>")
-      vim.keymap.set("n", "ca", "<cmd>lua vim.lsp.buf.code_action()<CR>")
+      vim.keymap.set("n", "lga", "<cmd>lua vim.lsp.buf.code_action()<CR>")
       vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>")
       vim.keymap.set("n", "gt", "<cmd>lua vim.lsp.buf.type_definition()<CR>")
       vim.keymap.set("n", "gn", "<cmd>lua vim.lsp.buf.rename()<CR>")
@@ -752,7 +712,6 @@ return {
   { "hrsh7th/cmp-path", event = "VeryLazy" },
   { "hrsh7th/cmp-cmdline", event = "VeryLazy" },
   { "hrsh7th/cmp-omni", event = "VeryLazy" },
-  { "hrsh7th/cmp-nvim-lsp-signature-help", event = "VeryLazy" },
   { "hrsh7th/cmp-calc", event = "VeryLazy" },
   { "lukas-reineke/cmp-rg", event = "VeryLazy" },
   {

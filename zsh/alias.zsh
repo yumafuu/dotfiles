@@ -35,8 +35,7 @@ alias vv='vim ~/.config/nvim/lua/plugins.lua'
 alias vd='vim -p $(git diff --name-only)'
 
 # ai
-## claude
-alias c="claude"
+alias c="crush"
 
 ## gwq
 alias gq="gwq"
@@ -127,3 +126,8 @@ alias main="git checkout main"
 
 # fast
 alias fast="bun x fast-cli --single-line --upload"
+
+# fzf-make
+alias fm='fzf-make'
+alias fr='fzf-make repeat'
+alias fh='fzf-make history'

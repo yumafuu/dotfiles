@@ -124,6 +124,10 @@ const shared = [
     k: toPaste('【個人】'),
   }),
 
+  rule("Shottr").manipulators([
+    map("o", ["left_control", "left_command"]).to$(`open -g "shottr://ocr"`),
+  ]),
+
   rule("コロンとセミコロンを入れ替える").manipulators([
     // ; -> :
     map("semicolon", { optional: "caps_lock" }).to("semicolon", "left_shift"),
