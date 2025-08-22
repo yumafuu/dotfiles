@@ -1,14 +1,6 @@
 return {
   { "nvim-lua/plenary.nvim", lazy = true },
   {
-    -- Make sure to set this up properly if you have lazy=true
-    "MeanderingProgrammer/render-markdown.nvim",
-    opts = {
-      file_types = { "markdown", "Avante" },
-    },
-    ft = { "markdown", "Avante" },
-  },
-  {
     "folke/flash.nvim",
     event = "VeryLazy",
     opts = {},
@@ -502,7 +494,68 @@ return {
       vim.lsp.config("*", {
         capabilities = require("cmp_nvim_lsp").default_capabilities(),
       })
-      vim.lsp.enable(require("mason-lspconfig").get_installed_servers())
+
+      -- TypeScript/JavaScript LSP setup with Deno/Node detection
+      local function is_deno_project(fname)
+        local root = vim.fs.root(fname, {"deno.json", "deno.jsonc", "deno.lock"})
+        if root then return true end
+
+        -- Check shebang for deno
+        local file = io.open(fname, "r")
+        if file then
+          local first_line = file:read("*line")
+          file:close()
+          if first_line and (first_line:match("#!/usr/bin/env.*deno") or first_line:match("#!/usr/bin/env %-S deno")) then
+            return true
+          end
+        end
+        return false
+      end
+
+      local function is_node_project(fname)
+        return vim.fs.root(fname, {"package.json", "node_modules"}) ~= nil
+      end
+
+      vim.lsp.config("ts_ls", {
+        root_dir = function(fname)
+          if is_node_project(fname) and not is_deno_project(fname) then
+            return vim.fs.root(fname, {"package.json"})
+          end
+          return nil
+        end,
+      })
+
+      vim.lsp.config("denols", {
+        root_dir = function(fname)
+          if is_deno_project(fname) then
+            return vim.fs.root(fname, {"deno.json", "deno.jsonc", "deno.lock"}) or vim.fs.dirname(fname)
+          end
+          return nil
+        end,
+        init_options = {
+          lint = true,
+          unstable = true,
+          suggest = {
+            imports = {
+              hosts = {
+                ["https://deno.land"] = true,
+                ["https://cdn.nest.land"] = true,
+                ["https://crux.land"] = true,
+              },
+            },
+          },
+        },
+      })
+
+      local installed_servers = require("mason-lspconfig").get_installed_servers()
+      for _, server in ipairs(installed_servers) do
+        if server ~= "ts_ls" and server ~= "denols" then
+          vim.lsp.enable(server)
+        end
+      end
+
+      -- Enable denols with custom config
+      vim.lsp.enable("denols")
 
       local lspconfig = require("lspconfig")
       local util = require("lspconfig.util")
@@ -516,7 +569,7 @@ return {
       })
 
       lspconfig.jsonls.setup({
-        capabilities = capabilities,
+        capabilities = require("cmp_nvim_lsp").default_capabilities(),
         settings = {
           json = {
             schemas = require("schemastore").json.schemas(),
@@ -542,7 +595,9 @@ return {
         },
       })
       -- lspconfig["ts_ls"].setup({
-      --   root_dir = lspconfig.util.root_pattern("package.json"),
+      --   root_dir = function(fname)
+      --     return lspconfig.util.root_pattern("package.json")(fname)
+      --   end,
       -- })
       lspconfig.typos_lsp.setup({
         init_options = {
@@ -567,6 +622,52 @@ return {
           "go",
           "gomod",
           "gowork",
+        },
+      })
+    end,
+  },
+  {
+    "pmizio/typescript-tools.nvim",
+    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+    ft = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
+    config = function()
+      local function is_deno_project(fname)
+        local root = vim.fs.root(fname, {"deno.json", "deno.jsonc", "deno.lock"})
+        if root then return true end
+
+        -- Check shebang for deno
+        local file = io.open(fname, "r")
+        if file then
+          local first_line = file:read("*line")
+          file:close()
+          if first_line and (first_line:match("#!/usr/bin/env.*deno") or first_line:match("#!/usr/bin/env %-S deno")) then
+            return true
+          end
+        end
+        return false
+      end
+
+      local function is_node_project(fname)
+        return vim.fs.root(fname, {"package.json", "node_modules"}) ~= nil
+      end
+
+      require("typescript-tools").setup({
+        root_dir = function(fname)
+          if is_node_project(fname) and not is_deno_project(fname) then
+            return vim.fs.root(fname, {"package.json"})
+          end
+          return nil
+        end,
+        settings = {
+          tsserver_file_preferences = {
+            includeInlayParameterNameHints = "all",
+            includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+            includeInlayFunctionParameterTypeHints = true,
+            includeInlayVariableTypeHints = true,
+            includeInlayPropertyDeclarationTypeHints = true,
+            includeInlayFunctionLikeReturnTypeHints = true,
+            includeInlayEnumMemberValueHints = true,
+          },
         },
       })
     end,
