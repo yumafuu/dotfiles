@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+if [ $# -eq 0 ]; then
+  git branch -a |
+    sed -e "s/[ ,\*]//g" |
+    sed -e "s/remotes\/origin\///g" |
+    sed -e "s/HEAD->//g" |
+    sort -u |
+    fzf | tr -d '\n' | xargs git checkout
+elif [ "$1" = "-" ]; then
+  # 引数が - の場合は前のブランチに戻る
+  git checkout -
+else
+  branch=$1
+  # refs/heads に存在すれば checkout、なければ -b
+  if git show-ref --verify --quiet "refs/heads/${branch}"; then
+    git checkout "${branch}"
+  else
+    git checkout -b "${branch}"
+  fi
+fi

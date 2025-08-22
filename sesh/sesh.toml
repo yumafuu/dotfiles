@@ -11,7 +11,7 @@ preview_command = "ls -l"
 [[session]]
 name = "tmux"
 path = "~/dotfiles/tmux"
-startup_command = "tmex tmux 1224"
+startup_command = "nvim .tmux.conf"
 
 [[session]]
 name = "😈 nvim"
@@ -37,6 +37,7 @@ startup_command = "nvim sesh.toml"
 name = "💬 dotfiles"
 path = "~/dotfiles"
 startup_command = "dotfiles link && nvim ."
+windows = ["git", "echo"]
 
 [[session]]
 name = "🧢 zsh"
@@ -59,6 +60,15 @@ name = "☁️ floax"
 name = "🤚 kos"
 path = "~/ghq/github.com/KOS-LLC/ai-dev-ops"
 
+[[session]]
+name = "spotify"
+path = "~/"
+startup_command = "spotify_player"
+
 [[window]]
 name = "git"
 startup_script = "git pull"
+
+[[window]]
+name = "echo"
+startup_script = "echo 'Hello, World!'"

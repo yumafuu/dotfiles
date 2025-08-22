@@ -69,33 +69,6 @@ alias gotestv="go test -v"
 alias gtv="go test -v"
 
 # git
-## checkout
-function g-branch-fzf() {
-  git branch -a |
-    sed -e "s/[ ,\*]//g" |
-    sed -e "s/remotes\/origin\///g" |
-    sed -e "s/HEAD->//g" |
-    sort -u |
-    fzf |
-    tr -d '\n'
-}
-
-# FZF でブランチ選択 or 引数でブランチ作成／チェックアウト
-co() {
-  if [ $# -eq 0 ]; then
-    # 引数なし：g-branch-fzf の結果を checkout
-    g-branch-fzf | xargs git checkout
-  else
-    branch=$1
-    # refs/heads に存在すれば checkout、なければ -b
-    if git show-ref --verify --quiet "refs/heads/${branch}"; then
-      git checkout "${branch}"
-    else
-      git checkout -b "${branch}"
-    fi
-  fi
-}
-
 alias g="git"
 alias gco="git checkout"
 alias gcdf='git clean -df'
