@@ -1,31 +1,6 @@
 return {
   { "nvim-lua/plenary.nvim", lazy = true },
   {
-    "Exafunction/windsurf.nvim",
-    config = function()
-      require("codeium").setup({
-        virtual_text = {
-          enabled = true,
-          manual = false,
-          filetypes = {},
-          default_filetype_enabled = true,
-          idle_delay = 75,
-          virtual_text_priority = 65535,
-          map_keys = true,
-          accept_fallback = nil,
-          key_bindings = {
-            accept = "<C-]>",
-            accept_word = false,
-            accept_line = false,
-            clear = false,
-            next = "<M-]>",
-            prev = "<M-[>",
-          },
-        },
-      })
-    end,
-  },
-  {
     -- Make sure to set this up properly if you have lazy=true
     "MeanderingProgrammer/render-markdown.nvim",
     opts = {
@@ -34,18 +9,8 @@ return {
     ft = { "markdown", "Avante" },
   },
   {
-    "ravitemer/mcphub.nvim",
-    build = "npm install -g mcp-hub@latest",
-    config = function()
-      require("mcphub").setup({
-        auto_approve = false,
-      })
-    end,
-  },
-  {
     "folke/flash.nvim",
     event = "VeryLazy",
-    ---@type Flash.Config
     opts = {},
     -- stylua: ignore
     keys = {
@@ -102,36 +67,6 @@ return {
     end,
   },
   {
-    "kylechui/nvim-surround",
-    version = "*", -- Use for stability; omit to use `main` branch for the latest features
-    event = "VimEnter",
-    config = function()
-      require("nvim-surround").setup({
-        -- Configuration here, or leave empty to use defaults
-      })
-    end,
-  },
-  -- {
-  --   "github/copilot.vim",
-  --   enabled = true,
-  --   config = function()
-  --     vim.g.copilot_no_tab_map = true
-
-  --     local keymap = vim.keymap.set
-  --     -- https://github.com/orgs/community/discussions/29817#discussioncomment-4217615
-  --     keymap(
-  --       "i",
-  --       "<C-g>",
-  --       'copilot#Accept("<CR>")',
-  --       { silent = true, expr = true, script = true, replace_keycodes = false }
-  --     )
-  --     keymap("i", "<C-j>", "<Plug>(copilot-next)")
-  --     keymap("i", "<C-k>", "<Plug>(copilot-previous)")
-  --     keymap("i", "<C-o>", "<Plug>(copilot-dismiss)")
-  --     keymap("i", "<C-s>", "<Plug>(copilot-suggest)")
-  --   end,
-  -- },
-  {
     "pmizio/typescript-tools.nvim",
     opts = {},
     enabled = true,
@@ -145,13 +80,11 @@ return {
       qt.setup({
         -- Choose your adapter, here all supported adapters are listed
         adapters = {
+          require("quicktest.adapters.gorun"),
+          require("quicktest.adapters.bash"),
           require("quicktest.adapters.golang")({}),
           require("quicktest.adapters.vitest")({}),
           require("quicktest.adapters.playwright")({}),
-          require("quicktest.adapters.elixir"),
-          require("quicktest.adapters.criterion"),
-          require("quicktest.adapters.dart"),
-          require("quicktest.adapters.rspec"),
         },
         -- split or popup mode, when argument not specified
         default_win_mode = "popup",
@@ -264,9 +197,7 @@ return {
     lazy = true,
     cmd = { "Rayso" },
     config = function()
-      require("rayso").setup({
-        open_cmd = "open-via-lemonade",
-      })
+      require("rayso").setup({})
     end,
   },
   {
@@ -301,14 +232,68 @@ return {
     lazy = false,
     dependencies = { "kana/vim-operator-user" },
   },
+  {
+    "echasnovski/mini.extra",
+    lazy = false,
+    config = function()
+      require("mini.extra").setup()
+    end,
+  },
+  {
+    "echasnovski/mini.ai",
+    lazy = false,
+    config = function()
+      local gen_ai_spec = require("mini.extra").gen_ai_spec
+
+      require("mini.ai").setup({
+        -- n_lines = 1000,
+        search_method = "cover_or_next",
+
+        custom_textobjects = {
+          B = gen_ai_spec.buffer(),
+          D = gen_ai_spec.diagnostic(),
+          I = gen_ai_spec.indent(),
+          L = gen_ai_spec.line(),
+          N = gen_ai_spec.number(),
+          J = { { "()%d%d%d%d%-%d%d%-%d%d()", "()%d%d%d%d%/%d%d%/%d%d()" } },
+        },
+      })
+    end,
+  },
+  {
+    "echasnovski/mini.operators",
+    lazy = false,
+    config = function()
+    require("mini.operators").setup()
+    end,
+  },
+  {
+    "echasnovski/mini.pairs",
+    lazy = false,
+    config = function()
+      require("mini.pairs").setup({
+        n_lines = 1000,
+        search_method = "cover_or_next",
+      })
+    end,
+  },
+  {
+    "echasnovski/mini.surround",
+    lazy = false,
+    config = function()
+      require("mini.surround").setup({
+        n_lines = 1000,
+        search_method = "cover_or_next",
+      })
+    end,
+  },
+  { "nvim-treesitter/nvim-treesitter", lazy = true },
   { "tyru/operator-camelize.vim", lazy = true },
-  { "kana/vim-textobj-user", lazy = true },
   { "simeji/winresizer", event = "VeryLazy" },
   { "tpope/vim-repeat", lazy = false },
   { "tpope/vim-commentary", lazy = true },
   { "machakann/vim-highlightedyank", event = "VeryLazy" },
   { "dhruvasagar/vim-table-mode", lazy = true },
-  { "nvim-treesitter/nvim-treesitter", lazy = true },
   { "vim-denops/denops.vim", lazy = true },
   { "lambdalisue/kensaku.vim", event = "CmdlineEnter" },
   {
@@ -346,49 +331,6 @@ return {
     lazy = true,
     config = function()
       vim.g.csv_default_delim = ","
-    end,
-  },
-  {
-    "akinsho/toggleterm.nvim",
-    event = "VeryLazy",
-    version = "*",
-    config = function()
-      local opts = { noremap = true, silent = true }
-      local Terminal = require("toggleterm.terminal").Terminal
-
-      local float_opts = {
-        border = "curved",
-      }
-      local highlights = {
-        Normal = {
-          -- guibg = "#262626",
-          guibg = None,
-        },
-        FloatBorder = {
-          guifg = "#3A3A3A",
-          -- guibg = "#262626",
-          guibg = None,
-        },
-      }
-
-      -- -- git
-      -- local git_ui = Terminal:new({
-      --   cmd = "lazygit",
-      --   dir = "git_dir",
-      --   direction = "float",
-      --   hidden = true,
-      --   close_on_exit = true,
-      --   highlights = highlights,
-      --   float_opts = float_opts,
-      --   on_open = function(term)
-      --     vim.cmd("startinsert!")
-      --     vim.api.nvim_buf_set_keymap(term.bufnr, "t", "<c-\\>", "<CMD>close<CR>", opts)
-      --   end,
-      -- })
-      -- function _toggle_git_ui()
-      --   git_ui:toggle()
-      -- end
-      -- vim.api.nvim_set_keymap("n", "<c-\\>", "<cmd>lua _toggle_git_ui()<CR>", opts)
     end,
   },
   {
@@ -463,7 +405,25 @@ return {
       end, { noremap = true, silent = true })
     end,
   },
-  { "tyru/open-browser.vim", event = "VeryLazy" },
+  {
+    "yumafuu/oat.nvim",
+    config = function()
+      require("oat").setup({
+        operators = {
+          p = {
+            name = "gpt",
+            interactive = true,
+            command = function(text)
+              local encoded_text = vim.fn.substitute(text, " ", "%20", "g")
+              local url = "https://chat.com/?q=" .. encoded_text
+              return "open " .. vim.fn.shellescape(url)
+            end,
+            description = "Chat with GPT",
+          },
+        },
+      })
+    end,
+  },
   {
     "xiyaowong/nvim-transparent",
     lazy = false, -- needed
@@ -493,11 +453,10 @@ return {
       vim.api.nvim_create_autocmd("BufWritePre", {
         pattern = "*.go",
         callback = function()
-         require('go.format').goimports()
+          require("go.format").goimports()
         end,
         group = format_sync_grp,
       })
-
     end,
     event = "VeryLazy",
     ft = { "go", "gomod" },
@@ -536,19 +495,17 @@ return {
       })
     end,
   },
-
   {
     "neovim/nvim-lspconfig",
     -- lazy = true,
     config = function()
-      vim.lsp.config('*', {
-        capabilities = require('cmp_nvim_lsp').default_capabilities(),
+      vim.lsp.config("*", {
+        capabilities = require("cmp_nvim_lsp").default_capabilities(),
       })
-      vim.lsp.enable(require('mason-lspconfig').get_installed_servers())
+      vim.lsp.enable(require("mason-lspconfig").get_installed_servers())
 
       local lspconfig = require("lspconfig")
       local util = require("lspconfig.util")
-      local mason_lsp    = require("mason-lspconfig")
 
       lspconfig.terraformls.setup({
         capabilities = require("cmp_nvim_lsp").default_capabilities(),
@@ -604,7 +561,7 @@ return {
       lspconfig.gopls.setup({
         capabilities = capabilities,
         settings = {
-          gopls = { },
+          gopls = {},
         },
         filetypes = {
           "go",
@@ -664,12 +621,12 @@ return {
         init = function()
           -- Require providers
           require("hover.providers.lsp")
-          require('hover.providers.diagnostic')
-          require('hover.providers.gh')
-          require('hover.providers.gh_user')
-          require('hover.providers.jira')
+          require("hover.providers.diagnostic")
+          require("hover.providers.gh")
+          require("hover.providers.gh_user")
+          require("hover.providers.jira")
           -- require('hover.providers.dap')
-          require('hover.providers.fold_preview')
+          require("hover.providers.fold_preview")
           -- require('hover.providers.man')
           -- require('hover.providers.dictionary')
           -- require('hover.providers.highlight')
@@ -687,13 +644,16 @@ return {
         mouse_delay = 1000,
       })
 
-
       -- Setup keymaps
       vim.keymap.set("n", "K", require("hover").hover, { desc = "hover.nvim" })
       vim.keymap.set("n", "gK", require("hover").hover_select, { desc = "hover.nvim (select)" })
-      vim.keymap.set("n", "<S-h>", function() require("hover").hover_switch("previous") end, { desc = "hover.nvim (previous source)" })
-      vim.keymap.set("n", "<S-l>", function() require("hover").hover_switch("next") end, { desc = "hover.nvim (next source)" })
-      vim.keymap.set('n', '<MouseMove>', require('hover').hover_mouse, { desc = "hover.nvim (mouse)" })
+      vim.keymap.set("n", "<S-h>", function()
+        require("hover").hover_switch("previous")
+      end, { desc = "hover.nvim (previous source)" })
+      vim.keymap.set("n", "<S-l>", function()
+        require("hover").hover_switch("next")
+      end, { desc = "hover.nvim (next source)" })
+      vim.keymap.set("n", "<MouseMove>", require("hover").hover_mouse, { desc = "hover.nvim (mouse)" })
 
       vim.o.mousemoveevent = true
     end,
@@ -702,7 +662,7 @@ return {
     "greggh/claude-code.nvim",
     config = function()
       require("claude-code").setup()
-    end
+    end,
   },
   -------------------
   -- cmp
@@ -720,7 +680,6 @@ return {
     config = function()
       vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
         border = "rounded", -- "shadow" , "none", "rounded"
-        border = border,
         -- width = 100,
       })
       local cmp = require("cmp")
@@ -734,7 +693,6 @@ return {
           documentation = cmp.config.window.bordered({
             documentation = {
               border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-              bo
             },
           }),
         },
@@ -747,7 +705,7 @@ return {
         }),
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
-          { name = "codeium" },
+          -- { name = "codeium" },
           { name = "buffer", max_item_count = 10, keyword_length = 2 },
           { name = "path" },
           { name = "calc" },

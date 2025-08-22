@@ -36,17 +36,12 @@ vim.g.skip_loading_mswin = 1
 vim.diagnostic.config({
   float = { border = "rounded" },
 })
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-  vim.lsp.handlers.hover, {
-    border = "rounded",
-  }
-)
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
-  vim.lsp.handlers.signature_help, {
-    border = "rounded",
-  }
-)
-
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+  border = "rounded",
+})
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+  border = "rounded",
+})
 
 local o = vim.opt
 
@@ -135,7 +130,6 @@ maps = {
     ["j"] = "gj",
     ["k"] = "gk",
     ["R"] = "<Plug>(operator-replace)",
-    ["go"] = "<Plug>(openbrowser-smart-search)",
     ["<Leader>c"] = "<plug>(operator-camelize-toggle)",
     ["<C-n>"] = "<cmd>tabnext<CR>",
     ["<C-p>"] = "<cmd>tabprevious<CR>",
@@ -148,7 +142,6 @@ maps = {
     ["<C-l>"] = "<Right>",
   },
   v = {
-    ["go"] = "<Plug>(openbrowser-smart-search)",
     ["<C-d>"] = "<C-d>zz",
     ["<C-u>"] = "<C-u>zz",
   },
@@ -219,12 +212,12 @@ local function copy_current_path()
     fullpath = fullpath:sub(#prefix + 1)
   end
   local cwd = vim.fn.getcwd()
-  local relpath = vim.fn.fnamemodify(fullpath, ':.')
-  vim.fn.setreg('+', relpath)
+  local relpath = vim.fn.fnamemodify(fullpath, ":.")
+  vim.fn.setreg("+", relpath)
   vim.notify("Copied path: " .. relpath, vim.log.levels.INFO)
 end
 
-vim.keymap.set({'n','v'}, '<leader>l', copy_current_path, { noremap = true, silent = true })
+vim.keymap.set({ "n", "v" }, "<leader>l", copy_current_path, { noremap = true, silent = true })
 
 local function select_ABC()
   vim.fn.jobstart({ "/opt/homebrew/bin/im-select", "com.apple.keylayout.ABC" }, { detach = true })
@@ -239,16 +232,16 @@ vim.api.nvim_create_autocmd("InsertLeave", {
 -- クリップボードの内容でバッファを全上書き
 local function replace_buffer_with_clipboard()
   -- クリップボードの内容を取得
-  local clipboard = vim.fn.getreg('+')
-  if clipboard == nil or clipboard == '' then
-    vim.notify('Clipboard is empty', vim.log.levels.WARN)
+  local clipboard = vim.fn.getreg("+")
+  if clipboard == nil or clipboard == "" then
+    vim.notify("Clipboard is empty", vim.log.levels.WARN)
     return
   end
 
   -- バッファ全体を書き換え
-  vim.api.nvim_buf_set_lines(0, 0, -1, false, vim.split(clipboard, '\n'))
+  vim.api.nvim_buf_set_lines(0, 0, -1, false, vim.split(clipboard, "\n"))
 end
-vim.keymap.set('n', '<leader>p', replace_buffer_with_clipboard, { desc = 'Replace buffer with clipboard' })
+vim.keymap.set("n", "<leader>p", replace_buffer_with_clipboard, { desc = "Replace buffer with clipboard" })
 
 vim.keymap.set("n", "gq", function()
   local file = vim.fn.expand("<cfile>")
@@ -260,5 +253,3 @@ vim.keymap.set("n", "gq", function()
     end
   end
 end, { noremap = true, silent = true })
-
-

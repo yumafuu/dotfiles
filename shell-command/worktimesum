@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# クリップボードから時刻(HH:MM)だけを抽出してソート
+# "C " などの文字は無視。空行もOK。
+readarray -t sorted < <(pbpaste \
+  | grep -Eo '([01]?[0-9]|2[0-3]):[0-5][0-9]' \
+  | awk '{print sprintf("%02d:%02d", substr($0,1,index($0,":")-1), substr($0,index($0,":")+1))}' \
+  | sort)
+
+if ((${#sorted[@]} == 0)); then
+  echo "時刻が見つかりませんでした。クリップボードに HH:MM 形式の時刻をコピーしてください。"
+  exit 1
+fi
+
+# 奇数個なら現在時刻を末尾に補完
+if ((${#sorted[@]} % 2 == 1)); then
+  now=$(date +"%H:%M")
+  sorted+=("$now")
+fi
+
+# HH:MM を分に
+to_minutes() {
+  local h=${1%:*} m=${1#*:}
+  echo $((10#$h * 60 + 10#$m))
+}
+
+total=0
+pairs=()
+
+for ((i=0; i<${#sorted[@]}; i+=2)); do
+  s="${sorted[i]}"
+  e="${sorted[i+1]}"
+  sm=$(to_minutes "$s")
+  em=$(to_minutes "$e")
+
+  # もし退勤が開始より小さい（＝日跨ぎの可能性）なら24hを加算
+  if (( em < sm )); then
+    em=$(( em + 24*60 ))
+  fi
+
+  dur=$(( em - sm ))
+  (( dur < 0 )) && dur=0
+
+  total=$(( total + dur ))
+  pairs+=("$s-$e")
+done
+
+# 合計を HH:MM に
+hours=$(( total / 60 ))
+mins=$(( total % 60 ))
+
+# 出力
+echo "対象時刻(ソート後): ${sorted[*]}"
+echo "ペア: ${pairs[*]}"
+printf "勤務時間 合計: %02d:%02d\n" "$hours" "$mins"
+
