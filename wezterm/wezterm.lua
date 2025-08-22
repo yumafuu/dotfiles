@@ -35,7 +35,7 @@ return {
   tab_bar_at_bottom = false,
   disable_default_key_bindings = true,
 
-  leader = { key = "s", mods = "CTRL|SHIFT", timeout_milliseconds = 500 },
+  leader = { key = "s", mods = "CTRL", timeout_milliseconds = 500 },
   colors = {
     brights = {
       "#969896",

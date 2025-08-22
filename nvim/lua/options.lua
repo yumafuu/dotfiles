@@ -14,6 +14,7 @@ hl(1, "HlSearchNear", { bg = "#444444", fg = "#7CB0FF" })
 hl(0, "HlSearchLens", { bg = None, fg = "#7CB0FF" })
 hl(0, "HlSearchLensNear", { bg = "None", fg = "#7BAFDA" })
 
+
 vim.g.did_install_default_menus = 1
 vim.g.did_install_syntax_menu = 1
 vim.g.did_indent_on = 1
@@ -44,6 +45,8 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
 })
 
 local o = vim.opt
+
+o.iskeyword:append("-")
 
 o.fillchars = {
   vert = "│",
