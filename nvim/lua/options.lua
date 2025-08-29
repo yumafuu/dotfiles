@@ -231,28 +231,3 @@ vim.api.nvim_create_autocmd("InsertLeave", {
   callback = select_ABC,
   desc = "Restore ABC input source after leaving insert mode",
 })
-
--- クリップボードの内容でバッファを全上書き
-local function replace_buffer_with_clipboard()
-  -- クリップボードの内容を取得
-  local clipboard = vim.fn.getreg("+")
-  if clipboard == nil or clipboard == "" then
-    vim.notify("Clipboard is empty", vim.log.levels.WARN)
-    return
-  end
-
-  -- バッファ全体を書き換え
-  vim.api.nvim_buf_set_lines(0, 0, -1, false, vim.split(clipboard, "\n"))
-end
-vim.keymap.set("n", "<leader>p", replace_buffer_with_clipboard, { desc = "Replace buffer with clipboard" })
-
-vim.keymap.set("n", "gq", function()
-  local file = vim.fn.expand("<cfile>")
-  if vim.fn.filereadable(file) == 1 then
-    vim.cmd.edit(file)
-  else
-    if vim.fn.confirm(file .. " does not exist. Create?", "&Yes\n&No", 1) == 1 then
-      vim.cmd.edit(file)
-    end
-  end
-end, { noremap = true, silent = true })

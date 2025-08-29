@@ -3,6 +3,11 @@ name = "🐤 kw"
 path = "~/ghq/github.com/knowledge-work/knowledgework"
 
 [[session]]
+name = "crush"
+path = "~/.config/crush/"
+startup_command = "nvim crush.json"
+
+[[session]]
 name = "📥 Downloads"
 path = "~/Downloads"
 startup_command = "ls"

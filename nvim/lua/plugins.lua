@@ -11,6 +11,23 @@ return {
     },
   },
   {
+    "tapihdev/cfp.nvim",
+    config = function()
+      require("cfp").setup({
+        keymaps = {
+          copy_path = "<leader>l",
+          copy_path_line = "<leader>L",
+          copy_branch_url = "<leader>cb",
+          copy_branch_url_line = "<leader>cB",
+          copy_hash_url = "<leader>ch",
+          copy_hash_url_line = "<leader>cH",
+        },
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+      })
+    end,
+  },
+  {
     "ysmb-wtsg/in-and-out.nvim",
     event = "VeryLazy",
     config = function()
@@ -61,7 +78,7 @@ return {
   {
     "pmizio/typescript-tools.nvim",
     opts = {},
-    enabled = true,
+    enabled = false,
   },
   {
     "quolpr/quicktest.nvim",
