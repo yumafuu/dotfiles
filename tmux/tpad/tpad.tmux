@@ -57,6 +57,13 @@ toggle_popup() {
     fi
     tmux setenv -g TPAD_PARENT_SESSION "$current_session"
     create_session_if_needed "$instance" "$session"
+
+    # Update working directory if session already exists
+    if tmux has-session -t "$session" 2>/dev/null; then
+      local dir="$(get_config "$instance" dir)"
+      tmux send-keys -t "$session" "cd '$dir'" C-m
+    fi
+
     local popup_opts=()
     while IFS= read -r opt; do
       popup_opts+=("$opt")
@@ -106,6 +113,11 @@ get_config() {
     val="${DEFAULTS[$key]/@instance@/${instance^}}"
   fi
 
+  # Expand tmux format strings if present
+  if [[ "$val" =~ \#\{[^}]+\} ]]; then
+    val="$(tmux display-message -p "$val")"
+  fi
+
   echo "$val"
 }
 
@@ -114,8 +126,9 @@ bind_key() {
   local key="$(get_config "$instance" bind)"
   [[ -z "$key" ]] && return
 
-  tmux bind-key "$key" run-shell "$TPAD_SCRIPT toggle $instance"
-  tmux bind-key -T "tpad_$instance" "$key" run-shell "$TPAD_SCRIPT toggle $instance"
+  # Use eval to properly handle key arguments with flags
+  eval "tmux bind-key $key run-shell '$TPAD_SCRIPT toggle $instance'"
+  eval "tmux bind-key -T 'tpad_$instance' $key run-shell '$TPAD_SCRIPT toggle $instance'"
 }
 
 build_popup_options() {
