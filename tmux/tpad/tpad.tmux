@@ -92,7 +92,7 @@ configure_session() {
   tmux set-option -s -t "$session_id" set-clipboard on
 
   # Add small delay to ensure session is ready
-  # sleep 0.1
+  sleep 0.1
 
   local prefix="$(get_config "$instance" prefix)"
   [[ "$prefix" ]] && tmux set-option -s -t "$session_id" prefix "$prefix"
