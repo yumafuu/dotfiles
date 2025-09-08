@@ -1,12 +1,60 @@
 #!/usr/bin/env bash
 
-if [ $# -eq 0 ]; then
-  git branch -a |
-    sed -e "s/[ ,\*]//g" |
-    sed -e "s/remotes\/origin\///g" |
-    sed -e "s/HEAD->//g" |
-    sort -u |
-    fzf | tr -d '\n' | xargs git checkout
+# Function to delete old branches
+delete_old_branches() {
+  user_email=$(git config --get user.email)
+  current_branch=$(git branch --show-current)
+  
+  echo "Finding your old merged branches..."
+  
+  # Get branches authored by user that are merged to main/master
+  main_branch=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@' || echo "main")
+  
+  merged_branches=$(git for-each-ref --format='%(refname:short) %(authoremail) %(committerdate:relative)' refs/heads/ |
+    grep "${user_email}" |
+    while read branch email date_info; do
+      # Skip current branch and main branches
+      if [[ "$branch" != "$current_branch" && "$branch" != "main" && "$branch" != "master" ]]; then
+        # Check if branch is merged
+        if git branch --merged "$main_branch" | grep -q "^[* ]*$branch$"; then
+          echo "$branch (merged, $date_info)"
+        fi
+      fi
+    done)
+  
+  if [ -z "$merged_branches" ]; then
+    echo "No old merged branches found."
+    return
+  fi
+  
+  echo "Merged branches to delete:"
+  echo "$merged_branches"
+  echo ""
+  read -p "Delete these branches? (y/N): " confirm
+  
+  if [[ "$confirm" == "y" || "$confirm" == "Y" ]]; then
+    echo "$merged_branches" | cut -d' ' -f1 | while read branch; do
+      echo "Deleting $branch..."
+      git branch -d "$branch"
+    done
+  fi
+}
+
+if [ "$1" = "--clean" ] || [ "$1" = "-c" ]; then
+  delete_old_branches
+elif [ $# -eq 0 ]; then
+  # Get current user's email for filtering
+  user_email=$(git config --get user.email)
+  
+  # Start with my branches
+  git for-each-ref --format='%(refname:short) %(authoremail)' refs/heads/ | 
+    grep "${user_email}" | 
+    cut -d' ' -f1 | 
+    fzf --header="My branches (ctrl-g: all branches, ctrl-d: delete selected)" \
+        --bind="ctrl-g:reload(git branch -a | sed -e 's/[ ,\*]//g' | sed -e 's/remotes\/origin\///g' | sed -e 's/HEAD->//g' | sort -u)+change-header(All branches (ctrl-h: my branches))" \
+        --bind="ctrl-h:reload(git for-each-ref --format='%(refname:short) %(authoremail)' refs/heads/ | grep '${user_email}' | cut -d' ' -f1)+change-header(My branches (ctrl-g: all branches, ctrl-d: delete selected))" \
+        --bind="ctrl-d:execute(echo 'Delete branch {}? (y/N): ' && read confirm && [[ \"\$confirm\" == 'y' ]] && git branch -d {})+reload(git for-each-ref --format='%(refname:short) %(authoremail)' refs/heads/ | grep '${user_email}' | cut -d' ' -f1)" | 
+    tr -d '\n' | xargs -r git checkout
 elif [ "$1" = "-" ]; then
   # 引数が - の場合は前のブランチに戻る
   git checkout -

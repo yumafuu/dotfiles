@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
 
-if [[ "$1" == "-o" ]]; then
+# Check if a pull request exists for the current branch
+if gh pr view &>/dev/null; then
+  # PR exists, open it in browser
   url=$(gh pr view --json url -q .url)
   open "$url"
 else
-  gh pr view "$@"
+  # PR doesn't exist, create and open it
+  gh pr create --web
 fi
