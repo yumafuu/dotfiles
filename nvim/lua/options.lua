@@ -10,10 +10,9 @@ hl(0, "LineNr", { fg = "#C0C0C0" })
 hl(0, "CursorLineNr", { fg = "#66C1FF" })
 hl(0, "NotifyBackground", { bg = "None" })
 hl(0, "TelescopeNormal", { bg = "None" })
-hl(1, "HlSearchNear", { bg = "#444444", fg = "#7CB0FF" })
-hl(0, "HlSearchLens", { bg = None, fg = "#7CB0FF" })
+hl(0, "HlSearchNear", { bg = "#444444", fg = "#7CB0FF" })
+hl(0, "HlSearchLens", { bg = "None", fg = "#7CB0FF" })
 hl(0, "HlSearchLensNear", { bg = "None", fg = "#7BAFDA" })
-
 
 vim.g.did_install_default_menus = 1
 vim.g.did_install_syntax_menu = 1
@@ -43,11 +42,16 @@ vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
   border = "rounded",
 })
+vim.lsp.inlay_hint.enable(false)
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local bufnr = args.buf
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if client and client.server_capabilities.inlayHintProvider then vim.lsp.inlay_hint.enable(false, { bufnr = bufnr }) end
+  end,
+})
 
 local o = vim.opt
-
-o.iskeyword:append("-")
-
 o.fillchars = {
   vert = "│",
   vertleft = "┤",
@@ -95,9 +99,9 @@ o.clipboard:append({ "unnamedplus" })
 o.laststatus = 3
 o.cmdheight = 1
 
--- vim.api.nvim_create_augroup( 'lua', {} )
+-- vim.api.nvim_create_augroup( 'abc', {} )
 -- vim.api.nvim_create_autocmd( 'bufwritepre', {
---   group = 'lua',
+--   group = 'abc',
 --   callback = function() print('insert enter') end
 -- })
 
@@ -121,12 +125,10 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   command = [[%s/\s\+$//e]],
 })
 
-local map = vim.api.nvim_set_keymap
 maps = {
   n = {
     ["te"] = '<cmd>execute ":tabedit" expand("%:h")<CR>',
     ["tt"] = '<cmd>execute ":tab split"<CR>',
-    ["<C-[><C-[>"] = "<cmd>noh<CR><Esc>",
     ["C-l"] = "<cmd>noh<CR>",
     ["<C-[><C-[>"] = "<cmd>noh<CR>",
     ["<ECS><ECS>"] = "<cmd>noh<CR>",
@@ -139,6 +141,7 @@ maps = {
     ["tv"] = "<cmd>vsplit | terminal<CR>",
     ["<C-d>"] = "<C-d>zz",
     ["<C-u>"] = "<C-u>zz",
+    ["co"] = "<cmd>cfdo tabedit %<CR>",
   },
   i = {
     ["<C-h>"] = "<Left>",
@@ -211,9 +214,7 @@ local function copy_current_path()
   local bufname = vim.api.nvim_buf_get_name(0)
   local prefix = "oil://"
   local fullpath = bufname
-  if fullpath:sub(1, #prefix) == prefix then
-    fullpath = fullpath:sub(#prefix + 1)
-  end
+  if fullpath:sub(1, #prefix) == prefix then fullpath = fullpath:sub(#prefix + 1) end
   local cwd = vim.fn.getcwd()
   local relpath = vim.fn.fnamemodify(fullpath, ":.")
   vim.fn.setreg("+", relpath)
@@ -222,12 +223,15 @@ end
 
 vim.keymap.set({ "n", "v" }, "<leader>l", copy_current_path, { noremap = true, silent = true })
 
-local function select_ABC()
-  vim.fn.jobstart({ "/opt/homebrew/bin/im-select", "com.apple.keylayout.ABC" }, { detach = true })
-end
+local function select_ABC() vim.fn.jobstart({ "/opt/homebrew/bin/im-select", "com.apple.keylayout.ABC" }, { detach = true }) end
 -- Create the autocmd
 vim.api.nvim_create_autocmd("InsertLeave", {
   pattern = "*",
   callback = select_ABC,
   desc = "Restore ABC input source after leaving insert mode",
+})
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*",
+  callback = function(args) require("conform").format({ bufnr = args.buf }) end,
 })

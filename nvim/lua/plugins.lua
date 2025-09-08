@@ -3,12 +3,24 @@ return {
   {
     "folke/flash.nvim",
     event = "VeryLazy",
-    opts = {},
-    -- stylua: ignore
     keys = {
-      { "?", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
-      { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+      { "?", mode = { "n", "x", "o" }, function() require("flash").jump() end },
+      { "<leader>s", mode = { "n", "x", "o" }, function() require("flash").jump() end },
+      { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end },
+      { "f", mode = { "n", "x", "o" }, function() require("flash").jump({ mode = "char" }) end },
+      { "F", mode = { "n", "x", "o" }, function() require("flash").jump({ mode = "char", backward = true }) end },
+      { "t", mode = { "n", "x", "o" }, function() require("flash").jump({ mode = "char", jump_labels = false }) end },
+      { "T", mode = { "n", "x", "o" }, function() require("flash").jump({ mode = "char", jump_labels = false, backward = true }) end },
     },
+    config = function()
+      require("flash").setup({
+        highlight = {
+          backdrop = true,
+          matches = true,
+          minimal_jump = true,
+        },
+      })
+    end,
   },
   {
     "tapihdev/cfp.nvim",
@@ -16,7 +28,7 @@ return {
       require("cfp").setup({
         keymaps = {
           copy_path = "<leader>l",
-          copy_path_line = "<leader>L",
+          copy_path_line = "<leader>K",
           copy_branch_url = "<leader>cb",
           copy_branch_url_line = "<leader>cB",
           copy_hash_url = "<leader>ch",
@@ -28,12 +40,197 @@ return {
     end,
   },
   {
+    "kevinhwang91/nvim-bqf",
+    ft = "qf",
+    config = function()
+      local fn = vim.fn
+
+      function _G.qftf(info)
+        local items
+        local ret = {}
+        -- The name of item in list is based on the directory of quickfix window.
+        -- Change the directory for quickfix window make the name of item shorter.
+        -- It's a good opportunity to change current directory in quickfixtextfunc :)
+        --
+        -- local alterBufnr = fn.bufname('#') -- alternative buffer is the buffer before enter qf window
+        -- local root = getRootByAlterBufnr(alterBufnr)
+        -- vim.cmd(('noa lcd %s'):format(fn.fnameescape(root)))
+        --
+        if info.quickfix == 1 then
+          items = fn.getqflist({ id = info.id, items = 0 }).items
+        else
+          items = fn.getloclist(info.winid, { id = info.id, items = 0 }).items
+        end
+        local limit = 31
+        local fnameFmt1, fnameFmt2 = "%-" .. limit .. "s", "…%." .. (limit - 1) .. "s"
+        local validFmt = "%s │%5d:%-3d│%s %s"
+        for i = info.start_idx, info.end_idx do
+          local e = items[i]
+          local fname = ""
+          local str
+          if e.valid == 1 then
+            if e.bufnr > 0 then
+              fname = fn.bufname(e.bufnr)
+              if fname == "" then
+                fname = "[No Name]"
+              else
+                fname = fname:gsub("^" .. vim.env.HOME, "~")
+              end
+              -- char in fname may occur more than 1 width, ignore this issue in order to keep performance
+              if #fname <= limit then
+                fname = fnameFmt1:format(fname)
+              else
+                fname = fnameFmt2:format(fname:sub(1 - limit))
+              end
+            end
+            local lnum = e.lnum > 99999 and -1 or e.lnum
+            local col = e.col > 999 and -1 or e.col
+            local qtype = e.type == "" and "" or " " .. e.type:sub(1, 1):upper()
+            str = validFmt:format(fname, lnum, col, qtype, e.text)
+          else
+            str = e.text
+          end
+          table.insert(ret, str)
+        end
+        return ret
+      end
+
+      vim.o.qftf = "{info -> v:lua._G.qftf(info)}"
+      
+      -- ハイライト設定を先に行う
+      vim.cmd([[
+        highlight BqfPreviewFloat guibg=NONE
+        highlight BqfPreviewBorder guifg=#444444 guibg=NONE
+        highlight BqfPreviewCursorLine guibg=#2e3440
+        highlight link BqfPreviewRange IncSearch
+        highlight BqfSign guifg=#66C1FF
+      ]])
+      
+      require("bqf").setup({
+        auto_enable = true,
+        func_map = {
+          vsplit = "",
+        },
+        preview = {
+          win_height = 12,
+          win_vheight = 12,
+          delay_syntax = 80,
+          border = "rounded",
+          show_title = false,
+          winblend = 0, -- 透過度を0に設定
+        },
+      })
+    end,
+  },
+  {
+    "stevearc/oil.nvim",
+    lazy = false,
+    config = function()
+      require("oil").setup({
+        default_file_explorer = true,
+        keymaps = {
+          ["?"] = "actions.show_help",
+          ["-"] = "actions.parent",
+          ["_"] = "actions.open_cwd",
+          ["<C-l>"] = "actions.refresh",
+          ["<CR>"] = "actions.select",
+          ["<C-t>"] = "actions.select_tab",
+          ["<C-i>"] = "actions.preview",
+          ["g."] = "actions.toggle_hidden",
+          ["~"] = "actions.tcd",
+        },
+        use_default_keymaps = false,
+        view_options = {
+          show_hidden = true,
+        },
+        git = {
+          add = function(path) return false end,
+          mv = function(src_path, dest_path) return false end,
+          rm = function(path) return false end,
+        },
+        columns = {
+          -- "icon",
+          -- "permissions",
+          -- "size",
+          -- "mtime",
+        },
+      })
+
+      vim.g.loaded_netrw = 1
+      vim.g.loaded_netrwPlugin = 1
+      vim.keymap.set("n", "<leader>f", function()
+        local dir = vim.fn.expand("%:h")
+        if dir == "" then dir = vim.fn.getcwd() end
+        vim.cmd("e " .. dir)
+      end, { noremap = true, silent = true })
+    end,
+  },
+  {
+    "stevearc/conform.nvim",
+    config = function()
+      require("conform").setup({
+        formatters_by_ft = {
+          lua = { "stylua" },
+          terraform = { "terraform_fmt" },
+        },
+      })
+    end,
+  },
+  {
+    "stevearc/overseer.nvim",
+    lazy = true,
+    keys = {
+      { "<leader>e", "<cmd>OverseerToggle<cr>", desc = "Toggle" },
+      { "<leader>r", "<cmd>OverseerRun<cr>", desc = "Run Task" },
+      -- { "<space>ec", "<cmd>OverseerRunCmd<cr>", desc = "Run Command" },
+      -- { "<space>eq", "<cmd>OverseerQuickAction<cr>", desc = "Quick Action" },
+      -- { "<space>ea", "<cmd>OverseerTaskAction<cr>", desc = "Task Action" },
+      -- { "<space>ei", "<cmd>OverseerInfo<cr>", desc = "Info" },
+    },
+    config = function()
+      overseer = require("overseer")
+
+      overseer.setup({
+        select = "fzf_lua",
+
+        form = {
+          border = "rounded",
+          win_opts = {
+            winblend = 0,
+            winhighlight = "Normal:MyNormal,NormalNC:MyNormalNC",
+          },
+        },
+        confirm = {
+          border = "rounded",
+          win_opts = {
+            winblend = 0,
+            winhighlight = "Normal:MyNormal,NormalNC:MyNormalNC",
+          },
+        },
+        task_win = {
+          border = "rounded",
+          win_opts = {
+            winblend = 0,
+            winhighlight = "Normal:MyNormal,NormalNC:MyNormalNC",
+          },
+        },
+      })
+    end,
+  },
+  {
+    "stevearc/quicker.nvim",
+    event = "FileType qf",
+    opts = {},
+  },
+  {
+    "chrisgrieser/nvim-recorder",
+    opts = {}, -- required
+  },
+  {
     "ysmb-wtsg/in-and-out.nvim",
     event = "VeryLazy",
     config = function()
-      vim.keymap.set("i", "<C-k>", function()
-        require("in-and-out").in_and_out()
-      end)
+      vim.keymap.set("i", "<C-k>", function() require("in-and-out").in_and_out() end)
     end,
   },
   {
@@ -178,9 +375,7 @@ return {
   { "RRethy/vim-illuminate", event = "VeryLazy" },
   {
     "brenoprata10/nvim-highlight-colors",
-    config = function()
-      require("nvim-highlight-colors").setup()
-    end,
+    config = function() require("nvim-highlight-colors").setup() end,
   },
   {
     "shortcuts/no-neck-pain.nvim",
@@ -205,9 +400,7 @@ return {
     "TobinPalmer/rayso.nvim",
     lazy = true,
     cmd = { "Rayso" },
-    config = function()
-      require("rayso").setup({})
-    end,
+    config = function() require("rayso").setup({}) end,
   },
   {
     "rapan931/lasterisk.nvim",
@@ -228,9 +421,7 @@ return {
     "hrsh7th/nvim-insx",
     lazy = true,
     tag = "v1.1.0",
-    config = function()
-      require("insx.preset.standard").setup()
-    end,
+    config = function() require("insx.preset.standard").setup() end,
   },
   {
     "kana/vim-operator-user",
@@ -244,9 +435,7 @@ return {
   {
     "echasnovski/mini.extra",
     lazy = false,
-    config = function()
-      require("mini.extra").setup()
-    end,
+    config = function() require("mini.extra").setup() end,
   },
   {
     "echasnovski/mini.ai",
@@ -272,9 +461,7 @@ return {
   {
     "echasnovski/mini.operators",
     lazy = false,
-    config = function()
-    require("mini.operators").setup()
-    end,
+    config = function() require("mini.operators").setup() end,
   },
   {
     "echasnovski/mini.pairs",
@@ -308,17 +495,29 @@ return {
   {
     "lambdalisue/kensaku-search.vim",
     lazy = true,
-    config = function()
-      vim.api.nvim_set_keymap("c", "<CR>", "<Plug>(kensaku-search-replace)<CR>", { noremap = true, silent = true })
-    end,
+    config = function() vim.api.nvim_set_keymap("c", "<CR>", "<Plug>(kensaku-search-replace)<CR>", { noremap = true, silent = true }) end,
   },
   { "nvim-tree/nvim-web-devicons", lazy = true },
   {
     "ibhagwan/fzf-lua",
     lazy = true,
     config = function()
-      -- calling `setup` is optional for customization
-      require("fzf-lua").setup({})
+      require("fzf-lua").setup({
+        keymap = {
+          fzf = {
+            ["ctrl-n"] = "select-all+accept",
+          },
+        },
+        files = {
+          rg_opts = [[--color=never --hidden --files -g "!.git"]],
+          fd_opts = [[--color=never --hidden --type f --type l --exclude .git]],
+          hidden = true,
+        },
+        grep = {
+          rg_opts = [[--column --line-number --no-heading --color=never --smart-case --hidden -g "!.git"]],
+          hidden = true,
+        },
+      })
     end,
     keys = {
       { "<leader>'", ":FzfLua files<cr>", silent = true },
@@ -331,16 +530,12 @@ return {
   {
     "0xAdk/full_visual_line.nvim",
     lazy = true,
-    config = function()
-      require("full_visual_line").setup({})
-    end,
+    config = function() require("full_visual_line").setup({}) end,
   },
   {
     "chrisbra/csv.vim",
     lazy = true,
-    config = function()
-      vim.g.csv_default_delim = ","
-    end,
+    config = function() vim.g.csv_default_delim = "," end,
   },
   {
     "monaqa/dial.nvim",
@@ -363,57 +558,6 @@ return {
     end,
   },
   { "shaunsingh/nord.nvim", lazy = false },
-  {
-    "stevearc/oil.nvim",
-    lazy = false,
-    config = function()
-      require("oil").setup({
-        default_file_explorer = true,
-        keymaps = {
-          ["?"] = "actions.show_help",
-          ["-"] = "actions.parent",
-          ["_"] = "actions.open_cwd",
-          ["<C-l>"] = "actions.refresh",
-          ["<CR>"] = "actions.select",
-          ["<C-t>"] = "actions.select_tab",
-          ["<C-i>"] = "actions.preview",
-          ["g."] = "actions.toggle_hidden",
-          ["~"] = "actions.tcd",
-        },
-        use_default_keymaps = false,
-        view_options = {
-          show_hidden = true,
-        },
-        git = {
-          add = function(path)
-            return false
-          end,
-          mv = function(src_path, dest_path)
-            return false
-          end,
-          rm = function(path)
-            return false
-          end,
-        },
-        columns = {
-          -- "icon",
-          -- "permissions",
-          -- "size",
-          -- "mtime",
-        },
-      })
-
-      vim.g.loaded_netrw = 1
-      vim.g.loaded_netrwPlugin = 1
-      vim.keymap.set("n", "<leader>f", function()
-        local dir = vim.fn.expand("%:h")
-        if dir == "" then
-          dir = vim.fn.getcwd()
-        end
-        vim.cmd("e " .. dir)
-      end, { noremap = true, silent = true })
-    end,
-  },
   {
     "yumafuu/oat.nvim",
     config = function()
@@ -449,9 +593,7 @@ return {
     "williamboman/mason.nvim",
     event = "VeryLazy",
     build = ":MasonUpdate",
-    config = function()
-      require("mason").setup()
-    end,
+    config = function() require("mason").setup() end,
   },
   { "mattn/vim-goimports", lazy = true },
   {
@@ -461,15 +603,13 @@ return {
       local format_sync_grp = vim.api.nvim_create_augroup("GoFormat", {})
       vim.api.nvim_create_autocmd("BufWritePre", {
         pattern = "*.go",
-        callback = function()
-          require("go.format").goimports()
-        end,
+        callback = function() require("go.format").goimports() end,
         group = format_sync_grp,
       })
     end,
     event = "VeryLazy",
     ft = { "go", "gomod" },
-    build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
+    build = ':abc require("go.install").update_all_sync()', -- if you need to install/update all binaries
   },
   { "ray-x/guihua.lua", lazy = true },
   { "b0o/schemastore.nvim", lazy = true },
@@ -514,7 +654,7 @@ return {
 
       -- TypeScript/JavaScript LSP setup with Deno/Node detection
       local function is_deno_project(fname)
-        local root = vim.fs.root(fname, {"deno.json", "deno.jsonc", "deno.lock"})
+        local root = vim.fs.root(fname, { "deno.json", "deno.jsonc", "deno.lock" })
         if root then return true end
 
         -- Check shebang for deno
@@ -522,31 +662,23 @@ return {
         if file then
           local first_line = file:read("*line")
           file:close()
-          if first_line and (first_line:match("#!/usr/bin/env.*deno") or first_line:match("#!/usr/bin/env %-S deno")) then
-            return true
-          end
+          if first_line and (first_line:match("#!/usr/bin/env.*deno") or first_line:match("#!/usr/bin/env %-S deno")) then return true end
         end
         return false
       end
 
-      local function is_node_project(fname)
-        return vim.fs.root(fname, {"package.json", "node_modules"}) ~= nil
-      end
+      local function is_node_project(fname) return vim.fs.root(fname, { "package.json", "node_modules" }) ~= nil end
 
       vim.lsp.config("ts_ls", {
         root_dir = function(fname)
-          if is_node_project(fname) and not is_deno_project(fname) then
-            return vim.fs.root(fname, {"package.json"})
-          end
+          if is_node_project(fname) and not is_deno_project(fname) then return vim.fs.root(fname, { "package.json" }) end
           return nil
         end,
       })
 
       vim.lsp.config("denols", {
         root_dir = function(fname)
-          if is_deno_project(fname) then
-            return vim.fs.root(fname, {"deno.json", "deno.jsonc", "deno.lock"}) or vim.fs.dirname(fname)
-          end
+          if is_deno_project(fname) then return vim.fs.root(fname, { "deno.json", "deno.jsonc", "deno.lock" }) or vim.fs.dirname(fname) end
           return nil
         end,
         init_options = {
@@ -566,9 +698,7 @@ return {
 
       local installed_servers = require("mason-lspconfig").get_installed_servers()
       for _, server in ipairs(installed_servers) do
-        if server ~= "ts_ls" and server ~= "denols" then
-          vim.lsp.enable(server)
-        end
+        if server ~= "ts_ls" and server ~= "denols" then vim.lsp.enable(server) end
       end
 
       -- Enable denols with custom config
@@ -649,7 +779,7 @@ return {
     ft = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
     config = function()
       local function is_deno_project(fname)
-        local root = vim.fs.root(fname, {"deno.json", "deno.jsonc", "deno.lock"})
+        local root = vim.fs.root(fname, { "deno.json", "deno.jsonc", "deno.lock" })
         if root then return true end
 
         -- Check shebang for deno
@@ -657,22 +787,16 @@ return {
         if file then
           local first_line = file:read("*line")
           file:close()
-          if first_line and (first_line:match("#!/usr/bin/env.*deno") or first_line:match("#!/usr/bin/env %-S deno")) then
-            return true
-          end
+          if first_line and (first_line:match("#!/usr/bin/env.*deno") or first_line:match("#!/usr/bin/env %-S deno")) then return true end
         end
         return false
       end
 
-      local function is_node_project(fname)
-        return vim.fs.root(fname, {"package.json", "node_modules"}) ~= nil
-      end
+      local function is_node_project(fname) return vim.fs.root(fname, { "package.json", "node_modules" }) ~= nil end
 
       require("typescript-tools").setup({
         root_dir = function(fname)
-          if is_node_project(fname) and not is_deno_project(fname) then
-            return vim.fs.root(fname, {"package.json"})
-          end
+          if is_node_project(fname) and not is_deno_project(fname) then return vim.fs.root(fname, { "package.json" }) end
           return nil
         end,
         settings = {
@@ -765,12 +889,8 @@ return {
       -- Setup keymaps
       vim.keymap.set("n", "K", require("hover").hover, { desc = "hover.nvim" })
       vim.keymap.set("n", "gK", require("hover").hover_select, { desc = "hover.nvim (select)" })
-      vim.keymap.set("n", "<S-h>", function()
-        require("hover").hover_switch("previous")
-      end, { desc = "hover.nvim (previous source)" })
-      vim.keymap.set("n", "<S-l>", function()
-        require("hover").hover_switch("next")
-      end, { desc = "hover.nvim (next source)" })
+      vim.keymap.set("n", "<S-h>", function() require("hover").hover_switch("previous") end, { desc = "hover.nvim (previous source)" })
+      vim.keymap.set("n", "<S-l>", function() require("hover").hover_switch("next") end, { desc = "hover.nvim (next source)" })
       vim.keymap.set("n", "<MouseMove>", require("hover").hover_mouse, { desc = "hover.nvim (mouse)" })
 
       vim.o.mousemoveevent = true
@@ -778,9 +898,7 @@ return {
   },
   {
     "greggh/claude-code.nvim",
-    config = function()
-      require("claude-code").setup()
-    end,
+    config = function() require("claude-code").setup() end,
   },
   -------------------
   -- cmp
@@ -893,9 +1011,7 @@ return {
     "Wansmer/treesj",
     lazy = true,
     keys = { "<space>m", "<space>j", "<space>s" },
-    config = function()
-      require("treesj").setup()
-    end,
+    config = function() require("treesj").setup() end,
   },
   {
     "HiPhish/rainbow-delimiters.nvim",
@@ -931,52 +1047,9 @@ return {
     end,
   },
   {
-    "stevearc/overseer.nvim",
-    lazy = true,
-    keys = {
-      { "<leader>e", "<cmd>OverseerToggle<cr>", desc = "Toggle" },
-      { "<leader>r", "<cmd>OverseerRun<cr>", desc = "Run Task" },
-      -- { "<space>ec", "<cmd>OverseerRunCmd<cr>", desc = "Run Command" },
-      -- { "<space>eq", "<cmd>OverseerQuickAction<cr>", desc = "Quick Action" },
-      -- { "<space>ea", "<cmd>OverseerTaskAction<cr>", desc = "Task Action" },
-      -- { "<space>ei", "<cmd>OverseerInfo<cr>", desc = "Info" },
-    },
-    config = function()
-      overseer = require("overseer")
-
-      overseer.setup({
-        strategy = "toggleterm",
-
-        form = {
-          border = "rounded",
-          win_opts = {
-            winblend = 0,
-            winhighlight = "Normal:MyNormal,NormalNC:MyNormalNC",
-          },
-        },
-        confirm = {
-          border = "rounded",
-          win_opts = {
-            winblend = 0,
-            winhighlight = "Normal:MyNormal,NormalNC:MyNormalNC",
-          },
-        },
-        task_win = {
-          border = "rounded",
-          win_opts = {
-            winblend = 0,
-            winhighlight = "Normal:MyNormal,NormalNC:MyNormalNC",
-          },
-        },
-      })
-    end,
-  },
-  {
     "lewis6991/gitsigns.nvim",
     lazy = true,
-    init = function()
-      require("gitsigns").setup()
-    end,
+    init = function() require("gitsigns").setup() end,
   },
   {
     "kevinhwang91/nvim-hlslens",
@@ -1055,9 +1128,7 @@ return {
         render = function(props)
           local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ":t")
 
-          if filename == "" then
-            filename = vim.bo[props.buf]
-          end
+          if filename == "" then filename = vim.bo[props.buf] end
 
           -- local ft_icon, ft_color = devicons.get_icon_color(filename)
           local modified = vim.bo[props.buf].modified
@@ -1102,12 +1173,8 @@ return {
       end
       local function OverseerTasksForStatus(status)
         return {
-          condition = function(self)
-            return self.tasks[status]
-          end,
-          provider = function(self)
-            return string.format("%s%d", self.symbols[status], #self.tasks[status])
-          end,
+          condition = function(self) return self.tasks[status] end,
+          provider = function(self) return string.format("%s%d", self.symbols[status], #self.tasks[status]) end,
           hl = function(self)
             return {
               fg = utils.get_highlight(string.format("Overseer%s", status)).fg,
@@ -1117,9 +1184,7 @@ return {
       end
 
       local Overseer = {
-        condition = function()
-          return package.loaded.overseer
-        end,
+        condition = function() return package.loaded.overseer end,
         init = function(self)
           local tasks = require("overseer.task_list").list_tasks({ unique = true })
           local tasks_by_status = require("overseer.util").tbl_group_by(tasks, "status")
