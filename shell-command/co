@@ -46,14 +46,14 @@ elif [ $# -eq 0 ]; then
   # Get current user's email for filtering
   user_email=$(git config --get user.email)
   
-  # Start with my branches
-  git for-each-ref --format='%(refname:short) %(authoremail)' refs/heads/ | 
+  # Start with my branches sorted by newest first
+  git for-each-ref --sort=-committerdate --format='%(refname:short) %(authoremail)' refs/heads/ | 
     grep "${user_email}" | 
     cut -d' ' -f1 | 
-    fzf --header="My branches (ctrl-g: all branches, ctrl-d: delete selected)" \
-        --bind="ctrl-g:reload(git branch -a | sed -e 's/[ ,\*]//g' | sed -e 's/remotes\/origin\///g' | sed -e 's/HEAD->//g' | sort -u)+change-header(All branches (ctrl-h: my branches))" \
-        --bind="ctrl-h:reload(git for-each-ref --format='%(refname:short) %(authoremail)' refs/heads/ | grep '${user_email}' | cut -d' ' -f1)+change-header(My branches (ctrl-g: all branches, ctrl-d: delete selected))" \
-        --bind="ctrl-d:execute(echo 'Delete branch {}? (y/N): ' && read confirm && [[ \"\$confirm\" == 'y' ]] && git branch -d {})+reload(git for-each-ref --format='%(refname:short) %(authoremail)' refs/heads/ | grep '${user_email}' | cut -d' ' -f1)" | 
+    fzf --header="My branches (newest first) (ctrl-g: all branches, ctrl-d: delete selected)" \
+        --bind="ctrl-g:reload(git for-each-ref --sort=-committerdate --format='%(refname:short)' refs/heads/ refs/remotes/origin/ | sed -e 's/origin\///g' | grep -v HEAD | sort -u)+change-header(All branches (newest first) (ctrl-h: my branches))" \
+        --bind="ctrl-h:reload(git for-each-ref --sort=-committerdate --format='%(refname:short) %(authoremail)' refs/heads/ | grep '${user_email}' | cut -d' ' -f1)+change-header(My branches (newest first) (ctrl-g: all branches, ctrl-d: delete selected))" \
+        --bind="ctrl-d:execute(echo 'Delete branch {}? (y/N): ' && read confirm && [[ \"\$confirm\" == 'y' ]] && git branch -d {})+reload(git for-each-ref --sort=-committerdate --format='%(refname:short) %(authoremail)' refs/heads/ | grep '${user_email}' | cut -d' ' -f1)" | 
     tr -d '\n' | xargs -r git checkout
 elif [ "$1" = "-" ]; then
   # 引数が - の場合は前のブランチに戻る
