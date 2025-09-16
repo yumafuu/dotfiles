@@ -1,6 +1,14 @@
 return {
   { "nvim-lua/plenary.nvim", lazy = true },
   {
+    dir = "~/ghq/github.com/yumafuu/sse-mcp.nvim",
+    config = function()
+      require("sse-mcp").setup({
+        auto_start = true,
+      })
+    end,
+  },
+  {
     "folke/flash.nvim",
     event = "VeryLazy",
     keys = {
@@ -28,11 +36,11 @@ return {
       require("cfp").setup({
         keymaps = {
           copy_path = "<leader>l",
-          copy_path_line = "<leader>K",
-          copy_branch_url = "<leader>cb",
-          copy_branch_url_line = "<leader>cB",
-          copy_hash_url = "<leader>ch",
-          copy_hash_url_line = "<leader>cH",
+          copy_path_line = "L",
+          copy_branch_url = "<leader>gl",
+          copy_branch_url_line = "gL",
+          copy_hash_url = "<leader>gh",
+          copy_hash_url_line = "gH",
         },
         -- your configuration comes here
         -- or leave it empty to use the default settings
@@ -41,6 +49,7 @@ return {
   },
   {
     "kevinhwang91/nvim-bqf",
+    lazy = true,
     ft = "qf",
     config = function()
       local fn = vim.fn
@@ -96,7 +105,7 @@ return {
       end
 
       vim.o.qftf = "{info -> v:lua._G.qftf(info)}"
-      
+
       -- ハイライト設定を先に行う
       vim.cmd([[
         highlight BqfPreviewFloat guibg=NONE
@@ -105,7 +114,7 @@ return {
         highlight link BqfPreviewRange IncSearch
         highlight BqfSign guifg=#66C1FF
       ]])
-      
+
       require("bqf").setup({
         auto_enable = true,
         func_map = {
@@ -144,9 +153,9 @@ return {
           show_hidden = true,
         },
         git = {
-          add = function(path) return false end,
-          mv = function(src_path, dest_path) return false end,
-          rm = function(path) return false end,
+          add = function() return false end,
+          mv = function() return false end,
+          rm = function() return false end,
         },
         columns = {
           -- "icon",
@@ -172,6 +181,23 @@ return {
         formatters_by_ft = {
           lua = { "stylua" },
           terraform = { "terraform_fmt" },
+          json = { "deno_fmt" },
+          go = { "gofumpt" },
+          markdown = { "markdownlint-cli2" },
+        },
+        formatters = {
+          deno_fmt = {
+            command = "deno",
+            args = {
+              "fmt",
+              "--ext",
+              "json",
+              "--line-width",
+              "100",
+              "-",
+            },
+            stdin = true,
+          },
         },
       })
     end,
@@ -273,11 +299,6 @@ return {
     end,
   },
   {
-    "pmizio/typescript-tools.nvim",
-    opts = {},
-    enabled = false,
-  },
-  {
     "quolpr/quicktest.nvim",
     event = "VeryLazy",
     config = function()
@@ -286,9 +307,9 @@ return {
       qt.setup({
         -- Choose your adapter, here all supported adapters are listed
         adapters = {
+          require("quicktest.adapters.golang")({}),
           require("quicktest.adapters.gorun"),
           require("quicktest.adapters.bash"),
-          require("quicktest.adapters.golang")({}),
           require("quicktest.adapters.vitest")({}),
           require("quicktest.adapters.playwright")({}),
         },
@@ -529,7 +550,7 @@ return {
   },
   {
     "0xAdk/full_visual_line.nvim",
-    lazy = true,
+    lazy = false,
     config = function() require("full_visual_line").setup({}) end,
   },
   {
@@ -591,9 +612,20 @@ return {
   },
   {
     "williamboman/mason.nvim",
-    event = "VeryLazy",
+    lazy = false,
+    priority = 100,
     build = ":MasonUpdate",
-    config = function() require("mason").setup() end,
+    config = function()
+      require("mason").setup({
+        ui = {
+          icons = {
+            package_installed = "✓",
+            package_pending = "➜",
+            package_uninstalled = "✗",
+          },
+        },
+      })
+    end,
   },
   { "mattn/vim-goimports", lazy = true },
   {
@@ -614,21 +646,6 @@ return {
   { "ray-x/guihua.lua", lazy = true },
   { "b0o/schemastore.nvim", lazy = true },
   {
-    "jose-elias-alvarez/typescript.nvim",
-    lazy = true,
-    config = function()
-      require("typescript").setup({
-        server = {
-          on_attach = function(client, bufnr)
-            -- client.server_capabilities.document_formatting = false
-            -- client.server_capabilities.document_range_formatting = false
-            -- fmt_on_save()
-          end,
-        },
-      })
-    end,
-  },
-  {
     "jose-elias-alvarez/null-ls.nvim",
     lazy = true,
     config = function()
@@ -646,11 +663,12 @@ return {
   },
   {
     "neovim/nvim-lspconfig",
-    -- lazy = true,
+    lazy = false,
+    dependencies = { "williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim" },
     config = function()
-      vim.lsp.config("*", {
-        capabilities = require("cmp_nvim_lsp").default_capabilities(),
-      })
+      local lspconfig = require("lspconfig")
+      local util = require("lspconfig.util")
+      local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
       -- TypeScript/JavaScript LSP setup with Deno/Node detection
       local function is_deno_project(fname)
@@ -669,108 +687,96 @@ return {
 
       local function is_node_project(fname) return vim.fs.root(fname, { "package.json", "node_modules" }) ~= nil end
 
-      vim.lsp.config("ts_ls", {
-        root_dir = function(fname)
-          if is_node_project(fname) and not is_deno_project(fname) then return vim.fs.root(fname, { "package.json" }) end
-          return nil
-        end,
-      })
-
-      vim.lsp.config("denols", {
-        root_dir = function(fname)
-          if is_deno_project(fname) then return vim.fs.root(fname, { "deno.json", "deno.jsonc", "deno.lock" }) or vim.fs.dirname(fname) end
-          return nil
-        end,
-        init_options = {
-          lint = true,
-          unstable = true,
-          suggest = {
-            imports = {
-              hosts = {
-                ["https://deno.land"] = true,
-                ["https://cdn.nest.land"] = true,
-                ["https://crux.land"] = true,
-              },
-            },
+      if vim.fn.executable("terraform-ls") == 1 then
+        lspconfig.terraformls.setup({
+          capabilities = capabilities,
+          filetypes = {
+            "terraform",
+            "tf",
           },
-        },
-      })
-
-      local installed_servers = require("mason-lspconfig").get_installed_servers()
-      for _, server in ipairs(installed_servers) do
-        if server ~= "ts_ls" and server ~= "denols" then vim.lsp.enable(server) end
+        })
       end
 
-      -- Enable denols with custom config
-      vim.lsp.enable("denols")
-
-      local lspconfig = require("lspconfig")
-      local util = require("lspconfig.util")
-
-      lspconfig.terraformls.setup({
-        capabilities = require("cmp_nvim_lsp").default_capabilities(),
-        filetypes = {
-          "terraform",
-          "tf",
-        },
-      })
-
-      lspconfig.jsonls.setup({
-        capabilities = require("cmp_nvim_lsp").default_capabilities(),
-        settings = {
-          json = {
-            schemas = require("schemastore").json.schemas(),
-            validate = { enable = true },
+      -- Only setup jsonls if the executable exists
+      if vim.fn.executable("vscode-json-language-server") == 1 then
+        lspconfig.jsonls.setup({
+          capabilities = capabilities,
+          cmd = { "vscode-json-language-server", "--stdio" },
+          settings = {
+            json = {
+              schemas = require("schemastore").json.schemas(),
+              validate = { enable = true },
+            },
           },
-        },
-      })
-      lspconfig.denols.setup({
-        root_dir = util.root_pattern("deno.json"),
-        workspace_required = true,
-        init_options = {
-          lint = true,
-          unstable = true,
-          suggest = {
-            imports = {
-              hosts = {
-                ["https://deno.land"] = true,
-                ["https://cdn.nest.land"] = true,
-                ["https://crux.land"] = true,
+        })
+      end
+
+      if vim.fn.executable("deno") == 1 then
+        lspconfig.denols.setup({
+          capabilities = capabilities,
+          root_dir = function(fname)
+            if is_deno_project(fname) then return util.root_pattern("deno.json", "deno.jsonc", "deno.lock")(fname) or vim.fs.dirname(fname) end
+            return nil
+          end,
+          init_options = {
+            lint = true,
+            unstable = true,
+            suggest = {
+              imports = {
+                hosts = {
+                  ["https://deno.land"] = true,
+                  ["https://cdn.nest.land"] = true,
+                  ["https://crux.land"] = true,
+                },
               },
             },
           },
-        },
-      })
-      -- lspconfig["ts_ls"].setup({
-      --   root_dir = function(fname)
-      --     return lspconfig.util.root_pattern("package.json")(fname)
-      --   end,
-      -- })
-      lspconfig.typos_lsp.setup({
-        init_options = {
-          config = "~/dotfiles/typos/typos.toml",
-        },
-        on_attach = function(client, bufnr)
-          local name = vim.api.nvim_buf_get_name(bufnr)
-          if name:match("^oil://") then
-            client.stop()
-            return
-          end
-        end,
-      })
-      -- lspconfig.protols.setup({})
-      lspconfig.buf_ls.setup({})
-      lspconfig.gopls.setup({
+        })
+      end
+
+      if vim.fn.executable("typescript-language-server") == 1 then
+        lspconfig.ts_ls.setup({
+          capabilities = capabilities,
+          root_dir = function(fname)
+            if is_node_project(fname) and not is_deno_project(fname) then return util.root_pattern("package.json")(fname) end
+            return nil
+          end,
+        })
+      end
+
+      if vim.fn.executable("typos-lsp") == 1 then
+        lspconfig.typos_lsp.setup({
+          capabilities = capabilities,
+          init_options = {
+            config = "~/dotfiles/typos/typos.toml",
+          },
+          on_attach = function(client, bufnr)
+            local name = vim.api.nvim_buf_get_name(bufnr)
+            if name:match("^oil://") then
+              client.stop()
+              return
+            end
+          end,
+        })
+      end
+
+      if vim.fn.executable("buf") == 1 then lspconfig.buf_ls.setup({
         capabilities = capabilities,
-        settings = {
-          gopls = {},
-        },
-        filetypes = {
-          "go",
-          "gomod",
-          "gowork",
-        },
-      })
+      }) end
+
+      if vim.fn.executable("gopls") == 1 then
+        lspconfig.gopls.setup({
+          capabilities = capabilities,
+          settings = {
+            gopls = {},
+          },
+          filetypes = {
+            "go",
+            "gomod",
+            "gowork",
+          },
+        })
+      end
     end,
   },
   {
@@ -815,20 +821,33 @@ return {
   },
   {
     "williamboman/mason-lspconfig.nvim",
-    lazy = true,
+    lazy = false,
+    dependencies = { "williamboman/mason.nvim" },
     config = function()
-      local nvim_lsp = require("lspconfig")
-      local mason_lspconfig = require("mason-lspconfig")
-      -- mason_lspconfig.setup_handlers({
-      --   function(server_name)
-      --     local opts = {}
-      --     opts.on_attach = function(_, bufnr)
-      --       local bufopts = { silent = true, buffer = bufnr }
-      --     end
-      --     nvim_lsp[server_name].setup(opts)
-      --   end,
-      -- })
-      vim.keymap.set("n", "gf", "<cmd>lua vim.lsp.buf.format()<CR>")
+      require("mason-lspconfig").setup({
+        ensure_installed = { "jsonls", "lua_ls", "gopls", "ts_ls", "denols", "terraformls", "typos_lsp", "buf_ls" },
+        automatic_installation = true,
+        handlers = {
+          -- Default handler for servers without custom config
+          function(server_name)
+            if
+              server_name ~= "jsonls"
+              and server_name ~= "denols"
+              and server_name ~= "ts_ls"
+              and server_name ~= "terraformls"
+              and server_name ~= "typos_lsp"
+              and server_name ~= "buf_ls"
+              and server_name ~= "gopls"
+            then
+              require("lspconfig")[server_name].setup({
+                capabilities = require("cmp_nvim_lsp").default_capabilities(),
+              })
+            end
+          end,
+        },
+      })
+
+      -- vim.keymap.set("n", "gf", "<cmd>lua vim.lsp.buf.format()<CR>")
       vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>")
       vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>")
       vim.keymap.set("n", "lga", "<cmd>lua vim.lsp.buf.code_action()<CR>")
@@ -1017,10 +1036,8 @@ return {
     "HiPhish/rainbow-delimiters.nvim",
     lazy = true,
     config = function()
-      -- This module contains a number of default definitions
       local rainbow_delimiters = require("rainbow-delimiters")
 
-      ---@type rainbow_delimiters.config
       vim.g.rainbow_delimiters = {
         strategy = {
           [""] = rainbow_delimiters.strategy["global"],
@@ -1118,8 +1135,8 @@ return {
     "b0o/incline.nvim",
     lazy = true,
     config = function()
-      local helpers = require("incline.helpers")
-      local devicons = require("nvim-web-devicons")
+      -- local helpers = require("incline.helpers")
+      -- local devicons = require("nvim-web-devicons")
       require("incline").setup({
         window = {
           padding = 0,
@@ -1159,7 +1176,7 @@ return {
     "rebelot/heirline.nvim",
     lazy = true,
     config = function()
-      local conditions = require("heirline.conditions")
+      -- local conditions = require("heirline.conditions")
       local utils = require("heirline.utils")
 
       local Spacer = { provider = " " }
@@ -1175,7 +1192,7 @@ return {
         return {
           condition = function(self) return self.tasks[status] end,
           provider = function(self) return string.format("%s%d", self.symbols[status], #self.tasks[status]) end,
-          hl = function(self)
+          hl = function()
             return {
               fg = utils.get_highlight(string.format("Overseer%s", status)).fg,
             }

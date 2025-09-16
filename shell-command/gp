@@ -14,7 +14,12 @@ if ! command -v gh >/dev/null 2>&1; then
 fi
 
 COMMIT_MSG="$*"
-BASE_BRANCH="${BASE_BRANCH:-main}"   # 環境変数で上書き可: export BASE_BRANCH=develop
+# ベースブランチを決定: master があれば master、なければ main
+if git show-ref --verify --quiet refs/heads/master; then
+  BASE_BRANCH="${BASE_BRANCH:-master}"
+else
+  BASE_BRANCH="${BASE_BRANCH:-main}"
+fi
 
 # 現在のブランチ名取得（detached HEAD 対策込み）
 branch="$(git rev-parse --abbrev-ref HEAD 2>/dev/null || true)"
@@ -44,8 +49,8 @@ else
   if [ -n "${PR_BODY:-}" ]; then
     gh pr create --base "$BASE_BRANCH" --head "$branch" --title "$PR_TITLE" --body "$PR_BODY" --web
   else
-    # --fill でコミットメッセージを本文に流用
-    gh pr create --base "$BASE_BRANCH" --head "$branch" --title "$PR_TITLE" --fill --web
+    # 本文は空にして URL 長を抑える
+    gh pr create --base "$BASE_BRANCH" --head "$branch" --title "$PR_TITLE" --body "" --web
   fi
 fi
 
