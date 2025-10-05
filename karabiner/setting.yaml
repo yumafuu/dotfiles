@@ -8,6 +8,7 @@ apps:
       f: Google Chrome
       n: Notion
       m: My Recorder
+      j: GatherV2
     yumaAir:
       d: Discord
       l: Line

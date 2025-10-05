@@ -1,14 +1,167 @@
 return {
-  { "nvim-lua/plenary.nvim", lazy = true },
+  { "nvim-lua/plenary.nvim", lazy = false },
+  { "vim-denops/denops.vim", lazy = false },
   {
-    dir = "~/ghq/github.com/yumafuu/sse-mcp.nvim",
-    config = function()
-      require("sse-mcp").setup({
-        auto_start = true,
-      })
-    end,
+    "folke/snacks.nvim",
+    priority = 1000,
+    lazy = false,
+    opts = {
+      bigfile = { enabled = true },
+      -- explorer = { enabled = true },
+      indent = { enabled = true },
+      input = { enabled = true },
+      picker = { enabled = true },
+      notifier = {
+        enabled = true,
+        timeout = 1000,
+      },
+      quickfile = { enabled = true },
+      -- scope = { enabled = true },
+      lazygit = {
+        enabled = true,
+        configure = true,
+        theme = {
+          [241] = { fg = "Special" },
+          activeBorderColor = { fg = "MatchParen", bold = true },
+          cherryPickedCommitBgColor = { fg = "Identifier" },
+          cherryPickedCommitFgColor = { fg = "Function" },
+          defaultFgColor = { fg = "Normal" },
+          inactiveBorderColor = { fg = "FloatBorder" },
+          optionsTextColor = { fg = "Function" },
+          searchingActiveBorderColor = { fg = "MatchParen", bold = true },
+          selectedLineBgColor = { bg = "Visual" }, -- set to `default` to have no background colour
+          unstagedChangesColor = { fg = "DiagnosticError" },
+        },
+        win = {
+          style = "lazygit",
+        },
+      },
+      -- statuscolumn = { enabled = true },
+      words = { enabled = true },
+    },
+    keys = {
+      -- Top Pickers & Explorer
+      { "<leader><leader>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
+      { "<leader>,", function() Snacks.picker.buffers() end, desc = "Buffers" },
+      { "<leader>/", function() Snacks.picker.grep() end, desc = "Grep" },
+      { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
+      { "<leader>n", function() Snacks.picker.notifications() end, desc = "Notification History" },
+      -- { "<leader><leader>", function() Snacks.explorer() end, desc = "File Explorer" },
+      -- find
+      { "<leader>fb", function() Snacks.picker.buffers() end, desc = "Buffers" },
+      { "<leader>fc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
+      { "<leader>ff", function() Snacks.picker.files() end, desc = "Find Files" },
+      { "<leader>fg", function() Snacks.picker.git_files() end, desc = "Find Git Files" },
+      { "<leader>fp", function() Snacks.picker.projects() end, desc = "Projects" },
+      { "<leader>fr", function() Snacks.picker.recent() end, desc = "Recent" },
+      -- git
+      { "<leader>gb", function() Snacks.picker.git_branches() end, desc = "Git Branches" },
+      { "<leader>gl", function() Snacks.picker.git_log() end, desc = "Git Log" },
+      { "<leader>gL", function() Snacks.picker.git_log_line() end, desc = "Git Log Line" },
+      { "<leader>gs", function() Snacks.picker.git_status() end, desc = "Git Status" },
+      { "<leader>gS", function() Snacks.picker.git_stash() end, desc = "Git Stash" },
+      { "<leader>gd", function() Snacks.picker.git_diff() end, desc = "Git Diff (Hunks)" },
+      { "<leader>gf", function() Snacks.picker.git_log_file() end, desc = "Git Log File" },
+      -- Grep
+      { "<leader>sb", function() Snacks.picker.lines() end, desc = "Buffer Lines" },
+      { "<leader>sB", function() Snacks.picker.grep_buffers() end, desc = "Grep Open Buffers" },
+      { "<leader>sg", function() Snacks.picker.grep() end, desc = "Grep" },
+      { "<leader>sw", function() Snacks.picker.grep_word() end, desc = "Visual selection or word", mode = { "n", "x" } },
+      -- search
+      { '<leader>s"', function() Snacks.picker.registers() end, desc = "Registers" },
+      { "<leader>s/", function() Snacks.picker.search_history() end, desc = "Search History" },
+      { "<leader>sa", function() Snacks.picker.autocmds() end, desc = "Autocmds" },
+      { "<leader>sb", function() Snacks.picker.lines() end, desc = "Buffer Lines" },
+      { "<leader>sc", function() Snacks.picker.command_history() end, desc = "Command History" },
+      { "<leader>sC", function() Snacks.picker.commands() end, desc = "Commands" },
+      { "<leader>sd", function() Snacks.picker.diagnostics() end, desc = "Diagnostics" },
+      { "<leader>sD", function() Snacks.picker.diagnostics_buffer() end, desc = "Buffer Diagnostics" },
+      { "<leader>sh", function() Snacks.picker.help() end, desc = "Help Pages" },
+      { "<leader>sH", function() Snacks.picker.highlights() end, desc = "Highlights" },
+      { "<leader>si", function() Snacks.picker.icons() end, desc = "Icons" },
+      { "<leader>sj", function() Snacks.picker.jumps() end, desc = "Jumps" },
+      { "<leader>sk", function() Snacks.picker.keymaps() end, desc = "Keymaps" },
+      { "<leader>sl", function() Snacks.picker.loclist() end, desc = "Location List" },
+      { "<leader>sm", function() Snacks.picker.marks() end, desc = "Marks" },
+      { "<leader>sM", function() Snacks.picker.man() end, desc = "Man Pages" },
+      { "<leader>sp", function() Snacks.picker.lazy() end, desc = "Search for Plugin Spec" },
+      { "<leader>sq", function() Snacks.picker.qflist() end, desc = "Quickfix List" },
+      { "<leader>sR", function() Snacks.picker.resume() end, desc = "Resume" },
+      { "<leader>su", function() Snacks.picker.undo() end, desc = "Undo History" },
+      { "<leader>uC", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
+      -- LSP
+      { "gd", function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition" },
+      { "gD", function() Snacks.picker.lsp_declarations() end, desc = "Goto Declaration" },
+      { "gr", function() Snacks.picker.lsp_references() end, nowait = true, desc = "References" },
+      { "gI", function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
+      { "gy", function() Snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
+      { "<leader>ss", function() Snacks.picker.lsp_symbols() end, desc = "LSP Symbols" },
+      { "<leader>sS", function() Snacks.picker.lsp_workspace_symbols() end, desc = "LSP Workspace Symbols" },
+      -- Other
+      { "<leader>z", function() Snacks.zen() end, desc = "Toggle Zen Mode" },
+      { "<leader>Z", function() Snacks.zen.zoom() end, desc = "Toggle Zoom" },
+      { "<leader>.", function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
+      { "<leader>S", function() Snacks.scratch.select() end, desc = "Select Scratch Buffer" },
+      { "<leader>n", function() Snacks.notifier.show_history() end, desc = "Notification History" },
+      { "<leader>bd", function() Snacks.bufdelete() end, desc = "Delete Buffer" },
+      { "<leader>cR", function() Snacks.rename.rename_file() end, desc = "Rename File" },
+      { "<leader>gB", function() Snacks.gitbrowse() end, desc = "Git Browse", mode = { "n", "v" } },
+      { "<leader>un", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications" },
+      { "<c-\\>", function() Snacks.lazygit() end, desc = "Lazygit" },
+      { "<c-_>", function() Snacks.terminal() end, desc = "which_key_ignore" },
+      { "]]", function() Snacks.words.jump(vim.v.count1) end, desc = "Next Reference", mode = { "n", "t" } },
+      { "[[", function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference", mode = { "n", "t" } },
+      {
+        "<leader>N",
+        desc = "Neovim News",
+        function()
+          Snacks.win({
+            file = vim.api.nvim_get_runtime_file("doc/news.txt", false)[1],
+            width = 0.6,
+            height = 0.6,
+            wo = {
+              spell = false,
+              wrap = false,
+              signcolumn = "yes",
+              statuscolumn = " ",
+              conceallevel = 3,
+            },
+          })
+        end,
+      },
+    },
   },
+  -- {
+  --   "ibhagwan/fzf-lua",
+  --   lazy = true,
+  --   config = function()
+  --     require("fzf-lua").setup({
+  --       keymap = {
+  --         fzf = {
+  --           ["ctrl-n"] = "select-all+accept",
+  --         },
+  --       },
+  --       files = {
+  --         rg_opts = [[--color=never --hidden --files -g "!.git"]],
+  --         fd_opts = [[--color=never --hidden --type f --type l --exclude .git]],
+  --         hidden = true,
+  --       },
+  --       grep = {
+  --         rg_opts = [[--column --line-number --no-heading --color=never --smart-case --hidden -g "!.git"]],
+  --         hidden = true,
+  --       },
+  --     })
+  --   end,
+  --   keys = {
+  --     { "<leader>'", ":FzfLua files<cr>", silent = true },
+  --     { "<leader>i", ":FzfLua live_grep<cr>", silent = true },
+  --     { "<leader>b", ":FzfLua buffers<cr>", silent = true },
+  --     { "<leader>g", ":FzfLua git_status<cr>", silent = true },
+  --     { "<leader>m", ":FzfLua marks<cr>", silent = true },
+  --   },
+  -- },
   {
+
     "folke/flash.nvim",
     event = "VeryLazy",
     keys = {
@@ -511,7 +664,6 @@ return {
   { "tpope/vim-commentary", lazy = true },
   { "machakann/vim-highlightedyank", event = "VeryLazy" },
   { "dhruvasagar/vim-table-mode", lazy = true },
-  { "vim-denops/denops.vim", lazy = true },
   { "lambdalisue/kensaku.vim", event = "CmdlineEnter" },
   {
     "lambdalisue/kensaku-search.vim",
@@ -519,35 +671,6 @@ return {
     config = function() vim.api.nvim_set_keymap("c", "<CR>", "<Plug>(kensaku-search-replace)<CR>", { noremap = true, silent = true }) end,
   },
   { "nvim-tree/nvim-web-devicons", lazy = true },
-  {
-    "ibhagwan/fzf-lua",
-    lazy = true,
-    config = function()
-      require("fzf-lua").setup({
-        keymap = {
-          fzf = {
-            ["ctrl-n"] = "select-all+accept",
-          },
-        },
-        files = {
-          rg_opts = [[--color=never --hidden --files -g "!.git"]],
-          fd_opts = [[--color=never --hidden --type f --type l --exclude .git]],
-          hidden = true,
-        },
-        grep = {
-          rg_opts = [[--column --line-number --no-heading --color=never --smart-case --hidden -g "!.git"]],
-          hidden = true,
-        },
-      })
-    end,
-    keys = {
-      { "<leader>'", ":FzfLua files<cr>", silent = true },
-      { "<leader>i", ":FzfLua live_grep<cr>", silent = true },
-      { "<leader>b", ":FzfLua buffers<cr>", silent = true },
-      { "<leader>g", ":FzfLua git_status<cr>", silent = true },
-      { "<leader>m", ":FzfLua marks<cr>", silent = true },
-    },
-  },
   {
     "0xAdk/full_visual_line.nvim",
     lazy = false,
@@ -666,8 +789,10 @@ return {
     lazy = false,
     dependencies = { "williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim" },
     config = function()
-      local lspconfig = require("lspconfig")
-      local util = require("lspconfig.util")
+      -- Use vim.lsp.config if available (nvim 0.11+), otherwise fallback to lspconfig
+      local use_new_config = vim.lsp.config ~= nil
+      local lspconfig = not use_new_config and require("lspconfig") or nil
+      local util = not use_new_config and require("lspconfig.util") or nil
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
       -- TypeScript/JavaScript LSP setup with Deno/Node detection
@@ -687,8 +812,19 @@ return {
 
       local function is_node_project(fname) return vim.fs.root(fname, { "package.json", "node_modules" }) ~= nil end
 
+      -- Helper function to safely setup LSP servers
+      local function safe_setup(server_name, config)
+        local ok, err
+        if use_new_config then
+          ok, err = pcall(function() vim.lsp.config[server_name] = config end)
+        else
+          ok, err = pcall(function() lspconfig[server_name].setup(config) end)
+        end
+        if not ok then vim.notify("Failed to setup " .. server_name .. ": " .. tostring(err), vim.log.levels.WARN) end
+      end
+
       if vim.fn.executable("terraform-ls") == 1 then
-        lspconfig.terraformls.setup({
+        safe_setup("terraformls", {
           capabilities = capabilities,
           filetypes = {
             "terraform",
@@ -699,7 +835,7 @@ return {
 
       -- Only setup jsonls if the executable exists
       if vim.fn.executable("vscode-json-language-server") == 1 then
-        lspconfig.jsonls.setup({
+        safe_setup("jsonls", {
           capabilities = capabilities,
           cmd = { "vscode-json-language-server", "--stdio" },
           settings = {
@@ -712,10 +848,16 @@ return {
       end
 
       if vim.fn.executable("deno") == 1 then
-        lspconfig.denols.setup({
+        local denols_config = {
           capabilities = capabilities,
           root_dir = function(fname)
-            if is_deno_project(fname) then return util.root_pattern("deno.json", "deno.jsonc", "deno.lock")(fname) or vim.fs.dirname(fname) end
+            if is_deno_project(fname) then
+              if use_new_config then
+                return vim.fs.root(fname, { "deno.json", "deno.jsonc", "deno.lock" }) or vim.fs.dirname(fname)
+              else
+                return util.root_pattern("deno.json", "deno.jsonc", "deno.lock")(fname) or vim.fs.dirname(fname)
+              end
+            end
             return nil
           end,
           init_options = {
@@ -731,21 +873,29 @@ return {
               },
             },
           },
-        })
+        }
+        safe_setup("denols", denols_config)
       end
 
       if vim.fn.executable("typescript-language-server") == 1 then
-        lspconfig.ts_ls.setup({
+        local ts_ls_config = {
           capabilities = capabilities,
           root_dir = function(fname)
-            if is_node_project(fname) and not is_deno_project(fname) then return util.root_pattern("package.json")(fname) end
+            if is_node_project(fname) and not is_deno_project(fname) then
+              if use_new_config then
+                return vim.fs.root(fname, { "package.json" })
+              else
+                return util.root_pattern("package.json")(fname)
+              end
+            end
             return nil
           end,
-        })
+        }
+        safe_setup("ts_ls", ts_ls_config)
       end
 
       if vim.fn.executable("typos-lsp") == 1 then
-        lspconfig.typos_lsp.setup({
+        safe_setup("typos_lsp", {
           capabilities = capabilities,
           init_options = {
             config = "~/dotfiles/typos/typos.toml",
@@ -760,12 +910,12 @@ return {
         })
       end
 
-      if vim.fn.executable("buf") == 1 then lspconfig.buf_ls.setup({
+      if vim.fn.executable("buf") == 1 then safe_setup("buf_ls", {
         capabilities = capabilities,
       }) end
 
       if vim.fn.executable("gopls") == 1 then
-        lspconfig.gopls.setup({
+        safe_setup("gopls", {
           capabilities = capabilities,
           settings = {
             gopls = {},
@@ -839,13 +989,28 @@ return {
               and server_name ~= "buf_ls"
               and server_name ~= "gopls"
             then
-              require("lspconfig")[server_name].setup({
-                capabilities = require("cmp_nvim_lsp").default_capabilities(),
-              })
+              local ok, err = pcall(function()
+                if use_new_config then
+                  vim.lsp.config[server_name] = {
+                    capabilities = require("cmp_nvim_lsp").default_capabilities(),
+                  }
+                else
+                  require("lspconfig")[server_name].setup({
+                    capabilities = require("cmp_nvim_lsp").default_capabilities(),
+                  })
+                end
+              end)
+              if not ok then vim.notify("Failed to setup " .. server_name .. ": " .. tostring(err), vim.log.levels.WARN) end
             end
           end,
         },
       })
+
+      -- Command to install all configured LSP servers
+      vim.api.nvim_create_user_command("MasonInstallAll", function()
+        local servers = { "jsonls", "lua_ls", "gopls", "ts_ls", "denols", "terraformls", "typos_lsp", "buf_ls" }
+        vim.cmd("MasonInstall " .. table.concat(servers, " "))
+      end, {})
 
       -- vim.keymap.set("n", "gf", "<cmd>lua vim.lsp.buf.format()<CR>")
       vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>")
