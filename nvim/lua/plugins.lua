@@ -315,29 +315,16 @@ return {
     end,
   },
   {
-    "stevearc/conform.nvim",
+    "yumafuu/conform.nvim",
+    branch = "feat/json_repair",
     config = function()
       require("conform").setup({
         formatters_by_ft = {
           lua = { "stylua" },
           terraform = { "terraform_fmt" },
-          json = { "deno_fmt" },
+          json = { "json_repair" },
           go = { "gofumpt" },
           markdown = { "markdownlint-cli2" },
-        },
-        formatters = {
-          deno_fmt = {
-            command = "deno",
-            args = {
-              "fmt",
-              "--ext",
-              "json",
-              "--line-width",
-              "100",
-              "-",
-            },
-            stdin = true,
-          },
         },
       })
     end,
