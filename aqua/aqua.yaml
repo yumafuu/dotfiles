@@ -10,7 +10,7 @@ packages:
   - name: xxxserxxx/gotop@v4.2.0
   - name: jqlang/jq@jq-1.7.1
   - name: rhysd/dotfiles@v0.2.3
-  - name: neovim/neovim@v0.11.1
+  - name: neovim/neovim@v0.11.4
   - name: rossmacarthur/sheldon@0.8.1
   - name: sharkdp/hyperfine@v1.18.0
   - name: denoland/deno@v2.3.3
