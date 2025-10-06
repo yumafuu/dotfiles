@@ -19,20 +19,17 @@ return {
       lazygit = {
         enabled = true,
         configure = true,
-        theme = {
-          [241] = { fg = "Special" },
-          activeBorderColor = { fg = "MatchParen", bold = true },
-          cherryPickedCommitBgColor = { fg = "Identifier" },
-          cherryPickedCommitFgColor = { fg = "Function" },
-          defaultFgColor = { fg = "Normal" },
-          inactiveBorderColor = { fg = "FloatBorder" },
-          optionsTextColor = { fg = "Function" },
-          searchingActiveBorderColor = { fg = "MatchParen", bold = true },
-          selectedLineBgColor = { bg = "Visual" }, -- set to `default` to have no background colour
-          unstagedChangesColor = { fg = "DiagnosticError" },
-        },
-        win = {
-          style = "lazygit",
+      },
+      terminal = {
+        lazygit = {
+          cmd = "lazygit",
+          direction = "float",
+          size = 0.9,
+          float_opts = {
+            border = "rounded",
+            width = 0.9,
+            height = 0.9,
+          },
         },
       },
       -- statuscolumn = { enabled = true },
@@ -103,13 +100,20 @@ return {
       { "<leader>cR", function() Snacks.rename.rename_file() end, desc = "Rename File" },
       { "<leader>gB", function() Snacks.gitbrowse() end, desc = "Git Browse", mode = { "n", "v" } },
       { "<leader>un", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications" },
-      { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
-      { "<c-\\>", function() Snacks.lazygit() end, desc = "Lazygit" },
+      -- { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
+      -- { "<c-\\>", function() Snacks.lazygit() end, desc = "Lazygit" },
       { "<c-_>", function() Snacks.terminal() end, desc = "which_key_ignore" },
       { "]]", function() Snacks.words.jump(vim.v.count1) end, desc = "Next Reference", mode = { "n", "t" } },
       { "[[", function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference", mode = { "n", "t" } },
+      {
+        "<C-\\>",
+        function() require("snacks.terminal").toggle("lazygit") end,
+        mode = { "n", "t" },
+        desc = "Toggle Lazygit",
+      },
     },
     config = function()
+      require("snacks").setup()
       vim.api.nvim_set_hl(0, "SnacksPickerPath", { fg = "#aaaaaa" })
       vim.keymap.set("n", "<leader>g", function() require("snacks.terminal").toggle("lazygit") end, { desc = "Toggle Lazygit" })
     end,
@@ -992,16 +996,16 @@ return {
       end, {})
 
       -- vim.keymap.set("n", "gf", "<cmd>lua vim.lsp.buf.format()<CR>")
-      vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>")
-      vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>")
-      vim.keymap.set("n", "lga", "<cmd>lua vim.lsp.buf.code_action()<CR>")
-      vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>")
-      vim.keymap.set("n", "gt", "<cmd>lua vim.lsp.buf.type_definition()<CR>")
-      vim.keymap.set("n", "gn", "<cmd>lua vim.lsp.buf.rename()<CR>")
-      -- vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>")
-      vim.keymap.set("n", "ga", "<cmd>lua vim.diagnostic.open_float()<CR>")
-      vim.keymap.set("n", "g]", "<cmd>lua vim.diagnostic.goto_next()<CR>")
-      vim.keymap.set("n", "g[", "<cmd>lua vim.diagnostic.goto_prev()<CR>")
+      -- vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>")
+      -- vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>")
+      -- vim.keymap.set("n", "lga", "<cmd>lua vim.lsp.buf.code_action()<CR>")
+      -- vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>")
+      -- vim.keymap.set("n", "gt", "<cmd>lua vim.lsp.buf.type_definition()<CR>")
+      -- vim.keymap.set("n", "gn", "<cmd>lua vim.lsp.buf.rename()<CR>")
+      -- -- vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>")
+      -- vim.keymap.set("n", "ga", "<cmd>lua vim.diagnostic.open_float()<CR>")
+      -- vim.keymap.set("n", "g]", "<cmd>lua vim.diagnostic.goto_next()<CR>")
+      -- vim.keymap.set("n", "g[", "<cmd>lua vim.diagnostic.goto_prev()<CR>")
       vim.api.nvim_set_keymap("n", "<CR>", "<CR>:cclose<CR>", { noremap = true, silent = true })
     end,
   },
