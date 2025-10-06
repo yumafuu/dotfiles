@@ -7,7 +7,6 @@ return {
     lazy = false,
     opts = {
       bigfile = { enabled = true },
-      -- explorer = { enabled = true },
       indent = { enabled = true },
       input = { enabled = true },
       picker = { enabled = true },
@@ -16,7 +15,7 @@ return {
         timeout = 1000,
       },
       quickfile = { enabled = true },
-      -- scope = { enabled = true },
+      image = { enabled = true },
       lazygit = {
         enabled = true,
         configure = true,
@@ -42,18 +41,15 @@ return {
     keys = {
       -- Top Pickers & Explorer
       { "<leader><leader>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
-      { "<leader>,", function() Snacks.picker.buffers() end, desc = "Buffers" },
-      { "<leader>/", function() Snacks.picker.grep() end, desc = "Grep" },
+      { "<leader>b", function() Snacks.picker.buffers() end, desc = "Buffers" },
+      { "<leader>a", function() Snacks.picker.grep() end, desc = "Grep" },
       { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
-      { "<leader>n", function() Snacks.picker.notifications() end, desc = "Notification History" },
+      -- { "<leader>n", function() Snacks.picker.notifications() end, desc = "Notification History" },
       -- { "<leader><leader>", function() Snacks.explorer() end, desc = "File Explorer" },
       -- find
-      { "<leader>fb", function() Snacks.picker.buffers() end, desc = "Buffers" },
-      { "<leader>fc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
-      { "<leader>ff", function() Snacks.picker.files() end, desc = "Find Files" },
-      { "<leader>fg", function() Snacks.picker.git_files() end, desc = "Find Git Files" },
-      { "<leader>fp", function() Snacks.picker.projects() end, desc = "Projects" },
-      { "<leader>fr", function() Snacks.picker.recent() end, desc = "Recent" },
+      { "<leader>c", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
+      { "<leader>f", function() Snacks.picker.git_files() end, desc = "Find Git Files" },
+      { "<leader>n", function() Snacks.picker.recent() end, desc = "Recent" },
       -- git
       { "<leader>gb", function() Snacks.picker.git_branches() end, desc = "Git Branches" },
       { "<leader>gl", function() Snacks.picker.git_log() end, desc = "Git Log" },
@@ -107,29 +103,16 @@ return {
       { "<leader>cR", function() Snacks.rename.rename_file() end, desc = "Rename File" },
       { "<leader>gB", function() Snacks.gitbrowse() end, desc = "Git Browse", mode = { "n", "v" } },
       { "<leader>un", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications" },
+      { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
       { "<c-\\>", function() Snacks.lazygit() end, desc = "Lazygit" },
       { "<c-_>", function() Snacks.terminal() end, desc = "which_key_ignore" },
       { "]]", function() Snacks.words.jump(vim.v.count1) end, desc = "Next Reference", mode = { "n", "t" } },
       { "[[", function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference", mode = { "n", "t" } },
-      {
-        "<leader>N",
-        desc = "Neovim News",
-        function()
-          Snacks.win({
-            file = vim.api.nvim_get_runtime_file("doc/news.txt", false)[1],
-            width = 0.6,
-            height = 0.6,
-            wo = {
-              spell = false,
-              wrap = false,
-              signcolumn = "yes",
-              statuscolumn = " ",
-              conceallevel = 3,
-            },
-          })
-        end,
-      },
     },
+    config = function()
+      vim.api.nvim_set_hl(0, "SnacksPickerPath", { fg = "#aaaaaa" })
+      vim.keymap.set("n", "<leader>g", function() require("snacks.terminal").toggle("lazygit") end, { desc = "Toggle Lazygit" })
+    end,
   },
   -- {
   --   "ibhagwan/fzf-lua",
@@ -989,17 +972,13 @@ return {
               and server_name ~= "buf_ls"
               and server_name ~= "gopls"
             then
-              local ok, err = pcall(function()
-                if use_new_config then
-                  vim.lsp.config[server_name] = {
-                    capabilities = require("cmp_nvim_lsp").default_capabilities(),
-                  }
-                else
+              local ok, err = pcall(
+                function()
                   require("lspconfig")[server_name].setup({
                     capabilities = require("cmp_nvim_lsp").default_capabilities(),
                   })
                 end
-              end)
+              )
               if not ok then vim.notify("Failed to setup " .. server_name .. ": " .. tostring(err), vim.log.levels.WARN) end
             end
           end,

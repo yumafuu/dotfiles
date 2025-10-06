@@ -13,6 +13,7 @@ hl(0, "TelescopeNormal", { bg = "None" })
 hl(0, "HlSearchNear", { bg = "#444444", fg = "#7CB0FF" })
 hl(0, "HlSearchLens", { bg = "None", fg = "#7CB0FF" })
 hl(0, "HlSearchLensNear", { bg = "None", fg = "#7BAFDA" })
+hl(0, "SnacksPickerDir", { fg = "#C0C0C0" })
 
 vim.g.did_install_default_menus = 1
 vim.g.did_install_syntax_menu = 1
