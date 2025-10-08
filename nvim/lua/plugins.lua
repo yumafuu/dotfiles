@@ -9,7 +9,14 @@ return {
       bigfile = { enabled = true },
       indent = { enabled = true },
       input = { enabled = true },
-      picker = { enabled = true },
+      picker = {
+        files = {
+          hidden = true,
+        },
+        grep = {
+          hidden = true,
+        },
+      },
       notifier = {
         enabled = true,
         timeout = 1000,
@@ -39,7 +46,7 @@ return {
       -- Top Pickers & Explorer
       { "<leader><leader>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
       { "<leader>b", function() Snacks.picker.buffers() end, desc = "Buffers" },
-      { "<leader>a", function() Snacks.picker.grep() end, desc = "Grep" },
+      { "<leader>i", function() Snacks.picker.grep({ hidden = true }) end, desc = "Grep" },
       { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
       -- { "<leader>n", function() Snacks.picker.notifications() end, desc = "Notification History" },
       -- { "<leader><leader>", function() Snacks.explorer() end, desc = "File Explorer" },
