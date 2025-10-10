@@ -34,6 +34,7 @@ import {
   Spark,
   Vivaldi,
   Wezterm,
+  Alacritty,
 } from "./src/app.ts";
 
 import type { Setting } from "./src/types.ts";
@@ -157,7 +158,7 @@ const shared = [
   ]),
 
   rule("[!Wezterm]left_control+ w`でcommand+delete").manipulators([
-    withCondition(ifApp(`${Wezterm}`).unless())([
+    withCondition(ifApp(`${Wezterm}|${Alacritty}`).unless())([
       map("w", "left_control")
         .to("delete_or_backspace", "command"),
     ]),
