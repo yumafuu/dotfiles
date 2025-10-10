@@ -44,8 +44,9 @@ return {
     },
     keys = {
       -- Top Pickers & Explorer
-      { "<leader><leader>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
-      { "<leader>b", function() Snacks.picker.buffers() end, desc = "Buffers" },
+      -- { "<leader><leader>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
+      { "<leader><leader>", function() Snacks.picker.files({ hidden = true }) end, desc = "Files" },
+      { "<leader>b", function() Snacks.picker.buffers({ hidden = true }) end, desc = "Buffers" },
       { "<leader>i", function() Snacks.picker.grep({ hidden = true }) end, desc = "Grep" },
       { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
       -- { "<leader>n", function() Snacks.picker.notifications() end, desc = "Notification History" },

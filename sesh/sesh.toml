@@ -1,5 +1,5 @@
 [[session]]
-name = "🐤 kw"
+name = "kw"
 path = "~/ghq/github.com/knowledge-work/knowledgework"
 
 [[session]]
@@ -8,7 +8,7 @@ path = "~/.config/crush/"
 startup_command = "nvim crush.json"
 
 [[session]]
-name = "📥 Downloads"
+name = "Downloads"
 path = "~/Downloads"
 startup_command = "ls"
 preview_command = "ls -l"
@@ -19,50 +19,47 @@ path = "~/dotfiles/tmux"
 startup_command = "nvim .tmux.conf"
 
 [[session]]
-name = "😈 nvim"
+name = "nvim"
 path = "~/dotfiles/nvim"
 startup_command = "nvim lua/plugins.lua"
 
 [[session]]
-name = "💻 karabiner"
+name = "karabiner"
 path = "~/dotfiles/karabiner"
 startup_command = "nvim ."
 
 [[session]]
-name = "💧 aqua"
+name = "aqua"
 path = "~/dotfiles/aqua"
 startup_command = "nvim aqua.yaml"
 
 [[session]]
-name = "📁 sesh"
+name = "sesh"
 path = "~/dotfiles/sesh"
 startup_command = "nvim sesh.toml"
 
 [[session]]
-name = "💬 dotfiles"
+name = "dotfiles"
 path = "~/dotfiles"
 startup_command = "dotfiles link && nvim ."
 windows = ["git", "echo"]
 
 [[session]]
-name = "🧢 zsh"
+name = "zsh"
 path = "~/dotfiles"
 startup_command = "vim -p .zshrc zsh/alias.zsh"
 
 [[session]]
-name = "🎮 wezterm"
+name = "wezterm"
 path = "~/dotfiles/wezterm"
 startup_command = "vim wezterm.lua"
 
 [[session]]
-name = "👨‍🔧 me"
+name = "junk"
 path = "~/junk"
 
 [[session]]
-name = "☁️ floax"
-
-[[session]]
-name = "🤚 kos"
+name = "kos"
 path = "~/ghq/github.com/KOS-LLC/ai-dev-ops"
 
 [[session]]

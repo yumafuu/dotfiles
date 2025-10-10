@@ -1,0 +1,56 @@
+[general]
+live_config_reload = true
+
+[window]
+decorations = "None"
+opacity = 0.9
+padding = { x = 8, y = 8 }
+dynamic_padding = true
+startup_mode = "Maximized"
+class = { instance = "Alacritty", general = "Alacritty" }
+
+[font]
+normal = { family = "MesloLGS Nerd Font Mono", style = "Regular" }
+bold = { family = "MesloLGS Nerd Font Mono", style = "Bold" }
+italic = { family = "MesloLGS Nerd Font Mono", style = "Italic" }
+bold_italic = { family = "MesloLGS Nerd Font Mono", style = "Bold Italic" }
+size = 15.0
+
+[scrolling]
+history = 10000
+multiplier = 3
+
+[cursor]
+style = { shape = "Block", blinking = "On" }
+vi_mode_style = "None"
+blink_interval = 750
+blink_timeout = 5
+unfocused_hollow = true
+thickness = 0.15
+
+[selection]
+semantic_escape_chars = ",│`|:\"' ()[]{}<>\\u0000-\\u001F\\u007F-\\u009F<>\"\\s{-}\\^⟨⟩`\\\\"
+save_to_clipboard = true
+
+[mouse]
+hide_when_typing = true
+
+[colors]
+  [colors.primary]
+  foreground = "#cdd6f4"
+  background = "#262626"
+
+[keyboard]
+bindings = [
+  { key = "Space", mods = "Control|Shift", action = "ToggleViMode" },
+  { key = "F", mods = "Control|Shift", action = "SearchForward" },
+]
+
+[debug]
+render_timer = false
+persistent_logging = false
+log_level = "Warn"
+renderer = "None"
+print_events = false
+highlight_damage = false
+prefer_egl = false
