@@ -2,7 +2,6 @@ apps:
   profiles:
     shared:
       s: Slack
-      # a: Wezterm
       a: Alacritty
       r: Reflect
       p: Spotify
