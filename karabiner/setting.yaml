@@ -12,9 +12,6 @@ apps:
     yumaAir:
       d: Discord
       l: Line
-      i: Rhino 8
     kwPro:
       o: zoom.us
-      t: Toggl
       g: GoogleCalendar
-      j: Jira
