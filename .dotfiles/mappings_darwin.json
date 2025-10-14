@@ -1,4 +1,5 @@
 {
   "karabiner/": "~/.config/karabiner/",
+  "hammerspoon/": "~/.hammerspoon/",
   "alacritty/": "~/.config/alacritty/"
 }

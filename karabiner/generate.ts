@@ -213,7 +213,7 @@ const shared = [
       map("l", "left_control").to("→"),
       map("spacebar", "left_control").to("1", "left_control"),
 
-      map("o", ["left_command", "left_control"]).to$(`open "slack://channel?team=T0115RHBKBN&id=C0119U6TYHW"`),
+      map("d", ["left_command", "left_control"]).to$(`open "slack://channel?team=T0115RHBKBN&id=D07RLKKB8BZ"`) ,
       map("y", ["left_command", "left_control"]).to$(`open "slack://channel?team=T0115RHBKBN&id=C07SDSKJY73"`),
       map("g", ["left_command", "left_control"]).to$(`open "slack://channel?team=T0115RHBKBN&id=C051H2P00SY"`),
     ]),
