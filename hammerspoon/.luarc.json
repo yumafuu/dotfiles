@@ -8,8 +8,8 @@
   },
   "diagnostics": {
     "globals": [
-      "vim",
-      "Snacks"
+      "hs",
+      "spoon"
     ]
   }
 }
