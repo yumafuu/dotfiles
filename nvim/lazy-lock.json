@@ -24,6 +24,7 @@
   "guihua.lua": { "branch": "master", "commit": "c49a0fb7346586a1b1431d7e407f943c4164d8cb" },
   "guise.vim": { "branch": "main", "commit": "12e311bd48304ce3f724fdb9a9776816b845a9ba" },
   "heirline.nvim": { "branch": "master", "commit": "fae936abb5e0345b85c3a03ecf38525b0828b992" },
+  "hellshake-yano.vim": { "branch": "main", "commit": "294a171e2fd8259d71c6fcc2e448979747a85cca" },
   "hlchunk.nvim": { "branch": "main", "commit": "474ec5d0f220158afa83aaefab32402e710d3032" },
   "hover.nvim": { "branch": "main", "commit": "3b49066e09e03e63be6d6f43ae2b8bcd58301f63" },
   "in-and-out.nvim": { "branch": "master", "commit": "03456b9c49365a28732378a7f2a72a613154e042" },
