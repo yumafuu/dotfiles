@@ -12,7 +12,12 @@
               {
                 "type": "basic",
                 "from": {
-                  "key_code": "right_command"
+                  "key_code": "spacebar",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_control"
+                    ]
+                  }
                 },
                 "to": [
                   {
@@ -22,11 +27,6 @@
                       "control",
                       "shift"
                     ]
-                  }
-                ],
-                "to_if_alone": [
-                  {
-                    "key_code": "right_command"
                   }
                 ]
               }
@@ -363,7 +363,7 @@
                 },
                 "to": [
                   {
-                    "shell_command": "open -a \"Wezterm\".app"
+                    "shell_command": "open -a \"Alacritty\".app"
                   }
                 ]
               },
@@ -432,6 +432,40 @@
                 "to": [
                   {
                     "shell_command": "open -a \"Notion\".app"
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "m",
+                  "modifiers": {
+                    "mandatory": [
+                      "control",
+                      "shift"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "shell_command": "open -a \"My Recorder\".app"
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "j",
+                  "modifiers": {
+                    "mandatory": [
+                      "control",
+                      "shift"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "shell_command": "open -a \"GatherV2\".app"
                   }
                 ]
               }
@@ -822,6 +856,28 @@
             ]
           },
           {
+            "description": "Shottr",
+            "manipulators": [
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "o",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_control",
+                      "left_command"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "shell_command": "open -g \"shottr://ocr\""
+                  }
+                ]
+              }
+            ]
+          },
+          {
             "description": "コロンとセミコロンを入れ替える",
             "manipulators": [
               {
@@ -985,47 +1041,7 @@
                   {
                     "type": "frontmost_application_unless",
                     "bundle_identifiers": [
-                      "com.github.wez.wezterm"
-                    ]
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "description": "[Wezterm] escで英数字モード",
-            "manipulators": [
-              {
-                "type": "basic",
-                "from": {
-                  "key_code": "escape",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to_if_alone": [
-                  {
-                    "key_code": "japanese_eisuu"
-                  }
-                ],
-                "to_if_held_down": [
-                  {
-                    "key_code": "left_control"
-                  }
-                ],
-                "to": [
-                  {
-                    "key_code": "left_control",
-                    "lazy": true
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "frontmost_application_if",
-                    "bundle_identifiers": [
-                      "com.github.wez.wezterm"
+                      "com.github.wez.wezterm|org.alacritty"
                     ]
                   }
                 ]
@@ -1513,7 +1529,7 @@
               {
                 "type": "basic",
                 "from": {
-                  "key_code": "o",
+                  "key_code": "d",
                   "modifiers": {
                     "mandatory": [
                       "left_command",
@@ -1523,7 +1539,7 @@
                 },
                 "to": [
                   {
-                    "shell_command": "open \"slack://channel?team=T0115RHBKBN&id=C0119U6TYHW\""
+                    "shell_command": "open \"slack://channel?team=T0115RHBKBN&id=D07RLKKB8BZ\""
                   }
                 ],
                 "conditions": [
@@ -1573,7 +1589,7 @@
                 },
                 "to": [
                   {
-                    "shell_command": "open \"slack://channel?team=T0115RHBKBN&id=C07BTBXKE0H\""
+                    "shell_command": "open \"slack://channel?team=T0115RHBKBN&id=C051H2P00SY\""
                   }
                 ],
                 "conditions": [
@@ -1756,107 +1772,6 @@
             ]
           },
           {
-            "description": "[tmux] Cmd + HJKL to tmux-safe keys",
-            "manipulators": [
-              {
-                "type": "basic",
-                "from": {
-                  "key_code": "h",
-                  "modifiers": {
-                    "mandatory": [
-                      "left_command"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "page_down"
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "frontmost_application_if",
-                    "bundle_identifiers": [
-                      "Wezterm"
-                    ]
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "from": {
-                  "key_code": "j",
-                  "modifiers": {
-                    "mandatory": [
-                      "left_command"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "end"
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "frontmost_application_if",
-                    "bundle_identifiers": [
-                      "Wezterm"
-                    ]
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "from": {
-                  "key_code": "k",
-                  "modifiers": {
-                    "mandatory": [
-                      "left_command"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "home"
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "frontmost_application_if",
-                    "bundle_identifiers": [
-                      "Wezterm"
-                    ]
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "from": {
-                  "key_code": "l",
-                  "modifiers": {
-                    "mandatory": [
-                      "left_command"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "page_up"
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "frontmost_application_if",
-                    "bundle_identifiers": [
-                      "Wezterm"
-                    ]
-                  }
-                ]
-              }
-            ]
-          },
-          {
             "description": "Open App - kwPro",
             "manipulators": [
               {
@@ -1879,23 +1794,6 @@
               {
                 "type": "basic",
                 "from": {
-                  "key_code": "t",
-                  "modifiers": {
-                    "mandatory": [
-                      "control",
-                      "shift"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "open -a \"Toggl\".app"
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "from": {
                   "key_code": "g",
                   "modifiers": {
                     "mandatory": [
@@ -1907,40 +1805,6 @@
                 "to": [
                   {
                     "shell_command": "open -a \"GoogleCalendar\".app"
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "from": {
-                  "key_code": "j",
-                  "modifiers": {
-                    "mandatory": [
-                      "control",
-                      "shift"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "open -a \"Jira\".app"
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "from": {
-                  "key_code": "m",
-                  "modifiers": {
-                    "mandatory": [
-                      "control",
-                      "shift"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "open -a \"Gmail\".app"
                   }
                 ]
               }
@@ -1979,7 +1843,12 @@
               {
                 "type": "basic",
                 "from": {
-                  "key_code": "right_command"
+                  "key_code": "spacebar",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_control"
+                    ]
+                  }
                 },
                 "to": [
                   {
@@ -1989,11 +1858,6 @@
                       "control",
                       "shift"
                     ]
-                  }
-                ],
-                "to_if_alone": [
-                  {
-                    "key_code": "right_command"
                   }
                 ]
               }
@@ -2330,7 +2194,7 @@
                 },
                 "to": [
                   {
-                    "shell_command": "open -a \"Wezterm\".app"
+                    "shell_command": "open -a \"Alacritty\".app"
                   }
                 ]
               },
@@ -2399,6 +2263,40 @@
                 "to": [
                   {
                     "shell_command": "open -a \"Notion\".app"
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "m",
+                  "modifiers": {
+                    "mandatory": [
+                      "control",
+                      "shift"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "shell_command": "open -a \"My Recorder\".app"
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "j",
+                  "modifiers": {
+                    "mandatory": [
+                      "control",
+                      "shift"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "shell_command": "open -a \"GatherV2\".app"
                   }
                 ]
               }
@@ -2789,6 +2687,28 @@
             ]
           },
           {
+            "description": "Shottr",
+            "manipulators": [
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "o",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_control",
+                      "left_command"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "shell_command": "open -g \"shottr://ocr\""
+                  }
+                ]
+              }
+            ]
+          },
+          {
             "description": "コロンとセミコロンを入れ替える",
             "manipulators": [
               {
@@ -2952,47 +2872,7 @@
                   {
                     "type": "frontmost_application_unless",
                     "bundle_identifiers": [
-                      "com.github.wez.wezterm"
-                    ]
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "description": "[Wezterm] escで英数字モード",
-            "manipulators": [
-              {
-                "type": "basic",
-                "from": {
-                  "key_code": "escape",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to_if_alone": [
-                  {
-                    "key_code": "japanese_eisuu"
-                  }
-                ],
-                "to_if_held_down": [
-                  {
-                    "key_code": "left_control"
-                  }
-                ],
-                "to": [
-                  {
-                    "key_code": "left_control",
-                    "lazy": true
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "frontmost_application_if",
-                    "bundle_identifiers": [
-                      "com.github.wez.wezterm"
+                      "com.github.wez.wezterm|org.alacritty"
                     ]
                   }
                 ]
@@ -3480,7 +3360,7 @@
               {
                 "type": "basic",
                 "from": {
-                  "key_code": "o",
+                  "key_code": "d",
                   "modifiers": {
                     "mandatory": [
                       "left_command",
@@ -3490,7 +3370,7 @@
                 },
                 "to": [
                   {
-                    "shell_command": "open \"slack://channel?team=T0115RHBKBN&id=C0119U6TYHW\""
+                    "shell_command": "open \"slack://channel?team=T0115RHBKBN&id=D07RLKKB8BZ\""
                   }
                 ],
                 "conditions": [
@@ -3540,7 +3420,7 @@
                 },
                 "to": [
                   {
-                    "shell_command": "open \"slack://channel?team=T0115RHBKBN&id=C07BTBXKE0H\""
+                    "shell_command": "open \"slack://channel?team=T0115RHBKBN&id=C051H2P00SY\""
                   }
                 ],
                 "conditions": [
@@ -3717,107 +3597,6 @@
                 "to": [
                   {
                     "shell_command": "open \"https://google.com/search?q=$(pbpaste)\""
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "description": "[tmux] Cmd + HJKL to tmux-safe keys",
-            "manipulators": [
-              {
-                "type": "basic",
-                "from": {
-                  "key_code": "h",
-                  "modifiers": {
-                    "mandatory": [
-                      "left_command"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "page_down"
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "frontmost_application_if",
-                    "bundle_identifiers": [
-                      "Wezterm"
-                    ]
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "from": {
-                  "key_code": "j",
-                  "modifiers": {
-                    "mandatory": [
-                      "left_command"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "end"
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "frontmost_application_if",
-                    "bundle_identifiers": [
-                      "Wezterm"
-                    ]
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "from": {
-                  "key_code": "k",
-                  "modifiers": {
-                    "mandatory": [
-                      "left_command"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "home"
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "frontmost_application_if",
-                    "bundle_identifiers": [
-                      "Wezterm"
-                    ]
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "from": {
-                  "key_code": "l",
-                  "modifiers": {
-                    "mandatory": [
-                      "left_command"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "page_up"
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "frontmost_application_if",
-                    "bundle_identifiers": [
-                      "Wezterm"
-                    ]
                   }
                 ]
               }
@@ -3857,23 +3636,6 @@
                 "to": [
                   {
                     "shell_command": "open -a \"Line\".app"
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "from": {
-                  "key_code": "i",
-                  "modifiers": {
-                    "mandatory": [
-                      "control",
-                      "shift"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "open -a \"Rhino 8\".app"
                   }
                 ]
               }
