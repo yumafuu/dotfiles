@@ -3,9 +3,9 @@ live_config_reload = true
 
 [window]
 decorations = "None"
-opacity = 0.9
-blur = true
-padding = { x = 8, y = 8 }
+opacity = 0.97
+blur = false
+padding = { x = 4, y = 0 }
 dynamic_padding = true
 startup_mode = "Maximized"
 class = { instance = "Alacritty", general = "Alacritty" }

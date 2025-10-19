@@ -67,7 +67,6 @@
   "rayso.nvim": { "branch": "main", "commit": "4a94c6fa2410e3800cf47a03b8f5e5315595ba99" },
   "schemastore.nvim": { "branch": "main", "commit": "fb58187b76d8e086f08686b872b50f52eac57818" },
   "sixelview.nvim": { "branch": "master", "commit": "ebfdcb42adbe69ae08dde4d25b56651103e065ab" },
-  "smart-splits.nvim": { "branch": "master", "commit": "ebb1375cda434c7a075986e1724fa53d0c754e8f" },
   "snacks.nvim": { "branch": "main", "commit": "bfe8c26dbd83f7c4fbc222787552e29b4eccfcc0" },
   "tabby.nvim": { "branch": "main", "commit": "b3affa6db7eab80fca2a2db5b73b473144507039" },
   "treesj": { "branch": "main", "commit": "925b506eadd9b465e6e577bb684d86e9863a2e21" },

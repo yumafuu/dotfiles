@@ -648,20 +648,20 @@ return {
   { "nvim-treesitter/nvim-treesitter", lazy = true },
   { "tyru/operator-camelize.vim", lazy = true },
   -- { "simeji/winresizer", event = "VeryLazy" },
-  {
-    "mrjones2014/smart-splits.nvim",
-    config = function()
-      vim.keymap.set("n", "<c-e>h", require("smart-splits").resize_left)
-      vim.keymap.set("n", "<c-e>j", require("smart-splits").resize_down)
-      vim.keymap.set("n", "<c-e>k", require("smart-splits").resize_up)
-      vim.keymap.set("n", "<c-e>l", require("smart-splits").resize_right)
-      -- swapping buffers between windows
-      vim.keymap.set("n", "<leader>sh", require("smart-splits").swap_buf_left)
-      vim.keymap.set("n", "<leader>sj", require("smart-splits").swap_buf_down)
-      vim.keymap.set("n", "<leader>sk", require("smart-splits").swap_buf_up)
-      vim.keymap.set("n", "<leader>sl", require("smart-splits").swap_buf_right)
-    end,
-  },
+  -- {
+  --   "mrjones2014/smart-splits.nvim",
+  --   config = function()
+  --     vim.keymap.set("n", "<c-e>h", require("smart-splits").resize_left)
+  --     vim.keymap.set("n", "<c-e>j", require("smart-splits").resize_down)
+  --     vim.keymap.set("n", "<c-e>k", require("smart-splits").resize_up)
+  --     vim.keymap.set("n", "<c-e>l", require("smart-splits").resize_right)
+  --     -- swapping buffers between windows
+  --     vim.keymap.set("n", "<leader>sh", require("smart-splits").swap_buf_left)
+  --     vim.keymap.set("n", "<leader>sj", require("smart-splits").swap_buf_down)
+  --     vim.keymap.set("n", "<leader>sk", require("smart-splits").swap_buf_up)
+  --     vim.keymap.set("n", "<leader>sl", require("smart-splits").swap_buf_right)
+  --   end,
+  -- },
   { "tpope/vim-repeat", lazy = false },
   { "tpope/vim-commentary", lazy = true },
   { "machakann/vim-highlightedyank", event = "VeryLazy" },

@@ -67,6 +67,11 @@ name = "spotify"
 path = "~/"
 startup_command = "spotify_player"
 
+[[session]]
+name = "alacritty"
+path = "~/dotfiles/alacritty"
+startup_command = "nvim alacritty.toml"
+
 [[window]]
 name = "git"
 startup_script = "git pull"
