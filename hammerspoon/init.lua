@@ -45,7 +45,7 @@ hs.hotkey.bind({ "cmd", "alt", "ctrl" }, "R", function()
 end)
 hs.alert.show("Hammerspoon loaded!")
 
-hs.hotkey.bind({ "ctrl", "alt" }, "Left", function()
+hs.hotkey.bind({ "alt", "ctrl" }, "h", function()
    local win = hs.window.focusedWindow()
    local f = win:frame()
    local screen = win:screen()
@@ -57,7 +57,7 @@ hs.hotkey.bind({ "ctrl", "alt" }, "Left", function()
    win:setFrame(f)
 end)
 
-hs.hotkey.bind({ "ctrl", "alt" }, "Right", function()
+hs.hotkey.bind({ "alt", "ctrl" }, "l", function()
    local win = hs.window.focusedWindow()
    local f = win:frame()
    local screen = win:screen()
@@ -69,9 +69,31 @@ hs.hotkey.bind({ "ctrl", "alt" }, "Right", function()
    win:setFrame(f)
 end)
 
-hs.hotkey.bind({ "ctrl", "alt" }, "Up", function()
+hs.hotkey.bind({ "alt", "ctrl" }, "k", function()
    local win = hs.window.focusedWindow()
    win:maximize()
+end)
+
+hs.hotkey.bind({ "alt", "ctrl" }, "n", function()
+   local win = hs.window.focusedWindow()
+   if not win then
+      return
+   end
+
+   local app = win:application()
+   if not app then
+      return
+   end
+
+   local windows = app:allWindows()
+   if #windows <= 1 then
+      return
+   end
+
+   local currentIndex = hs.fnutils.indexOf(windows, win)
+   local nextIndex = (currentIndex % #windows) + 1
+
+   windows[nextIndex]:focus()
 end)
 
 -- grid

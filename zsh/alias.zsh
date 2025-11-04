@@ -75,11 +75,9 @@ alias gcdf='git clean -df'
 alias ghco='gh pr checkout'
 
 ## push
-alias gush='git push origin $( git branch | grep "*" | sed -e "s/^\*\s*//g" )'
+alias gul="git fetch && git pull --rebase origin $(git branch --show-current)"
+alias gush="git pull --rebase origin $(git branch --show-current) && git push origin $(git branch --show-current)"
 alias gushf='gush -f'
-
-## pull
-alias gul='git pull --autostash --rebase origin $( git branch | grep "*" | sed -e "s/^\*\s*//g" )'
 
 ## status
 alias gs='git status'
