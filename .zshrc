@@ -33,8 +33,8 @@ export PATH=$NPM_CONFIG_PREFIX/bin:$PATH
 export PATH="$(aqua root-dir)/bin:$PATH"
 
 # mise
-eval "$(mise activate zsh)"
-eval "$(mise hook-env)"
+# eval "$(mise activate zsh)"
+# eval "$(mise hook-env)"
 
 # go
 export PATH="$(go env GOPATH)/bin:$PATH"

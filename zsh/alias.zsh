@@ -75,8 +75,8 @@ alias gcdf='git clean -df'
 alias ghco='gh pr checkout'
 
 ## push
-alias gul="git fetch && git pull --rebase origin $(git branch --show-current)"
-alias gush="git pull --rebase origin $(git branch --show-current) && git push origin $(git branch --show-current)"
+alias gul='git fetch && git pull --rebase origin $(git branch --show-current)'
+alias gush='git pull --rebase origin $(git branch --show-current) && git push origin $(git branch --show-current)'
 alias gushf='gush -f'
 
 ## status

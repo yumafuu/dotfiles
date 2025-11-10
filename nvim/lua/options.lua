@@ -126,7 +126,7 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   command = [[%s/\s\+$//e]],
 })
 
-maps = {
+local maps = {
   n = {
     ["te"] = '<cmd>execute ":tabedit" expand("%:h")<CR>',
     ["tt"] = '<cmd>execute ":tab split"<CR>',
@@ -143,6 +143,7 @@ maps = {
     ["<C-d>"] = "<C-d>zz",
     ["<C-u>"] = "<C-u>zz",
     ["co"] = "<cmd>cfdo tabedit %<CR>",
+    ["yy"] = "v^y$",
   },
   i = {
     ["<C-h>"] = "<Left>",
