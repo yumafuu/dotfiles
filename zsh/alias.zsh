@@ -21,12 +21,6 @@ alias tree="eza -T -a -I .git --git-ignore"
 alias ez='exec zsh'
 
 # vim
-# nvim() {
-#   # pwdkey is $(pwd) replace / to .
-#   local pwdkey=$(pwd | tr '/' '.')
-#   local sock="/tmp/nvim-$pwdkey.sock"
-#   command nvim --listen "$sock" "$@"
-# }
 alias vim='nvim'
 alias v="vim ."
 alias vz='vim ~/dotfiles/.zshrc '
@@ -36,6 +30,7 @@ alias vd='vim -p $(git diff --name-only)'
 
 # ai
 alias c="crush"
+alias ai="mods -m"
 
 ## gwq
 alias gq="gwq"
@@ -58,7 +53,6 @@ alias imgcat='img2sixel'
 
 # aqua
 alias agi="aqua g -i"
-alias ai="aqua i -l"
 alias aia="aqua i -a -l"
 
 # go
@@ -76,7 +70,18 @@ alias ghco='gh pr checkout'
 
 ## push
 alias gul='git fetch && git pull --rebase origin $(git branch --show-current)'
-alias gush='git pull --rebase origin $(git branch --show-current) && git push origin $(git branch --show-current)'
+gush() {
+  local branch
+  branch=$(git branch --show-current)
+
+  if git ls-remote --exit-code origin "$branch" >/dev/null 2>&1; then
+    echo "🔄 Remote branch '$branch' found. Rebasing & pushing..."
+    git pull --rebase origin "$branch" && git push origin "$branch"
+  else
+    echo "🌱 Remote branch '$branch' not found. Creating it on origin..."
+    git push --set-upstream origin "$branch"
+  fi
+}
 alias gushf='gush -f'
 
 ## status
@@ -89,7 +94,7 @@ alias gaa='git add .'
 alias gaaa='git add .'
 
 ## commit
-alias gc='git commit'
+gc() { git commit -m "$*" }
 
 ## branch to command
 alias master="git checkout master"

@@ -143,7 +143,7 @@ local maps = {
     ["<C-d>"] = "<C-d>zz",
     ["<C-u>"] = "<C-u>zz",
     ["co"] = "<cmd>cfdo tabedit %<CR>",
-    ["yy"] = "v^y$",
+    ["Y"] = "v^y$",
   },
   i = {
     ["<C-h>"] = "<Left>",

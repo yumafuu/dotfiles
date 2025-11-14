@@ -33,10 +33,13 @@ spoon.Seal:bindHotkeys({ toggle = { { "cmd", "ctrl" }, "space" } })
 
 spoon.Seal:start()
 
--- IME
-hs.window.filter.new("Alacritty"):subscribe(hs.window.filter.windowFocused, function()
-   hs.task.new("/opt/homebrew/bin/im-select", function() end, { "com.apple.keylayout.ABC" }):start()
-end)
+-- IME (Alacritty起動時のみ有効化)
+local alacrittyFilter = hs.window.filter.new(false):setAppFilter("Alacritty")
+if alacrittyFilter then
+   alacrittyFilter:subscribe(hs.window.filter.windowFocused, function()
+      hs.task.new("/opt/homebrew/bin/im-select", function() end, { "com.apple.keylayout.ABC" }):start()
+   end)
+end
 
 -- リロードショートカット
 hs.hotkey.bind({ "cmd", "alt", "ctrl" }, "R", function()
@@ -50,9 +53,38 @@ hs.hotkey.bind({ "alt", "ctrl" }, "h", function()
    local f = win:frame()
    local screen = win:screen()
    local max = screen:frame()
-   f.x = max.x
+
+   local widthRatio = f.w / max.w
+   local posRatio = (f.x - max.x) / max.w
+   local threshold = 0.05
+
+   if math.abs(posRatio - 0) < threshold and math.abs(widthRatio - 1 / 3) < threshold then
+      f.x = max.x + max.w * 2 / 3
+      f.w = max.w / 3
+   elseif math.abs(posRatio - 0) < threshold and math.abs(widthRatio - 1 / 2) < threshold then
+      f.x = max.x
+      f.w = max.w / 3
+   elseif math.abs(posRatio - 0) < threshold and math.abs(widthRatio - 2 / 3) < threshold then
+      f.x = max.x
+      f.w = max.w / 2
+   elseif math.abs(widthRatio - 1) < threshold then
+      f.x = max.x
+      f.w = max.w * 2 / 3
+   elseif math.abs(posRatio - 1 / 3) < threshold and math.abs(widthRatio - 2 / 3) < threshold then
+      win:maximize()
+      return
+   elseif math.abs(posRatio - 1 / 2) < threshold and math.abs(widthRatio - 1 / 2) < threshold then
+      f.x = max.x + max.w / 3
+      f.w = max.w * 2 / 3
+   elseif math.abs(posRatio - 2 / 3) < threshold and math.abs(widthRatio - 1 / 3) < threshold then
+      f.x = max.x + max.w / 2
+      f.w = max.w / 2
+   else
+      f.x = max.x + max.w * 2 / 3
+      f.w = max.w / 3
+   end
+
    f.y = max.y
-   f.w = max.w / 2
    f.h = max.h
    win:setFrame(f)
 end)
@@ -62,9 +94,38 @@ hs.hotkey.bind({ "alt", "ctrl" }, "l", function()
    local f = win:frame()
    local screen = win:screen()
    local max = screen:frame()
-   f.x = max.x + max.w / 2
+
+   local widthRatio = f.w / max.w
+   local posRatio = (f.x - max.x) / max.w
+   local threshold = 0.05
+
+   if math.abs(posRatio - 2 / 3) < threshold and math.abs(widthRatio - 1 / 3) < threshold then
+      f.x = max.x
+      f.w = max.w / 3
+   elseif math.abs(posRatio - 1 / 2) < threshold and math.abs(widthRatio - 1 / 2) < threshold then
+      f.x = max.x + max.w * 2 / 3
+      f.w = max.w / 3
+   elseif math.abs(posRatio - 1 / 3) < threshold and math.abs(widthRatio - 2 / 3) < threshold then
+      f.x = max.x + max.w / 2
+      f.w = max.w / 2
+   elseif math.abs(widthRatio - 1) < threshold then
+      f.x = max.x + max.w / 3
+      f.w = max.w * 2 / 3
+   elseif math.abs(posRatio - 0) < threshold and math.abs(widthRatio - 2 / 3) < threshold then
+      win:maximize()
+      return
+   elseif math.abs(posRatio - 0) < threshold and math.abs(widthRatio - 1 / 2) < threshold then
+      f.x = max.x
+      f.w = max.w * 2 / 3
+   elseif math.abs(posRatio - 0) < threshold and math.abs(widthRatio - 1 / 3) < threshold then
+      f.x = max.x
+      f.w = max.w / 2
+   else
+      f.x = max.x
+      f.w = max.w / 3
+   end
+
    f.y = max.y
-   f.w = max.w / 2
    f.h = max.h
    win:setFrame(f)
 end)
@@ -103,3 +164,39 @@ hs.grid.setMargins("5x5")
 hs.hotkey.bind({ "ctrl", "alt" }, "G", function()
    hs.grid.show()
 end)
+
+-- Chrome
+-- Chrome のアクティブタブを新規ウィンドウに切り出す
+local function moveChromeTabToNewWindow()
+   local app = hs.application.frontmostApplication()
+   if not app or app:name() ~= "Google Chrome" then
+      -- Chrome 以外が前面なら何もしない
+      return
+   end
+
+   local script = [[
+tell application "Google Chrome"
+    if (count of windows) is 0 then return
+
+    set theWin to front window
+    if (count of tabs of theWin) is 0 then return
+
+    set theTab to active tab of theWin
+    set theURL to URL of theTab
+
+    -- 新しいウィンドウを作成
+    set newWin to make new window
+
+    -- 新ウィンドウの空タブに URL を設定
+    set URL of active tab of newWin to theURL
+
+    -- 新しいウィンドウを最前面に
+    set index of newWin to 1
+end tell
+  ]]
+
+   hs.osascript.applescript(script)
+end
+
+-- ホットキー登録（Ctrl + Alt + Cmd + T）
+hs.hotkey.bind({ "ctrl", "alt" }, "p", moveChromeTabToNewWindow)

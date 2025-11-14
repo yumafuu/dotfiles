@@ -17,6 +17,7 @@ declare -A DEFAULTS=(
   [height]="60%"
   [style]="fg=none"
   [border_style]="bg=none,fg=none,rounded"
+  [auto_cd]="true"
 )
 
 main() {
@@ -58,12 +59,22 @@ toggle_popup() {
     tmux setenv -g TPAD_PARENT_SESSION "$current_session"
     create_session_if_needed "$instance" "$session"
 
-    # Update working directory if session already exists and no command is running
+    # Update working directory or run command if session already exists
     if tmux has-session -t "$session" 2>/dev/null; then
       local pane_command="$(tmux display-message -t "$session" -p '#{pane_current_command}')"
       if [[ "$pane_command" == "bash" || "$pane_command" == "zsh" || "$pane_command" == "sh" ]]; then
-        local dir="$(get_config "$instance" dir)"
-        tmux send-keys -t "$session" "cd '$dir'" C-m
+        local cmd="$(get_config "$instance" cmd)"
+        if [[ -n "$cmd" ]]; then
+          # Run command if shell is idle and cmd is configured
+          tmux send-keys -t "$session" "$cmd" C-m
+        else
+          # Otherwise do auto-cd if enabled
+          local auto_cd="$(get_config "$instance" auto_cd)"
+          if [[ "$auto_cd" == "true" ]]; then
+            local dir="$(get_config "$instance" dir)"
+            tmux send-keys -t "$session" "cd '$dir'" C-m
+          fi
+        fi
       fi
     fi
 
