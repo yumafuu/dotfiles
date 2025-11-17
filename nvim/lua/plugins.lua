@@ -166,12 +166,6 @@ return {
     end,
   },
   {
-    "nekowasabi/hellshake-yano.vim",
-    config = function()
-      -- Configuration here
-    end,
-  },
-  {
 
     "folke/flash.nvim",
     event = "VeryLazy",
