@@ -45,6 +45,9 @@ export PATH=$HOME/.cargo/bin:$PATH
 # deno
 export PATH="$HOME/.deno/bin:$PATH"
 
+# node
+export PATH="/opt/homebrew/opt/node@22/bin:$PATH"
+
 # local
 export PATH="$HOME/.local/bin:$PATH"
 
@@ -107,3 +110,4 @@ export PATH="/Users/yuma.ishikawa/.codeium/windsurf/bin:$PATH"
 # if type zprof > /dev/null 2>&1; then
 #   zprof | cat
 # fi
+export PATH="/opt/homebrew/opt/node@24/bin:$PATH"

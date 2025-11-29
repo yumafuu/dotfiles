@@ -107,3 +107,6 @@ alias fast="bun x fast-cli --single-line --upload"
 alias fm='fzf-make'
 alias fr='fzf-make repeat'
 alias fh='fzf-make history'
+
+# yazi
+alias y='yazi'

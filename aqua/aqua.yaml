@@ -21,8 +21,8 @@ packages:
   - name: rhysd/vim-startuptime@v1.3.2
   - name: oven-sh/bun@bun-v1.2.21
   - name: protocolbuffers/protobuf/protoc@v28.3
-  - name: nodejs/node@v24.1.0
-  - name: joshmedeski/sesh@v2.6.0
+  # - name: nodejs/node@v24.1.0
+  - name: joshmedeski/sesh@v2.19.0
   - name: charmbracelet/gum@v0.14.5
   - name: svenstaro/genact@v1.4.2
   - name: charmbracelet/glow@v2.0.0
@@ -41,3 +41,4 @@ packages:
   - name: jesseduffield/lazydocker@v0.24.1
   - name: gohugoio/hugo@v0.148.2
   - name: suzuki-shunsuke/ghalint@v1.5.3
+  - name: aquasecurity/trivy@v0.67.2

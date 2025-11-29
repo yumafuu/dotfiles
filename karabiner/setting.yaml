@@ -2,7 +2,8 @@ apps:
   profiles:
     shared:
       s: Slack
-      a: Alacritty
+      # a: Alacritty
+      a: wezterm
       r: Reflect
       p: Spotify
       f: Google Chrome

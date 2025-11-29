@@ -35,33 +35,35 @@ vim.g.loaded_zipPlugin = 1
 vim.g.skip_loading_mswin = 1
 
 vim.diagnostic.config({
-  float = { border = "rounded" },
+   float = { border = "rounded" },
 })
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-  border = "rounded",
+   border = "rounded",
 })
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-  border = "rounded",
+   border = "rounded",
 })
 vim.lsp.inlay_hint.enable(false)
 vim.api.nvim_create_autocmd("LspAttach", {
-  callback = function(args)
-    local bufnr = args.buf
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
-    if client and client.server_capabilities.inlayHintProvider then vim.lsp.inlay_hint.enable(false, { bufnr = bufnr }) end
-  end,
+   callback = function(args)
+      local bufnr = args.buf
+      local client = vim.lsp.get_client_by_id(args.data.client_id)
+      if client and client.server_capabilities.inlayHintProvider then
+         vim.lsp.inlay_hint.enable(false, { bufnr = bufnr })
+      end
+   end,
 })
 
 local o = vim.opt
 o.fillchars = {
-  vert = "│",
-  vertleft = "┤",
-  vertright = "├",
-  verthoriz = "┼",
-  horiz = "─",
-  horizup = "┴",
-  horizdown = "┬",
-  eob = " ",
+   vert = "│",
+   vertleft = "┤",
+   vertright = "├",
+   verthoriz = "┼",
+   horiz = "─",
+   horizup = "┴",
+   horizdown = "┬",
+   eob = " ",
 }
 o.termguicolors = true
 o.confirm = true
@@ -106,59 +108,44 @@ o.cmdheight = 1
 --   callback = function() print('insert enter') end
 -- })
 
-if vim.fn.has("linux") == 1 then
-  vim.g.clipboard = {
-    name = "lemonade",
-    copy = {
-      ["+"] = "lemonade copy",
-      ["*"] = "lemonade copy",
-    },
-    paste = {
-      ["+"] = "lemonade paste",
-      ["*"] = "lemonade paste",
-    },
-    cache_enabled = 0,
-  }
-end
-
-vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-  pattern = { "*" },
-  command = [[%s/\s\+$//e]],
-})
-
+-- vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+--   pattern = { "*" },
+--   command = [[%s/\s\+$//e]],
+-- })
+--
 local maps = {
-  n = {
-    ["te"] = '<cmd>execute ":tabedit" expand("%:h")<CR>',
-    ["tt"] = '<cmd>execute ":tab split"<CR>',
-    ["C-l"] = "<cmd>noh<CR>",
-    ["<C-[><C-[>"] = "<cmd>noh<CR>",
-    ["<ECS><ECS>"] = "<cmd>noh<CR>",
-    ["j"] = "gj",
-    ["k"] = "gk",
-    ["R"] = "<Plug>(operator-replace)",
-    ["<Leader>c"] = "<plug>(operator-camelize-toggle)",
-    ["<C-n>"] = "<cmd>tabnext<CR>",
-    ["<C-p>"] = "<cmd>tabprevious<CR>",
-    ["tv"] = "<cmd>vsplit | terminal<CR>",
-    ["<C-d>"] = "<C-d>zz",
-    ["<C-u>"] = "<C-u>zz",
-    ["co"] = "<cmd>cfdo tabedit %<CR>",
-    ["Y"] = "v^y$",
-  },
-  i = {
-    ["<C-h>"] = "<Left>",
-    ["<C-l>"] = "<Right>",
-  },
-  v = {
-    ["<C-d>"] = "<C-d>zz",
-    ["<C-u>"] = "<C-u>zz",
-  },
+   n = {
+      ["te"] = '<cmd>execute ":tabedit" expand("%:h")<CR>',
+      ["tt"] = '<cmd>execute ":tab split"<CR>',
+      ["C-l"] = "<cmd>noh<CR>",
+      ["<C-[><C-[>"] = "<cmd>noh<CR>",
+      ["<ECS><ECS>"] = "<cmd>noh<CR>",
+      ["j"] = "gj",
+      ["k"] = "gk",
+      ["R"] = "<Plug>(operator-replace)",
+      ["<Leader>c"] = "<plug>(operator-camelize-toggle)",
+      ["<C-n>"] = "<cmd>tabnext<CR>",
+      ["<C-p>"] = "<cmd>tabprevious<CR>",
+      ["tv"] = "<cmd>vsplit | terminal<CR>",
+      ["<C-d>"] = "<C-d>zz",
+      ["<C-u>"] = "<C-u>zz",
+      ["co"] = "<cmd>cfdo tabedit %<CR>",
+      ["Y"] = "v^y$",
+   },
+   i = {
+      ["<C-h>"] = "<Left>",
+      ["<C-l>"] = "<Right>",
+   },
+   v = {
+      ["<C-d>"] = "<C-d>zz",
+      ["<C-u>"] = "<C-u>zz",
+   },
 }
 
 for mode, _maps in pairs(maps) do
-  for k, v in pairs(_maps) do
-    vim.keymap.set(mode, k, v, { noremap = true, silent = true })
-  end
+   for k, v in pairs(_maps) do
+      vim.keymap.set(mode, k, v, { noremap = true, silent = true })
+   end
 end
 
 vim.cmd([[
@@ -213,27 +200,33 @@ vim.cmd([[
 ]])
 
 local function copy_current_path()
-  local bufname = vim.api.nvim_buf_get_name(0)
-  local prefix = "oil://"
-  local fullpath = bufname
-  if fullpath:sub(1, #prefix) == prefix then fullpath = fullpath:sub(#prefix + 1) end
-  local cwd = vim.fn.getcwd()
-  local relpath = vim.fn.fnamemodify(fullpath, ":.")
-  vim.fn.setreg("+", relpath)
-  vim.notify("Copied path: " .. relpath, vim.log.levels.INFO)
+   local bufname = vim.api.nvim_buf_get_name(0)
+   local prefix = "oil://"
+   local fullpath = bufname
+   if fullpath:sub(1, #prefix) == prefix then
+      fullpath = fullpath:sub(#prefix + 1)
+   end
+   local cwd = vim.fn.getcwd()
+   local relpath = vim.fn.fnamemodify(fullpath, ":.")
+   vim.fn.setreg("+", relpath)
+   vim.notify("Copied path: " .. relpath, vim.log.levels.INFO)
 end
 
 vim.keymap.set({ "n", "v" }, "<leader>l", copy_current_path, { noremap = true, silent = true })
 
-local function select_ABC() vim.fn.jobstart({ "/opt/homebrew/bin/im-select", "com.apple.keylayout.ABC" }, { detach = true }) end
+local function select_ABC()
+   vim.fn.jobstart({ "/opt/homebrew/bin/im-select", "com.apple.keylayout.ABC" }, { detach = true })
+end
 -- Create the autocmd
 vim.api.nvim_create_autocmd("InsertLeave", {
-  pattern = "*",
-  callback = select_ABC,
-  desc = "Restore ABC input source after leaving insert mode",
+   pattern = "*",
+   callback = select_ABC,
+   desc = "Restore ABC input source after leaving insert mode",
 })
 
 vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = "*",
-  callback = function(args) require("conform").format({ bufnr = args.buf }) end,
+   pattern = "*",
+   callback = function(args)
+      require("conform").format({ bufnr = args.buf })
+   end,
 })

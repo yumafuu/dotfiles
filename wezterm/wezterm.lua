@@ -1,12 +1,8 @@
 local wezterm = require("wezterm")
 local act = wezterm.action
-local font_size = 14.0
+local font_size = 15.0
 local window_background_opacity = 9 * 0.1
 local macos_window_background_blur = 7 * 10
-
-wezterm.on("window-focus-changed", function(window, pane)
-   os.execute("/opt/homebrew/bin/im-select com.apple.keylayout.ABC")
-end)
 
 return {
    color_scheme = "Teerb",
@@ -15,8 +11,8 @@ return {
    integrated_title_button_style = "Gnome",
    font_size = font_size,
    font = wezterm.font_with_fallback({
+      "MesloLGS NF",
       { family = "Comic Code Ligatures", weight = "Regular" },
-      -- "MesloLGS NF",
    }),
    window_padding = {
       left = "1cell",
